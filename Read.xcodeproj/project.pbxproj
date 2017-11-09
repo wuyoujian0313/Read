@@ -63,6 +63,10 @@
 		AF2308E31FB342CE00BEC151 /* LoginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308DD1FB342CE00BEC151 /* LoginResult.m */; };
 		AF2308E41FB342CE00BEC151 /* HomeTabVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308E01FB342CE00BEC151 /* HomeTabVC.m */; };
 		AF2308E51FB342CE00BEC151 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308E21FB342CE00BEC151 /* LoginVC.m */; };
+		AFDEC9011FB4878F00926F38 /* NotesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEC9001FB4878F00926F38 /* NotesVC.m */; };
+		AFDEC9041FB487AB00926F38 /* BookroomVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEC9031FB487AB00926F38 /* BookroomVC.m */; };
+		AFDEC9071FB487CB00926F38 /* NewbooksVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEC9061FB487CB00926F38 /* NewbooksVC.m */; };
+		AFDEC9091FB48BC400926F38 /* sysAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFDEC9081FB48BC400926F38 /* sysAssets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -180,6 +184,13 @@
 		AF2308E01FB342CE00BEC151 /* HomeTabVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTabVC.m; sourceTree = "<group>"; };
 		AF2308E11FB342CE00BEC151 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		AF2308E21FB342CE00BEC151 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
+		AFDEC8FF1FB4878F00926F38 /* NotesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesVC.h; sourceTree = "<group>"; };
+		AFDEC9001FB4878F00926F38 /* NotesVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesVC.m; sourceTree = "<group>"; };
+		AFDEC9021FB487AB00926F38 /* BookroomVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookroomVC.h; sourceTree = "<group>"; };
+		AFDEC9031FB487AB00926F38 /* BookroomVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookroomVC.m; sourceTree = "<group>"; };
+		AFDEC9051FB487CB00926F38 /* NewbooksVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewbooksVC.h; sourceTree = "<group>"; };
+		AFDEC9061FB487CB00926F38 /* NewbooksVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewbooksVC.m; sourceTree = "<group>"; };
+		AFDEC9081FB48BC400926F38 /* sysAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = sysAssets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +251,7 @@
 				AF2308D01FB340EB00BEC151 /* MainVCManager.h */,
 				AF2308D11FB340EB00BEC151 /* MainVCManager.m */,
 				AF23082F1FB3371200BEC151 /* Assets.xcassets */,
+				AFDEC9081FB48BC400926F38 /* sysAssets.xcassets */,
 				AF2308341FB3371200BEC151 /* Info.plist */,
 				AF2308231FB3371200BEC151 /* Supporting Files */,
 			);
@@ -417,12 +429,42 @@
 		AF2308DE1FB342CE00BEC151 /* UIs */ = {
 			isa = PBXGroup;
 			children = (
+				AFDEC8FE1FB4870600926F38 /* Notes */,
+				AFDEC8FD1FB4868D00926F38 /* Bookroom */,
+				AFDEC8FC1FB4866700926F38 /* Newbooks */,
 				AF04C5771FB35A1600C0C67B /* Me */,
 				AF04C5701FB3599400C0C67B /* Login */,
 				AF2308DF1FB342CE00BEC151 /* HomeTabVC.h */,
 				AF2308E01FB342CE00BEC151 /* HomeTabVC.m */,
 			);
 			path = UIs;
+			sourceTree = "<group>";
+		};
+		AFDEC8FC1FB4866700926F38 /* Newbooks */ = {
+			isa = PBXGroup;
+			children = (
+				AFDEC9051FB487CB00926F38 /* NewbooksVC.h */,
+				AFDEC9061FB487CB00926F38 /* NewbooksVC.m */,
+			);
+			name = Newbooks;
+			sourceTree = "<group>";
+		};
+		AFDEC8FD1FB4868D00926F38 /* Bookroom */ = {
+			isa = PBXGroup;
+			children = (
+				AFDEC9021FB487AB00926F38 /* BookroomVC.h */,
+				AFDEC9031FB487AB00926F38 /* BookroomVC.m */,
+			);
+			name = Bookroom;
+			sourceTree = "<group>";
+		};
+		AFDEC8FE1FB4870600926F38 /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				AFDEC8FF1FB4878F00926F38 /* NotesVC.h */,
+				AFDEC9001FB4878F00926F38 /* NotesVC.m */,
+			);
+			name = Notes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -483,6 +525,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFDEC9091FB48BC400926F38 /* sysAssets.xcassets in Resources */,
 				AF2308AE1FB33F5600BEC151 /* MJRefresh.bundle in Resources */,
 				AF2308CE1FB33F5600BEC151 /* SVProgressHUD.bundle in Resources */,
 				AF2308301FB3371200BEC151 /* Assets.xcassets in Resources */,
@@ -528,8 +571,10 @@
 				AF2308281FB3371200BEC151 /* AppDelegate.m in Sources */,
 				AF2308A71FB33F5600BEC151 /* NSObject+Utility.m in Sources */,
 				AF2308B81FB33F5600BEC151 /* FadePromptView.m in Sources */,
+				AFDEC9071FB487CB00926F38 /* NewbooksVC.m in Sources */,
 				AF2308A41FB33F5600BEC151 /* AFURLRequestSerialization.m in Sources */,
 				AF2308AC1FB33F5600BEC151 /* UIImage+Utility.m in Sources */,
+				AFDEC9011FB4878F00926F38 /* NotesVC.m in Sources */,
 				AF2308AF1FB33F5600BEC151 /* MJRefreshBaseView.m in Sources */,
 				AF2308CD1FB33F5600BEC151 /* UIView+WebCacheOperation.m in Sources */,
 				AF2308B11FB33F5600BEC151 /* MJRefreshFooterView.m in Sources */,
@@ -546,6 +591,7 @@
 				AF2308A81FB33F5600BEC151 /* NSString+Utility.m in Sources */,
 				AF2308251FB3371200BEC151 /* main.m in Sources */,
 				AF2308BC1FB33F5600BEC151 /* NetworkTask.m in Sources */,
+				AFDEC9041FB487AB00926F38 /* BookroomVC.m in Sources */,
 				AF2308C71FB33F5600BEC151 /* UIButton+WebCache.m in Sources */,
 				AF2308B51FB33F5600BEC151 /* BaseVC.m in Sources */,
 				AF2308BB1FB33F5600BEC151 /* NetResultBase.m in Sources */,

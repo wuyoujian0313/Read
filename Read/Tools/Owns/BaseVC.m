@@ -132,21 +132,19 @@
     label.textAlignment=NSTextAlignmentCenter;
     self.navigationItem.titleView = label;
     
-    self.title = title;
-    
-    
+    //self.title = title;
 }
 
 - (void)setNavTitle:(NSString*)title titleColor:(UIColor *)color {
     UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 30)];
     label.backgroundColor=[UIColor clearColor];
-    label.font = [UIFont systemFontOfSize:18];
+    label.font = [UIFont systemFontOfSize:24];
     label.textColor = color;
     label.text = title;
     label.textAlignment=NSTextAlignmentCenter;
     self.navigationItem.titleView = label;
     
-    self.title = title;
+    //self.title = title;
 }
 
 // 从矢量图加载图片
