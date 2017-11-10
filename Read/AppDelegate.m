@@ -22,6 +22,7 @@
 
 
 - (void)setupMainVC {
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     MainVCManager *mainController = [[MainVCManager alloc] init];
     self.mainVC = mainController;
