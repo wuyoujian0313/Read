@@ -14,9 +14,15 @@
 
 @implementation ResigterVC
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self setNavTitle:@"注册"];
 }
 
 - (void)didReceiveMemoryWarning {

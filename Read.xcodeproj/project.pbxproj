@@ -63,6 +63,11 @@
 		AF2308E31FB342CE00BEC151 /* LoginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308DD1FB342CE00BEC151 /* LoginResult.m */; };
 		AF2308E41FB342CE00BEC151 /* HomeTabVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308E01FB342CE00BEC151 /* HomeTabVC.m */; };
 		AF2308E51FB342CE00BEC151 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308E21FB342CE00BEC151 /* LoginVC.m */; };
+		AF506F8F1FB5E26700470C01 /* icon_pwd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF506F8B1FB5E26700470C01 /* icon_pwd@2x.png */; };
+		AF506F901FB5E26700470C01 /* icon_user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF506F8C1FB5E26700470C01 /* icon_user@2x.png */; };
+		AF506F911FB5E26700470C01 /* login_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF506F8D1FB5E26700470C01 /* login_bg@2x.png */; };
+		AF506F921FB5E26700470C01 /* yuedushu_green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF506F8E1FB5E26700470C01 /* yuedushu_green@2x.png */; };
+		AF506F971FB6071800470C01 /* ForgetPwdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF506F961FB6071800470C01 /* ForgetPwdVC.m */; };
 		AFDEC9011FB4878F00926F38 /* NotesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEC9001FB4878F00926F38 /* NotesVC.m */; };
 		AFDEC9041FB487AB00926F38 /* BookroomVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEC9031FB487AB00926F38 /* BookroomVC.m */; };
 		AFDEC9071FB487CB00926F38 /* NewbooksVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEC9061FB487CB00926F38 /* NewbooksVC.m */; };
@@ -184,6 +189,14 @@
 		AF2308E01FB342CE00BEC151 /* HomeTabVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTabVC.m; sourceTree = "<group>"; };
 		AF2308E11FB342CE00BEC151 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		AF2308E21FB342CE00BEC151 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
+		AF506F8B1FB5E26700470C01 /* icon_pwd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_pwd@2x.png"; sourceTree = "<group>"; };
+		AF506F8C1FB5E26700470C01 /* icon_user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_user@2x.png"; sourceTree = "<group>"; };
+		AF506F8D1FB5E26700470C01 /* login_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_bg@2x.png"; sourceTree = "<group>"; };
+		AF506F8E1FB5E26700470C01 /* yuedushu_green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yuedushu_green@2x.png"; sourceTree = "<group>"; };
+		AF506F931FB5E6C600470C01 /* ConstantDef.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConstantDef.h; sourceTree = "<group>"; };
+		AF506F941FB5E7BE00470C01 /* Read-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Read-Prefix.pch"; sourceTree = "<group>"; };
+		AF506F951FB6071800470C01 /* ForgetPwdVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPwdVC.h; sourceTree = "<group>"; };
+		AF506F961FB6071800470C01 /* ForgetPwdVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPwdVC.m; sourceTree = "<group>"; };
 		AFDEC8FF1FB4878F00926F38 /* NotesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesVC.h; sourceTree = "<group>"; };
 		AFDEC9001FB4878F00926F38 /* NotesVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesVC.m; sourceTree = "<group>"; };
 		AFDEC9021FB487AB00926F38 /* BookroomVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookroomVC.h; sourceTree = "<group>"; };
@@ -211,6 +224,8 @@
 				AF2308E21FB342CE00BEC151 /* LoginVC.m */,
 				AF04C5711FB359BE00C0C67B /* ResigterVC.h */,
 				AF04C5721FB359BE00C0C67B /* ResigterVC.m */,
+				AF506F951FB6071800470C01 /* ForgetPwdVC.h */,
+				AF506F961FB6071800470C01 /* ForgetPwdVC.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -248,6 +263,7 @@
 				AF2308DE1FB342CE00BEC151 /* UIs */,
 				AF2308261FB3371200BEC151 /* AppDelegate.h */,
 				AF2308271FB3371200BEC151 /* AppDelegate.m */,
+				AF506F931FB5E6C600470C01 /* ConstantDef.h */,
 				AF2308D01FB340EB00BEC151 /* MainVCManager.h */,
 				AF2308D11FB340EB00BEC151 /* MainVCManager.m */,
 				AF23082F1FB3371200BEC151 /* Assets.xcassets */,
@@ -261,7 +277,9 @@
 		AF2308231FB3371200BEC151 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AF506F8A1FB5E26700470C01 /* Images */,
 				AF2308241FB3371200BEC151 /* main.m */,
+				AF506F941FB5E7BE00470C01 /* Read-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -440,6 +458,17 @@
 			path = UIs;
 			sourceTree = "<group>";
 		};
+		AF506F8A1FB5E26700470C01 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				AF506F8B1FB5E26700470C01 /* icon_pwd@2x.png */,
+				AF506F8C1FB5E26700470C01 /* icon_user@2x.png */,
+				AF506F8D1FB5E26700470C01 /* login_bg@2x.png */,
+				AF506F8E1FB5E26700470C01 /* yuedushu_green@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		AFDEC8FC1FB4866700926F38 /* Newbooks */ = {
 			isa = PBXGroup;
 			children = (
@@ -525,10 +554,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF506F901FB5E26700470C01 /* icon_user@2x.png in Resources */,
 				AFDEC9091FB48BC400926F38 /* sysAssets.xcassets in Resources */,
 				AF2308AE1FB33F5600BEC151 /* MJRefresh.bundle in Resources */,
 				AF2308CE1FB33F5600BEC151 /* SVProgressHUD.bundle in Resources */,
 				AF2308301FB3371200BEC151 /* Assets.xcassets in Resources */,
+				AF506F911FB5E26700470C01 /* login_bg@2x.png in Resources */,
+				AF506F921FB5E26700470C01 /* yuedushu_green@2x.png in Resources */,
+				AF506F8F1FB5E26700470C01 /* icon_pwd@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,6 +590,7 @@
 				AF2308CA1FB33F5600BEC151 /* UIImage+WebP.m in Sources */,
 				AF2308C21FB33F5600BEC151 /* SDWebImageDecoder.m in Sources */,
 				AF2308C91FB33F5600BEC151 /* UIImage+MultiFormat.m in Sources */,
+				AF506F971FB6071800470C01 /* ForgetPwdVC.m in Sources */,
 				AF2308C01FB33F5600BEC151 /* SDImageCache.m in Sources */,
 				AF2308B01FB33F5600BEC151 /* MJRefreshConst.m in Sources */,
 				AF2308AD1FB33F5600BEC151 /* UIView+SizeUtility.m in Sources */,
@@ -697,6 +731,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Read/Read-Prefix.pch";
 				INFOPLIST_FILE = Read/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -712,6 +748,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Read/Read-Prefix.pch";
 				INFOPLIST_FILE = Read/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -1,0 +1,35 @@
+//
+//  Read-Prefix.pch
+//  Read
+//
+//  Created by wuyoujian on 2017/11/10.
+//  Copyright © 2017年 wuyj. All rights reserved.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_7_0
+#warning "This project uses features only available in iOS SDK 7.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import "ConstantDef.h"
+#import "UIColor+Utility.h"
+#import "UIImage+ResizeMagick.h"
+#import "UIImage+Utility.h"
+#import "NSString+Utility.h"
+#import "LineView.h"
+#import "SVProgressHUD.h"
+#import "FadePromptView.h"
+#import "DeviceInfo.h"
+#endif
+
+// 日志开关
+#if DEBUG
+#define NSLog(...) NSLog(__VA_ARGS__)
+#else
+#define NSLog(...) {}
+#endif
+
+
+

@@ -9,12 +9,9 @@
 #import "LoginVC.h"
 #import "NetworkTask.h"
 #import "AppDelegate.h"
-#import "SVProgressHUD.h"
-#import "UIColor+Utility.h"
-#import "UIImage+Utility.h"
-#import "FadePromptView.h"
-#import "DeviceInfo.h"
-#import "LineView.h"
+#import "ForgetPwdVC.h"
+#import "ResigterVC.h"
+
 
 
 @interface LoginVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,NetworkTaskDelegate>
@@ -22,15 +19,13 @@
 @property(nonatomic,strong)UITableView          *loginTableView;
 @property(nonatomic,strong)UITextField          *nameTextField;
 @property(nonatomic,strong)UITextField          *pwdTextField;
-@property(nonatomic,strong)UIButton             *loginBtn;
-
 @end
 
 @implementation LoginVC
 
 
 - (BOOL)prefersStatusBarHidden {
-    return YES;
+    return NO;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -46,13 +41,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.leftBarButtonItem = nil;
-    [self setNavTitle:@"登录"];
+    [self layoutBGView];
     [self layoutLoginTableView];
+}
+
+- (void)layoutBGView {
+    UIImage * bgImage = [UIImage imageNamed:@"login_bg.png"];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    [imageView setImage:bgImage];
+    [self.view addSubview:imageView];
 }
 
 - (void)layoutLoginTableView {
     
-    UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-35) style:UITableViewStylePlain];
+    UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
     [self setLoginTableView:tableView];
     [tableView setDelegate:self];
     [tableView setDataSource:self];
@@ -60,14 +62,19 @@
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.view addSubview:tableView];
     
-    [self setTableViewHeaderView:200];
+    [self setTableViewHeaderView:300];
     [self setTableViewFooterView:180];
 }
 
 
 - (void)setTableViewHeaderView:(NSInteger)height {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _loginTableView.frame.size.width, height)];
-    view.backgroundColor = [UIColor colorWithHex:0xebeef0];
+    view.backgroundColor = [UIColor clearColor];
+    // 214 * 69
+    UIImage * yuedushu = [UIImage imageNamed:@"yuedushu_green.png"];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((view.frame.size.width - 107)/2.0, 160, 107, 35)];
+    [imageView setImage:yuedushu];
+    [view addSubview:imageView];
     [_loginTableView setTableHeaderView:view];
 }
 
@@ -77,15 +84,36 @@
     view.backgroundColor = [UIColor clearColor];
     
     UIButton *loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [loginBtn setBackgroundImage:[UIImage imageFromColor:[UIColor colorWithHex:0x56b5f5]] forState:UIControlStateNormal];
+    [loginBtn setBackgroundImage:[UIImage imageFromColor:[UIColor colorWithHex:kGlobalGreenColor]] forState:UIControlStateNormal];
     [loginBtn.layer setCornerRadius:5.0];
     [loginBtn setTag:101];
     [loginBtn setClipsToBounds:YES];
     [loginBtn setTitle:@"登录" forState:UIControlStateNormal];
+    [loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [loginBtn.titleLabel setFont:[UIFont systemFontOfSize:18]];
-    [loginBtn setFrame:CGRectMake(11, 40, _loginTableView.frame.size.width - 22, 45)];
+    [loginBtn setFrame:CGRectMake(30, 12, _loginTableView.frame.size.width - 60, 45)];
     [loginBtn addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:loginBtn];
+    
+    UIButton *regBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [regBtn setBackgroundColor:[UIColor clearColor]];
+    [regBtn setTag:102];
+    [regBtn setTitle:@"注册" forState:UIControlStateNormal];
+    [regBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    [regBtn setTitleColor:[UIColor colorWithHex:0x666666] forState:UIControlStateNormal];
+    [regBtn setFrame:CGRectMake(15, 12 + 45 + 8, 60, 30)];
+    [regBtn addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:regBtn];
+    
+    UIButton *forgetBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [forgetBtn setBackgroundColor:[UIColor clearColor]];
+    [forgetBtn setTag:103];
+    [forgetBtn setTitle:@"忘记密码" forState:UIControlStateNormal];
+    [forgetBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    [forgetBtn setTitleColor:[UIColor colorWithHex:0x666666] forState:UIControlStateNormal];
+    [forgetBtn setFrame:CGRectMake(view.frame.size.width - 120, 12 + 45 + 8, 120, 30)];
+    [forgetBtn addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:forgetBtn];
     
     [_loginTableView setTableFooterView:view];
 }
@@ -132,6 +160,13 @@
 //                                                 delegate:self
 //                                                resultObj:[[LoginResult alloc] init]
 //                                               customInfo:@"login"];
+    } else if (tag == 102) {
+        // 注册
+        ResigterVC *vc = [[ResigterVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (tag == 103) {
+        ForgetPwdVC *vc = [[ForgetPwdVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
@@ -213,7 +248,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -234,57 +269,60 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reusedCellID];
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.contentView.backgroundColor = [UIColor whiteColor];
+            cell.backgroundColor = [UIColor clearColor];
+            cell.contentView.backgroundColor = [UIColor clearColor];
             
-            //
-            UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(11, 0, cell.contentView.frame.size.width - 22, 45)];
+            UIView * bgView = [[UIView alloc] initWithFrame:CGRectMake(30, 0, tableView.frame.size.width - 60, 90)];
+            [bgView setBackgroundColor:[UIColor whiteColor]];
+            [bgView.layer setCornerRadius:5.0];
+            [bgView.layer setBorderWidth:kLineHeight1px];
+            [bgView.layer setBorderColor:[UIColor colorWithHex:0xdcdcdc].CGColor];
+            [bgView setClipsToBounds:YES];
+            [cell.contentView addSubview:bgView];
+            
+            LineView *line = [[LineView alloc] initWithFrame:CGRectMake(kLineHeight1px, 45, tableView.frame.size.width-2*kLineHeight1px, kLineHeight1px)];
+            [line setLineColor:[UIColor colorWithHex:0xdcdcdc]];
+            [bgView addSubview:line];
+            
+            
+            UIImage *userImage = [UIImage imageNamed:@"icon_user.png"];
+            UIImageView *userImageView = [[UIImageView alloc] initWithFrame:CGRectMake(15,(44 - 20)/2.0    ,20,20)];
+            [userImageView setImage:userImage];
+            [bgView addSubview:userImageView];
+            
+            
+            UIImage *pwdImage = [UIImage imageNamed:@"icon_pwd.png"];
+            UIImageView *pwdImageView = [[UIImageView alloc] initWithFrame:CGRectMake(15,(44 - 20)/2.0 + 45,20,20)];
+            [pwdImageView setImage:pwdImage];
+            [bgView addSubview:pwdImageView];
+            
+    
+            UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(50, 0, tableView.frame.size.width - 60 - 60, 44)];
             self.nameTextField = textField;
             [textField setDelegate:self];
             [textField setFont:[UIFont systemFontOfSize:14]];
             [textField setReturnKeyType:UIReturnKeyNext];
             [textField setClearButtonMode:UITextFieldViewModeAlways];
-            [textField setTextAlignment:NSTextAlignmentCenter];
+            [textField setTextAlignment:NSTextAlignmentLeft];
             [textField setKeyboardType:UIKeyboardTypePhonePad];
             [textField setClearsOnBeginEditing:YES];
             [textField setPlaceholder:@"手机号码"];
+            [bgView addSubview:textField];
             
-            [textField setText:@"18600746313"];
-        
-            [cell.contentView addSubview:textField];
             
-            LineView *line1 = [[LineView alloc] initWithFrame:CGRectMake(0, 45 - kLineHeight1px, tableView.frame.size.width, kLineHeight1px)];
-            [cell.contentView addSubview:line1];
-        }
-        
-        return cell;
-    }
-    
-    curRow ++;
-    if (row == curRow) {
-        static NSString *reusedCellID = @"loginCell2";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reusedCellID];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reusedCellID];
-            
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.contentView.backgroundColor = [UIColor whiteColor];
-            
-            //
-            UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(11,0, cell.contentView.frame.size.width - 22, 45)];
+            textField = [[UITextField alloc] initWithFrame:CGRectMake(50,46, tableView.frame.size.width - 60 - 60, 44)];
             self.pwdTextField = textField;
             [textField setDelegate:self];
             [textField setSecureTextEntry:YES];
             [textField setFont:[UIFont systemFontOfSize:14]];
-            [textField setTextAlignment:NSTextAlignmentCenter];
+            [textField setTextAlignment:NSTextAlignmentLeft];
             [textField setClearButtonMode:UITextFieldViewModeAlways];
             [textField setClearsOnBeginEditing:YES];
             [textField setReturnKeyType:UIReturnKeyDone];
-            [textField setPlaceholder:@"请输入密码"];
-            [textField setText:@"654321"];
-            [cell.contentView addSubview:textField];
+            [textField setPlaceholder:@"登录密码"];
+            [bgView addSubview:textField];
             
-            LineView *line1 = [[LineView alloc] initWithFrame:CGRectMake(0, 45 - kLineHeight1px, cell.contentView.frame.size.width, kLineHeight1px)];
-            [cell.contentView addSubview:line1];
+
         }
         
         return cell;
@@ -295,7 +333,7 @@
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 45;
+    return 90;
 }
 
 

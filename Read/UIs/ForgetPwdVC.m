@@ -1,23 +1,28 @@
 //
-//  BookroomVC.m
+//  ForgetPwdVC.m
 //  Read
 //
-//  Created by wuyoujian on 2017/11/9.
+//  Created by wuyoujian on 2017/11/11.
 //  Copyright © 2017年 wuyj. All rights reserved.
 //
 
-#import "BookroomVC.h"
+#import "ForgetPwdVC.h"
 
-@interface BookroomVC ()
+@interface ForgetPwdVC ()
 
 @end
 
-@implementation BookroomVC
+@implementation ForgetPwdVC
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self setNavTitle:@"Rlab阿来学院" titleColor:[UIColor colorWithHex:kGlobalGreenColor]];
+    [self setNavTitle:@"找回密码"];
 }
 
 - (void)didReceiveMemoryWarning {

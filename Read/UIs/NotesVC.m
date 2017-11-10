@@ -7,7 +7,7 @@
 //
 
 #import "NotesVC.h"
-#import "UIColor+Utility.h"
+
 
 @interface NotesVC ()
 
@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self setNavTitle:@"Rlab阿来学院" titleColor:[UIColor colorWithHex:0x6Fc05b]];
+    [self setNavTitle:@"Rlab阿来学院" titleColor:[UIColor colorWithHex:kGlobalGreenColor]];
 }
 
 - (void)didReceiveMemoryWarning {

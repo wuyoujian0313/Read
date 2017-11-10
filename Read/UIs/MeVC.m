@@ -7,17 +7,12 @@
 //
 
 #import "MeVC.h"
-#import "UIColor+Utility.h"
 #import "SDImageCache.h"
-#import "UIImage+Utility.h"
 #import "UIImageView+WebCache.h"
-#import "LineView.h"
 #import "DeviceInfo.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <AVFoundation/AVFoundation.h>
-#import "UIImage+ResizeMagick.h"
-#import "SVProgressHUD.h"
 
 
 @interface MeVC ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
@@ -32,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self setNavTitle:@"Rlab阿来学院" titleColor:[UIColor colorWithHex:0x6Fc05b]];
+    [self setNavTitle:@"Rlab阿来学院" titleColor:[UIColor colorWithHex:kGlobalGreenColor]];
     [self layoutMeTableView];
 }
 
