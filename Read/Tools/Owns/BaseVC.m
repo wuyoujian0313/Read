@@ -11,7 +11,7 @@
 #import "UIColor+Utility.h"
 
 
-
+#define IS_IOS7 ([[[[UIDevice currentDevice] systemVersion] substringToIndex:1] intValue]>=7)
 
 @interface BaseVC ()<UIGestureRecognizerDelegate>
 @property (nonatomic,strong) UIView *contentView;
@@ -52,9 +52,14 @@
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
+    if (IS_IOS7) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.extendedLayoutIncludesOpaqueBars = NO;
+    }
+    
     //self.navigationController.interactivePopGestureRecognizer.delegate = self;
     
-    self.contentView = [[UIView alloc] initWithFrame:CGRectMake(0, [DeviceInfo navigationBarHeight], self.view.frame.size.width, self.view.frame.size.height - [DeviceInfo navigationBarHeight])];
+    self.contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [_contentView setBackgroundColor:[UIColor colorWithHex:0xebeef0]];
     [self.view addSubview:_contentView];
     

@@ -33,10 +33,18 @@
 
 - (NSString*)base64EncodeString;
 - (NSString*)base64DecodeString;
-
 - (NSData*)base64EncodeData;
 - (NSData*)base64DecodeData;
 
 + (NSString*)generateZH_string;
+
+- (NSData *) SHA1Hash;
+- (NSData *) SHA224Hash;
+- (NSData *) SHA256Hash;
+- (NSData *) SHA384Hash;
+- (NSData *) SHA512Hash;
+
+- (NSString *)byteToHex;
+- (NSString *)hexToString;
 
 @end

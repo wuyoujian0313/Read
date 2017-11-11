@@ -12,7 +12,13 @@
 
 - (void)dealloc
 {
-    
+}
+
+-(void)viewDidLoad {
+    self.navigationBar.barStyle = UIBarStyleDefault;
+    self.navigationBar.translucent = NO;
+    self.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationBar.barTintColor = [UIColor whiteColor];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

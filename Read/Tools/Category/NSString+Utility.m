@@ -208,4 +208,69 @@ static NSString * const kCharactersToBeEscapedInQueryString = @":/?&=;+!@#$()',*
     return Zh_string;
 }
 
+- (NSData *) SHA1Hash {
+    unsigned char hash[CC_SHA1_DIGEST_LENGTH];
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    (void) CC_SHA1( [data bytes], (CC_LONG)[self length], hash );
+    return ( [NSData dataWithBytes: hash length: CC_SHA1_DIGEST_LENGTH] );
+}
+
+- (NSData *) SHA224Hash {
+    unsigned char hash[CC_SHA224_DIGEST_LENGTH];
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    (void) CC_SHA224( [data bytes], (CC_LONG)[self length], hash );
+    return ( [NSData dataWithBytes: hash length: CC_SHA224_DIGEST_LENGTH] );
+}
+
+- (NSData *) SHA256Hash {
+    unsigned char hash[CC_SHA256_DIGEST_LENGTH];
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    (void) CC_SHA256( [data bytes], (CC_LONG)[self length], hash );
+    return ( [NSData dataWithBytes: hash length: CC_SHA256_DIGEST_LENGTH] );
+}
+
+- (NSData *) SHA384Hash {
+    unsigned char hash[CC_SHA384_DIGEST_LENGTH];
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    (void) CC_SHA384( [data bytes], (CC_LONG)[self length], hash );
+    return ( [NSData dataWithBytes: hash length: CC_SHA384_DIGEST_LENGTH] );
+}
+
+- (NSData *) SHA512Hash {
+    unsigned char hash[CC_SHA512_DIGEST_LENGTH];
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    (void) CC_SHA512( [data bytes], (CC_LONG)[self length], hash );
+    return ( [NSData dataWithBytes: hash length: CC_SHA512_DIGEST_LENGTH] );
+}
+
+- (NSString *)byteToHex {
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    Byte *bytes = (Byte *)[data bytes];
+
+    NSString *hexString = @"";
+    for(int i=0;i<[data length];i++) {
+        NSString *newHexStr = [NSString stringWithFormat:@"%x",bytes[i]&0xff];
+        if([newHexStr length]==1) {
+            hexString = [NSString stringWithFormat:@"%@0%@",hexString,newHexStr];
+        } else {
+            hexString = [NSString stringWithFormat:@"%@%@",hexString,newHexStr];
+        }
+    }   
+    return hexString;
+}
+
+- (NSString *)hexToString {
+    char *myBuffer = (char *)malloc((int)[self length] / 2 + 1);
+    bzero(myBuffer, [self length] / 2 + 1);
+    for (int i = 0; i < [self length] - 1; i += 2) {
+        unsigned int anInt;
+        NSString * hexCharStr = [self substringWithRange:NSMakeRange(i, 2)];
+        NSScanner * scanner = [[NSScanner alloc] initWithString:hexCharStr];
+        [scanner scanHexInt:&anInt];
+        myBuffer[i / 2] = (char)anInt;
+    }
+    NSString *unicodeString = [NSString stringWithCString:myBuffer encoding:NSUTF8StringEncoding];
+    return unicodeString;
+}
+
 @end

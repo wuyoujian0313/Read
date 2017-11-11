@@ -58,6 +58,7 @@
     [self setLoginTableView:tableView];
     [tableView setDelegate:self];
     [tableView setDataSource:self];
+    [tableView setBounces:NO];
     [tableView setBackgroundColor:[UIColor clearColor]];
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.view addSubview:tableView];
@@ -70,11 +71,20 @@
 - (void)setTableViewHeaderView:(NSInteger)height {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _loginTableView.frame.size.width, height)];
     view.backgroundColor = [UIColor clearColor];
-    // 214 * 69
-    UIImage * yuedushu = [UIImage imageNamed:@"yuedushu_green.png"];
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((view.frame.size.width - 107)/2.0, 160, 107, 35)];
-    [imageView setImage:yuedushu];
-    [view addSubview:imageView];
+//    // 214 * 69 图片方案
+//    UIImage * yuedushu = [UIImage imageNamed:@"yuedushu_green.png"];
+//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((view.frame.size.width - 107)/2.0, 160, 107, 35)];
+//    [imageView setImage:yuedushu];
+//    [view addSubview:imageView];
+
+//    // 文字方案
+//    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 160, _loginTableView.frame.size.width, 60)];
+//    label.backgroundColor=[UIColor clearColor];
+//    label.font = [UIFont boldSystemFontOfSize:30];
+//    label.textColor = [UIColor colorWithHex:kGlobalGreenColor];
+//    label.text = @"Rlab阿来学院";
+//    label.textAlignment = NSTextAlignmentCenter;
+//    [view addSubview:label];
     [_loginTableView setTableHeaderView:view];
 }
 
@@ -276,12 +286,12 @@
             [bgView setBackgroundColor:[UIColor whiteColor]];
             [bgView.layer setCornerRadius:5.0];
             [bgView.layer setBorderWidth:kLineHeight1px];
-            [bgView.layer setBorderColor:[UIColor colorWithHex:0xdcdcdc].CGColor];
+            [bgView.layer setBorderColor:[UIColor colorWithHex:kGlobalLineColor].CGColor];
             [bgView setClipsToBounds:YES];
             [cell.contentView addSubview:bgView];
             
             LineView *line = [[LineView alloc] initWithFrame:CGRectMake(kLineHeight1px, 45, tableView.frame.size.width-2*kLineHeight1px, kLineHeight1px)];
-            [line setLineColor:[UIColor colorWithHex:0xdcdcdc]];
+            [line setLineColor:[UIColor colorWithHex:kGlobalLineColor]];
             [bgView addSubview:line];
             
             
@@ -321,8 +331,6 @@
             [textField setReturnKeyType:UIReturnKeyDone];
             [textField setPlaceholder:@"登录密码"];
             [bgView addSubview:textField];
-            
-
         }
         
         return cell;

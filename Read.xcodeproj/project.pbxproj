@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		AF04C5731FB359BE00C0C67B /* ResigterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF04C5721FB359BE00C0C67B /* ResigterVC.m */; };
 		AF04C5761FB35A0800C0C67B /* MeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF04C5751FB35A0800C0C67B /* MeVC.m */; };
+		AF14EAB31FB6FB770042683D /* NSData+Crypto.m in Sources */ = {isa = PBXBuildFile; fileRef = AF14EAB21FB6FB770042683D /* NSData+Crypto.m */; };
+		AF14EAB61FB7191D0042683D /* SetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF14EAB51FB7191D0042683D /* SetVC.m */; };
 		AF2308251FB3371200BEC151 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308241FB3371200BEC151 /* main.m */; };
 		AF2308281FB3371200BEC151 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308271FB3371200BEC151 /* AppDelegate.m */; };
 		AF2308301FB3371200BEC151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF23082F1FB3371200BEC151 /* Assets.xcassets */; };
@@ -80,6 +82,10 @@
 		AF04C5721FB359BE00C0C67B /* ResigterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResigterVC.m; sourceTree = "<group>"; };
 		AF04C5741FB35A0800C0C67B /* MeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeVC.h; sourceTree = "<group>"; };
 		AF04C5751FB35A0800C0C67B /* MeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeVC.m; sourceTree = "<group>"; };
+		AF14EAB11FB6FB770042683D /* NSData+Crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Crypto.h"; sourceTree = "<group>"; };
+		AF14EAB21FB6FB770042683D /* NSData+Crypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Crypto.m"; sourceTree = "<group>"; };
+		AF14EAB41FB7191D0042683D /* SetVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetVC.h; sourceTree = "<group>"; };
+		AF14EAB51FB7191D0042683D /* SetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetVC.m; sourceTree = "<group>"; };
 		AF2308201FB3371200BEC151 /* Read.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Read.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF2308241FB3371200BEC151 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AF2308261FB3371200BEC151 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -237,6 +243,8 @@
 			children = (
 				AF04C5741FB35A0800C0C67B /* MeVC.h */,
 				AF04C5751FB35A0800C0C67B /* MeVC.m */,
+				AF14EAB41FB7191D0042683D /* SetVC.h */,
+				AF14EAB51FB7191D0042683D /* SetVC.m */,
 			);
 			name = Me;
 			sourceTree = "<group>";
@@ -326,6 +334,8 @@
 				AF23084B1FB33F5600BEC151 /* NSObject+Utility.m */,
 				AF23084C1FB33F5600BEC151 /* NSString+Utility.h */,
 				AF23084D1FB33F5600BEC151 /* NSString+Utility.m */,
+				AF14EAB11FB6FB770042683D /* NSData+Crypto.h */,
+				AF14EAB21FB6FB770042683D /* NSData+Crypto.m */,
 				AF23084E1FB33F5600BEC151 /* UIAlertController+Orientations.h */,
 				AF23084F1FB33F5600BEC151 /* UIAlertController+Orientations.m */,
 				AF2308501FB33F5600BEC151 /* UIColor+Utility.h */,
@@ -583,6 +593,7 @@
 				AF2308CF1FB33F5600BEC151 /* SVProgressHUD.m in Sources */,
 				AF2308E51FB342CE00BEC151 /* LoginVC.m in Sources */,
 				AF2308C61FB33F5600BEC151 /* SDWebImagePrefetcher.m in Sources */,
+				AF14EAB31FB6FB770042683D /* NSData+Crypto.m in Sources */,
 				AF2308B71FB33F5600BEC151 /* DeviceInfo.m in Sources */,
 				AF2308C41FB33F5600BEC151 /* SDWebImageDownloaderOperation.m in Sources */,
 				AF2308CB1FB33F5600BEC151 /* UIImageView+HighlightedWebCache.m in Sources */,
@@ -629,6 +640,7 @@
 				AF2308A81FB33F5600BEC151 /* NSString+Utility.m in Sources */,
 				AF2308251FB3371200BEC151 /* main.m in Sources */,
 				AF2308BC1FB33F5600BEC151 /* NetworkTask.m in Sources */,
+				AF14EAB61FB7191D0042683D /* SetVC.m in Sources */,
 				AFDEC9041FB487AB00926F38 /* BookroomVC.m in Sources */,
 				AF2308C71FB33F5600BEC151 /* UIButton+WebCache.m in Sources */,
 				AF2308B51FB33F5600BEC151 /* BaseVC.m in Sources */,

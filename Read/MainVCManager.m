@@ -87,6 +87,8 @@
 - (UIViewController *)setupLoginVC {
     LoginVC *controller = [[LoginVC alloc] init];
     AINavigationController *loginNav = [[AINavigationController alloc] initWithRootViewController:controller];
+    
+    
     [self addChildViewController:loginNav];
     [self.view addSubview:loginNav.view];
     

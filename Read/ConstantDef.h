@@ -10,6 +10,7 @@
 #define ConstantDef_h
 
 #define kGlobalGreenColor       0x6Fc05b
+#define kGlobalLineColor        0xdcdcdc
 
 //// 服务器地址
 //#define kNetworkServerIP            @"http://101.69.181.210:80"
