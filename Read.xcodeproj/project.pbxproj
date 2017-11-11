@@ -11,6 +11,7 @@
 		AF04C5761FB35A0800C0C67B /* MeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF04C5751FB35A0800C0C67B /* MeVC.m */; };
 		AF14EAB31FB6FB770042683D /* NSData+Crypto.m in Sources */ = {isa = PBXBuildFile; fileRef = AF14EAB21FB6FB770042683D /* NSData+Crypto.m */; };
 		AF14EAB61FB7191D0042683D /* SetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF14EAB51FB7191D0042683D /* SetVC.m */; };
+		AF14EAB91FB737F60042683D /* ModifyPwdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF14EAB81FB737F60042683D /* ModifyPwdVC.m */; };
 		AF2308251FB3371200BEC151 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308241FB3371200BEC151 /* main.m */; };
 		AF2308281FB3371200BEC151 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308271FB3371200BEC151 /* AppDelegate.m */; };
 		AF2308301FB3371200BEC151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF23082F1FB3371200BEC151 /* Assets.xcassets */; };
@@ -86,6 +87,8 @@
 		AF14EAB21FB6FB770042683D /* NSData+Crypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Crypto.m"; sourceTree = "<group>"; };
 		AF14EAB41FB7191D0042683D /* SetVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetVC.h; sourceTree = "<group>"; };
 		AF14EAB51FB7191D0042683D /* SetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetVC.m; sourceTree = "<group>"; };
+		AF14EAB71FB737F60042683D /* ModifyPwdVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyPwdVC.h; sourceTree = "<group>"; };
+		AF14EAB81FB737F60042683D /* ModifyPwdVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyPwdVC.m; sourceTree = "<group>"; };
 		AF2308201FB3371200BEC151 /* Read.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Read.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF2308241FB3371200BEC151 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AF2308261FB3371200BEC151 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -245,6 +248,8 @@
 				AF04C5751FB35A0800C0C67B /* MeVC.m */,
 				AF14EAB41FB7191D0042683D /* SetVC.h */,
 				AF14EAB51FB7191D0042683D /* SetVC.m */,
+				AF14EAB71FB737F60042683D /* ModifyPwdVC.h */,
+				AF14EAB81FB737F60042683D /* ModifyPwdVC.m */,
 			);
 			name = Me;
 			sourceTree = "<group>";
@@ -598,6 +603,7 @@
 				AF2308C41FB33F5600BEC151 /* SDWebImageDownloaderOperation.m in Sources */,
 				AF2308CB1FB33F5600BEC151 /* UIImageView+HighlightedWebCache.m in Sources */,
 				AF04C5761FB35A0800C0C67B /* MeVC.m in Sources */,
+				AF14EAB91FB737F60042683D /* ModifyPwdVC.m in Sources */,
 				AF2308BD1FB33F5600BEC151 /* Reachability.m in Sources */,
 				AF2308E31FB342CE00BEC151 /* LoginResult.m in Sources */,
 				AF2308A91FB33F5600BEC151 /* UIAlertController+Orientations.m in Sources */,

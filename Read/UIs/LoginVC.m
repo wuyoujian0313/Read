@@ -316,6 +316,7 @@
             [textField setTextAlignment:NSTextAlignmentLeft];
             [textField setKeyboardType:UIKeyboardTypePhonePad];
             [textField setClearsOnBeginEditing:YES];
+            textField.text = @"18600746313";
             [textField setPlaceholder:@"手机号码"];
             [bgView addSubview:textField];
             
@@ -329,6 +330,7 @@
             [textField setClearButtonMode:UITextFieldViewModeAlways];
             [textField setClearsOnBeginEditing:YES];
             [textField setReturnKeyType:UIReturnKeyDone];
+            textField.text = @"123456";
             [textField setPlaceholder:@"登录密码"];
             [bgView addSubview:textField];
         }

@@ -13,6 +13,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <AVFoundation/AVFoundation.h>
+#import "SetVC.h"
 
 
 @interface MeVC ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
@@ -39,10 +40,11 @@
     [tableView setDataSource:self];
     [tableView setBounces:NO];
     [tableView setBackgroundColor:[UIColor clearColor]];
+    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.view addSubview:tableView];
     
     [self setTableViewHeaderView:175];
-    [self setTableViewFooterView:0];
+    [self setTableViewFooterView:2];
 }
 
 -(void)loadHeadImageAndNickName {
@@ -103,6 +105,7 @@
     titleLabel.textColor = [UIColor blackColor];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     [view addSubview:titleLabel];
+    
     [_meTableView setTableHeaderView:view];
     
     [self loadHeadImageAndNickName];
@@ -142,6 +145,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        LineView *line = [[LineView alloc] initWithFrame:CGRectMake(0, 45-kLineHeight1px, tableView.frame.size.width, kLineHeight1px)];
+        [cell.contentView addSubview:line];
     }
     
     cell.textLabel.font = [UIFont systemFontOfSize:14];
@@ -210,6 +215,8 @@
     } else if (section == 1) {
         switch (row) {
             case 0: {
+                SetVC *vc = [[SetVC alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
                 break;
             }
                 
