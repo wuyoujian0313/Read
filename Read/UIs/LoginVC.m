@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "ForgetPwdVC.h"
 #import "ResigterVC.h"
+#import "LoginResult.h"
 
 
 
@@ -149,27 +150,20 @@
             return;
         }
         
-        AppDelegate *app = [AppDelegate shareMyApplication];
-        [app.mainVC switchToHomeVC];
+        [_nameTextField resignFirstResponder];
+        [_pwdTextField resignFirstResponder];
+        NSString *nameString = [NSString stringWithFormat:@"%@",_nameTextField.text];
+        NSString *pwdString = [NSString stringWithFormat:@"%@",_pwdTextField.text];
         
-        return;
-        
-//        [_nameTextField resignFirstResponder];
-//        [_pwdTextField resignFirstResponder];
-//        NSString *nameString = [NSString stringWithFormat:@"%@",_nameTextField.text];
-//        NSString *pwdString = [NSString stringWithFormat:@"%@",_pwdTextField.text];
-//        
-//        NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
-//                              nameString,@"phoneNumber",
-//                              pwdString,@"password",nil];
-//        [SVProgressHUD setBackgroundColor:[UIColor colorWithHex:0xcccccc]];
-//        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-//        [[NetworkTask sharedNetworkTask] setServerAddress:kNetworkAPIServer];
-//        [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_Login
-//                                                 forParam:param
-//                                                 delegate:self
-//                                                resultObj:[[LoginResult alloc] init]
-//                                               customInfo:@"login"];
+        NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
+                              nameString,@"phone",
+                              [pwdString md5EncodeUpper:NO],@"passwd",nil];
+        [SVProgressHUD showWithStatus:@"正在登录..." maskType:SVProgressHUDMaskTypeBlack];
+        [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_Login
+                                                 forParam:param
+                                                 delegate:self
+                                                resultObj:[[LoginResult alloc] init]
+                                               customInfo:@"login"];
     } else if (tag == 102) {
         // 注册
         ResigterVC *vc = [[ResigterVC alloc] init];
@@ -208,7 +202,6 @@
     [SVProgressHUD dismiss];
     
     if ([customInfo isEqualToString:@"login"]) {
-        
         AppDelegate *app = [AppDelegate shareMyApplication];
         [app.mainVC switchToHomeVC];
     }
@@ -316,7 +309,7 @@
             [textField setTextAlignment:NSTextAlignmentLeft];
             [textField setKeyboardType:UIKeyboardTypePhonePad];
             [textField setClearsOnBeginEditing:YES];
-            textField.text = @"18600746313";
+            textField.text = @"13520291141";
             [textField setPlaceholder:@"手机号码"];
             [bgView addSubview:textField];
             
@@ -330,7 +323,7 @@
             [textField setClearButtonMode:UITextFieldViewModeAlways];
             [textField setClearsOnBeginEditing:YES];
             [textField setReturnKeyType:UIReturnKeyDone];
-            textField.text = @"123456";
+            textField.text = @"120723";
             [textField setPlaceholder:@"登录密码"];
             [bgView addSubview:textField];
         }

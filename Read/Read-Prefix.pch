@@ -18,10 +18,12 @@
 #import "UIImage+ResizeMagick.h"
 #import "UIImage+Utility.h"
 #import "NSString+Utility.h"
+#import "NSData+Crypto.h"
 #import "LineView.h"
 #import "SVProgressHUD.h"
 #import "FadePromptView.h"
 #import "DeviceInfo.h"
+#import "AICommonDef.h"
 #endif
 
 // 日志开关

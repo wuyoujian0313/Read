@@ -8,7 +8,9 @@
 
 #import "NetworkTask.h"
 #import "NetResultBase.h"
-#import "../AFNetworking/AFNetworking.h"
+#import "AFNetworking.h"
+#import "ReadNetRequestParam.h"
+
 
 #if DEBUG
 #define RESPONSE_LOG \
@@ -36,6 +38,7 @@ AISINGLETON_IMP(NetworkTask, sharedNetworkTask)
     if (self = [super init]) {
         self.taskTimeout = 20;
         self.afManager = [AFHTTPSessionManager manager];
+        self.serverAddress = kNetworkAPIServer;
         
         [_afManager setRequestSerializer:[AFHTTPRequestSerializer serializer]];
         [_afManager.requestSerializer setHTTPMethodsEncodingParametersInURI:[NSSet setWithObjects:@"GET",@"DELETE",nil]];
@@ -108,11 +111,13 @@ AISINGLETON_IMP(NetworkTask, sharedNetworkTask)
     [_afManager.requestSerializer setTimeoutInterval:_taskTimeout];
     [_afManager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
+    NSDictionary *serverParam = [ReadNetRequestParam generateSignedParam:param];
+    
     __weak NetworkTask *weakSelf = self;
-    NSString * urlString = [NSString stringWithFormat:@"%@/%@",_serverAddress,api];
+    NSString * urlString = [NSString stringWithFormat:@"%@%@",_serverAddress,api];
     if ([method isEqualToString:@"GET"]) {
         
-        [_afManager GET:urlString parameters:param progress:^(NSProgress * _Nonnull downloadProgress) {
+        [_afManager GET:urlString parameters:serverParam progress:^(NSProgress * _Nonnull downloadProgress) {
             //
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
@@ -128,7 +133,7 @@ AISINGLETON_IMP(NetworkTask, sharedNetworkTask)
         
     } else if([method isEqualToString:@"POST"]) {
         
-        [_afManager POST:urlString parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
+        [_afManager POST:urlString parameters:serverParam progress:^(NSProgress * _Nonnull uploadProgress) {
             //
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             //
@@ -141,7 +146,7 @@ AISINGLETON_IMP(NetworkTask, sharedNetworkTask)
         
     } else if([method isEqualToString:@"PUT"]) {
         
-        [_afManager PUT:urlString parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+        [_afManager PUT:urlString parameters:serverParam success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
             //
             RESPONSE_LOG
             [weakSelf analyzeData:responseObject delegate:delegate resultObj:resultObj customInfo:customInfo];
@@ -152,7 +157,7 @@ AISINGLETON_IMP(NetworkTask, sharedNetworkTask)
         
     } else if([method isEqualToString:@"DELETE"]) {
         
-        [_afManager DELETE:urlString parameters:param success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+        [_afManager DELETE:urlString parameters:serverParam success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
             //
             RESPONSE_LOG
             [weakSelf analyzeData:responseObject delegate:delegate resultObj:resultObj customInfo:customInfo];
@@ -320,8 +325,8 @@ AISINGLETON_IMP(NetworkTask, sharedNetworkTask)
     NSMutableString *desc = [[NSMutableString alloc] initWithCapacity:0];
     
     switch (statusCode) {
-        case NetStatusCodeMAPSuccess:
-        case NetStatusCodeSuccess: {
+        case NetStatusCodeSuccess:
+        case NetStatusCodeSuccess2: {
             [desc appendString:@"成功"];
             break;
         }

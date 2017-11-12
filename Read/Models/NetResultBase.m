@@ -7,7 +7,7 @@
 //
 
 #import "NetResultBase.h"
-#import "../Category/NSObject+Utility.h"
+#import "NSObject+Utility.h"
 
 @implementation NetResultBase
 
@@ -15,6 +15,7 @@
     NetResultBase * temp = [[NetResultBase alloc] init];
     [temp setCode:_code];
     [temp setMessage:_message];
+    [temp setStatus:_status];
     
     return temp;
 }
@@ -31,33 +32,18 @@
     if (jsonDictionary != nil && error == nil) {
         NSLog(@"Successfully JSON parse...");
         
-        if ([jsonDictionary objectForKey:@"code"]) {
-            self.code = [jsonDictionary objectForKey:@"code"];
-        } else if ([jsonDictionary objectForKey:@"status"]) {
-            self.code = [jsonDictionary objectForKey:@"status"];
-        } else {
-            self.code = [jsonDictionary objectForKey:@"code"];
+        if ([jsonDictionary objectForKey:@"head"]) {
+            
+            // 解析响应头
+            NSDictionary *headDic = [jsonDictionary objectForKey:@"head"];
+            self.code = [headDic objectForKey:@"code"];
+            self.message = [headDic objectForKey:@"message"];
+            self.status = [headDic objectForKey:@"status"];
         }
         
-        if ([jsonDictionary objectForKey:@"message"]) {
-            self.message = [jsonDictionary objectForKey:@"message"];
-        } else if ([jsonDictionary objectForKey:@"msg"]) {
-            self.message = [jsonDictionary objectForKey:@"msg"];
-        } else {
-            self.message = [jsonDictionary objectForKey:@"message"];
-        }
-        
-        if (self.code != nil) {
-            // 解析
-            
-            NSString *dataJson = nil;
-            if ([jsonDictionary objectForKey:@"data"]) {
-                dataJson = @"data";
-            } else {
-                dataJson = @"result";
-            }
-            
-            id data = [jsonDictionary objectForKey:dataJson];
+        if ([jsonDictionary objectForKey:@"data"]) {
+            // 解析业务数据
+            id data = [jsonDictionary objectForKey:@"data"];
             if ([data isKindOfClass:[NSDictionary class]]) {
                 [self parseNetResult:data];
             } else {

@@ -12,11 +12,10 @@
 #define kGlobalGreenColor       0x6Fc05b
 #define kGlobalLineColor        0xdcdcdc
 
-//// 服务器地址
-//#define kNetworkServerIP            @"http://101.69.181.210:80"
-//#define kNetworkAPIServer           kNetworkServerIP@"/tuwen_web"
-//
-//// 接口定义
-//#define API_Login                   @"service/login"
+// 服务器地址
+#define kNetworkAPIServer           @"http://123.56.104.127/"
+
+// 接口定义
+#define API_Login                   @"user/login"
 
 #endif /* ConstantDef_h */

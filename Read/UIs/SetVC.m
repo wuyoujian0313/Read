@@ -58,7 +58,6 @@
     [_nextBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
     [_nextBtn setTag:101];
     [_nextBtn setClipsToBounds:YES];
-    [_nextBtn setEnabled:NO];
     [_nextBtn setTitle:@"退出登录" forState:UIControlStateNormal];
     [_nextBtn setFrame:CGRectMake(0, 15, _setTableView.frame.size.width, 45)];
     [_nextBtn addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];

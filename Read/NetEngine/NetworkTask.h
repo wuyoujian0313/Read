@@ -11,14 +11,14 @@
 
 
 typedef NS_ENUM(NSInteger, NetStatusCode) {
-    NetStatusCodeSuccess = 1000,
-    NetStatusCodeMAPSuccess = 0,
+    NetStatusCodeSuccess = 20000,
+    NetStatusCodeSuccess2 = 20001,
     NetStatusCodeUnknown,
 };
 
 
-#define NetStatusCodeSuc(status)    (status == NetStatusCodeSuccess || status == NetStatusCodeMAPSuccess)
-#define NetStatusCodeFail(status)    (status != NetStatusCodeSuccess && status != NetStatusCodeMAPSuccess)
+#define NetStatusCodeSuc(status)    (status == NetStatusCodeSuccess || status == NetStatusCodeSuccess2)
+#define NetStatusCodeFail(status)    (status != NetStatusCodeSuccess && status != NetStatusCodeSuccess2)
 
 @interface UploadFileInfo : NSObject
 @property(nonatomic,copy) NSString      *fileName;

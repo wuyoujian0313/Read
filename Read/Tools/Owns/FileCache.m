@@ -8,7 +8,7 @@
 
 #import "FileCache.h"
 #import <UIKit/UIKit.h>
-#import "../Category/NSString+Utility.h"
+#import "NSString+Utility.h"
 
 #define MEMORY_CACHE_NAME               @"com.weimeitc.Filecache"
 #define DISK_CACHE_NAMESPACE            @"com.weimeitc.Filecache"
