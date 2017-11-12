@@ -74,6 +74,15 @@
 		AF683D881FB81B5800AB69EC /* NetworkTask.m in Sources */ = {isa = PBXBuildFile; fileRef = AF683D861FB81B5800AB69EC /* NetworkTask.m */; };
 		AFBAE1611FB83B560002DE1B /* NetResultBase.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE1601FB83B560002DE1B /* NetResultBase.m */; };
 		AFBAE1651FB83D5B0002DE1B /* SysDataSaver.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE1641FB83D5B0002DE1B /* SysDataSaver.m */; };
+		AFBAE1681FB854140002DE1B /* CaptchaResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE1671FB854140002DE1B /* CaptchaResult.m */; };
+		AFBAE16B1FB8558A0002DE1B /* RegisterResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE16A1FB8558A0002DE1B /* RegisterResult.m */; };
+		AFBAE16E1FB856890002DE1B /* UserInfoResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE16D1FB856890002DE1B /* UserInfoResult.m */; };
+		AFBAE1711FB856CA0002DE1B /* UpdateUserInfoResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE1701FB856CA0002DE1B /* UpdateUserInfoResult.m */; };
+		AFBAE1741FB856F50002DE1B /* ResetPwdResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE1731FB856F50002DE1B /* ResetPwdResult.m */; };
+		AFBAE1771FB858C60002DE1B /* NoteListResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE1761FB858C60002DE1B /* NoteListResult.m */; };
+		AFBAE17A1FB8590B0002DE1B /* NoteItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE1791FB8590B0002DE1B /* NoteItem.m */; };
+		AFBAE17D1FB85EC50002DE1B /* MultySearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE17C1FB85EC50002DE1B /* MultySearchResult.m */; };
+		AFBAE1801FB85EF40002DE1B /* BookItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE17F1FB85EF40002DE1B /* BookItem.m */; };
 		AFDEC9011FB4878F00926F38 /* NotesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEC9001FB4878F00926F38 /* NotesVC.m */; };
 		AFDEC9041FB487AB00926F38 /* BookroomVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEC9031FB487AB00926F38 /* BookroomVC.m */; };
 		AFDEC9071FB487CB00926F38 /* NewbooksVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEC9061FB487CB00926F38 /* NewbooksVC.m */; };
@@ -214,6 +223,24 @@
 		AFBAE1601FB83B560002DE1B /* NetResultBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetResultBase.m; sourceTree = "<group>"; };
 		AFBAE1631FB83D5B0002DE1B /* SysDataSaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SysDataSaver.h; sourceTree = "<group>"; };
 		AFBAE1641FB83D5B0002DE1B /* SysDataSaver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SysDataSaver.m; sourceTree = "<group>"; };
+		AFBAE1661FB854140002DE1B /* CaptchaResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptchaResult.h; sourceTree = "<group>"; };
+		AFBAE1671FB854140002DE1B /* CaptchaResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptchaResult.m; sourceTree = "<group>"; };
+		AFBAE1691FB8558A0002DE1B /* RegisterResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterResult.h; sourceTree = "<group>"; };
+		AFBAE16A1FB8558A0002DE1B /* RegisterResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterResult.m; sourceTree = "<group>"; };
+		AFBAE16C1FB856890002DE1B /* UserInfoResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoResult.h; sourceTree = "<group>"; };
+		AFBAE16D1FB856890002DE1B /* UserInfoResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoResult.m; sourceTree = "<group>"; };
+		AFBAE16F1FB856CA0002DE1B /* UpdateUserInfoResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateUserInfoResult.h; sourceTree = "<group>"; };
+		AFBAE1701FB856CA0002DE1B /* UpdateUserInfoResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateUserInfoResult.m; sourceTree = "<group>"; };
+		AFBAE1721FB856F50002DE1B /* ResetPwdResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPwdResult.h; sourceTree = "<group>"; };
+		AFBAE1731FB856F50002DE1B /* ResetPwdResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPwdResult.m; sourceTree = "<group>"; };
+		AFBAE1751FB858C60002DE1B /* NoteListResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteListResult.h; sourceTree = "<group>"; };
+		AFBAE1761FB858C60002DE1B /* NoteListResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteListResult.m; sourceTree = "<group>"; };
+		AFBAE1781FB8590B0002DE1B /* NoteItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteItem.h; sourceTree = "<group>"; };
+		AFBAE1791FB8590B0002DE1B /* NoteItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteItem.m; sourceTree = "<group>"; };
+		AFBAE17B1FB85EC50002DE1B /* MultySearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultySearchResult.h; sourceTree = "<group>"; };
+		AFBAE17C1FB85EC50002DE1B /* MultySearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultySearchResult.m; sourceTree = "<group>"; };
+		AFBAE17E1FB85EF40002DE1B /* BookItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookItem.h; sourceTree = "<group>"; };
+		AFBAE17F1FB85EF40002DE1B /* BookItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookItem.m; sourceTree = "<group>"; };
 		AFDEC8FF1FB4878F00926F38 /* NotesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesVC.h; sourceTree = "<group>"; };
 		AFDEC9001FB4878F00926F38 /* NotesVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesVC.m; sourceTree = "<group>"; };
 		AFDEC9021FB487AB00926F38 /* BookroomVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookroomVC.h; sourceTree = "<group>"; };
@@ -465,6 +492,24 @@
 				AF2308DD1FB342CE00BEC151 /* LoginResult.m */,
 				AF683D7F1FB81ADE00AB69EC /* ReadNetRequestParam.h */,
 				AF683D801FB81ADE00AB69EC /* ReadNetRequestParam.m */,
+				AFBAE1661FB854140002DE1B /* CaptchaResult.h */,
+				AFBAE1671FB854140002DE1B /* CaptchaResult.m */,
+				AFBAE1691FB8558A0002DE1B /* RegisterResult.h */,
+				AFBAE16A1FB8558A0002DE1B /* RegisterResult.m */,
+				AFBAE16C1FB856890002DE1B /* UserInfoResult.h */,
+				AFBAE16D1FB856890002DE1B /* UserInfoResult.m */,
+				AFBAE16F1FB856CA0002DE1B /* UpdateUserInfoResult.h */,
+				AFBAE1701FB856CA0002DE1B /* UpdateUserInfoResult.m */,
+				AFBAE1721FB856F50002DE1B /* ResetPwdResult.h */,
+				AFBAE1731FB856F50002DE1B /* ResetPwdResult.m */,
+				AFBAE1751FB858C60002DE1B /* NoteListResult.h */,
+				AFBAE1761FB858C60002DE1B /* NoteListResult.m */,
+				AFBAE1781FB8590B0002DE1B /* NoteItem.h */,
+				AFBAE1791FB8590B0002DE1B /* NoteItem.m */,
+				AFBAE17E1FB85EF40002DE1B /* BookItem.h */,
+				AFBAE17F1FB85EF40002DE1B /* BookItem.m */,
+				AFBAE17B1FB85EC50002DE1B /* MultySearchResult.h */,
+				AFBAE17C1FB85EC50002DE1B /* MultySearchResult.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -629,6 +674,7 @@
 				AF2308B71FB33F5600BEC151 /* DeviceInfo.m in Sources */,
 				AF2308C41FB33F5600BEC151 /* SDWebImageDownloaderOperation.m in Sources */,
 				AFBAE1651FB83D5B0002DE1B /* SysDataSaver.m in Sources */,
+				AFBAE17D1FB85EC50002DE1B /* MultySearchResult.m in Sources */,
 				AF2308CB1FB33F5600BEC151 /* UIImageView+HighlightedWebCache.m in Sources */,
 				AF04C5761FB35A0800C0C67B /* MeVC.m in Sources */,
 				AF14EAB91FB737F60042683D /* ModifyPwdVC.m in Sources */,
@@ -640,14 +686,18 @@
 				AF2308C21FB33F5600BEC151 /* SDWebImageDecoder.m in Sources */,
 				AF2308C91FB33F5600BEC151 /* UIImage+MultiFormat.m in Sources */,
 				AF506F971FB6071800470C01 /* ForgetPwdVC.m in Sources */,
+				AFBAE1801FB85EF40002DE1B /* BookItem.m in Sources */,
 				AF2308C01FB33F5600BEC151 /* SDImageCache.m in Sources */,
 				AF2308B01FB33F5600BEC151 /* MJRefreshConst.m in Sources */,
 				AF2308AD1FB33F5600BEC151 /* UIView+SizeUtility.m in Sources */,
 				AF2308B91FB33F5600BEC151 /* FileCache.m in Sources */,
 				AF2308C11FB33F5600BEC151 /* SDWebImageCompat.m in Sources */,
 				AF2308AA1FB33F5600BEC151 /* UIColor+Utility.m in Sources */,
+				AFBAE1741FB856F50002DE1B /* ResetPwdResult.m in Sources */,
 				AF2308C81FB33F5600BEC151 /* UIImage+GIF.m in Sources */,
 				AF2308C51FB33F5600BEC151 /* SDWebImageManager.m in Sources */,
+				AFBAE17A1FB8590B0002DE1B /* NoteItem.m in Sources */,
+				AFBAE1771FB858C60002DE1B /* NoteListResult.m in Sources */,
 				AF2308B61FB33F5600BEC151 /* CaptchaControl.m in Sources */,
 				AF2308BA1FB33F5600BEC151 /* LineView.m in Sources */,
 				AF2308B41FB33F5600BEC151 /* AINavigationController.m in Sources */,
@@ -661,13 +711,17 @@
 				AF2308AF1FB33F5600BEC151 /* MJRefreshBaseView.m in Sources */,
 				AF2308CD1FB33F5600BEC151 /* UIView+WebCacheOperation.m in Sources */,
 				AF2308B11FB33F5600BEC151 /* MJRefreshFooterView.m in Sources */,
+				AFBAE1711FB856CA0002DE1B /* UpdateUserInfoResult.m in Sources */,
 				AF2308E41FB342CE00BEC151 /* HomeTabVC.m in Sources */,
 				AF2308BE1FB33F5600BEC151 /* MKAnnotationView+WebCache.m in Sources */,
 				AF2308CC1FB33F5600BEC151 /* UIImageView+WebCache.m in Sources */,
+				AFBAE16B1FB8558A0002DE1B /* RegisterResult.m in Sources */,
 				AF2308A21FB33F5600BEC151 /* AFNetworkReachabilityManager.m in Sources */,
 				AF2308B31FB33F5600BEC151 /* AIActionSheet.m in Sources */,
+				AFBAE1681FB854140002DE1B /* CaptchaResult.m in Sources */,
 				AFBAE1611FB83B560002DE1B /* NetResultBase.m in Sources */,
 				AF2308A51FB33F5600BEC151 /* AFURLResponseSerialization.m in Sources */,
+				AFBAE16E1FB856890002DE1B /* UserInfoResult.m in Sources */,
 				AF2308C31FB33F5600BEC151 /* SDWebImageDownloader.m in Sources */,
 				AF683D811FB81ADE00AB69EC /* ReadNetRequestParam.m in Sources */,
 				AF2308AB1FB33F5600BEC151 /* UIImage+ResizeMagick.m in Sources */,

@@ -9,6 +9,11 @@
 #import <Foundation/Foundation.h>
 
 #define BaiduParserArray(key,type)    key##__Array__##type
+/* Example:
+ @property(nonatomic,strong,getter=arrayList)NSArray        *BaiduParserArray(List,ItemClass);
+ List:字段的名称；TtemClass:List中item的类名
+ */
+
 
 @interface NetResultBase : NSObject<NSCopying>
 
