@@ -8,8 +8,11 @@
 
 #import "ForgetPwdVC.h"
 #import "NetResultBase.h"
+#import "NetworkTask.h"
+#import "ResetPwdResult.h"
+#import "CaptchaResult.h"
 
-@interface ForgetPwdVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+@interface ForgetPwdVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,NetworkTaskDelegate>
 
 @property(nonatomic,strong)UITableView          *registerTableView;
 @property(nonatomic,strong)UITextField          *codeTextField;
@@ -106,53 +109,59 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info);
         //
         
         if (_codeTextField.text == nil || [_codeTextField.text length] <= 0) {
-            [SVProgressHUD showErrorWithStatus:@"请输入验证码"];
+            [FadePromptView showPromptStatus:@"请输入验证码" duration:0.6  positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
+                //
+            }];
             [_codeTextField becomeFirstResponder];
             return;
         }
         
         if (_phoneTextField.text == nil || [_phoneTextField.text length] <= 0) {
-            [SVProgressHUD showErrorWithStatus:@"请输入手机号码"];
+            [FadePromptView showPromptStatus:@"请输入手机号码" duration:0.6  positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
+                //
+            }];
             [_phoneTextField becomeFirstResponder];
             return;
         }
         
         
         if (_pwdTextField.text == nil || [_pwdTextField.text length] <= 0) {
-            [SVProgressHUD showErrorWithStatus:@"请输入密码"];
+            [FadePromptView showPromptStatus:@"请输入密码" duration:0.6  positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
+                //
+            }];
             [_pwdTextField becomeFirstResponder];
             return;
         }
         
         
         BOOL isPhone = [_phoneTextField.text isValidateMobile];
-        BOOL isEmail = [_phoneTextField.text isValidateEmail];
-        if (!isPhone && !isEmail) {
-            [SVProgressHUD showErrorWithStatus:@"请输入11位的手机号码"];
+        if (!isPhone) {
+            [FadePromptView showPromptStatus:@"请输入11位的手机号码" duration:0.6  positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
+                //
+            }];
             [_phoneTextField becomeFirstResponder];
             return;
         }
         
-        if ([_pwdTextField.text length] < 6 || [_pwdTextField.text length] > 18) {
-            [SVProgressHUD showErrorWithStatus:@"密码长度限制在6-18位"];
+        if ([_pwdTextField.text length] < 6 || [_pwdTextField.text length] > 20) {
+            [FadePromptView showPromptStatus:@"密码长度限制在6-20位" duration:0.6  positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
+                //
+            }];
             [_pwdTextField becomeFirstResponder];
             return;
         }
         
-//        NSMutableDictionary *param = [[NSMutableDictionary alloc] initWithCapacity:0];
-//        NSString *str = [NSString stringWithFormat:@"%@",_phoneTextField.text];
-//        NSString *apiString = nil;
-//        
-//        NSString *codeString = [NSString stringWithFormat:@"%@",_codeTextField.text];
-//        [param setObject:codeString forKey:@"vcode"];
-//        
-//        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-//        [[NetworkTask sharedNetworkTask] addPUTTaskApi:apiString
-//                                              forParam:param
-//                                                 token:[User sharedUser].accessToken
-//                                              delegate:self
-//                                      receiveResultObj:[[NetResultBase alloc] init]
-//                                            customInfo:@"verify"];
+        NSMutableDictionary *param = [[NSMutableDictionary alloc] initWithCapacity:0];
+        [param setObject:_phoneTextField.text forKey:@"phone"];
+        [param setObject:_pwdTextField.text forKey:@"passwd"];
+        [param setObject:_codeTextField.text forKey:@"captcha"];
+        
+        [SVProgressHUD showWithStatus:@"正在重置密码..." maskType:SVProgressHUDMaskTypeBlack];
+        [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_ReSetPwd
+                                                 forParam:param
+                                                 delegate:self
+                                                resultObj:[[ResetPwdResult alloc] init]
+                                               customInfo:@"ResetPwd"];
         
     }
 }
@@ -162,11 +171,11 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info);
     if(_lessTime > 0) {
         NSString *lessTimeTmp = [[NSString alloc] initWithFormat:@"重新发送(%ld)", (long)_lessTime];
         [_codeBtn setTitle:lessTimeTmp forState:UIControlStateDisabled];
-        [_codeBtn setTitleColor:[UIColor colorWithHex:0x669900] forState:UIControlStateDisabled];
+        [_codeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
         [_codeBtn setEnabled:NO];
     } else {
         NSString *lessTimeTmp = [[NSString alloc] initWithFormat:@"重新发送"];
-        [_codeBtn setTitleColor:[UIColor colorWithHex:0xff6600] forState:UIControlStateNormal];
+        [_codeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_codeBtn setTitle:lessTimeTmp forState:UIControlStateNormal];
         [_codeBtn setEnabled:YES];
     }
@@ -211,21 +220,21 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
     BOOL isEmail = [codeString isValidateEmail];
     
     if (!isPhoneNumber && !isEmail) {
-        [SVProgressHUD showErrorWithStatus:@"请输入11位的手机号码"];
+        [FadePromptView showPromptStatus:@"请输入11位的手机号码" duration:0.6  positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
+            //
+        }];
         [_phoneTextField becomeFirstResponder];
         return;
     }
     
-//    [param setObject:@"1" forKey:@"type"];
-//    NSString *apiString = nil;
-//    
-//    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-//    [[NetworkTask sharedNetworkTask] addPOSTTaskApi:apiString
-//                                           forParam:param
-//                                              token:[User sharedUser].accessToken
-//                                           delegate:self
-//                                   receiveResultObj:[[NetResultBase alloc] init]
-//                                         customInfo:@"registerCode"];
+    [param setObject:_phoneTextField.text forKey:@"phone"];
+    [param setObject:@"2" forKey:@"type"]; // 1:注册 ，2:重置密码
+    [SVProgressHUD showWithStatus:@"正在获取验证码..." maskType:SVProgressHUDMaskTypeBlack];
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_ReSetPwd
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[CaptchaResult alloc] init]
+                                           customInfo:@"registerCode"];
 }
 
 
@@ -261,49 +270,32 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
         //
         // 设置倒计时时间
         [self setLessTime:60];
-        
         // 启动倒计时
         [self timerStart];
         
-    } else if ([customInfo isEqualToString:@"verify"]) {
-        //
-        NSMutableDictionary *param = [[NSMutableDictionary alloc] initWithCapacity:0];
-        NSString *str = [NSString stringWithFormat:@"%@",_phoneTextField.text];
-        NSString *apiString = nil;
-//        if (_type == 0) {
-//            apiString = @"user/passwd/mobile";
-//            [param setObject:str forKey:@"mobile"];
-//        } else if (_type == 1){
-//            apiString = @"user/passwd/email";
-//            [param setObject:str forKey:@"email"];
-//        }
-//        
-//        NSString *codeString = [NSString stringWithFormat:@"%@",_codeTextField.text];
-//        [param setObject:codeString forKey:@"vcode"];
-//        
-//        NSString *pwdString = [NSString stringWithFormat:@"%@",_pwdTextField.text];
-//        [param setObject:pwdString forKey:@"passwd"];
-//        
-//        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-//        [[NetworkTask sharedNetworkTask] addPOSTTaskApi:apiString
-//                                               forParam:param
-//                                                  token:nil
-//                                               delegate:self
-//                                       receiveResultObj:[User sharedUser]
-//                                             customInfo:@"getPassword"];
-        
-        
-        
-    } else if ([customInfo isEqualToString:@"getPassword"]) {
-        //
-        [SVProgressHUD showSuccessWithStatus:@"恭喜您，新密码设置成功！"];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+    } else if ([customInfo isEqualToString:@"ResetPwd"]) {
+        [FadePromptView showPromptStatus:@"修改成功，请重新登录~！" duration:2.0  positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
+            //
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
     }
 }
 
 
 -(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
-    [SVProgressHUD showErrorWithStatus:errorDesc];
+    
+    [SVProgressHUD dismiss];
+    if ([customInfo isEqualToString:@"registerCode"]) {
+        // 测试代码！！！！
+        // 设置倒计时时间
+        [self setLessTime:60];
+        // 启动倒计时
+        [self timerStart];
+    } else {
+        [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
+            //
+        }];
+    }
 }
 
 
@@ -350,7 +342,7 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
         NSMutableString *textString = [NSMutableString stringWithString:textField.text];
         [textString replaceCharactersInRange:range withString:string];
         
-        if ([textString length] > 18) {
+        if ([textString length] > 20) {
             return NO;
         }
     }
@@ -364,7 +356,7 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
     
     UITextField *textField = (UITextField *)sender;
     NSString *temp = [NSString stringWithFormat:@"%@",textField.text];
-    if ([temp length] > 18) {
+    if ([temp length] > 20) {
         textField.text = _pwdNewString;
         return;
     }
@@ -496,7 +488,7 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
             [textField setTextColor:[UIColor colorWithHex:0x666666]];
             [textField addTarget:self action:@selector(inputChange:) forControlEvents:UIControlEventEditingChanged];
             [textField setClearButtonMode:UITextFieldViewModeAlways];
-            [textField setPlaceholder:@"请输入新密码(6-18位)"];
+            [textField setPlaceholder:@"请输入新密码(6-20位)"];
             [textField setClearsOnBeginEditing:YES];
             [cell.contentView addSubview:textField];
             

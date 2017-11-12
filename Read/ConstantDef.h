@@ -13,9 +13,19 @@
 #define kGlobalLineColor        0xdcdcdc
 
 // 服务器地址
-#define kNetworkAPIServer           @"http://123.56.104.127/"
+#define kNetworkAPIServer               @"http://123.56.104.127/"
 
 // 接口定义
-#define API_Login                   @"user/login"
+// 登录
+#define API_Login                       @"user/login"
+// 注册
+#define API_Register                    @"user/register"
+// 获取验证码
+#define API_GetCaptcha                  @"user/getCaptcha"
+
+// 重置密码
+#define API_ReSetPwd                    @"user/resetPwd"
+
+
 
 #endif /* ConstantDef_h */
