@@ -72,6 +72,14 @@
 		AF506F991FB609C800470C01 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF506F981FB609C800470C01 /* back@2x.png */; };
 		AF683D811FB81ADE00AB69EC /* ReadNetRequestParam.m in Sources */ = {isa = PBXBuildFile; fileRef = AF683D801FB81ADE00AB69EC /* ReadNetRequestParam.m */; };
 		AF683D881FB81B5800AB69EC /* NetworkTask.m in Sources */ = {isa = PBXBuildFile; fileRef = AF683D861FB81B5800AB69EC /* NetworkTask.m */; };
+		AF94FDFB1FB9DD5F0086CB22 /* tb-biji-sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF94FDF31FB9DD5F0086CB22 /* tb-biji-sel@2x.png */; };
+		AF94FDFC1FB9DD5F0086CB22 /* tb-biji@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF94FDF41FB9DD5F0086CB22 /* tb-biji@2x.png */; };
+		AF94FDFD1FB9DD5F0086CB22 /* tb-me-sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF94FDF51FB9DD5F0086CB22 /* tb-me-sel@2x.png */; };
+		AF94FDFE1FB9DD5F0086CB22 /* tb-me@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF94FDF61FB9DD5F0086CB22 /* tb-me@2x.png */; };
+		AF94FDFF1FB9DD5F0086CB22 /* tb-shuku-sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF94FDF71FB9DD5F0086CB22 /* tb-shuku-sel@2x.png */; };
+		AF94FE001FB9DD5F0086CB22 /* tb-shuku@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF94FDF81FB9DD5F0086CB22 /* tb-shuku@2x.png */; };
+		AF94FE011FB9DD5F0086CB22 /* tb-xinshu-sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF94FDF91FB9DD5F0086CB22 /* tb-xinshu-sel@2x.png */; };
+		AF94FE021FB9DD5F0086CB22 /* tb-xinshu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF94FDFA1FB9DD5F0086CB22 /* tb-xinshu@2x.png */; };
 		AFBAE1611FB83B560002DE1B /* NetResultBase.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE1601FB83B560002DE1B /* NetResultBase.m */; };
 		AFBAE1651FB83D5B0002DE1B /* SysDataSaver.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE1641FB83D5B0002DE1B /* SysDataSaver.m */; };
 		AFBAE1681FB854140002DE1B /* CaptchaResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE1671FB854140002DE1B /* CaptchaResult.m */; };
@@ -86,7 +94,6 @@
 		AFDEC9011FB4878F00926F38 /* NotesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEC9001FB4878F00926F38 /* NotesVC.m */; };
 		AFDEC9041FB487AB00926F38 /* BookroomVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEC9031FB487AB00926F38 /* BookroomVC.m */; };
 		AFDEC9071FB487CB00926F38 /* NewbooksVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEC9061FB487CB00926F38 /* NewbooksVC.m */; };
-		AFDEC9091FB48BC400926F38 /* sysAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFDEC9081FB48BC400926F38 /* sysAssets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -219,6 +226,14 @@
 		AF683D801FB81ADE00AB69EC /* ReadNetRequestParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadNetRequestParam.m; sourceTree = "<group>"; };
 		AF683D851FB81B5800AB69EC /* NetworkTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkTask.h; sourceTree = "<group>"; };
 		AF683D861FB81B5800AB69EC /* NetworkTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkTask.m; sourceTree = "<group>"; };
+		AF94FDF31FB9DD5F0086CB22 /* tb-biji-sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-biji-sel@2x.png"; sourceTree = "<group>"; };
+		AF94FDF41FB9DD5F0086CB22 /* tb-biji@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-biji@2x.png"; sourceTree = "<group>"; };
+		AF94FDF51FB9DD5F0086CB22 /* tb-me-sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-me-sel@2x.png"; sourceTree = "<group>"; };
+		AF94FDF61FB9DD5F0086CB22 /* tb-me@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-me@2x.png"; sourceTree = "<group>"; };
+		AF94FDF71FB9DD5F0086CB22 /* tb-shuku-sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-shuku-sel@2x.png"; sourceTree = "<group>"; };
+		AF94FDF81FB9DD5F0086CB22 /* tb-shuku@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-shuku@2x.png"; sourceTree = "<group>"; };
+		AF94FDF91FB9DD5F0086CB22 /* tb-xinshu-sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-xinshu-sel@2x.png"; sourceTree = "<group>"; };
+		AF94FDFA1FB9DD5F0086CB22 /* tb-xinshu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-xinshu@2x.png"; sourceTree = "<group>"; };
 		AFBAE15F1FB83B560002DE1B /* NetResultBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetResultBase.h; sourceTree = "<group>"; };
 		AFBAE1601FB83B560002DE1B /* NetResultBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetResultBase.m; sourceTree = "<group>"; };
 		AFBAE1631FB83D5B0002DE1B /* SysDataSaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SysDataSaver.h; sourceTree = "<group>"; };
@@ -247,7 +262,6 @@
 		AFDEC9031FB487AB00926F38 /* BookroomVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookroomVC.m; sourceTree = "<group>"; };
 		AFDEC9051FB487CB00926F38 /* NewbooksVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewbooksVC.h; sourceTree = "<group>"; };
 		AFDEC9061FB487CB00926F38 /* NewbooksVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewbooksVC.m; sourceTree = "<group>"; };
-		AFDEC9081FB48BC400926F38 /* sysAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = sysAssets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -317,7 +331,6 @@
 				AF2308D01FB340EB00BEC151 /* MainVCManager.h */,
 				AF2308D11FB340EB00BEC151 /* MainVCManager.m */,
 				AF23082F1FB3371200BEC151 /* Assets.xcassets */,
-				AFDEC9081FB48BC400926F38 /* sysAssets.xcassets */,
 				AF2308341FB3371200BEC151 /* Info.plist */,
 				AF2308231FB3371200BEC151 /* Supporting Files */,
 			);
@@ -531,6 +544,7 @@
 		AF506F8A1FB5E26700470C01 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				AF94FE031FB9DEB70086CB22 /* tabbar */,
 				AF506F8B1FB5E26700470C01 /* icon_pwd@2x.png */,
 				AF506F8C1FB5E26700470C01 /* icon_user@2x.png */,
 				AF506F8D1FB5E26700470C01 /* login_bg@2x.png */,
@@ -547,6 +561,21 @@
 				AF683D861FB81B5800AB69EC /* NetworkTask.m */,
 			);
 			path = NetEngine;
+			sourceTree = "<group>";
+		};
+		AF94FE031FB9DEB70086CB22 /* tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				AF94FDF31FB9DD5F0086CB22 /* tb-biji-sel@2x.png */,
+				AF94FDF41FB9DD5F0086CB22 /* tb-biji@2x.png */,
+				AF94FDF51FB9DD5F0086CB22 /* tb-me-sel@2x.png */,
+				AF94FDF61FB9DD5F0086CB22 /* tb-me@2x.png */,
+				AF94FDF71FB9DD5F0086CB22 /* tb-shuku-sel@2x.png */,
+				AF94FDF81FB9DD5F0086CB22 /* tb-shuku@2x.png */,
+				AF94FDF91FB9DD5F0086CB22 /* tb-xinshu-sel@2x.png */,
+				AF94FDFA1FB9DD5F0086CB22 /* tb-xinshu@2x.png */,
+			);
+			name = tabbar;
 			sourceTree = "<group>";
 		};
 		AFBAE1621FB83D000002DE1B /* Helper */ = {
@@ -612,10 +641,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0830;
-				ORGANIZATIONNAME = wuyj;
+				ORGANIZATIONNAME = weimeitc;
 				TargetAttributes = {
 					AF23081F1FB3371200BEC151 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 7DUX67X748;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -644,12 +674,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF506F901FB5E26700470C01 /* icon_user@2x.png in Resources */,
-				AFDEC9091FB48BC400926F38 /* sysAssets.xcassets in Resources */,
+				AF94FE001FB9DD5F0086CB22 /* tb-shuku@2x.png in Resources */,
 				AF2308AE1FB33F5600BEC151 /* MJRefresh.bundle in Resources */,
+				AF94FE011FB9DD5F0086CB22 /* tb-xinshu-sel@2x.png in Resources */,
+				AF94FDFD1FB9DD5F0086CB22 /* tb-me-sel@2x.png in Resources */,
+				AF94FDFE1FB9DD5F0086CB22 /* tb-me@2x.png in Resources */,
+				AF94FE021FB9DD5F0086CB22 /* tb-xinshu@2x.png in Resources */,
+				AF94FDFC1FB9DD5F0086CB22 /* tb-biji@2x.png in Resources */,
 				AF2308CE1FB33F5600BEC151 /* SVProgressHUD.bundle in Resources */,
 				AF2308301FB3371200BEC151 /* Assets.xcassets in Resources */,
 				AF506F991FB609C800470C01 /* back@2x.png in Resources */,
 				AF506F911FB5E26700470C01 /* login_bg@2x.png in Resources */,
+				AF94FDFF1FB9DD5F0086CB22 /* tb-shuku-sel@2x.png in Resources */,
+				AF94FDFB1FB9DD5F0086CB22 /* tb-biji-sel@2x.png in Resources */,
 				AF506F921FB5E26700470C01 /* yuedushu_green@2x.png in Resources */,
 				AF506F8F1FB5E26700470C01 /* icon_pwd@2x.png in Resources */,
 			);
@@ -780,7 +817,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -822,7 +859,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -834,15 +871,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Wu YouJian (EK2QWBZ82K)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Wu YouJian (EK2QWBZ82K)";
+				DEVELOPMENT_TEAM = 7DUX67X748;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Read/Read-Prefix.pch";
 				INFOPLIST_FILE = Read/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = wuyj.Read;
+				PRODUCT_BUNDLE_IDENTIFIER = com.weimeitc.bqdj;
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "fe1b8371-4900-41c5-ac86-8b23601cb620";
+				PROVISIONING_PROFILE_SPECIFIER = bqdjAppDev_profile;
 			};
 			name = Debug;
 		};
@@ -851,15 +892,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing WeiMeiTianCheng Technology Co., Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing WeiMeiTianCheng Technology Co., Ltd.";
+				DEVELOPMENT_TEAM = 7DUX67X748;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Read/Read-Prefix.pch";
 				INFOPLIST_FILE = Read/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = wuyj.Read;
+				PRODUCT_BUNDLE_IDENTIFIER = com.weimeitc.bqdj;
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "021b0eed-3146-46b4-bff7-f213a15f2f87";
+				PROVISIONING_PROFILE_SPECIFIER = bqdjAppDis_profile;
 			};
 			name = Release;
 		};

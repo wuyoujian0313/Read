@@ -35,30 +35,30 @@
 
 - (void)configViewControllers {
 
-    [self.tabBar setBarTintColor:[UIColor colorWithHex:0x6Fc05b]];
+    [self.tabBar setBarTintColor:[UIColor colorWithHex:kGlobalGreenColor]];
     [self.tabBar setTintColor:[UIColor whiteColor]];
 
     NewbooksVC *commonVc = [[NewbooksVC alloc] init];
     _newbooksVc = commonVc;
     UITabBarItem *itemObj1 = [[UITabBarItem alloc] initWithTitle:@"新书"
-                                                           image:[UIImage imageNamed:@"tabbar_circle"]
-                                                   selectedImage:nil];
+                                                           image:[UIImage imageNamed:@"tb-xinshu"]
+                                                   selectedImage:[UIImage imageNamed:@"tb-xinshu-sel"]];
     itemObj1.tag = 0;
     [_newbooksVc setTabBarItem:itemObj1];
 
     BookroomVC *bookroomVc = [[BookroomVC alloc] init];
     _bookroomVc = bookroomVc;
     UITabBarItem *itemObj2 = [[UITabBarItem alloc] initWithTitle:@"书库"
-                                                           image:[UIImage imageNamed:@"tabbar_home"]
-                                                   selectedImage:nil];
+                                                           image:[UIImage imageNamed:@"tb-shuku"]
+                                                   selectedImage:[UIImage imageNamed:@"tb-shuku-sel"]];
     itemObj2.tag = 1;
     [_bookroomVc setTabBarItem:itemObj2];
 
     NotesVC *notesVc = [[NotesVC alloc] init];
     _notesVc = notesVc;
     UITabBarItem *itemObj3 = [[UITabBarItem alloc] initWithTitle:@"笔记"
-                                                           image:[UIImage imageNamed:@"tabbar_question"]
-                                                   selectedImage:nil];
+                                                           image:[UIImage imageNamed:@"tb-biji"]
+                                                   selectedImage:[UIImage imageNamed:@"tb-biji-sel"]];
     itemObj3.tag = 2;
     [_notesVc setTabBarItem:itemObj3];
     
@@ -66,8 +66,8 @@
     MeVC *meVc = [[MeVC alloc] init];
     _meVc = meVc;
     UITabBarItem *itemObj4 = [[UITabBarItem alloc] initWithTitle:@"我"
-                                                           image:[UIImage imageNamed:@"tabbar_me"]
-                                                   selectedImage:nil];
+                                                           image:[UIImage imageNamed:@"tb-me"]
+                                                   selectedImage:[UIImage imageNamed:@"tb-me-sel"]];
     itemObj4.tag = 2;
     [_meVc setTabBarItem:itemObj4];
     
