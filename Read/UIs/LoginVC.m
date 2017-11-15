@@ -65,7 +65,7 @@
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.view addSubview:tableView];
     
-    [self setTableViewHeaderView:300];
+    [self setTableViewHeaderView:260];
     [self setTableViewFooterView:180];
 }
 
@@ -79,14 +79,14 @@
 //    [imageView setImage:yuedushu];
 //    [view addSubview:imageView];
 
-//    // 文字方案
-//    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 160, _loginTableView.frame.size.width, 60)];
-//    label.backgroundColor=[UIColor clearColor];
-//    label.font = [UIFont boldSystemFontOfSize:30];
-//    label.textColor = [UIColor colorWithHex:kGlobalGreenColor];
-//    label.text = @"Rlab阿来学院";
-//    label.textAlignment = NSTextAlignmentCenter;
-//    [view addSubview:label];
+    // 文字方案
+    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, (height - 60)/2.0, _loginTableView.frame.size.width, 60)];
+    label.backgroundColor=[UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:30];
+    label.textColor = [UIColor colorWithHex:kGlobalGreenColor];
+    label.text = @"Rlab阿来学院";
+    label.textAlignment = NSTextAlignmentCenter;
+    [view addSubview:label];
     [_loginTableView setTableHeaderView:view];
 }
 

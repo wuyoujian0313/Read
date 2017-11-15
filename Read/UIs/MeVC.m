@@ -14,6 +14,10 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <AVFoundation/AVFoundation.h>
 #import "SetVC.h"
+#import "ChildrenInfoVC.h"
+#import "LoginResult.h"
+#import "SysDataSaver.h"
+
 
 
 @interface MeVC ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
@@ -34,7 +38,7 @@
 
 - (void)layoutMeTableView {
     
-    UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, [DeviceInfo navigationBarHeight], self.view.frame.size.width, self.view.frame.size.height -[DeviceInfo navigationBarHeight]) style:UITableViewStyleGrouped];
+    UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
     [self setMeTableView:tableView];
     [tableView setDelegate:self];
     [tableView setDataSource:self];
@@ -43,28 +47,34 @@
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.view addSubview:tableView];
     
-    [self setTableViewHeaderView:175];
+    [self setTableViewHeaderView:170];
     [self setTableViewFooterView:2];
 }
 
 -(void)loadHeadImageAndNickName {
-    _userNicknameLabel.text = @"树与风";
+    
+    LoginResult *userInfo = [[SysDataSaver SharedSaver] getUserInfo];
+    _userNicknameLabel.text = userInfo.nick;
     
     //从缓存取
     //取图片缓存
     SDImageCache * imageCache = [SDImageCache sharedImageCache];
-    NSString *imageUrl  = @"123321";
-    UIImage *default_image = [imageCache imageFromDiskCacheForKey:imageUrl];
+    NSString *imageUrl = userInfo.avatar;
+    NSString *avatarKey  = [imageUrl md5EncodeUpper:NO];
+    UIImage *default_image = [imageCache imageFromDiskCacheForKey:avatarKey];
     
     if (default_image == nil) {
-        default_image = [UIImage imageFromColor:[UIColor colorWithHex:0x6Fc05b]];
-        
+        default_image = [UIImage imageNamed:@"icon_photo"];
+        _headImageView.image = default_image;
+        if (imageUrl == nil || [imageUrl length] == 0) {
+            return;
+        }
         [_headImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl]
                           placeholderImage:default_image
                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                      if (image) {
                                          _headImageView.image = image;
-                                         [[SDImageCache sharedImageCache] storeImage:image forKey:imageUrl];
+                                         [[SDImageCache sharedImageCache] storeImage:image forKey:avatarKey];
                                      }
                                  }
          ];
@@ -87,7 +97,7 @@
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _meTableView.frame.size.width, height)];
     view.backgroundColor = [UIColor colorWithHex:0xebeef0];
     
-    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake((_meTableView.frame.size.width - 75)/2.0, 35, 75, 75)];
+    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake((_meTableView.frame.size.width - 75)/2.0, (height - 75 - 15 - 15)/2.0, 75, 75)];
     self.headImageView = imageView;
     imageView.clipsToBounds = YES;
     imageView.userInteractionEnabled = YES;
@@ -98,7 +108,7 @@
     UITapGestureRecognizer *tapChangeHeadImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeHeadImage:)];
     [imageView addGestureRecognizer:tapChangeHeadImage];
     
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 35 + 75 + 15, _meTableView.frame.size.width, 15)];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (height - 75 - 15 - 15)/2.0 + 75 + 15, _meTableView.frame.size.width, 15)];
     [self setUserNicknameLabel:titleLabel];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.font = [UIFont systemFontOfSize:14];
@@ -154,19 +164,19 @@
     NSInteger section = indexPath.section;
     if (section == 0) {
         if (row == 0) {
-            cell.imageView.image = [UIImage imageNamed:@"tabbar_circle"];
+            cell.imageView.image = [UIImage imageNamed:@"icon_emotion"];
             cell.textLabel.text = @"宝贝信息";
         } else if (row == 1) {
-            cell.imageView.image = [UIImage imageNamed:@"tabbar_circle"];
+            cell.imageView.image = [UIImage imageNamed:@"icon_heart"];
             cell.textLabel.text = @"已收藏书目";
         } else if (row == 2) {
-            cell.imageView.image = [UIImage imageNamed:@"tabbar_circle"];
+            cell.imageView.image = [UIImage imageNamed:@"icon_note"];
             cell.textLabel.text = @"已笔记书目";
         }
         
     } else if (section == 1) {
         if (row == 0) {
-            cell.imageView.image = [UIImage imageNamed:@"tabbar_circle"];
+            cell.imageView.image = [UIImage imageNamed:@"icon_setting"];
             cell.textLabel.text = @"设置";
         }
         
@@ -200,6 +210,8 @@
     if (section == 0) {
         switch (row) {
             case 0: {
+                ChildrenInfoVC *vc = [[ChildrenInfoVC alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
                 break;
             }
             case 1: {
