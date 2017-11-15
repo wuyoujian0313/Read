@@ -10,4 +10,25 @@
 
 @implementation LoginResult
 
+- (id) initWithCoder:(NSCoder*)coder {
+    if (self = [super init]) {
+        self.nick               = [coder decodeObjectForKey:@"nick"];
+        self.avatar             = [coder decodeObjectForKey:@"avatar"];
+        self.favorCount         = [coder decodeObjectForKey:@"favorCount"];
+        self.noteCount          = [coder decodeObjectForKey:@"noteCount"];
+        self.user_id            = [coder decodeObjectForKey:@"user_id"];
+        self.phone              = [coder decodeObjectForKey:@"phone"];
+    }
+    return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *)coder {
+    [coder encodeObject:self.nick forKey:@"nick"];
+    [coder encodeObject:self.avatar forKey:@"avatar"];
+    [coder encodeObject:self.favorCount forKey:@"favorCount"];
+    [coder encodeObject:self.noteCount forKey:@"noteCount"];
+    [coder encodeObject:self.user_id forKey:@"user_id"];
+    [coder encodeObject:self.phone forKey:@"phone"];
+}
+
 @end

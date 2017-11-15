@@ -15,7 +15,7 @@
  */
 
 
-@interface NetResultBase : NSObject<NSCopying>
+@interface NetResultBase : NSObject<NSCopying,NSCoding>
 
 @property (nonatomic, copy)NSNumber     *code;                    // 返回代码
 @property (nonatomic, copy)NSString     *message;                 // 返回描述

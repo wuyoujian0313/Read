@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "LoginResult.h"
+#import "SysDataSaver.h"
 
 
 @interface AppDelegate ()
@@ -34,6 +36,23 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [self setupMainVC];
+    
+    /*
+     @property (nonatomic, copy)NSString *nick;
+     @property (nonatomic, copy)NSString *avatar;
+     @property (nonatomic, copy)NSString *favorCount;
+     @property (nonatomic, copy)NSString *noteCount;
+     @property (nonatomic, copy)NSString *user_id;
+     @property (nonatomic, copy)NSString *phone;
+     */
+    
+    LoginResult *result = [[LoginResult alloc] init];
+    result.user_id = @"user_id";
+    result.nick = @"nick";
+    
+    [[SysDataSaver SharedSaver] saveCustomObject:result key:@"wuyoujian"];
+    LoginResult *r = [[SysDataSaver SharedSaver] getCustomObjectWithKey:@"wuyoujian"];
+    
         
     return YES;
 }

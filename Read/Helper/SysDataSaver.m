@@ -7,33 +7,53 @@
 //
 
 #import "SysDataSaver.h"
+#import "LoginResult.h"
 
+#define kUkeyUserDefaults       @"kUkeyUserDefaults"
 #define kUkeyUserDefaults       @"kUkeyUserDefaults"
 
 @implementation SysDataSaver
 
 AISINGLETON_IMP(SysDataSaver,SharedSaver);
 
-- (void)saveToUserDefault:(id)value key:(NSString *)key {
+
+- (void)saveSystemStandardObject:(id)value key:(NSString *)key {
     [[NSUserDefaults standardUserDefaults] setObject:value forKey:key];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (id)getValueFromUserDefaultWithKey:(NSString *)key {
+- (id)getSystemStandardObjectWithKey:(NSString *)key {
     return [[NSUserDefaults standardUserDefaults] objectForKey:key];
 }
 
-- (void)clearValueUserDefaultWithKey:(NSString *)key {
+- (void)saveCustomObject:(id<NSCoding>)value key:(NSString *)key {
+    NSData *valueData = [NSKeyedArchiver archivedDataWithRootObject:value];
+    [self saveSystemStandardObject:valueData key:key];
+}
+
+- (id)getCustomObjectWithKey:(NSString *)key {
+    NSData *valueData = [[NSUserDefaults standardUserDefaults] objectForKey:key];
+    id obj = [NSKeyedUnarchiver unarchiveObjectWithData:valueData];
+    return obj;
+}
+
+- (void)clearValueWithKey:(NSString *)key {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:key];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (void)setUserId:(NSString *)userId {
-    [self saveToUserDefault:userId key:kUkeyUserDefaults];
+
+- (void)saveUserInfo:(id<NSCoding>)userInfo {
+    [self saveCustomObject:userInfo key:kUkeyUserDefaults];
+}
+
+- (id)getUserInfo {
+    return [self getCustomObjectWithKey:kUkeyUserDefaults];
 }
 
 - (NSString *)getUserId {
-    return [self getValueFromUserDefaultWithKey:kUkeyUserDefaults];
+    LoginResult *userInfo = [self getCustomObjectWithKey:kUkeyUserDefaults];
+    return userInfo.user_id;
 }
 
 @end

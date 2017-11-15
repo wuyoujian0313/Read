@@ -11,6 +11,27 @@
 
 @implementation NetResultBase
 
+/*
+ @property (nonatomic, copy)NSNumber     *code;                    // 返回代码
+ @property (nonatomic, copy)NSString     *message;                 // 返回描述
+ @property (nonatomic, copy)NSNumber     *status;
+ */
+
+- (id) initWithCoder:(NSCoder*)coder {
+    if (self = [super init]) {
+        self.code           = [coder decodeObjectForKey:@"code"];
+        self.message        = [coder decodeObjectForKey:@"message"];
+        self.status         = [coder decodeObjectForKey:@"status"];
+    }
+    return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *)coder {
+    [coder encodeObject:self.code forKey:@"code"];
+    [coder encodeObject:self.message forKey:@"message"];
+    [coder encodeObject:self.status forKey:@"status"];
+}
+
 - (id)copyWithZone:(nullable NSZone *)zone {
     NetResultBase * temp = [[NetResultBase alloc] init];
     [temp setCode:_code];

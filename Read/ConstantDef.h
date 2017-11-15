@@ -26,6 +26,7 @@
 // 重置密码
 #define API_ReSetPwd                    @"user/resetPwd"
 
-
+// 修改密码
+#define API_Changepasswd                @"user/changepasswd"
 
 #endif /* ConstantDef_h */

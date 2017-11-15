@@ -12,11 +12,16 @@
 
 AISINGLETON_DEF(SysDataSaver,SharedSaver);
 
-- (void)saveToUserDefault:(id)value key:(NSString *)key;
-- (id)getValueFromUserDefaultWithKey:(NSString *)key;
-- (void)clearValueUserDefaultWithKey:(NSString *)key;
+// 基础函数
+- (void)saveSystemStandardObject:(id)value key:(NSString *)key;
+- (id)getSystemStandardObjectWithKey:(NSString *)key;
+- (void)saveCustomObject:(id<NSCoding>)value key:(NSString *)key;
+- (id)getCustomObjectWithKey:(NSString *)key;
+- (void)clearValueWithKey:(NSString *)key;
 
-- (void)setUserId:(NSString *)userId;
+// 业务函数
+- (void)saveUserInfo:(id<NSCoding>)userInfo;
+- (id)getUserInfo;
 - (NSString *)getUserId;
 
 @end

@@ -8,8 +8,10 @@
 
 #import "ModifyPwdVC.h"
 #import "NetResultBase.h"
+#import "NetworkTask.h"
+#import "ChangePasswdResult.h"
 
-@interface ModifyPwdVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+@interface ModifyPwdVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,NetworkTaskDelegate>
 
 @property(nonatomic,strong)UITableView          *modifyTableView;
 @property(nonatomic,strong)UITextField          *ordPwdTextField;
@@ -87,6 +89,57 @@
     NSInteger tag = sender.tag;
     if (tag == 101) {
         //
+        if (_ordPwdTextField.text == nil || [_ordPwdTextField.text length] <= 0) {
+            [FadePromptView showPromptStatus:@"请输入原密码" duration:0.6  positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
+                //
+            }];
+            [_ordPwdTextField becomeFirstResponder];
+            return;
+        }
+        
+        if (_nowPwdTextField.text == nil || [_nowPwdTextField.text length] <= 0) {
+            [FadePromptView showPromptStatus:@"请输入现密码" duration:0.6  positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
+                //
+            }];
+            [_nowPwdTextField becomeFirstResponder];
+            return;
+        }
+        
+        
+        if (_pwdTextField.text == nil || [_pwdTextField.text length] <= 0) {
+            [FadePromptView showPromptStatus:@"请再次输入新密码" duration:0.6  positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
+                //
+            }];
+            [_pwdTextField becomeFirstResponder];
+            return;
+        }
+        
+        if ([_nowPwdTextField.text length] < 6 || [_nowPwdTextField.text length] > 20) {
+            [FadePromptView showPromptStatus:@"密码长度限制在6-20位" duration:0.6  positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
+                //
+            }];
+            [_nowPwdTextField becomeFirstResponder];
+            return;
+        }
+        
+        if (![_nowPwdTextField.text isEqualToString:_pwdTextField.text] ) {
+            [FadePromptView showPromptStatus:@"两次输入的新密码不一致" duration:0.6  positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
+                //
+            }];
+            [_pwdTextField becomeFirstResponder];
+            return;
+        }
+        
+        NSMutableDictionary *param = [[NSMutableDictionary alloc] initWithCapacity:0];
+        [param setObject:[_ordPwdTextField.text md5EncodeUpper:NO] forKey:@"oldPasswd"];
+        [param setObject:[_pwdTextField.text md5EncodeUpper:NO] forKey:@"newPasswd"];
+        
+        [SVProgressHUD showWithStatus:@"正在修改密码..." maskType:SVProgressHUDMaskTypeBlack];
+        [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_Changepasswd
+                                                 forParam:param
+                                                 delegate:self
+                                                resultObj:[[ChangePasswdResult alloc] init]
+                                               customInfo:@"Changepasswd"];
     }
 }
 
@@ -117,11 +170,24 @@
 #pragma mark - NetworkTaskDelegate
 -(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
     [SVProgressHUD dismiss];
+    
+    if ([customInfo isEqualToString:@"Changepasswd"]) {
+        //
+        [FadePromptView showPromptStatus:@"修改密码成功！" duration:2.0  positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
+        }];
+        
+    }
 }
 
 
 -(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
-    [SVProgressHUD showErrorWithStatus:errorDesc];
+    
+    [SVProgressHUD dismiss];
+    if ([customInfo isEqualToString:@"Changepasswd"]) {
+        [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
+            //
+        }];
+    }
 }
 
 
@@ -168,14 +234,14 @@
         NSMutableString *textString = [NSMutableString stringWithString:textField.text];
         [textString replaceCharactersInRange:range withString:string];
         
-        if ([textString length] > 18) {
+        if ([textString length] > 20) {
             return NO;
         }
     }  else if(textField == _nowPwdTextField) {
         NSMutableString *textString = [NSMutableString stringWithString:textField.text];
         [textString replaceCharactersInRange:range withString:string];
         
-        if ([textString length] > 18) {
+        if ([textString length] > 20) {
             return NO;
         }
     }
@@ -189,7 +255,7 @@
     
     UITextField *textField = (UITextField *)sender;
     NSString *temp = [NSString stringWithFormat:@"%@",textField.text];
-    if ([temp length] > 18) {
+    if ([temp length] > 20) {
         textField.text = _pwdNewString;
         return;
     }
@@ -231,6 +297,7 @@
             UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(15 + 86 + 10, 0, tableView.frame.size.width - 86 - 10 - 15, 45)];
             self.ordPwdTextField = textField;
             [textField setDelegate:self];
+            [textField setSecureTextEntry:YES];
             [textField setFont:[UIFont systemFontOfSize:14]];
             [textField setReturnKeyType:UIReturnKeyNext];
             [textField setKeyboardType:UIKeyboardTypeDefault];
@@ -265,13 +332,14 @@
             UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(15 + 86 + 10, 0, tableView.frame.size.width - 86 - 10 - 15, 45)];
             self.nowPwdTextField = textField;
             [textField setDelegate:self];
+            [textField setSecureTextEntry:YES];
             [textField setFont:[UIFont systemFontOfSize:14]];
             [textField setReturnKeyType:UIReturnKeyNext];
-            [textField setKeyboardType:UIKeyboardTypeNumberPad];
+            [textField setKeyboardType:UIKeyboardTypeDefault];
             [textField setTextAlignment:NSTextAlignmentRight];
             [textField setTextColor:[UIColor colorWithHex:0x666666]];
             [textField setClearButtonMode:UITextFieldViewModeAlways];
-            [textField setPlaceholder:@"请输入新密码(6-18位)"];
+            [textField setPlaceholder:@"请输入新密码(6-20位)"];
             [cell.contentView addSubview:textField];
             
             LineView *line1 = [[LineView alloc] initWithFrame:CGRectMake(0, 45-kLineHeight1px, tableView.frame.size.width, kLineHeight1px)];
@@ -308,7 +376,7 @@
             [textField setTextColor:[UIColor colorWithHex:0x666666]];
             [textField addTarget:self action:@selector(inputChange:) forControlEvents:UIControlEventEditingChanged];
             [textField setClearButtonMode:UITextFieldViewModeAlways];
-            [textField setPlaceholder:@"请再次输入新密码(6-18位)"];
+            [textField setPlaceholder:@"请再次输入新密码(6-20位)"];
             [textField setClearsOnBeginEditing:YES];
             [cell.contentView addSubview:textField];
             

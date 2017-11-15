@@ -8,7 +8,7 @@
 
 #import "NetResultBase.h"
 
-@interface LoginResult : NetResultBase
+@interface LoginResult : NetResultBase<NSCoding>
 @property (nonatomic, copy)NSString *nick;
 @property (nonatomic, copy)NSString *avatar;
 @property (nonatomic, copy)NSString *favorCount;

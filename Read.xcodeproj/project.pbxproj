@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF0422801FBC499E00D15E8E /* ChangePasswdResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AF04227F1FBC499E00D15E8E /* ChangePasswdResult.m */; };
 		AF04C5731FB359BE00C0C67B /* ResigterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF04C5721FB359BE00C0C67B /* ResigterVC.m */; };
 		AF04C5761FB35A0800C0C67B /* MeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF04C5751FB35A0800C0C67B /* MeVC.m */; };
 		AF14EAB31FB6FB770042683D /* NSData+Crypto.m in Sources */ = {isa = PBXBuildFile; fileRef = AF14EAB21FB6FB770042683D /* NSData+Crypto.m */; };
@@ -97,6 +98,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AF04227E1FBC499E00D15E8E /* ChangePasswdResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswdResult.h; sourceTree = "<group>"; };
+		AF04227F1FBC499E00D15E8E /* ChangePasswdResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswdResult.m; sourceTree = "<group>"; };
 		AF04C5711FB359BE00C0C67B /* ResigterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResigterVC.h; sourceTree = "<group>"; };
 		AF04C5721FB359BE00C0C67B /* ResigterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResigterVC.m; sourceTree = "<group>"; };
 		AF04C5741FB35A0800C0C67B /* MeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeVC.h; sourceTree = "<group>"; };
@@ -503,6 +506,8 @@
 				AFBAE1601FB83B560002DE1B /* NetResultBase.m */,
 				AF2308DC1FB342CE00BEC151 /* LoginResult.h */,
 				AF2308DD1FB342CE00BEC151 /* LoginResult.m */,
+				AF04227E1FBC499E00D15E8E /* ChangePasswdResult.h */,
+				AF04227F1FBC499E00D15E8E /* ChangePasswdResult.m */,
 				AF683D7F1FB81ADE00AB69EC /* ReadNetRequestParam.h */,
 				AF683D801FB81ADE00AB69EC /* ReadNetRequestParam.m */,
 				AFBAE1661FB854140002DE1B /* CaptchaResult.h */,
@@ -729,6 +734,7 @@
 				AF2308AD1FB33F5600BEC151 /* UIView+SizeUtility.m in Sources */,
 				AF2308B91FB33F5600BEC151 /* FileCache.m in Sources */,
 				AF2308C11FB33F5600BEC151 /* SDWebImageCompat.m in Sources */,
+				AF0422801FBC499E00D15E8E /* ChangePasswdResult.m in Sources */,
 				AF2308AA1FB33F5600BEC151 /* UIColor+Utility.m in Sources */,
 				AFBAE1741FB856F50002DE1B /* ResetPwdResult.m in Sources */,
 				AF2308C81FB33F5600BEC151 /* UIImage+GIF.m in Sources */,

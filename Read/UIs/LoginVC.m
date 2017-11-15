@@ -12,6 +12,7 @@
 #import "ForgetPwdVC.h"
 #import "ResigterVC.h"
 #import "LoginResult.h"
+#import "SysDataSaver.h"
 
 
 
@@ -204,6 +205,9 @@
     if ([customInfo isEqualToString:@"login"]) {
         AppDelegate *app = [AppDelegate shareMyApplication];
         [app.mainVC switchToHomeVC];
+        
+        LoginResult *userInfo = (LoginResult *)result;
+        [[SysDataSaver SharedSaver] saveUserInfo:userInfo];
     }
 }
 
@@ -212,8 +216,6 @@
     [SVProgressHUD dismiss];
     [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
         //
-        AppDelegate *app = [AppDelegate shareMyApplication];
-        [app.mainVC switchToHomeVC];
     }];
 }
 
