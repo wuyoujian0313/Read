@@ -9,6 +9,7 @@
 #import "ChildrenInfoVC.h"
 #import "NetResultBase.h"
 #import "NetworkTask.h"
+#import "DatePickerView.h"
 
 @interface ChildrenInfoVC ()<UITableViewDataSource,UITableViewDelegate,NetworkTaskDelegate>
 
@@ -19,6 +20,7 @@
 @property(nonatomic,strong)UIButton             *boyButton;
 @property(nonatomic,copy)NSString               *name;
 @property(nonatomic,copy)NSString               *interest;
+@property(nonatomic,copy)NSString               *birthdayString;
 
 @end
 
@@ -33,6 +35,7 @@
     _isGirl = YES;
     _name = @"王二小";
     _interest = @"唱歌跳舞";
+    _birthdayString = @"2015/05/12";
     [self layoutChildremTableView];
 
     UIBarButtonItem *itemBtn = [self configBarButtonWithTitle:@"修改" target:self selector:@selector(editChildrenInfo:)];
@@ -261,7 +264,7 @@
             [cell.contentView addSubview:label];
             
             UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(135, 0, tableView.frame.size.width - 120 - 20 - 15, 45)];
-            label2.text = @"2015/5/20";
+            label2.tag = 1002;
             label2.textColor = [UIColor colorWithHex:0x666666];
             label2.font = [UIFont systemFontOfSize:14];
             [cell.contentView addSubview:label2];
@@ -269,6 +272,9 @@
             LineView *line1 = [[LineView alloc] initWithFrame:CGRectMake(0, 45-kLineHeight1px, tableView.frame.size.width, kLineHeight1px)];
             [cell.contentView addSubview:line1];
         }
+        
+        UILabel *label2 = (UILabel *)[cell.contentView viewWithTag:1002];
+        label2.text = _birthdayString;
         
         if (!_isEdit) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -365,6 +371,20 @@
             break;
         }
         case 2: {
+            //
+            ChildrenInfoVC *wSelf = self;
+            DatePickerView *picker = [[DatePickerView alloc] initWithFrame:CGRectZero];
+            [picker showInKeywindow:^(NSDate *date) {
+                //
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateStyle:NSDateFormatterMediumStyle];
+                [formatter setTimeStyle:NSDateFormatterShortStyle];
+                [formatter setDateFormat:@"YYYY/MM/dd"];
+                NSString *dateString = [formatter stringFromDate:date];
+                wSelf.birthdayString = dateString;
+                [tableView reloadData];
+                
+            }];
             break;
         }
         case 3: {

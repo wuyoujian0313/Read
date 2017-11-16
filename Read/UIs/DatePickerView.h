@@ -9,16 +9,17 @@
 #import <UIKit/UIKit.h>
 
 
-typedef NSDate *(^DateSelectedFinish)();
+typedef void (^DateSelectedFinish)(NSDate * date);
 
 @interface DatePickerView : UIView
 
 @property(nonatomic,strong)NSDate* selDate;
 @property(nonatomic,strong)NSDate* minDate;
+@property(nonatomic,strong)NSDate* maxDate;
 
-- (void)showDataPickerInKeywindow:(DateSelectedFinish)block;
-- (void)showDataPickerInView:(UIView *)view finish:(DateSelectedFinish)block;
-- (void)hiddenPickerView;
+- (instancetype)initWithFrame:(CGRect)frame;// frame无效，默认是全屏模式
+- (void)showInKeywindow:(DateSelectedFinish)block;
+- (void)dismiss;
 
 
 
