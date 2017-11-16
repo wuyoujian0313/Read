@@ -16,7 +16,7 @@
 		AF04228D1FBC797A00D15E8E /* icon_photo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF04228C1FBC797A00D15E8E /* icon_photo@2x.png */; };
 		AF0422901FBC88C900D15E8E /* radio_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF04228E1FBC88C900D15E8E /* radio_select@2x.png */; };
 		AF0422911FBC88C900D15E8E /* radio_unselect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF04228F1FBC88C900D15E8E /* radio_unselect@2x.png */; };
-		AF0422941FBC95C600D15E8E /* PickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0422931FBC95C600D15E8E /* PickerView.m */; };
+		AF0422941FBC95C600D15E8E /* DatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0422931FBC95C600D15E8E /* DatePickerView.m */; };
 		AF04C5731FB359BE00C0C67B /* ResigterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF04C5721FB359BE00C0C67B /* ResigterVC.m */; };
 		AF04C5761FB35A0800C0C67B /* MeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF04C5751FB35A0800C0C67B /* MeVC.m */; };
 		AF14EAB31FB6FB770042683D /* NSData+Crypto.m in Sources */ = {isa = PBXBuildFile; fileRef = AF14EAB21FB6FB770042683D /* NSData+Crypto.m */; };
@@ -117,8 +117,8 @@
 		AF04228C1FBC797A00D15E8E /* icon_photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_photo@2x.png"; sourceTree = "<group>"; };
 		AF04228E1FBC88C900D15E8E /* radio_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "radio_select@2x.png"; sourceTree = "<group>"; };
 		AF04228F1FBC88C900D15E8E /* radio_unselect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "radio_unselect@2x.png"; sourceTree = "<group>"; };
-		AF0422921FBC95C600D15E8E /* PickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerView.h; sourceTree = "<group>"; };
-		AF0422931FBC95C600D15E8E /* PickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerView.m; sourceTree = "<group>"; };
+		AF0422921FBC95C600D15E8E /* DatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerView.h; sourceTree = "<group>"; };
+		AF0422931FBC95C600D15E8E /* DatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerView.m; sourceTree = "<group>"; };
 		AF04C5711FB359BE00C0C67B /* ResigterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResigterVC.h; sourceTree = "<group>"; };
 		AF04C5721FB359BE00C0C67B /* ResigterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResigterVC.m; sourceTree = "<group>"; };
 		AF04C5741FB35A0800C0C67B /* MeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeVC.h; sourceTree = "<group>"; };
@@ -320,8 +320,8 @@
 				AF14EAB81FB737F60042683D /* ModifyPwdVC.m */,
 				AF0422811FBC71B900D15E8E /* ChildrenInfoVC.h */,
 				AF0422821FBC71B900D15E8E /* ChildrenInfoVC.m */,
-				AF0422921FBC95C600D15E8E /* PickerView.h */,
-				AF0422931FBC95C600D15E8E /* PickerView.m */,
+				AF0422921FBC95C600D15E8E /* DatePickerView.h */,
+				AF0422931FBC95C600D15E8E /* DatePickerView.m */,
 			);
 			name = Me;
 			sourceTree = "<group>";
@@ -782,7 +782,7 @@
 				AF2308281FB3371200BEC151 /* AppDelegate.m in Sources */,
 				AF2308A71FB33F5600BEC151 /* NSObject+Utility.m in Sources */,
 				AF2308B81FB33F5600BEC151 /* FadePromptView.m in Sources */,
-				AF0422941FBC95C600D15E8E /* PickerView.m in Sources */,
+				AF0422941FBC95C600D15E8E /* DatePickerView.m in Sources */,
 				AFDEC9071FB487CB00926F38 /* NewbooksVC.m in Sources */,
 				AF2308A41FB33F5600BEC151 /* AFURLRequestSerialization.m in Sources */,
 				AF2308AC1FB33F5600BEC151 /* UIImage+Utility.m in Sources */,
