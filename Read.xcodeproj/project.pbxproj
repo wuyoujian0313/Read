@@ -74,6 +74,8 @@
 		AF2308E31FB342CE00BEC151 /* LoginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308DD1FB342CE00BEC151 /* LoginResult.m */; };
 		AF2308E41FB342CE00BEC151 /* HomeTabVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308E01FB342CE00BEC151 /* HomeTabVC.m */; };
 		AF2308E51FB342CE00BEC151 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308E21FB342CE00BEC151 /* LoginVC.m */; };
+		AF4C90CD1FBF168C003148EC /* ChildInfoResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4C90CC1FBF168C003148EC /* ChildInfoResult.m */; };
+		AF4C90D01FBF1D2A003148EC /* AddChildrenResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4C90CF1FBF1D2A003148EC /* AddChildrenResult.m */; };
 		AF506F8F1FB5E26700470C01 /* icon_pwd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF506F8B1FB5E26700470C01 /* icon_pwd@2x.png */; };
 		AF506F901FB5E26700470C01 /* icon_user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF506F8C1FB5E26700470C01 /* icon_user@2x.png */; };
 		AF506F911FB5E26700470C01 /* login_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF506F8D1FB5E26700470C01 /* login_bg@2x.png */; };
@@ -235,6 +237,10 @@
 		AF2308E01FB342CE00BEC151 /* HomeTabVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTabVC.m; sourceTree = "<group>"; };
 		AF2308E11FB342CE00BEC151 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		AF2308E21FB342CE00BEC151 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
+		AF4C90CB1FBF168C003148EC /* ChildInfoResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildInfoResult.h; sourceTree = "<group>"; };
+		AF4C90CC1FBF168C003148EC /* ChildInfoResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildInfoResult.m; sourceTree = "<group>"; };
+		AF4C90CE1FBF1D2A003148EC /* AddChildrenResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddChildrenResult.h; sourceTree = "<group>"; };
+		AF4C90CF1FBF1D2A003148EC /* AddChildrenResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddChildrenResult.m; sourceTree = "<group>"; };
 		AF506F8B1FB5E26700470C01 /* icon_pwd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_pwd@2x.png"; sourceTree = "<group>"; };
 		AF506F8C1FB5E26700470C01 /* icon_user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_user@2x.png"; sourceTree = "<group>"; };
 		AF506F8D1FB5E26700470C01 /* login_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_bg@2x.png"; sourceTree = "<group>"; };
@@ -550,6 +556,10 @@
 				AFBAE17F1FB85EF40002DE1B /* BookItem.m */,
 				AFBAE17B1FB85EC50002DE1B /* MultySearchResult.h */,
 				AFBAE17C1FB85EC50002DE1B /* MultySearchResult.m */,
+				AF4C90CB1FBF168C003148EC /* ChildInfoResult.h */,
+				AF4C90CC1FBF168C003148EC /* ChildInfoResult.m */,
+				AF4C90CE1FBF1D2A003148EC /* AddChildrenResult.h */,
+				AF4C90CF1FBF1D2A003148EC /* AddChildrenResult.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -769,6 +779,7 @@
 				AF2308B91FB33F5600BEC151 /* FileCache.m in Sources */,
 				AF2308C11FB33F5600BEC151 /* SDWebImageCompat.m in Sources */,
 				AF0422801FBC499E00D15E8E /* ChangePasswdResult.m in Sources */,
+				AF4C90D01FBF1D2A003148EC /* AddChildrenResult.m in Sources */,
 				AF2308AA1FB33F5600BEC151 /* UIColor+Utility.m in Sources */,
 				AFBAE1741FB856F50002DE1B /* ResetPwdResult.m in Sources */,
 				AF2308C81FB33F5600BEC151 /* UIImage+GIF.m in Sources */,
@@ -792,6 +803,7 @@
 				AF2308B11FB33F5600BEC151 /* MJRefreshFooterView.m in Sources */,
 				AFBAE1711FB856CA0002DE1B /* UpdateUserInfoResult.m in Sources */,
 				AF2308E41FB342CE00BEC151 /* HomeTabVC.m in Sources */,
+				AF4C90CD1FBF168C003148EC /* ChildInfoResult.m in Sources */,
 				AF2308BE1FB33F5600BEC151 /* MKAnnotationView+WebCache.m in Sources */,
 				AF2308CC1FB33F5600BEC151 /* UIImageView+WebCache.m in Sources */,
 				AFBAE16B1FB8558A0002DE1B /* RegisterResult.m in Sources */,

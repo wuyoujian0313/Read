@@ -10,17 +10,14 @@
 #import "NetResultBase.h"
 #import "NetworkTask.h"
 #import "DatePickerView.h"
+#import "ChildInfoResult.h"
+#import "AddChildrenResult.h"
 
 @interface ChildrenInfoVC ()<UITableViewDataSource,UITableViewDelegate,NetworkTaskDelegate>
 
 @property(nonatomic,strong)UITableView          *childrenTableView;
 @property(nonatomic,assign)BOOL                 isEdit;
-@property(nonatomic,assign)BOOL                 isGirl;
-@property(nonatomic,strong)UIButton             *grilButton;
-@property(nonatomic,strong)UIButton             *boyButton;
-@property(nonatomic,copy)NSString               *name;
-@property(nonatomic,copy)NSString               *interest;
-@property(nonatomic,copy)NSString               *birthdayString;
+@property(nonatomic,strong)ChildInfoResult      *childInfo;
 
 @end
 
@@ -30,33 +27,53 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setNavTitle:@"Rlab阿来学院" titleColor:[UIColor colorWithHex:kGlobalGreenColor]];
-
     _isEdit = NO;
-    _isGirl = YES;
-    _name = @"王二小";
-    _interest = @"唱歌跳舞";
-    _birthdayString = @"2015/05/12";
+    _childInfo = [[ChildInfoResult alloc] init];
+    _childInfo.sex = @"0";
+    _childInfo.birthday = @"0000-00-00";
+    _childInfo.intrest = @"";
+    _childInfo.name = @"";
+ 
     [self layoutChildremTableView];
 
     UIBarButtonItem *itemBtn = [self configBarButtonWithTitle:@"修改" target:self selector:@selector(editChildrenInfo:)];
-    
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                          [UIColor colorWithHex:kGlobalGreenColor],NSForegroundColorAttributeName,
-                          [UIFont systemFontOfSize:15],NSFontAttributeName,nil];
-    [itemBtn setTitleTextAttributes:dict forState:UIControlStateNormal];
-
     self.navigationItem.rightBarButtonItem = itemBtn;
+    
+    [self getChildrenInfo];
+}
+
+- (void)getChildrenInfo {
+    [SVProgressHUD showWithStatus:@"正在获取宝贝信息..." maskType:SVProgressHUDMaskTypeBlack];
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_ChildrenInfo
+                                             forParam:nil
+                                             delegate:self
+                                            resultObj:[[ChildInfoResult alloc] init]
+                                           customInfo:@"getChildInfo"];
+}
+
+- (void)addChildrenInfo {
+    //
+    NSMutableDictionary *param = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [param setObject:_childInfo.name forKey:@"name"];
+    [param setObject:_childInfo.sex forKey:@"sex"];
+    [param setObject:_childInfo.intrest forKey:@"intrest"];
+    [param setObject:_childInfo.birthday forKey:@"birthday"];
+    [SVProgressHUD showWithStatus:@"正在添加宝贝信息..." maskType:SVProgressHUDMaskTypeBlack];
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_AddChildrenInfo
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[AddChildrenResult alloc] init]
+                                           customInfo:@"addChildInfo"];
 }
 
 - (void)editChildrenInfo:(UIBarButtonItem *)sender {
     _isEdit = !_isEdit;
     if (_isEdit) {
         sender.title = @"完成";
+        [_childrenTableView reloadData];
     } else {
-        sender.title = @"修改";
+        [self addChildrenInfo];
     }
-    
-    [_childrenTableView reloadData];
 }
 
 - (void)layoutChildremTableView {
@@ -114,25 +131,48 @@
 -(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
     [SVProgressHUD dismiss];
     
-    if ([customInfo isEqualToString:@"registerCode"]) {
+    if ([customInfo isEqualToString:@"getChildInfo"]) {
+        ChildInfoResult *tmpInfo = (ChildInfoResult *)result;
+        if (tmpInfo != nil &&
+            tmpInfo.name != nil && [tmpInfo.name length] > 0 &&
+            tmpInfo.user_id != nil && [tmpInfo.user_id length] > 0) {
+            //
+            _childInfo = (ChildInfoResult *)result;
+        } else {
+            self.navigationItem.rightBarButtonItem.title = @"添加";
+        }
         
+    } else if ([customInfo isEqualToString:@"addChildInfo"]) {
+         self.navigationItem.rightBarButtonItem.title = @"修改";
+        _isEdit = NO;
     }
+    
+    [_childrenTableView reloadData];
 }
 
 
 -(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
     
     [SVProgressHUD dismiss];
-    if ([customInfo isEqualToString:@"registerCode"]) {
-    } else {
+    if ([customInfo isEqualToString:@"getChildInfo"]) {
+        //
+    } else if ([customInfo isEqualToString:@"addChildInfo"]) {
         [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
             //
+            self.navigationItem.rightBarButtonItem.title = @"添加";
+            _isEdit = NO;
         }];
     }
+    
+    [_childrenTableView reloadData];
 }
 
 - (void)buttonAction:(UIButton *)sender {
-    _isGirl = !_isGirl;
+    if ([_childInfo.sex isEqualToString:@"0"]) {
+        _childInfo.sex = @"1";
+    } else {
+        _childInfo.sex = @"0";
+    }
     [_childrenTableView reloadData];
 }
 
@@ -177,7 +217,7 @@
         }
         
         UILabel *label2 = (UILabel *)[cell.contentView viewWithTag:1000];
-        label2.text = _name;
+        label2.text = _childInfo.name;
         
         if (!_isEdit) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -207,9 +247,7 @@
             [cell.contentView addSubview:label];
             
             // 18 x18
-            
             UIButton *button1 = [UIButton buttonWithType:UIButtonTypeCustom];
-            self.grilButton = button1;
             button1.tag = 100;
             [button1 setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
             [button1 setTitle:@"女" forState:UIControlStateNormal];
@@ -221,7 +259,6 @@
             
             
             UIButton *button2 = [UIButton buttonWithType:UIButtonTypeCustom];
-            self.boyButton = button2;
             button2.tag = 101;
             [button2 setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
             [button2 setTitle:@"男" forState:UIControlStateNormal];
@@ -231,21 +268,23 @@
             [button2 addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
             [cell.contentView addSubview:button2];
             
-            
             LineView *line1 = [[LineView alloc] initWithFrame:CGRectMake(0, 45-kLineHeight1px, tableView.frame.size.width, kLineHeight1px)];
             [cell.contentView addSubview:line1];
         }
         
-        if (_isGirl) {
-            [_grilButton setImage:[UIImage imageNamed:@"radio_select"] forState:UIControlStateNormal];
-            [_boyButton setImage:[UIImage imageNamed:@"radio_unselect"] forState:UIControlStateNormal];
+        UIButton *button1 = (UIButton *)[cell.contentView viewWithTag:100];
+        UIButton *button2 = (UIButton *)[cell.contentView viewWithTag:101];
+        
+        if ([_childInfo.sex isEqualToString:@"0"]) {
+            [button1 setImage:[UIImage imageNamed:@"radio_select"] forState:UIControlStateNormal];
+            [button2 setImage:[UIImage imageNamed:@"radio_unselect"] forState:UIControlStateNormal];
         } else {
-            [_boyButton setImage:[UIImage imageNamed:@"radio_select"] forState:UIControlStateNormal];
-            [_grilButton setImage:[UIImage imageNamed:@"radio_unselect"] forState:UIControlStateNormal];
+            [button2 setImage:[UIImage imageNamed:@"radio_select"] forState:UIControlStateNormal];
+            [button1 setImage:[UIImage imageNamed:@"radio_unselect"] forState:UIControlStateNormal];
         }
         
-        _grilButton.enabled = _isEdit;
-        _boyButton.enabled = _isEdit;
+        button1.enabled = _isEdit;
+        button2.enabled = _isEdit;
         
         return cell;
     }
@@ -274,7 +313,7 @@
         }
         
         UILabel *label2 = (UILabel *)[cell.contentView viewWithTag:1002];
-        label2.text = _birthdayString;
+        label2.text = _childInfo.birthday;
         
         if (!_isEdit) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -312,7 +351,7 @@
         }
         
         UILabel *label2 = (UILabel *)[cell.contentView viewWithTag:1001];
-        label2.text = _interest;
+        label2.text = _childInfo.intrest;
         
         if (!_isEdit) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -341,9 +380,9 @@
     ChildrenInfoVC *wSelf = self;
     UIAlertAction *confirmAction =[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
         if (row == 0) {
-            wSelf.name = addAlertVC.textFields.firstObject.text;
+            wSelf.childInfo.name = addAlertVC.textFields.firstObject.text;
         } else if (row == 3) {
-            wSelf.interest = addAlertVC.textFields.firstObject.text;
+            wSelf.childInfo.intrest = addAlertVC.textFields.firstObject.text;
         }
         
         [wSelf.childrenTableView reloadData];
@@ -379,9 +418,9 @@
                 NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
                 [formatter setDateStyle:NSDateFormatterMediumStyle];
                 [formatter setTimeStyle:NSDateFormatterShortStyle];
-                [formatter setDateFormat:@"YYYY/MM/dd"];
+                [formatter setDateFormat:@"YYYY-MM-dd"];
                 NSString *dateString = [formatter stringFromDate:date];
-                wSelf.birthdayString = dateString;
+                wSelf.childInfo.birthday = dateString;
                 [tableView reloadData];
                 
             }];

@@ -10,6 +10,8 @@
 
 #define screenHeight [UIScreen mainScreen].bounds.size.height
 #define screenWidth [UIScreen mainScreen].bounds.size.width
+#define kNavToolBarHeight     44
+#define kDatePickerHeight     300
 
 #define kOkTag				  401
 #define kCancelTag			  402
@@ -58,7 +60,7 @@
     [item setLeftBarButtonItems:@[negativeSpacer,cancelBtn]];
     
     
-    UINavigationBar *toolbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0,screenHeight - 260, screenWidth, 44)];
+    UINavigationBar *toolbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0,screenHeight - kDatePickerHeight, screenWidth, kNavToolBarHeight)];
     toolbar.barStyle = UIBarStyleDefault;
     toolbar.translucent = YES;
     toolbar.tintColor = [UIColor colorWithHex:kGlobalGreenColor];
@@ -69,7 +71,7 @@
 
 
 - (void)layoutDatePicker {
-    UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, screenHeight - 216, screenWidth, 216)];
+    UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, screenHeight - (kDatePickerHeight - kNavToolBarHeight), screenWidth, kDatePickerHeight - kNavToolBarHeight)];
     self.datePicker = datePicker;
     datePicker.backgroundColor = [UIColor whiteColor];
     datePicker.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -158,7 +160,7 @@
     DatePickerView *wSelf = self;
     [UIView animateWithDuration:0.3 animations:^{
         wSelf.markView.alpha = 0.0;
-        wSelf.frame = CGRectMake(0, screenHeight, screenWidth, 260);
+        wSelf.frame = CGRectMake(0, screenHeight, screenWidth, kDatePickerHeight);
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
     }];

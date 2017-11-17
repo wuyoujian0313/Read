@@ -21,6 +21,4 @@ typedef void (^DateSelectedFinish)(NSDate * date);
 - (void)showInKeywindow:(DateSelectedFinish)block;
 - (void)dismiss;
 
-
-
 @end

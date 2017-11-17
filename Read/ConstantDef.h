@@ -29,4 +29,10 @@
 // 修改密码
 #define API_Changepasswd                @"user/changepasswd"
 
+// 小孩信息
+#define API_ChildrenInfo                @"child/info"
+
+// 添加小孩信息
+#define API_AddChildrenInfo             @"child/addChild"
+
 #endif /* ConstantDef_h */

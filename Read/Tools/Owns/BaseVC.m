@@ -177,6 +177,7 @@
     [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
     [button setImage:image forState:UIControlStateNormal];
     [button setImage:selectIamge forState:UIControlStateHighlighted];
+    [button setTitleColor:[UIColor colorWithHex:kGlobalGreenColor] forState:UIControlStateNormal];
     button.frame = frame;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     
@@ -189,6 +190,7 @@
     [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
     [button setImage:image forState:UIControlStateNormal];
     [button setImage:selectIamge forState:UIControlStateHighlighted];
+    [button setTitleColor:[UIColor colorWithHex:kGlobalGreenColor] forState:UIControlStateNormal];
     button.frame=CGRectMake(0, 0, 24, 24);
     self.navigationItem.leftBarButtonItem= [[UIBarButtonItem alloc] initWithCustomView:button];
     
@@ -199,7 +201,7 @@
     
     UIBarButtonItem *itemBtn = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:target action:selector];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                          [UIColor blackColor],NSForegroundColorAttributeName,
+                          [UIColor colorWithHex:kGlobalGreenColor],NSForegroundColorAttributeName,
                           [UIFont systemFontOfSize:15],NSFontAttributeName,nil];
     [itemBtn setTitleTextAttributes:dict forState:UIControlStateNormal];
     
@@ -209,7 +211,7 @@
 - (UIBarButtonItem*)configBarButtonWithTitle:(NSString*)title target:(id)target selector:(SEL)selector {
     
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                          [UIColor blackColor],NSForegroundColorAttributeName,
+                          [UIColor colorWithHex:kGlobalGreenColor],NSForegroundColorAttributeName,
                           [UIFont systemFontOfSize:15],NSFontAttributeName,nil];
     return [self configBarButtonWithTitle:title titleTextAttributes:dict target:target selector:selector];
 }

@@ -16,8 +16,8 @@
 
 + (NSDictionary *)generateSignedParam:(NSDictionary *)APIParam {
     
-    if (APIParam == nil || [APIParam count] == 0) {
-        return nil;
+    if (APIParam == nil) {
+        APIParam = [NSDictionary dictionary];
     }
 
     NSString *u = [[SysDataSaver SharedSaver] getUserId];
