@@ -21,6 +21,7 @@ AISINGLETON_DEF(SysDataSaver,SharedSaver);
 
 // 业务函数
 - (void)saveUserInfo:(id<NSCoding>)userInfo;
+- (void)clearUserInfo;
 - (id)getUserInfo;
 - (NSString *)getUserId;
 

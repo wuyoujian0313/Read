@@ -15,4 +15,5 @@
 @property (nonatomic, copy)NSString *noteCount;
 @property (nonatomic, copy)NSString *user_id;
 @property (nonatomic, copy)NSString *phone;
+@property (nonatomic, copy)NSString *mood;
 @end

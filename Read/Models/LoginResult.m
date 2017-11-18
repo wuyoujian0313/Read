@@ -18,6 +18,7 @@
         self.noteCount          = [coder decodeObjectForKey:@"noteCount"];
         self.user_id            = [coder decodeObjectForKey:@"user_id"];
         self.phone              = [coder decodeObjectForKey:@"phone"];
+        self.mood               = [coder decodeObjectForKey:@"mood"];
     }
     return self;
 }
@@ -29,6 +30,7 @@
     [coder encodeObject:self.noteCount forKey:@"noteCount"];
     [coder encodeObject:self.user_id forKey:@"user_id"];
     [coder encodeObject:self.phone forKey:@"phone"];
+    [coder encodeObject:self.mood forKey:@"mood"];
 }
 
 @end

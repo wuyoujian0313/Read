@@ -8,6 +8,8 @@
 
 #import "SetVC.h"
 #import "ModifyPwdVC.h"
+#import "AppDelegate.h"
+#import "SysDataSaver.h"
 
 @interface SetVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView          *setTableView;
@@ -71,6 +73,19 @@
     NSInteger tag = sender.tag;
     if (tag == 101) {
         //
+        UIAlertController *addAlertVC = [UIAlertController alertControllerWithTitle:nil message:@"您确定要退出当前用户" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        [addAlertVC addAction:cancelAction];
+        
+        UIAlertAction *confirmAction =[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+            AppDelegate *app = [AppDelegate shareMyApplication];
+            [app.mainVC switchToLoginVC];
+            
+            [[SysDataSaver SharedSaver] clearUserInfo];
+        }];
+        [addAlertVC addAction:confirmAction];
+        [self.navigationController presentViewController:addAlertVC animated:NO completion:nil];
     }
 }
 

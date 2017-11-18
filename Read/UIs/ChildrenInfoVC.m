@@ -18,6 +18,8 @@
 @property(nonatomic,strong)UITableView          *childrenTableView;
 @property(nonatomic,assign)BOOL                 isEdit;
 @property(nonatomic,strong)ChildInfoResult      *childInfo;
+@property(nonatomic,strong)UIButton             *okButton;
+@property(nonatomic,strong)UIBarButtonItem      *modifyBtn;
 
 @end
 
@@ -38,6 +40,7 @@
 
     UIBarButtonItem *itemBtn = [self configBarButtonWithTitle:@"修改" target:self selector:@selector(editChildrenInfo:)];
     self.navigationItem.rightBarButtonItem = itemBtn;
+    self.modifyBtn = itemBtn;
     
     [self getChildrenInfo];
 }
@@ -51,7 +54,7 @@
                                            customInfo:@"getChildInfo"];
 }
 
-- (void)addChildrenInfo {
+- (void)commitChildrenInfo {
     //
     NSMutableDictionary *param = [[NSMutableDictionary alloc] initWithCapacity:0];
     [param setObject:_childInfo.name forKey:@"name"];
@@ -63,17 +66,14 @@
                                              forParam:param
                                              delegate:self
                                             resultObj:[[AddChildrenResult alloc] init]
-                                           customInfo:@"addChildInfo"];
+                                           customInfo:@"commitChildInfo"];
 }
 
 - (void)editChildrenInfo:(UIBarButtonItem *)sender {
     _isEdit = !_isEdit;
-    if (_isEdit) {
-        sender.title = @"完成";
-        [_childrenTableView reloadData];
-    } else {
-        [self addChildrenInfo];
-    }
+    _okButton.enabled = _isEdit;
+    self.navigationItem.rightBarButtonItem = nil;
+    [_childrenTableView reloadData];
 }
 
 - (void)layoutChildremTableView {
@@ -88,7 +88,7 @@
     [self.view addSubview:tableView];
     
     [self setTableViewHeaderView:12];
-    [self setTableViewFooterView:10];
+    [self setTableViewFooterView:100];
 }
 
 -(void)setTableViewHeaderView:(NSInteger)height {
@@ -97,10 +97,26 @@
     [_childrenTableView setTableHeaderView:view];
 }
 
--(void)setTableViewFooterView:(NSInteger)height {
+- (void)setTableViewFooterView:(NSInteger)height {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _childrenTableView.frame.size.width, height)];
     view.backgroundColor = [UIColor clearColor];
+    
+    self.okButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_okButton setBackgroundImage:[UIImage imageFromColor:[UIColor colorWithHex:kGlobalGreenColor]] forState:UIControlStateNormal];
+    [_okButton.titleLabel setTextColor:[UIColor whiteColor]];
+    [_okButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    [_okButton setClipsToBounds:YES];
+    [_okButton setEnabled:NO];
+    
+    [_okButton setTitle:@"完成" forState:UIControlStateNormal];
+    [_okButton setFrame:CGRectMake(0, 15, _childrenTableView.frame.size.width, 45)];
+    [_okButton addTarget:self action:@selector(commitAction:) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:_okButton];
     [_childrenTableView setTableFooterView:view];
+}
+
+- (void)commitAction:(UIButton *)sender {
+    [self commitChildrenInfo];
 }
 
 -(void)keyboardWillShow:(NSNotification *)note{
@@ -142,9 +158,11 @@
             self.navigationItem.rightBarButtonItem.title = @"添加";
         }
         
-    } else if ([customInfo isEqualToString:@"addChildInfo"]) {
+    } else if ([customInfo isEqualToString:@"commitChildInfo"]) {
          self.navigationItem.rightBarButtonItem.title = @"修改";
+        _okButton.enabled = NO;
         _isEdit = NO;
+        self.navigationItem.rightBarButtonItem = _modifyBtn;
     }
     
     [_childrenTableView reloadData];
@@ -156,11 +174,14 @@
     [SVProgressHUD dismiss];
     if ([customInfo isEqualToString:@"getChildInfo"]) {
         //
+        self.navigationItem.rightBarButtonItem = nil;
     } else if ([customInfo isEqualToString:@"addChildInfo"]) {
         [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
             //
             self.navigationItem.rightBarButtonItem.title = @"添加";
             _isEdit = NO;
+            _okButton.enabled = NO;
+            self.navigationItem.rightBarButtonItem = _modifyBtn;
         }];
     }
     
@@ -360,7 +381,6 @@
             cell.selectionStyle = UITableViewCellSelectionStyleGray;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
-        
         
         return cell;
     }

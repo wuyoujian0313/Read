@@ -17,14 +17,16 @@
 #import "ChildrenInfoVC.h"
 #import "LoginResult.h"
 #import "SysDataSaver.h"
+#import "ModifyUserInfoVC.h"
 
 
 
-@interface MeVC ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface MeVC ()<UITableViewDataSource,UITableViewDelegate,ModifyUserInfoDelegate>
 
 @property(nonatomic,strong)UITableView          *meTableView;
 @property(nonatomic,strong)UIImageView          *headImageView;
 @property(nonatomic,strong)UILabel              *userNicknameLabel;
+@property(nonatomic,strong)UILabel              *moodLabel;
 @end
 
 @implementation MeVC
@@ -47,7 +49,16 @@
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.view addSubview:tableView];
     
-    [self setTableViewHeaderView:170];
+    NSInteger headHeight = 170;
+    LoginResult *userInfo = [[SysDataSaver SharedSaver] getUserInfo];
+    userInfo.mood = @"认真人最可爱";
+    NSString *mood = userInfo.mood;
+    if (mood != nil && [mood length] > 0) {
+        //
+        headHeight += 23;
+    }
+    
+    [self setTableViewHeaderView:headHeight];
     [self setTableViewFooterView:2];
 }
 
@@ -83,13 +94,11 @@
     }
 }
 
--(void)takePicture {
-    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从相册选择", nil];
-    [sheet showInView:self.view];
-}
-
-- (void)changeHeadImage:(UITapGestureRecognizer*)sender {
-    [self takePicture];
+- (void)changeUserInfo:(UITapGestureRecognizer*)sender {
+    ModifyUserInfoVC *vc = [[ModifyUserInfoVC alloc] init];
+    vc.delegate = self;
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)setTableViewHeaderView:(NSInteger)height {
@@ -104,17 +113,44 @@
     [imageView.layer setCornerRadius:75/2.0];
     [view addSubview:imageView];
     
+    NSInteger moodHeiht = 0;
+    LoginResult *userInfo = [[SysDataSaver SharedSaver] getUserInfo];
+    userInfo.mood = @"认真人最可爱";
+    NSString *mood = userInfo.mood;
+    if (mood != nil && [mood length] > 0) {
+        moodHeiht += 23;
+    }
     
-    UITapGestureRecognizer *tapChangeHeadImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeHeadImage:)];
-    [imageView addGestureRecognizer:tapChangeHeadImage];
     
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (height - 75 - 15 - 15)/2.0 + 75 + 15, _meTableView.frame.size.width, 15)];
+    UITapGestureRecognizer *tapChangeUserInfo = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeUserInfo:)];
+    [imageView addGestureRecognizer:tapChangeUserInfo];
+    
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (height - 75 - 15 - 15 - moodHeiht)/2.0 + 75 + 15, _meTableView.frame.size.width, 15)];
     [self setUserNicknameLabel:titleLabel];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.font = [UIFont systemFontOfSize:14];
     titleLabel.textColor = [UIColor blackColor];
     titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *tapChangeUserInfo1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeUserInfo:)];
+    [titleLabel addGestureRecognizer:tapChangeUserInfo1];
     [view addSubview:titleLabel];
+    
+    if (mood != nil && [mood length] > 0) {
+        //
+        UILabel *moodLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (height - 75 - 15 - 15 -moodHeiht)/2.0 + 75 + 15 + 15 + 10, _meTableView.frame.size.width, 13)];
+        [self setMoodLabel:moodLabel];
+        moodLabel.text = mood;
+        moodLabel.backgroundColor = [UIColor clearColor];
+        moodLabel.font = [UIFont systemFontOfSize:13];
+        moodLabel.textColor = [UIColor grayColor];
+        moodLabel.textAlignment = NSTextAlignmentCenter;
+        moodLabel.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tapChangeUserInfo2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeUserInfo:)];
+        [moodLabel addGestureRecognizer:tapChangeUserInfo2];
+        [view addSubview:moodLabel];
+    }
     
     [_meTableView setTableHeaderView:view];
     
@@ -211,6 +247,7 @@
         switch (row) {
             case 0: {
                 ChildrenInfoVC *vc = [[ChildrenInfoVC alloc] init];
+                vc.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:vc animated:YES];
                 break;
             }
@@ -228,6 +265,7 @@
         switch (row) {
             case 0: {
                 SetVC *vc = [[SetVC alloc] init];
+                vc.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:vc animated:YES];
                 break;
             }
@@ -239,89 +277,14 @@
     
 }
 
-#pragma mark - UIActionSheetDelegate
--(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+
+#pragma mark - ModifyUserInfoDelegate
+- (void)modifyUserNick:(NSString *)nick mood:(NSString *)mood {
     
-    switch (buttonIndex) {
-        case 0: {
-            
-            AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
-            if (authStatus == ALAuthorizationStatusRestricted || authStatus == ALAuthorizationStatusDenied ) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"无法使用相机" message:@"请在iPhone的“设置-隐私-相机”中允许访问相机" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                [alertView show];
-                return;
-            }
-            
-            //打开照相机拍照
-            if ([UIImagePickerController isSourceTypeAvailable:
-                 UIImagePickerControllerSourceTypeCamera]) {
-                
-                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-                picker.delegate = self;
-                picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-                picker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
-                picker.allowsEditing = YES;
-                [self presentViewController:picker animated:YES completion:^{
-                }];
-            }
-            
-            break;
-            
-        }
-            
-            
-        case 1: {
-            
-            //打开本地相册
-            if ([UIImagePickerController isSourceTypeAvailable:
-                 UIImagePickerControllerSourceTypePhotoLibrary]) {
-                
-                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-                picker.delegate = self;
-                picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                picker.allowsEditing = YES;
-                [self presentViewController:picker animated:YES completion:^{
-                }];
-            }
-            
-            break;
-        }
-    }
 }
 
-#pragma mark - imagepicker delegate
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+- (void)modifyUserAvatar:(NSString *)avatar {
     
-    __block UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
-    __block UIImagePickerController *weakPicker = picker;
-    
-    dispatch_async(dispatch_get_global_queue(0, 0), ^(void) {
-        UIImage *imageScale = [image resizedImageByMagick:@"200x200"];
-        
-        SDImageCache *imageCache = [SDImageCache sharedImageCache];
-        [imageCache storeImage:imageScale forKey:@"123321"];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            //
-            [weakPicker dismissViewControllerAnimated:YES completion:^{
-                [self changeHeadImage];
-            }];
-        });
-    });
-}
-
-- (void)changeHeadImage {
-    
-    SDImageCache *imageCache = [SDImageCache sharedImageCache];
-    UIImage *image = [imageCache imageFromDiskCacheForKey:@"123321"];
-    //NSData *imageData = UIImagePNGRepresentation(image);
-    _headImageView.image = image;
-    //
-}
-
--(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
-    [picker dismissViewControllerAnimated:YES completion:^{
-    }];
 }
 
 

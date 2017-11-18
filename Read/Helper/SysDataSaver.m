@@ -9,8 +9,7 @@
 #import "SysDataSaver.h"
 #import "LoginResult.h"
 
-#define kUkeyUserDefaults       @"kUkeyUserDefaults"
-#define kUkeyUserDefaults       @"kUkeyUserDefaults"
+#define kUserInfoUserDefaultsKey       @"kUserInfoUserDefaultsKey"
 
 @implementation SysDataSaver
 
@@ -42,17 +41,20 @@ AISINGLETON_IMP(SysDataSaver,SharedSaver);
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (void)clearUserInfo {
+    [self clearValueWithKey:kUserInfoUserDefaultsKey];
+}
 
 - (void)saveUserInfo:(id<NSCoding>)userInfo {
-    [self saveCustomObject:userInfo key:kUkeyUserDefaults];
+    [self saveCustomObject:userInfo key:kUserInfoUserDefaultsKey];
 }
 
 - (id)getUserInfo {
-    return [self getCustomObjectWithKey:kUkeyUserDefaults];
+    return [self getCustomObjectWithKey:kUserInfoUserDefaultsKey];
 }
 
 - (NSString *)getUserId {
-    LoginResult *userInfo = [self getCustomObjectWithKey:kUkeyUserDefaults];
+    LoginResult *userInfo = [self getCustomObjectWithKey:kUserInfoUserDefaultsKey];
     return userInfo.user_id;
 }
 
