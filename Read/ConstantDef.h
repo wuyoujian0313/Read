@@ -12,6 +12,8 @@
 #define kGlobalGreenColor       0x6Fc05b
 #define kGlobalLineColor        0xdcdcdc
 
+#define kHeadImageKey       @"d41d8cd98f00b204e9800998ecf8427e"
+
 // 服务器地址
 #define kNetworkAPIServer               @"http://123.56.104.127/"
 
@@ -26,6 +28,12 @@
 // 重置密码
 #define API_ReSetPwd                    @"user/resetPwd"
 
+// 更新用户资料
+#define API_UpdateUserInfo              @"user/updateUserInfo"
+
+// 更新用户头像
+#define API_UploadUserImage                  @"user/uploadImg"
+
 // 修改密码
 #define API_Changepasswd                @"user/changepasswd"
 
@@ -34,5 +42,7 @@
 
 // 添加小孩信息
 #define API_AddChildrenInfo             @"child/addChild"
+
+//
 
 #endif /* ConstantDef_h */

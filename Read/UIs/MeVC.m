@@ -17,11 +17,11 @@
 #import "ChildrenInfoVC.h"
 #import "LoginResult.h"
 #import "SysDataSaver.h"
-#import "ModifyUserInfoVC.h"
+#import "UpdateUserInfoVC.h"
 
 
 
-@interface MeVC ()<UITableViewDataSource,UITableViewDelegate,ModifyUserInfoDelegate>
+@interface MeVC ()<UITableViewDataSource,UITableViewDelegate,UpdateUserInfoDelegate>
 
 @property(nonatomic,strong)UITableView          *meTableView;
 @property(nonatomic,strong)UIImageView          *headImageView;
@@ -49,9 +49,8 @@
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.view addSubview:tableView];
     
-    NSInteger headHeight = 170;
+    NSInteger headHeight = 155;
     LoginResult *userInfo = [[SysDataSaver SharedSaver] getUserInfo];
-    userInfo.mood = @"认真人最可爱";
     NSString *mood = userInfo.mood;
     if (mood != nil && [mood length] > 0) {
         //
@@ -71,7 +70,7 @@
     //取图片缓存
     SDImageCache * imageCache = [SDImageCache sharedImageCache];
     NSString *imageUrl = userInfo.avatar;
-    NSString *avatarKey  = [imageUrl md5EncodeUpper:NO];
+    NSString *avatarKey  = kHeadImageKey;
     UIImage *default_image = [imageCache imageFromDiskCacheForKey:avatarKey];
     
     if (default_image == nil) {
@@ -94,8 +93,8 @@
     }
 }
 
-- (void)changeUserInfo:(UITapGestureRecognizer*)sender {
-    ModifyUserInfoVC *vc = [[ModifyUserInfoVC alloc] init];
+- (void)updateUserInfo:(UITapGestureRecognizer*)sender {
+    UpdateUserInfoVC *vc = [[UpdateUserInfoVC alloc] init];
     vc.delegate = self;
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
@@ -106,26 +105,25 @@
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _meTableView.frame.size.width, height)];
     view.backgroundColor = [UIColor colorWithHex:0xebeef0];
     
-    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake((_meTableView.frame.size.width - 75)/2.0, (height - 75 - 15 - 15)/2.0, 75, 75)];
+    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake((_meTableView.frame.size.width - 60)/2.0, (height - 60 - 15 - 15)/2.0, 60, 60)];
     self.headImageView = imageView;
     imageView.clipsToBounds = YES;
     imageView.userInteractionEnabled = YES;
-    [imageView.layer setCornerRadius:75/2.0];
+    [imageView.layer setCornerRadius:60/2.0];
     [view addSubview:imageView];
     
     NSInteger moodHeiht = 0;
     LoginResult *userInfo = [[SysDataSaver SharedSaver] getUserInfo];
-    userInfo.mood = @"认真人最可爱";
     NSString *mood = userInfo.mood;
     if (mood != nil && [mood length] > 0) {
         moodHeiht += 23;
     }
     
     
-    UITapGestureRecognizer *tapChangeUserInfo = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeUserInfo:)];
+    UITapGestureRecognizer *tapChangeUserInfo = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(updateUserInfo:)];
     [imageView addGestureRecognizer:tapChangeUserInfo];
     
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (height - 75 - 15 - 15 - moodHeiht)/2.0 + 75 + 15, _meTableView.frame.size.width, 15)];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (height - 60 - 15 - 15 - moodHeiht)/2.0 + 60 + 15, _meTableView.frame.size.width, 15)];
     [self setUserNicknameLabel:titleLabel];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.font = [UIFont systemFontOfSize:14];
@@ -133,13 +131,13 @@
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.userInteractionEnabled = YES;
     
-    UITapGestureRecognizer *tapChangeUserInfo1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeUserInfo:)];
+    UITapGestureRecognizer *tapChangeUserInfo1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(updateUserInfo:)];
     [titleLabel addGestureRecognizer:tapChangeUserInfo1];
     [view addSubview:titleLabel];
     
     if (mood != nil && [mood length] > 0) {
         //
-        UILabel *moodLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (height - 75 - 15 - 15 -moodHeiht)/2.0 + 75 + 15 + 15 + 10, _meTableView.frame.size.width, 13)];
+        UILabel *moodLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (height - 60 - 15 - 15 -moodHeiht)/2.0 + 60 + 15 + 15 + 10, _meTableView.frame.size.width, 13)];
         [self setMoodLabel:moodLabel];
         moodLabel.text = mood;
         moodLabel.backgroundColor = [UIColor clearColor];
@@ -147,7 +145,7 @@
         moodLabel.textColor = [UIColor grayColor];
         moodLabel.textAlignment = NSTextAlignmentCenter;
         moodLabel.userInteractionEnabled = YES;
-        UITapGestureRecognizer *tapChangeUserInfo2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeUserInfo:)];
+        UITapGestureRecognizer *tapChangeUserInfo2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(updateUserInfo:)];
         [moodLabel addGestureRecognizer:tapChangeUserInfo2];
         [view addSubview:moodLabel];
     }
@@ -278,13 +276,21 @@
 }
 
 
-#pragma mark - ModifyUserInfoDelegate
-- (void)modifyUserNick:(NSString *)nick mood:(NSString *)mood {
+#pragma mark - UpdateUserInfoDelegate
+- (void)updateUserNick:(NSString *)nick mood:(NSString *)mood {
+    LoginResult *userInfo = [[SysDataSaver SharedSaver] getUserInfo];
+    userInfo.nick = nick;
+    userInfo.mood = mood;
     
+    [[SysDataSaver SharedSaver] saveUserInfo:userInfo];
+    [self loadHeadImageAndNickName];
 }
 
-- (void)modifyUserAvatar:(NSString *)avatar {
-    
+- (void)updateUserAvatar:(NSString *)avatar {
+    LoginResult *userInfo = [[SysDataSaver SharedSaver] getUserInfo];
+    userInfo.avatar = avatar;
+    [[SysDataSaver SharedSaver] saveUserInfo:userInfo];
+    [self loadHeadImageAndNickName];
 }
 
 

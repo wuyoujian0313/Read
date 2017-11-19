@@ -39,7 +39,7 @@
     NSArray *sortKeys = [allKeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         NSString *obj1String = (NSString *)obj1;
         NSString *obj2String = (NSString *)obj2;
-        return [obj1String compare:obj2String];
+        return [obj1String localizedCompare:obj2String];
     }];
     
     NSString *signString = @"";

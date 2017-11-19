@@ -83,6 +83,7 @@
 		AF506F991FB609C800470C01 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF506F981FB609C800470C01 /* back@2x.png */; };
 		AF683D811FB81ADE00AB69EC /* ReadNetRequestParam.m in Sources */ = {isa = PBXBuildFile; fileRef = AF683D801FB81ADE00AB69EC /* ReadNetRequestParam.m */; };
 		AF683D881FB81B5800AB69EC /* NetworkTask.m in Sources */ = {isa = PBXBuildFile; fileRef = AF683D861FB81B5800AB69EC /* NetworkTask.m */; };
+		AF88AB321FC1540400E885D5 /* UploadUserAvatarResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AF88AB311FC1540400E885D5 /* UploadUserAvatarResult.m */; };
 		AF94FDFB1FB9DD5F0086CB22 /* tb-biji-sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF94FDF31FB9DD5F0086CB22 /* tb-biji-sel@2x.png */; };
 		AF94FDFC1FB9DD5F0086CB22 /* tb-biji@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF94FDF41FB9DD5F0086CB22 /* tb-biji@2x.png */; };
 		AF94FDFD1FB9DD5F0086CB22 /* tb-me-sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF94FDF51FB9DD5F0086CB22 /* tb-me-sel@2x.png */; };
@@ -102,7 +103,7 @@
 		AFBAE17A1FB8590B0002DE1B /* NoteItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE1791FB8590B0002DE1B /* NoteItem.m */; };
 		AFBAE17D1FB85EC50002DE1B /* MultySearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE17C1FB85EC50002DE1B /* MultySearchResult.m */; };
 		AFBAE1801FB85EF40002DE1B /* BookItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE17F1FB85EF40002DE1B /* BookItem.m */; };
-		AFD56B221FC070AF0062BA20 /* ModifyUserInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD56B211FC070AF0062BA20 /* ModifyUserInfoVC.m */; };
+		AFD56B221FC070AF0062BA20 /* UpdateUserInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD56B211FC070AF0062BA20 /* UpdateUserInfoVC.m */; };
 		AFDEC9011FB4878F00926F38 /* NotesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEC9001FB4878F00926F38 /* NotesVC.m */; };
 		AFDEC9041FB487AB00926F38 /* BookroomVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEC9031FB487AB00926F38 /* BookroomVC.m */; };
 		AFDEC9071FB487CB00926F38 /* NewbooksVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEC9061FB487CB00926F38 /* NewbooksVC.m */; };
@@ -254,6 +255,8 @@
 		AF683D801FB81ADE00AB69EC /* ReadNetRequestParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadNetRequestParam.m; sourceTree = "<group>"; };
 		AF683D851FB81B5800AB69EC /* NetworkTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkTask.h; sourceTree = "<group>"; };
 		AF683D861FB81B5800AB69EC /* NetworkTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkTask.m; sourceTree = "<group>"; };
+		AF88AB301FC1540400E885D5 /* UploadUserAvatarResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadUserAvatarResult.h; sourceTree = "<group>"; };
+		AF88AB311FC1540400E885D5 /* UploadUserAvatarResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadUserAvatarResult.m; sourceTree = "<group>"; };
 		AF94FDF31FB9DD5F0086CB22 /* tb-biji-sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-biji-sel@2x.png"; sourceTree = "<group>"; };
 		AF94FDF41FB9DD5F0086CB22 /* tb-biji@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-biji@2x.png"; sourceTree = "<group>"; };
 		AF94FDF51FB9DD5F0086CB22 /* tb-me-sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-me-sel@2x.png"; sourceTree = "<group>"; };
@@ -284,8 +287,8 @@
 		AFBAE17C1FB85EC50002DE1B /* MultySearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultySearchResult.m; sourceTree = "<group>"; };
 		AFBAE17E1FB85EF40002DE1B /* BookItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookItem.h; sourceTree = "<group>"; };
 		AFBAE17F1FB85EF40002DE1B /* BookItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookItem.m; sourceTree = "<group>"; };
-		AFD56B201FC070AF0062BA20 /* ModifyUserInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyUserInfoVC.h; sourceTree = "<group>"; };
-		AFD56B211FC070AF0062BA20 /* ModifyUserInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyUserInfoVC.m; sourceTree = "<group>"; };
+		AFD56B201FC070AF0062BA20 /* UpdateUserInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateUserInfoVC.h; sourceTree = "<group>"; };
+		AFD56B211FC070AF0062BA20 /* UpdateUserInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateUserInfoVC.m; sourceTree = "<group>"; };
 		AFDEC8FF1FB4878F00926F38 /* NotesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesVC.h; sourceTree = "<group>"; };
 		AFDEC9001FB4878F00926F38 /* NotesVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesVC.m; sourceTree = "<group>"; };
 		AFDEC9021FB487AB00926F38 /* BookroomVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookroomVC.h; sourceTree = "<group>"; };
@@ -331,8 +334,8 @@
 				AF0422821FBC71B900D15E8E /* ChildrenInfoVC.m */,
 				AF0422921FBC95C600D15E8E /* DatePickerView.h */,
 				AF0422931FBC95C600D15E8E /* DatePickerView.m */,
-				AFD56B201FC070AF0062BA20 /* ModifyUserInfoVC.h */,
-				AFD56B211FC070AF0062BA20 /* ModifyUserInfoVC.m */,
+				AFD56B201FC070AF0062BA20 /* UpdateUserInfoVC.h */,
+				AFD56B211FC070AF0062BA20 /* UpdateUserInfoVC.m */,
 			);
 			name = Me;
 			sourceTree = "<group>";
@@ -537,12 +540,12 @@
 			children = (
 				AFBAE15F1FB83B560002DE1B /* NetResultBase.h */,
 				AFBAE1601FB83B560002DE1B /* NetResultBase.m */,
+				AF683D7F1FB81ADE00AB69EC /* ReadNetRequestParam.h */,
+				AF683D801FB81ADE00AB69EC /* ReadNetRequestParam.m */,
 				AF2308DC1FB342CE00BEC151 /* LoginResult.h */,
 				AF2308DD1FB342CE00BEC151 /* LoginResult.m */,
 				AF04227E1FBC499E00D15E8E /* ChangePasswdResult.h */,
 				AF04227F1FBC499E00D15E8E /* ChangePasswdResult.m */,
-				AF683D7F1FB81ADE00AB69EC /* ReadNetRequestParam.h */,
-				AF683D801FB81ADE00AB69EC /* ReadNetRequestParam.m */,
 				AFBAE1661FB854140002DE1B /* CaptchaResult.h */,
 				AFBAE1671FB854140002DE1B /* CaptchaResult.m */,
 				AFBAE1691FB8558A0002DE1B /* RegisterResult.h */,
@@ -565,6 +568,8 @@
 				AF4C90CC1FBF168C003148EC /* ChildInfoResult.m */,
 				AF4C90CE1FBF1D2A003148EC /* AddChildrenResult.h */,
 				AF4C90CF1FBF1D2A003148EC /* AddChildrenResult.m */,
+				AF88AB301FC1540400E885D5 /* UploadUserAvatarResult.h */,
+				AF88AB311FC1540400E885D5 /* UploadUserAvatarResult.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -755,7 +760,7 @@
 			files = (
 				AF2308B21FB33F5600BEC151 /* MJRefreshHeaderView.m in Sources */,
 				AF2308A11FB33F5600BEC151 /* AFHTTPSessionManager.m in Sources */,
-				AFD56B221FC070AF0062BA20 /* ModifyUserInfoVC.m in Sources */,
+				AFD56B221FC070AF0062BA20 /* UpdateUserInfoVC.m in Sources */,
 				AF2308A61FB33F5600BEC151 /* AFURLSessionManager.m in Sources */,
 				AF2308D21FB340EB00BEC151 /* MainVCManager.m in Sources */,
 				AF683D881FB81B5800AB69EC /* NetworkTask.m in Sources */,
@@ -789,6 +794,7 @@
 				AF2308AA1FB33F5600BEC151 /* UIColor+Utility.m in Sources */,
 				AFBAE1741FB856F50002DE1B /* ResetPwdResult.m in Sources */,
 				AF2308C81FB33F5600BEC151 /* UIImage+GIF.m in Sources */,
+				AF88AB321FC1540400E885D5 /* UploadUserAvatarResult.m in Sources */,
 				AF2308C51FB33F5600BEC151 /* SDWebImageManager.m in Sources */,
 				AFBAE17A1FB8590B0002DE1B /* NoteItem.m in Sources */,
 				AFBAE1771FB858C60002DE1B /* NoteListResult.m in Sources */,

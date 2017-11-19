@@ -294,7 +294,7 @@
             label.font = [UIFont systemFontOfSize:14];
             [cell.contentView addSubview:label];
             
-            UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(15 + 86 + 10, 0, tableView.frame.size.width - 86 - 10 - 15, 45)];
+            UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(15 + 86 + 10, 0, tableView.frame.size.width - 86 - 10 - 15- 15, 45)];
             self.ordPwdTextField = textField;
             [textField setDelegate:self];
             [textField setSecureTextEntry:YES];
@@ -303,7 +303,7 @@
             [textField setKeyboardType:UIKeyboardTypeDefault];
             [textField setTextAlignment:NSTextAlignmentRight];
             [textField setTextColor:[UIColor colorWithHex:0x666666]];
-            [textField setClearButtonMode:UITextFieldViewModeAlways];
+            [textField setClearButtonMode:UITextFieldViewModeWhileEditing];
             [textField setPlaceholder:@"请输入原密码"];
             [cell.contentView addSubview:textField];
             
@@ -329,7 +329,7 @@
             label.font = [UIFont systemFontOfSize:14];
             [cell.contentView addSubview:label];
             
-            UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(15 + 86 + 10, 0, tableView.frame.size.width - 86 - 10 - 15, 45)];
+            UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(15 + 86 + 10, 0, tableView.frame.size.width - 86 - 10 - 15- 15, 45)];
             self.nowPwdTextField = textField;
             [textField setDelegate:self];
             [textField setSecureTextEntry:YES];
@@ -338,7 +338,7 @@
             [textField setKeyboardType:UIKeyboardTypeDefault];
             [textField setTextAlignment:NSTextAlignmentRight];
             [textField setTextColor:[UIColor colorWithHex:0x666666]];
-            [textField setClearButtonMode:UITextFieldViewModeAlways];
+            [textField setClearButtonMode:UITextFieldViewModeWhileEditing];
             [textField setPlaceholder:@"请输入新密码(6-20位)"];
             [cell.contentView addSubview:textField];
             
@@ -365,7 +365,7 @@
             label.font = [UIFont systemFontOfSize:14];
             [cell.contentView addSubview:label];
             
-            UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(15 + 86 + 10, 0, tableView.frame.size.width - 86 - 10 - 15, 45)];
+            UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(15 + 86 + 10, 0, tableView.frame.size.width - 86 - 10 - 15 - 15, 45)];
             self.pwdTextField = textField;
             [textField setDelegate:self];
             [textField setFont:[UIFont systemFontOfSize:14]];
@@ -375,7 +375,7 @@
             [textField setTextAlignment:NSTextAlignmentRight];
             [textField setTextColor:[UIColor colorWithHex:0x666666]];
             [textField addTarget:self action:@selector(inputChange:) forControlEvents:UIControlEventEditingChanged];
-            [textField setClearButtonMode:UITextFieldViewModeAlways];
+            [textField setClearButtonMode:UITextFieldViewModeWhileEditing];
             [textField setPlaceholder:@"请再次输入新密码(6-20位)"];
             [textField setClearsOnBeginEditing:YES];
             [cell.contentView addSubview:textField];

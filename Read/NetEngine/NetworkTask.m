@@ -179,11 +179,10 @@ AISINGLETON_IMP(NetworkTask, sharedNetworkTask)
     
     [_afManager.requestSerializer setTimeoutInterval:_taskTimeout];
     [_afManager.requestSerializer setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
-    NSString * urlString = [NSString stringWithFormat:@"%@/%@",_serverAddress,api];
-    
+    NSDictionary *serverParam = [ReadNetRequestParam generateSignedParam:param];
     __weak NetworkTask *weakSelf = self;
-    
-    [_afManager POST:urlString parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    NSString * urlString = [NSString stringWithFormat:@"%@%@",_serverAddress,api];
+    [_afManager POST:urlString parameters:serverParam constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         //
         for (UploadFileInfo *info in files) {
             [formData appendPartWithFileData:info.fileData name:info.fileKey fileName:info.fileName mimeType:info.mimeType];

@@ -211,21 +211,21 @@ static NSString * const kCharactersToBeEscapedInQueryString = @":/?&=;+!@#$()',*
 - (NSData *) SHA1Hash {
     unsigned char hash[CC_SHA1_DIGEST_LENGTH];
     NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
-    (void) CC_SHA1( [data bytes], (CC_LONG)[self length], hash );
+    (void) CC_SHA1( [data bytes], (CC_LONG)[data length], hash );
     return ( [NSData dataWithBytes: hash length: CC_SHA1_DIGEST_LENGTH] );
 }
 
 - (NSData *) SHA224Hash {
     unsigned char hash[CC_SHA224_DIGEST_LENGTH];
     NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
-    (void) CC_SHA224( [data bytes], (CC_LONG)[self length], hash );
+    (void) CC_SHA224( [data bytes], (CC_LONG)[data length], hash );
     return ( [NSData dataWithBytes: hash length: CC_SHA224_DIGEST_LENGTH] );
 }
 
 - (NSData *) SHA256Hash {
     unsigned char hash[CC_SHA256_DIGEST_LENGTH];
     NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
-    (void) CC_SHA256( [data bytes], (CC_LONG)[self length], hash );
+    (void) CC_SHA256( [data bytes], (CC_LONG)[data length], hash );
     return ( [NSData dataWithBytes: hash length: CC_SHA256_DIGEST_LENGTH] );
 }
 
@@ -239,7 +239,7 @@ static NSString * const kCharactersToBeEscapedInQueryString = @":/?&=;+!@#$()',*
 - (NSData *) SHA512Hash {
     unsigned char hash[CC_SHA512_DIGEST_LENGTH];
     NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
-    (void) CC_SHA512( [data bytes], (CC_LONG)[self length], hash );
+    (void) CC_SHA512( [data bytes], (CC_LONG)[data length], hash );
     return ( [NSData dataWithBytes: hash length: CC_SHA512_DIGEST_LENGTH] );
 }
 
