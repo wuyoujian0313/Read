@@ -18,6 +18,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setNavTitle:@"Rlab阿来学院" titleColor:[UIColor colorWithHex:kGlobalGreenColor]];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 80, self.view.frame.size.width - 30, 80)];
+    label.text = @"书库模块正在研发中......";
+    label.textColor = [UIColor blackColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor colorWithHex:kGlobalGreenColor];
+    label.font = [UIFont systemFontOfSize:20];
+    [self.view addSubview:label];
 }
 
 - (void)didReceiveMemoryWarning {

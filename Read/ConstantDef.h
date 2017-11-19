@@ -32,7 +32,7 @@
 #define API_UpdateUserInfo              @"user/updateUserInfo"
 
 // 更新用户头像
-#define API_UploadUserImage                  @"user/uploadImg"
+#define API_UploadUserImage             @"user/uploadImg"
 
 // 修改密码
 #define API_Changepasswd                @"user/changepasswd"
@@ -43,6 +43,7 @@
 // 添加小孩信息
 #define API_AddChildrenInfo             @"child/addChild"
 
-//
+// 推荐列表（即，新书）
+#define API_RecList                     @"book/recList"
 
 #endif /* ConstantDef_h */

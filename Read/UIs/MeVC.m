@@ -10,9 +10,6 @@
 #import "SDImageCache.h"
 #import "UIImageView+WebCache.h"
 #import "DeviceInfo.h"
-#import <MobileCoreServices/MobileCoreServices.h>
-#import <AssetsLibrary/AssetsLibrary.h>
-#import <AVFoundation/AVFoundation.h>
 #import "SetVC.h"
 #import "ChildrenInfoVC.h"
 #import "LoginResult.h"

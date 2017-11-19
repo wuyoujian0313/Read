@@ -12,5 +12,5 @@
 @interface NoteListResult : NetResultBase
 
 @property(nonatomic,strong,getter=arrayNote)NSArray        *BaiduParserArray(info,NoteItem);
-@property (nonatomic, copy)NSString *hasNext;
+@property (nonatomic, copy)NSNumber *hasNext;
 @end

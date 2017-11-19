@@ -65,7 +65,11 @@
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.view addSubview:tableView];
     
-    [self setTableViewHeaderView:260];
+    NSInteger height = 220;
+    if ([DeviceInfo screenWidth] > 320) {
+        height = 260;
+    }
+    [self setTableViewHeaderView:height];
     [self setTableViewFooterView:180];
 }
 

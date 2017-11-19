@@ -84,6 +84,9 @@
 		AF683D811FB81ADE00AB69EC /* ReadNetRequestParam.m in Sources */ = {isa = PBXBuildFile; fileRef = AF683D801FB81ADE00AB69EC /* ReadNetRequestParam.m */; };
 		AF683D881FB81B5800AB69EC /* NetworkTask.m in Sources */ = {isa = PBXBuildFile; fileRef = AF683D861FB81B5800AB69EC /* NetworkTask.m */; };
 		AF88AB321FC1540400E885D5 /* UploadUserAvatarResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AF88AB311FC1540400E885D5 /* UploadUserAvatarResult.m */; };
+		AF88AB341FC1723900E885D5 /* shucheng_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF88AB331FC1723900E885D5 /* shucheng_bg@2x.png */; };
+		AF88AB361FC1A83800E885D5 /* book_cover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF88AB351FC1A83800E885D5 /* book_cover@2x.png */; };
+		AF88AB391FC1AA9A00E885D5 /* RecBooksResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AF88AB381FC1AA9A00E885D5 /* RecBooksResult.m */; };
 		AF94FDFB1FB9DD5F0086CB22 /* tb-biji-sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF94FDF31FB9DD5F0086CB22 /* tb-biji-sel@2x.png */; };
 		AF94FDFC1FB9DD5F0086CB22 /* tb-biji@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF94FDF41FB9DD5F0086CB22 /* tb-biji@2x.png */; };
 		AF94FDFD1FB9DD5F0086CB22 /* tb-me-sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF94FDF51FB9DD5F0086CB22 /* tb-me-sel@2x.png */; };
@@ -257,6 +260,10 @@
 		AF683D861FB81B5800AB69EC /* NetworkTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkTask.m; sourceTree = "<group>"; };
 		AF88AB301FC1540400E885D5 /* UploadUserAvatarResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadUserAvatarResult.h; sourceTree = "<group>"; };
 		AF88AB311FC1540400E885D5 /* UploadUserAvatarResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadUserAvatarResult.m; sourceTree = "<group>"; };
+		AF88AB331FC1723900E885D5 /* shucheng_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shucheng_bg@2x.png"; sourceTree = "<group>"; };
+		AF88AB351FC1A83800E885D5 /* book_cover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "book_cover@2x.png"; sourceTree = "<group>"; };
+		AF88AB371FC1AA9A00E885D5 /* RecBooksResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecBooksResult.h; sourceTree = "<group>"; };
+		AF88AB381FC1AA9A00E885D5 /* RecBooksResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecBooksResult.m; sourceTree = "<group>"; };
 		AF94FDF31FB9DD5F0086CB22 /* tb-biji-sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-biji-sel@2x.png"; sourceTree = "<group>"; };
 		AF94FDF41FB9DD5F0086CB22 /* tb-biji@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-biji@2x.png"; sourceTree = "<group>"; };
 		AF94FDF51FB9DD5F0086CB22 /* tb-me-sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-me-sel@2x.png"; sourceTree = "<group>"; };
@@ -562,6 +569,8 @@
 				AFBAE1791FB8590B0002DE1B /* NoteItem.m */,
 				AFBAE17E1FB85EF40002DE1B /* BookItem.h */,
 				AFBAE17F1FB85EF40002DE1B /* BookItem.m */,
+				AF88AB371FC1AA9A00E885D5 /* RecBooksResult.h */,
+				AF88AB381FC1AA9A00E885D5 /* RecBooksResult.m */,
 				AFBAE17B1FB85EC50002DE1B /* MultySearchResult.h */,
 				AFBAE17C1FB85EC50002DE1B /* MultySearchResult.m */,
 				AF4C90CB1FBF168C003148EC /* ChildInfoResult.h */,
@@ -603,6 +612,8 @@
 				AF04228F1FBC88C900D15E8E /* radio_unselect@2x.png */,
 				AF506F8D1FB5E26700470C01 /* login_bg@2x.png */,
 				AF506F981FB609C800470C01 /* back@2x.png */,
+				AF88AB331FC1723900E885D5 /* shucheng_bg@2x.png */,
+				AF88AB351FC1A83800E885D5 /* book_cover@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -727,11 +738,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF0422891FBC77CD00D15E8E /* icon_heart@2x.png in Resources */,
+				AF88AB341FC1723900E885D5 /* shucheng_bg@2x.png in Resources */,
 				AF506F901FB5E26700470C01 /* icon_user@2x.png in Resources */,
 				AF94FE001FB9DD5F0086CB22 /* tb-shuku@2x.png in Resources */,
 				AF2308AE1FB33F5600BEC151 /* MJRefresh.bundle in Resources */,
 				AF0422881FBC77CD00D15E8E /* icon_emotion@2x.png in Resources */,
 				AF94FE011FB9DD5F0086CB22 /* tb-xinshu-sel@2x.png in Resources */,
+				AF88AB361FC1A83800E885D5 /* book_cover@2x.png in Resources */,
 				AF94FDFD1FB9DD5F0086CB22 /* tb-me-sel@2x.png in Resources */,
 				AF04228A1FBC77CD00D15E8E /* icon_note@2x.png in Resources */,
 				AF04228D1FBC797A00D15E8E /* icon_photo@2x.png in Resources */,
@@ -819,6 +832,7 @@
 				AF2308BE1FB33F5600BEC151 /* MKAnnotationView+WebCache.m in Sources */,
 				AF2308CC1FB33F5600BEC151 /* UIImageView+WebCache.m in Sources */,
 				AFBAE16B1FB8558A0002DE1B /* RegisterResult.m in Sources */,
+				AF88AB391FC1AA9A00E885D5 /* RecBooksResult.m in Sources */,
 				AF2308A21FB33F5600BEC151 /* AFNetworkReachabilityManager.m in Sources */,
 				AF2308B31FB33F5600BEC151 /* AIActionSheet.m in Sources */,
 				AFBAE1681FB854140002DE1B /* CaptchaResult.m in Sources */,
