@@ -85,14 +85,6 @@
     [tableView setBackgroundColor:[UIColor clearColor]];
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.view addSubview:tableView];
-    
-    //[self setTableViewHeaderView:20];
-}
-
--(void)setTableViewHeaderView:(NSInteger)height {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _booksTableView.frame.size.width, height)];
-    view.backgroundColor = [UIColor clearColor];
-    [_booksTableView setTableHeaderView:view];
 }
 
 - (void)keyboardWillShow:(NSNotification *)note{
