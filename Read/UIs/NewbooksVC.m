@@ -14,6 +14,7 @@
 #import "SDImageCache.h"
 #import "UIImageView+WebCache.h"
 #import "MJRefresh.h"
+#import "BookDetailVC.h"
 
 @interface BookButton : UIButton
 @property(nonatomic,assign)NSInteger index;
@@ -30,7 +31,7 @@
 @property(nonatomic, strong) RecBooksResult             *booksResult;
 @property(nonatomic,strong)MJRefreshHeaderView          *refreshHeader;
 @property(nonatomic,strong)MJRefreshFooterView          *refreshFootder;
-@property(nonatomic,assign)BOOL                 isRefreshList;
+@property(nonatomic,assign)BOOL                         isRefreshList;
 @end
 
 @implementation NewbooksVC
@@ -118,6 +119,7 @@
         if (_isRefreshList) {
             [_bookList removeAllObjects];
             _isRefreshList = NO;
+            [_refreshFootder setHidden:NO];
         }
         
         RecBooksResult *recBooks = (RecBooksResult *)result;
@@ -131,6 +133,10 @@
         
         if ([_refreshFootder isRefreshing]) {
             [_refreshFootder endRefreshing];
+        }
+        
+        if (_booksResult != nil && [_booksResult.hasNext integerValue] == 0) {
+            [_refreshFootder setHidden:YES];
         }
     }
 }
@@ -159,14 +165,6 @@
         }
     }
     
-    if ([refreshView isEqual:_refreshFootder]) {
-        if (_booksResult != nil && [_booksResult.hasNext integerValue] == 0) {
-            [_refreshFootder endRefreshing];
-            return;
-        }
-    }
-    
-    
     if (!refreshView.isRefreshing) {
         [self getRecBooks:_isRefreshList];
     }
@@ -177,10 +175,11 @@
 }
 
 - (void)selectBook:(BookButton *)sender {
-    NSInteger index = sender.index;
-    [FadePromptView showPromptStatus:[NSString stringWithFormat:@"selectBookIndex:%d",index] duration:1.0 finishBlock:^{
-        //
-    }];
+//    NSInteger index = sender.index;
+
+    BookDetailVC *vc = [[BookDetailVC alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

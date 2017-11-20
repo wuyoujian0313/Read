@@ -48,7 +48,7 @@
 }
 
 - (void)layoutBGView {
-    UIImage * bgImage = [UIImage imageNamed:@"login_bg.png"];
+    UIImage * bgImage = [UIImage imageNamed:@"background.png"];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     [imageView setImage:bgImage];
     [self.view addSubview:imageView];

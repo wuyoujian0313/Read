@@ -21,10 +21,12 @@
         CGSize stringSize = [self sizeWithAttributes:dictionaryAttributes];
         return CGSizeMake(ceil(stringSize.width), ceil(stringSize.height));
     }
-    else
-    {
-        return [self sizeWithFont:font];
-    }
+//    else
+//    {
+//        return [self sizeWithFont:font];
+//    }
+    
+    return CGSizeZero;
 }
 
 - (CGSize)sizeWithFontCompatible:(UIFont *)font constrainedToSize:(CGSize)size lineBreakMode:(NSLineBreakMode)lineBreakMode
@@ -39,11 +41,13 @@
         
         return CGSizeMake(ceil(stringRect.size.width), ceil(stringRect.size.height));
     }
-    else
-    {
-        return [self sizeWithFont:font constrainedToSize:size lineBreakMode:lineBreakMode];
-  
-    }
+//    else
+//    {
+//        return [self sizeWithFont:font constrainedToSize:size lineBreakMode:lineBreakMode];
+//  
+//    }
+    
+    return CGSizeZero;
 }
 
 -(NSString*)md5EncodeUpper:(BOOL)upper {
