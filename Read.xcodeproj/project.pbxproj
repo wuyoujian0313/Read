@@ -96,6 +96,10 @@
 		AF94FE021FB9DD5F0086CB22 /* tb-xinshu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF94FDFA1FB9DD5F0086CB22 /* tb-xinshu@2x.png */; };
 		AFAFB75F1FC282F100663862 /* BookDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFAFB75E1FC282F100663862 /* BookDetailVC.m */; };
 		AFAFB7621FC298A700663862 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AFAFB7601FC298A700663862 /* InfoPlist.strings */; };
+		AFAFB7661FC2ABC100663862 /* BookListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFAFB7651FC2ABC100663862 /* BookListVC.m */; };
+		AFAFB7691FC2ACB800663862 /* BookTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AFAFB7681FC2ACB800663862 /* BookTableViewCell.m */; };
+		AFAFB76C1FC2BB8F00663862 /* heart_empty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AFAFB76A1FC2BB8F00663862 /* heart_empty@2x.png */; };
+		AFAFB76D1FC2BB8F00663862 /* heart_read@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AFAFB76B1FC2BB8F00663862 /* heart_read@2x.png */; };
 		AFBAE1611FB83B560002DE1B /* NetResultBase.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE1601FB83B560002DE1B /* NetResultBase.m */; };
 		AFBAE1651FB83D5B0002DE1B /* SysDataSaver.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE1641FB83D5B0002DE1B /* SysDataSaver.m */; };
 		AFBAE1681FB854140002DE1B /* CaptchaResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE1671FB854140002DE1B /* CaptchaResult.m */; };
@@ -276,6 +280,12 @@
 		AFAFB75E1FC282F100663862 /* BookDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookDetailVC.m; sourceTree = "<group>"; };
 		AFAFB7611FC298A700663862 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		AFAFB7631FC298D100663862 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AFAFB7641FC2ABC100663862 /* BookListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookListVC.h; sourceTree = "<group>"; };
+		AFAFB7651FC2ABC100663862 /* BookListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookListVC.m; sourceTree = "<group>"; };
+		AFAFB7671FC2ACB800663862 /* BookTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookTableViewCell.h; sourceTree = "<group>"; };
+		AFAFB7681FC2ACB800663862 /* BookTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookTableViewCell.m; sourceTree = "<group>"; };
+		AFAFB76A1FC2BB8F00663862 /* heart_empty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart_empty@2x.png"; sourceTree = "<group>"; };
+		AFAFB76B1FC2BB8F00663862 /* heart_read@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart_read@2x.png"; sourceTree = "<group>"; };
 		AFBAE15F1FB83B560002DE1B /* NetResultBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetResultBase.h; sourceTree = "<group>"; };
 		AFBAE1601FB83B560002DE1B /* NetResultBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetResultBase.m; sourceTree = "<group>"; };
 		AFBAE1631FB83D5B0002DE1B /* SysDataSaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SysDataSaver.h; sourceTree = "<group>"; };
@@ -618,6 +628,8 @@
 				AF506F981FB609C800470C01 /* back@2x.png */,
 				AF88AB331FC1723900E885D5 /* shucheng_bg@2x.png */,
 				AF88AB351FC1A83800E885D5 /* book_cover@2x.png */,
+				AFAFB76A1FC2BB8F00663862 /* heart_empty@2x.png */,
+				AFAFB76B1FC2BB8F00663862 /* heart_read@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -671,6 +683,10 @@
 			children = (
 				AFDEC9021FB487AB00926F38 /* BookroomVC.h */,
 				AFDEC9031FB487AB00926F38 /* BookroomVC.m */,
+				AFAFB7641FC2ABC100663862 /* BookListVC.h */,
+				AFAFB7651FC2ABC100663862 /* BookListVC.m */,
+				AFAFB7671FC2ACB800663862 /* BookTableViewCell.h */,
+				AFAFB7681FC2ACB800663862 /* BookTableViewCell.m */,
 			);
 			name = Bookroom;
 			sourceTree = "<group>";
@@ -757,6 +773,7 @@
 				AF04228A1FBC77CD00D15E8E /* icon_note@2x.png in Resources */,
 				AF04228D1FBC797A00D15E8E /* icon_photo@2x.png in Resources */,
 				AF94FDFE1FB9DD5F0086CB22 /* tb-me@2x.png in Resources */,
+				AFAFB76D1FC2BB8F00663862 /* heart_read@2x.png in Resources */,
 				AF04228B1FBC77CD00D15E8E /* icon_setting@2x.png in Resources */,
 				AF94FE021FB9DD5F0086CB22 /* tb-xinshu@2x.png in Resources */,
 				AF94FDFC1FB9DD5F0086CB22 /* tb-biji@2x.png in Resources */,
@@ -765,6 +782,7 @@
 				AF506F991FB609C800470C01 /* back@2x.png in Resources */,
 				AF0422911FBC88C900D15E8E /* radio_unselect@2x.png in Resources */,
 				AF94FDFF1FB9DD5F0086CB22 /* tb-shuku-sel@2x.png in Resources */,
+				AFAFB76C1FC2BB8F00663862 /* heart_empty@2x.png in Resources */,
 				AF0422901FBC88C900D15E8E /* radio_select@2x.png in Resources */,
 				AF94FDFB1FB9DD5F0086CB22 /* tb-biji-sel@2x.png in Resources */,
 				AF506F8F1FB5E26700470C01 /* icon_pwd@2x.png in Resources */,
@@ -796,6 +814,7 @@
 				AF04C5761FB35A0800C0C67B /* MeVC.m in Sources */,
 				AF14EAB91FB737F60042683D /* ModifyPwdVC.m in Sources */,
 				AF2308BD1FB33F5600BEC151 /* Reachability.m in Sources */,
+				AFAFB7691FC2ACB800663862 /* BookTableViewCell.m in Sources */,
 				AF2308E31FB342CE00BEC151 /* LoginResult.m in Sources */,
 				AF2308A91FB33F5600BEC151 /* UIAlertController+Orientations.m in Sources */,
 				AF2308A31FB33F5600BEC151 /* AFSecurityPolicy.m in Sources */,
@@ -809,6 +828,7 @@
 				AF2308AD1FB33F5600BEC151 /* UIView+SizeUtility.m in Sources */,
 				AF2308B91FB33F5600BEC151 /* FileCache.m in Sources */,
 				AF2308C11FB33F5600BEC151 /* SDWebImageCompat.m in Sources */,
+				AFAFB7661FC2ABC100663862 /* BookListVC.m in Sources */,
 				AF0422801FBC499E00D15E8E /* ChangePasswdResult.m in Sources */,
 				AF4C90D01FBF1D2A003148EC /* AddChildrenResult.m in Sources */,
 				AF2308AA1FB33F5600BEC151 /* UIColor+Utility.m in Sources */,

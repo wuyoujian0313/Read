@@ -55,14 +55,15 @@
 
 - (void)switchToHomeVCFrom:(UIViewController*)fromVC {
     
+    MainVCManager *wSelf = self;
     UIViewController *homeVC = [self setupHomeController];
     [self transitionFromViewController:fromVC toViewController:homeVC duration:1.0 options:UIViewAnimationOptionTransitionFlipFromLeft animations:^{
         //
         [fromVC removeFromParentViewController];
-        self.currentController = homeVC;
+        wSelf.currentController = homeVC;
         
-        [_currentController didMoveToParentViewController:self];
-        [_currentController setNeedsStatusBarAppearanceUpdate];
+        [wSelf.currentController didMoveToParentViewController:self];
+        [wSelf.currentController setNeedsStatusBarAppearanceUpdate];
     } completion:^(BOOL finished) {
         //
         
@@ -72,12 +73,13 @@
 - (void)switchToLoginVCFrom:(UIViewController*)fromVC {
     UIViewController *loginVC =  [self setupLoginVC];
     
+    MainVCManager *wSelf = self;
     [self transitionFromViewController:fromVC toViewController:loginVC duration:1.0 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
         //
         [fromVC removeFromParentViewController];
-        self.currentController = loginVC;
-        [_currentController didMoveToParentViewController:self];
-        [_currentController setNeedsStatusBarAppearanceUpdate];
+        wSelf.currentController = loginVC;
+        [wSelf.currentController didMoveToParentViewController:self];
+        [wSelf.currentController setNeedsStatusBarAppearanceUpdate];
     } completion:^(BOOL finished) {
         //
         
@@ -87,7 +89,6 @@
 - (UIViewController *)setupLoginVC {
     LoginVC *controller = [[LoginVC alloc] init];
     AINavigationController *loginNav = [[AINavigationController alloc] initWithRootViewController:controller];
-    
     
     [self addChildViewController:loginNav];
     [self.view addSubview:loginNav.view];

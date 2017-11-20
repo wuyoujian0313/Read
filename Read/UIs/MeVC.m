@@ -67,7 +67,7 @@
     //取图片缓存
     SDImageCache * imageCache = [SDImageCache sharedImageCache];
     NSString *imageUrl = userInfo.avatar;
-    NSString *avatarKey  = kHeadImageKey;
+    NSString *avatarKey  = [imageUrl md5EncodeUpper:NO];
     UIImage *default_image = [imageCache imageFromDiskCacheForKey:avatarKey];
     
     if (default_image == nil) {

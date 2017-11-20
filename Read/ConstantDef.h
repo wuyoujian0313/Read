@@ -12,7 +12,6 @@
 #define kGlobalGreenColor       0x6Fc05b
 #define kGlobalLineColor        0xdcdcdc
 
-#define kHeadImageKey       @"d41d8cd98f00b204e9800998ecf8427e"
 
 // 服务器地址
 #define kNetworkAPIServer               @"http://123.56.104.127/"

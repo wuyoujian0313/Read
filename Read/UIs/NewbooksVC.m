@@ -29,12 +29,17 @@
 @property(nonatomic, strong) UITableView                *booksTableView;
 @property(nonatomic, strong) NSMutableArray<BookItem *> *bookList;
 @property(nonatomic, strong) RecBooksResult             *booksResult;
-@property(nonatomic,strong)MJRefreshHeaderView          *refreshHeader;
-@property(nonatomic,strong)MJRefreshFooterView          *refreshFootder;
-@property(nonatomic,assign)BOOL                         isRefreshList;
+@property(nonatomic, strong) MJRefreshHeaderView        *refreshHeader;
+@property(nonatomic, strong) MJRefreshFooterView        *refreshFootder;
+@property(nonatomic, assign) BOOL                       isRefreshList;
 @end
 
 @implementation NewbooksVC
+
+-(void)dealloc {
+    [_refreshFootder free];
+    [_refreshHeader free];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

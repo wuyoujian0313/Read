@@ -36,8 +36,6 @@
     [self setNavTitle:@"Rlab阿来学院" titleColor:[UIColor colorWithHex:kGlobalGreenColor]];
     [self layoutRegisterTableView];
     
-    NSLog(@"key:%@",[kHeadImageKey md5EncodeUpper:NO]);
-    
     UIBarButtonItem *itemBtn = [self configBarButtonWithTitle:@"保存" target:self selector:@selector(commitUserInfo:)];
     self.navigationItem.rightBarButtonItem = itemBtn;
 }
@@ -144,13 +142,14 @@
         UpdateUserInfoVC *wSelf = self;
         [FadePromptView showPromptStatus:@"上传成功！" duration:1.0  positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
             SDImageCache *imageCache = [SDImageCache sharedImageCache];
-            UIImage *image = [imageCache imageFromDiskCacheForKey:kHeadImageKey];
             
+            UploadUserAvatarResult *uploadResult = (UploadUserAvatarResult *)result;
+            NSString *avatar = uploadResult.avatar;
+            NSString *imageKey = [avatar md5EncodeUpper:NO];
+            UIImage *image = [imageCache imageFromDiskCacheForKey:imageKey];
             wSelf.headImageView.image = image;
             
             if ([wSelf.delegate respondsToSelector:@selector(updateUserAvatar:)]) {
-                
-                UploadUserAvatarResult *uploadResult = (UploadUserAvatarResult *)result;
                 [wSelf.delegate updateUserAvatar:uploadResult.avatar];
             }
         }];
@@ -179,7 +178,7 @@
     //取图片缓存
     SDImageCache * imageCache = [SDImageCache sharedImageCache];
     NSString *imageUrl = userInfo.avatar;
-    NSString *avatarKey  = kHeadImageKey;
+    NSString *avatarKey  = [imageUrl md5EncodeUpper:NO];
     UIImage *default_image = [imageCache imageFromDiskCacheForKey:avatarKey];
     
     if (default_image == nil) {
@@ -426,16 +425,20 @@
     __block UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
     __block UIImagePickerController *weakPicker = picker;
     
+    UpdateUserInfoVC *wSelf = self;
     dispatch_async(dispatch_get_global_queue(0, 0), ^(void) {
         UIImage *imageScale = [image resizedImageByMagick:@"200x200"];
         
         SDImageCache *imageCache = [SDImageCache sharedImageCache];
-        [imageCache storeImage:imageScale forKey:kHeadImageKey];
+        
+        LoginResult *userInfo = [[SysDataSaver SharedSaver] getUserInfo];\
+        NSString *imageKey = [userInfo.avatar md5EncodeUpper:NO];
+        [imageCache storeImage:imageScale forKey:imageKey];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             //
             [weakPicker dismissViewControllerAnimated:YES completion:^{
-                [self changeHeadImage];
+                [wSelf changeHeadImage:imageKey];
             }];
         });
     });
@@ -456,10 +459,10 @@
     
 }
 
-- (void)changeHeadImage {
+- (void)changeHeadImage:(NSString *)imageKey {
     
     SDImageCache *imageCache = [SDImageCache sharedImageCache];
-    UIImage *image = [imageCache imageFromDiskCacheForKey:kHeadImageKey];
+    UIImage *image = [imageCache imageFromDiskCacheForKey:imageKey];
     NSData *imageData = UIImagePNGRepresentation(image);
     //
     [self uploadImage:imageData];

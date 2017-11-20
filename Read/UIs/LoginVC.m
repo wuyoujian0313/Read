@@ -311,7 +311,7 @@
             [textField setDelegate:self];
             [textField setFont:[UIFont systemFontOfSize:14]];
             [textField setReturnKeyType:UIReturnKeyNext];
-            [textField setClearButtonMode:UITextFieldViewModeAlways];
+            [textField setClearButtonMode:UITextFieldViewModeWhileEditing];
             [textField setTextAlignment:NSTextAlignmentLeft];
             [textField setKeyboardType:UIKeyboardTypePhonePad];
             [textField setClearsOnBeginEditing:YES];
@@ -326,7 +326,7 @@
             [textField setSecureTextEntry:YES];
             [textField setFont:[UIFont systemFontOfSize:14]];
             [textField setTextAlignment:NSTextAlignmentLeft];
-            [textField setClearButtonMode:UITextFieldViewModeAlways];
+            [textField setClearButtonMode:UITextFieldViewModeWhileEditing];
             [textField setClearsOnBeginEditing:YES];
             [textField setReturnKeyType:UIReturnKeyDone];
             textField.text = @"120723";

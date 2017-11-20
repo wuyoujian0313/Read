@@ -85,7 +85,7 @@
             [[SysDataSaver SharedSaver] clearUserInfo];
         }];
         [addAlertVC addAction:confirmAction];
-        [self.navigationController presentViewController:addAlertVC animated:NO completion:nil];
+        [self.navigationController presentViewController:addAlertVC animated:YES completion:nil];
     }
 }
 
