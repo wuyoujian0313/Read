@@ -9,5 +9,5 @@
 #import "BaseVC.h"
 
 @interface BookListVC : BaseVC
-
+@property (nonatomic,copy)NSString *key;
 @end

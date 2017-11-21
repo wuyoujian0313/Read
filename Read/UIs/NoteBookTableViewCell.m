@@ -1,23 +1,21 @@
 //
-//  BookTableViewCell.m
+//  NoteBookTableViewCell.m
 //  Read
 //
-//  Created by wuyoujian on 2017/11/20.
+//  Created by wuyoujian on 2017/11/21.
 //  Copyright © 2017年 weimeitc. All rights reserved.
 //
 
-#import "BookTableViewCell.h"
+#import "NoteBookTableViewCell.h"
 #import "SDImageCache.h"
 #import "UIImageView+WebCache.h"
 #import "NetworkTask.h"
 
-@interface BookTableViewCell ()<NetworkTaskDelegate>
-@property(nonatomic, strong)BookItem    *bookInfo;
-@property(nonatomic, strong)UIButton    *favoriteButton;
-
+@interface NoteBookTableViewCell ()<NetworkTaskDelegate>
+@property(nonatomic, strong)NoteBookItem    *bookInfo;
 @end
 
-@implementation BookTableViewCell
+@implementation NoteBookTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -26,7 +24,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
@@ -55,7 +53,7 @@
             [viewParent addSubview:bookImageView];
         }
         
-        NSString *pic_big = _bookInfo.pic_big;
+        NSString *pic_big = _bookInfo.pic;
         if (pic_big != nil && [pic_big length] > 0) {
             //从缓存取
             //取图片缓存
@@ -118,7 +116,7 @@
         [bookDetailView addSubview:pressLabel];
     }
     
-    NSString *name = _bookInfo.name;
+    NSString *name = _bookInfo.bookname;
     nameLabel.text = name;
     
     NSString *author = _bookInfo.author;
@@ -137,64 +135,23 @@
         [viewParent addSubview:bookPriceView];
     }
     
-    UILabel *priceLabel = (UILabel *)[bookPriceView viewWithTag:301];
-    if (priceLabel == nil) {
-        priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, bookPriceView.frame.size.width, 15)];
-        [priceLabel setTag:301];
-        [priceLabel setTextAlignment:NSTextAlignmentRight];
-        [bookPriceView addSubview:priceLabel];
-    }
-    
-    
     // 14 x 12
-    UIButton *favoriteBtn = (UIButton *)[viewParent viewWithTag:302];
-    if (favoriteBtn == nil) {
-        favoriteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.favoriteButton = favoriteBtn;
-        [favoriteBtn setImage:[UIImage imageNamed:@"heart_empty"] forState:UIControlStateNormal];
-        [favoriteBtn addTarget:self action:@selector(favoriteAction:) forControlEvents:UIControlEventTouchUpInside];
-        [favoriteBtn setFrame:CGRectMake(bookPriceView.frame.size.width - 29, bookPriceView.frame.size.height - 27, 29, 27)];
-        [favoriteBtn setImageEdgeInsets:UIEdgeInsetsMake(15, 15, 0, 0)];
-        [bookPriceView addSubview:favoriteBtn];
-    }
-    
-    NSString *price = _bookInfo.price;// 单位:分
-    if (price !=nil && [price length] > 0) {
-        NSInteger priceInt = [price integerValue];
-        NSInteger priceYuan = priceInt/100;
-        NSInteger priceFen = priceInt%100;
-        
-        NSString *string1 = [NSString stringWithFormat:@"%ld",(long)priceYuan];
-        NSString *string2 = [NSString stringWithFormat:@".%ld元",(long)priceFen];
-        NSString *priceString = [string1 stringByAppendingString:string2];
-        
-        NSRange range1 = [priceString rangeOfString:string1];
-        NSRange range2 = [priceString rangeOfString:string2];
-        
-        NSDictionary *attributes1 = @{ NSFontAttributeName:[UIFont boldSystemFontOfSize:14], NSForegroundColorAttributeName:[UIColor colorWithHex:0xF74A40] };
-        
-        NSDictionary *attributes2 = @{ NSFontAttributeName:[UIFont systemFontOfSize:11], NSForegroundColorAttributeName:[UIColor colorWithHex:0xF74A40] };
-        
-        NSMutableAttributedString *attrText = [[NSMutableAttributedString alloc] initWithString:priceString];
-        [attrText addAttributes:attributes1 range:range1];
-        [attrText addAttributes:attributes2 range:range2];
-        priceLabel.attributedText = attrText;
-    }
-    
-    NSString *fav = _bookInfo.isFavor;
-    if ([fav isEqualToString:@"yes"]) {
-        [favoriteBtn setImage:[UIImage imageNamed:@"heart_read"] forState:UIControlStateNormal];
-    } else {
-        [favoriteBtn setImage:[UIImage imageNamed:@"heart_empty"] forState:UIControlStateNormal];
+    UIButton *noteBtn = (UIButton *)[viewParent viewWithTag:302];
+    if (noteBtn == nil) {
+        noteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [noteBtn setImage:[UIImage imageNamed:@"icon_note"] forState:UIControlStateNormal];
+        [noteBtn addTarget:self action:@selector(noteAction:) forControlEvents:UIControlEventTouchUpInside];
+        [noteBtn setFrame:CGRectMake(bookPriceView.frame.size.width - 28, 0, 28, 29)];
+        [bookPriceView addSubview:noteBtn];
     }
 }
 
-- (void)favoriteAction:(UIButton *)sender {
+- (void)noteAction:(UIButton *)sender {
     //
 }
 
 
-- (void)loadBookInfo:(BookItem *)book {
+- (void)loadBookInfo:(NoteBookItem *)book {
     _bookInfo = book;
     [self setNeedsLayout];
 }
@@ -209,33 +166,11 @@
 #pragma mark - NetworkTaskDelegate
 -(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
     [SVProgressHUD dismiss];
-    
-    if ([customInfo isEqualToString:@"favorite"]) {
-        NSString *fav = _bookInfo.isFavor;
-        if ([fav isEqualToString:@"yes"]) {
-            _bookInfo.isFavor = @"no";
-            [_favoriteButton setImage:[UIImage imageNamed:@"heart_empty"] forState:UIControlStateNormal];
-        } else {
-            _bookInfo.isFavor = @"yes";
-            [_favoriteButton setImage:[UIImage imageNamed:@"heart_read"] forState:UIControlStateNormal];
-        }
-        
-        if (_delegate && [_delegate respondsToSelector:@selector(favoriteBookAction:)]) {
-            [_delegate favoriteBookAction:self];
-        }
-    }
 }
 
 
 -(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
     [SVProgressHUD dismiss];
-    
-    if ([customInfo isEqualToString:@"favorite"]) {
-        //
-        [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
-            //
-        }];
-    }
 }
 
 @end

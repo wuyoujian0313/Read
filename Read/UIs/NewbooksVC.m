@@ -181,7 +181,6 @@
 
 - (void)selectBook:(BookButton *)sender {
 //    NSInteger index = sender.index;
-
     BookDetailVC *vc = [[BookDetailVC alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];

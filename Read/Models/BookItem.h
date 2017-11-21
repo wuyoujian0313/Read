@@ -34,7 +34,4 @@
 @property (nonatomic, copy)NSString *introduction;
 @property (nonatomic, copy)NSString *pic_intr;
 @property (nonatomic, copy)NSString *pic_jj;
-@property (nonatomic, copy)NSString *pic;//我的收藏用
-@property (nonatomic, copy)NSString *bookName;//我的收藏用
-@property (nonatomic, copy)NSString *bookname;//我的收藏用
 @end

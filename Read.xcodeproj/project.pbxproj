@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF036E2B1FC45680005A1765 /* FavoriteBooksResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AF036E2A1FC45680005A1765 /* FavoriteBooksResult.m */; };
+		AF036E2E1FC45756005A1765 /* FavoriteBookListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF036E2D1FC45756005A1765 /* FavoriteBookListVC.m */; };
+		AF036E311FC45CB1005A1765 /* FavoriteBookItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AF036E301FC45CB1005A1765 /* FavoriteBookItem.m */; };
+		AF036E341FC45DA6005A1765 /* FavBookTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF036E331FC45DA6005A1765 /* FavBookTableViewCell.m */; };
+		AF036E371FC460CB005A1765 /* NoteBookListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF036E361FC460CB005A1765 /* NoteBookListVC.m */; };
+		AF036E3A1FC4610E005A1765 /* NoteBookTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF036E391FC4610E005A1765 /* NoteBookTableViewCell.m */; };
+		AF036E3D1FC461B8005A1765 /* NoteBooksResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AF036E3C1FC461B8005A1765 /* NoteBooksResult.m */; };
+		AF036E401FC4639F005A1765 /* NoteBookItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AF036E3F1FC4639F005A1765 /* NoteBookItem.m */; };
 		AF0422801FBC499E00D15E8E /* ChangePasswdResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AF04227F1FBC499E00D15E8E /* ChangePasswdResult.m */; };
 		AF0422831FBC71B900D15E8E /* ChildrenInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0422821FBC71B900D15E8E /* ChildrenInfoVC.m */; };
 		AF0422881FBC77CD00D15E8E /* icon_emotion@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF0422841FBC77CD00D15E8E /* icon_emotion@2x.png */; };
@@ -118,6 +126,22 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AF036E291FC45680005A1765 /* FavoriteBooksResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteBooksResult.h; sourceTree = "<group>"; };
+		AF036E2A1FC45680005A1765 /* FavoriteBooksResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteBooksResult.m; sourceTree = "<group>"; };
+		AF036E2C1FC45756005A1765 /* FavoriteBookListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteBookListVC.h; sourceTree = "<group>"; };
+		AF036E2D1FC45756005A1765 /* FavoriteBookListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteBookListVC.m; sourceTree = "<group>"; };
+		AF036E2F1FC45CB1005A1765 /* FavoriteBookItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteBookItem.h; sourceTree = "<group>"; };
+		AF036E301FC45CB1005A1765 /* FavoriteBookItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteBookItem.m; sourceTree = "<group>"; };
+		AF036E321FC45DA6005A1765 /* FavBookTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavBookTableViewCell.h; sourceTree = "<group>"; };
+		AF036E331FC45DA6005A1765 /* FavBookTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavBookTableViewCell.m; sourceTree = "<group>"; };
+		AF036E351FC460CB005A1765 /* NoteBookListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteBookListVC.h; sourceTree = "<group>"; };
+		AF036E361FC460CB005A1765 /* NoteBookListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteBookListVC.m; sourceTree = "<group>"; };
+		AF036E381FC4610E005A1765 /* NoteBookTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteBookTableViewCell.h; sourceTree = "<group>"; };
+		AF036E391FC4610E005A1765 /* NoteBookTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteBookTableViewCell.m; sourceTree = "<group>"; };
+		AF036E3B1FC461B8005A1765 /* NoteBooksResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteBooksResult.h; sourceTree = "<group>"; };
+		AF036E3C1FC461B8005A1765 /* NoteBooksResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteBooksResult.m; sourceTree = "<group>"; };
+		AF036E3E1FC4639F005A1765 /* NoteBookItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteBookItem.h; sourceTree = "<group>"; };
+		AF036E3F1FC4639F005A1765 /* NoteBookItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteBookItem.m; sourceTree = "<group>"; };
 		AF04227E1FBC499E00D15E8E /* ChangePasswdResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswdResult.h; sourceTree = "<group>"; };
 		AF04227F1FBC499E00D15E8E /* ChangePasswdResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswdResult.m; sourceTree = "<group>"; };
 		AF0422811FBC71B900D15E8E /* ChildrenInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildrenInfoVC.h; sourceTree = "<group>"; };
@@ -357,6 +381,14 @@
 				AF0422931FBC95C600D15E8E /* DatePickerView.m */,
 				AFD56B201FC070AF0062BA20 /* UpdateUserInfoVC.h */,
 				AFD56B211FC070AF0062BA20 /* UpdateUserInfoVC.m */,
+				AF036E2C1FC45756005A1765 /* FavoriteBookListVC.h */,
+				AF036E2D1FC45756005A1765 /* FavoriteBookListVC.m */,
+				AF036E321FC45DA6005A1765 /* FavBookTableViewCell.h */,
+				AF036E331FC45DA6005A1765 /* FavBookTableViewCell.m */,
+				AF036E351FC460CB005A1765 /* NoteBookListVC.h */,
+				AF036E361FC460CB005A1765 /* NoteBookListVC.m */,
+				AF036E381FC4610E005A1765 /* NoteBookTableViewCell.h */,
+				AF036E391FC4610E005A1765 /* NoteBookTableViewCell.m */,
 			);
 			name = Me;
 			sourceTree = "<group>";
@@ -584,8 +616,16 @@
 				AFBAE1791FB8590B0002DE1B /* NoteItem.m */,
 				AFBAE17E1FB85EF40002DE1B /* BookItem.h */,
 				AFBAE17F1FB85EF40002DE1B /* BookItem.m */,
+				AF036E2F1FC45CB1005A1765 /* FavoriteBookItem.h */,
+				AF036E301FC45CB1005A1765 /* FavoriteBookItem.m */,
+				AF036E3E1FC4639F005A1765 /* NoteBookItem.h */,
+				AF036E3F1FC4639F005A1765 /* NoteBookItem.m */,
 				AF88AB371FC1AA9A00E885D5 /* RecBooksResult.h */,
 				AF88AB381FC1AA9A00E885D5 /* RecBooksResult.m */,
+				AF036E291FC45680005A1765 /* FavoriteBooksResult.h */,
+				AF036E2A1FC45680005A1765 /* FavoriteBooksResult.m */,
+				AF036E3B1FC461B8005A1765 /* NoteBooksResult.h */,
+				AF036E3C1FC461B8005A1765 /* NoteBooksResult.m */,
 				AFBAE17B1FB85EC50002DE1B /* MultySearchResult.h */,
 				AFBAE17C1FB85EC50002DE1B /* MultySearchResult.m */,
 				AF4C90CB1FBF168C003148EC /* ChildInfoResult.h */,
@@ -807,6 +847,7 @@
 				AF2308C61FB33F5600BEC151 /* SDWebImagePrefetcher.m in Sources */,
 				AF14EAB31FB6FB770042683D /* NSData+Crypto.m in Sources */,
 				AF2308B71FB33F5600BEC151 /* DeviceInfo.m in Sources */,
+				AF036E2E1FC45756005A1765 /* FavoriteBookListVC.m in Sources */,
 				AF2308C41FB33F5600BEC151 /* SDWebImageDownloaderOperation.m in Sources */,
 				AFBAE1651FB83D5B0002DE1B /* SysDataSaver.m in Sources */,
 				AFBAE17D1FB85EC50002DE1B /* MultySearchResult.m in Sources */,
@@ -833,8 +874,10 @@
 				AF4C90D01FBF1D2A003148EC /* AddChildrenResult.m in Sources */,
 				AF2308AA1FB33F5600BEC151 /* UIColor+Utility.m in Sources */,
 				AFBAE1741FB856F50002DE1B /* ResetPwdResult.m in Sources */,
+				AF036E3A1FC4610E005A1765 /* NoteBookTableViewCell.m in Sources */,
 				AF2308C81FB33F5600BEC151 /* UIImage+GIF.m in Sources */,
 				AF88AB321FC1540400E885D5 /* UploadUserAvatarResult.m in Sources */,
+				AF036E401FC4639F005A1765 /* NoteBookItem.m in Sources */,
 				AF2308C51FB33F5600BEC151 /* SDWebImageManager.m in Sources */,
 				AFBAE17A1FB8590B0002DE1B /* NoteItem.m in Sources */,
 				AFBAE1771FB858C60002DE1B /* NoteListResult.m in Sources */,
@@ -844,16 +887,21 @@
 				AF2308B41FB33F5600BEC151 /* AINavigationController.m in Sources */,
 				AF2308281FB3371200BEC151 /* AppDelegate.m in Sources */,
 				AF2308A71FB33F5600BEC151 /* NSObject+Utility.m in Sources */,
+				AF036E2B1FC45680005A1765 /* FavoriteBooksResult.m in Sources */,
+				AF036E341FC45DA6005A1765 /* FavBookTableViewCell.m in Sources */,
 				AF2308B81FB33F5600BEC151 /* FadePromptView.m in Sources */,
+				AF036E371FC460CB005A1765 /* NoteBookListVC.m in Sources */,
 				AF0422941FBC95C600D15E8E /* DatePickerView.m in Sources */,
 				AFDEC9071FB487CB00926F38 /* NewbooksVC.m in Sources */,
 				AF2308A41FB33F5600BEC151 /* AFURLRequestSerialization.m in Sources */,
 				AF2308AC1FB33F5600BEC151 /* UIImage+Utility.m in Sources */,
 				AFDEC9011FB4878F00926F38 /* NotesVC.m in Sources */,
+				AF036E311FC45CB1005A1765 /* FavoriteBookItem.m in Sources */,
 				AF2308AF1FB33F5600BEC151 /* MJRefreshBaseView.m in Sources */,
 				AF2308CD1FB33F5600BEC151 /* UIView+WebCacheOperation.m in Sources */,
 				AF2308B11FB33F5600BEC151 /* MJRefreshFooterView.m in Sources */,
 				AFBAE1711FB856CA0002DE1B /* UpdateUserInfoResult.m in Sources */,
+				AF036E3D1FC461B8005A1765 /* NoteBooksResult.m in Sources */,
 				AF2308E41FB342CE00BEC151 /* HomeTabVC.m in Sources */,
 				AF4C90CD1FBF168C003148EC /* ChildInfoResult.m in Sources */,
 				AF2308BE1FB33F5600BEC151 /* MKAnnotationView+WebCache.m in Sources */,

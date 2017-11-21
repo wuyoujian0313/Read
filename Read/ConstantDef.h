@@ -8,6 +8,7 @@
 
 #ifndef ConstantDef_h
 #define ConstantDef_h
+#import <Foundation/Foundation.h>
 
 #define kGlobalGreenColor       0x6Fc05b
 #define kGlobalLineColor        0xdcdcdc
@@ -19,8 +20,10 @@
 // 接口定义
 // 登录
 #define API_Login                       @"user/login"
+
 // 注册
 #define API_Register                    @"user/register"
+
 // 获取验证码
 #define API_GetCaptcha                  @"user/getCaptcha"
 
@@ -44,5 +47,15 @@
 
 // 推荐列表（即，新书）
 #define API_RecList                     @"book/recList"
+
+// 收藏书列表
+#define API_FavoriteList                @"book/favorList"
+
+// 用户已经笔记书列表
+#define API_NoteBookList                @"book/getNoteBookList"
+
+// 收藏书
+#define API_FavoriteBook                @"book/storeBook"
+
 
 #endif /* ConstantDef_h */

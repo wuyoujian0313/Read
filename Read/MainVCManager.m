@@ -57,7 +57,7 @@
     
     MainVCManager *wSelf = self;
     UIViewController *homeVC = [self setupHomeController];
-    [self transitionFromViewController:fromVC toViewController:homeVC duration:1.0 options:UIViewAnimationOptionTransitionFlipFromLeft animations:^{
+    [self transitionFromViewController:fromVC toViewController:homeVC duration:1.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         //
         [fromVC removeFromParentViewController];
         wSelf.currentController = homeVC;
@@ -74,7 +74,7 @@
     UIViewController *loginVC =  [self setupLoginVC];
     
     MainVCManager *wSelf = self;
-    [self transitionFromViewController:fromVC toViewController:loginVC duration:1.0 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
+    [self transitionFromViewController:fromVC toViewController:loginVC duration:1.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         //
         [fromVC removeFromParentViewController];
         wSelf.currentController = loginVC;

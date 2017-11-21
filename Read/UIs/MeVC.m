@@ -15,6 +15,8 @@
 #import "LoginResult.h"
 #import "SysDataSaver.h"
 #import "UpdateUserInfoVC.h"
+#import "FavoriteBookListVC.h"
+#import "NoteBookListVC.h"
 
 
 
@@ -247,9 +249,16 @@
                 break;
             }
             case 1: {
+                FavoriteBookListVC *vc = [[FavoriteBookListVC alloc] init];
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:vc animated:YES];
                 break;
             }
             case 2: {
+                NoteBookListVC *vc = [[NoteBookListVC alloc] init];
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+                
             }
                 break;
                 
