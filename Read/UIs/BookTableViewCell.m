@@ -151,6 +151,7 @@
     if (favoriteBtn == nil) {
         favoriteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         self.favoriteButton = favoriteBtn;
+        [favoriteBtn setTag:302];
         [favoriteBtn setImage:[UIImage imageNamed:@"heart_empty"] forState:UIControlStateNormal];
         [favoriteBtn addTarget:self action:@selector(favoriteAction:) forControlEvents:UIControlEventTouchUpInside];
         [favoriteBtn setFrame:CGRectMake(bookPriceView.frame.size.width - 29, bookPriceView.frame.size.height - 27, 29, 27)];

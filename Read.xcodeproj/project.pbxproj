@@ -82,6 +82,10 @@
 		AF2308E31FB342CE00BEC151 /* LoginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308DD1FB342CE00BEC151 /* LoginResult.m */; };
 		AF2308E41FB342CE00BEC151 /* HomeTabVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308E01FB342CE00BEC151 /* HomeTabVC.m */; };
 		AF2308E51FB342CE00BEC151 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308E21FB342CE00BEC151 /* LoginVC.m */; };
+		AF42D9B71FC536A7006DEDE8 /* BookInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF42D9B61FC536A7006DEDE8 /* BookInfoView.m */; };
+		AF42D9B91FC537A6006DEDE8 /* book_detail_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF42D9B81FC537A6006DEDE8 /* book_detail_bg@2x.png */; };
+		AF42D9BB1FC5468A006DEDE8 /* icon_heart_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF42D9BA1FC5468A006DEDE8 /* icon_heart_white@2x.png */; };
+		AF42D9BE1FC553BF006DEDE8 /* BookContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF42D9BD1FC553BF006DEDE8 /* BookContentView.m */; };
 		AF4C90CD1FBF168C003148EC /* ChildInfoResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4C90CC1FBF168C003148EC /* ChildInfoResult.m */; };
 		AF4C90D01FBF1D2A003148EC /* AddChildrenResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4C90CF1FBF1D2A003148EC /* AddChildrenResult.m */; };
 		AF506F8F1FB5E26700470C01 /* icon_pwd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF506F8B1FB5E26700470C01 /* icon_pwd@2x.png */; };
@@ -271,6 +275,12 @@
 		AF2308E01FB342CE00BEC151 /* HomeTabVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTabVC.m; sourceTree = "<group>"; };
 		AF2308E11FB342CE00BEC151 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		AF2308E21FB342CE00BEC151 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
+		AF42D9B51FC536A7006DEDE8 /* BookInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookInfoView.h; sourceTree = "<group>"; };
+		AF42D9B61FC536A7006DEDE8 /* BookInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookInfoView.m; sourceTree = "<group>"; };
+		AF42D9B81FC537A6006DEDE8 /* book_detail_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "book_detail_bg@2x.png"; sourceTree = "<group>"; };
+		AF42D9BA1FC5468A006DEDE8 /* icon_heart_white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_heart_white@2x.png"; sourceTree = "<group>"; };
+		AF42D9BC1FC553BF006DEDE8 /* BookContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookContentView.h; sourceTree = "<group>"; };
+		AF42D9BD1FC553BF006DEDE8 /* BookContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookContentView.m; sourceTree = "<group>"; };
 		AF4C90CB1FBF168C003148EC /* ChildInfoResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildInfoResult.h; sourceTree = "<group>"; };
 		AF4C90CC1FBF168C003148EC /* ChildInfoResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildInfoResult.m; sourceTree = "<group>"; };
 		AF4C90CE1FBF1D2A003148EC /* AddChildrenResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddChildrenResult.h; sourceTree = "<group>"; };
@@ -670,6 +680,8 @@
 				AF88AB351FC1A83800E885D5 /* book_cover@2x.png */,
 				AFAFB76A1FC2BB8F00663862 /* heart_empty@2x.png */,
 				AFAFB76B1FC2BB8F00663862 /* heart_read@2x.png */,
+				AF42D9B81FC537A6006DEDE8 /* book_detail_bg@2x.png */,
+				AF42D9BA1FC5468A006DEDE8 /* icon_heart_white@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -714,6 +726,10 @@
 				AFDEC9061FB487CB00926F38 /* NewbooksVC.m */,
 				AFAFB75D1FC282F100663862 /* BookDetailVC.h */,
 				AFAFB75E1FC282F100663862 /* BookDetailVC.m */,
+				AF42D9B51FC536A7006DEDE8 /* BookInfoView.h */,
+				AF42D9B61FC536A7006DEDE8 /* BookInfoView.m */,
+				AF42D9BC1FC553BF006DEDE8 /* BookContentView.h */,
+				AF42D9BD1FC553BF006DEDE8 /* BookContentView.m */,
 			);
 			name = Newbooks;
 			sourceTree = "<group>";
@@ -810,11 +826,13 @@
 				AF94FE011FB9DD5F0086CB22 /* tb-xinshu-sel@2x.png in Resources */,
 				AF88AB361FC1A83800E885D5 /* book_cover@2x.png in Resources */,
 				AF94FDFD1FB9DD5F0086CB22 /* tb-me-sel@2x.png in Resources */,
+				AF42D9B91FC537A6006DEDE8 /* book_detail_bg@2x.png in Resources */,
 				AF04228A1FBC77CD00D15E8E /* icon_note@2x.png in Resources */,
 				AF04228D1FBC797A00D15E8E /* icon_photo@2x.png in Resources */,
 				AF94FDFE1FB9DD5F0086CB22 /* tb-me@2x.png in Resources */,
 				AFAFB76D1FC2BB8F00663862 /* heart_read@2x.png in Resources */,
 				AF04228B1FBC77CD00D15E8E /* icon_setting@2x.png in Resources */,
+				AF42D9BB1FC5468A006DEDE8 /* icon_heart_white@2x.png in Resources */,
 				AF94FE021FB9DD5F0086CB22 /* tb-xinshu@2x.png in Resources */,
 				AF94FDFC1FB9DD5F0086CB22 /* tb-biji@2x.png in Resources */,
 				AF2308CE1FB33F5600BEC151 /* SVProgressHUD.bundle in Resources */,
@@ -873,6 +891,7 @@
 				AF0422801FBC499E00D15E8E /* ChangePasswdResult.m in Sources */,
 				AF4C90D01FBF1D2A003148EC /* AddChildrenResult.m in Sources */,
 				AF2308AA1FB33F5600BEC151 /* UIColor+Utility.m in Sources */,
+				AF42D9BE1FC553BF006DEDE8 /* BookContentView.m in Sources */,
 				AFBAE1741FB856F50002DE1B /* ResetPwdResult.m in Sources */,
 				AF036E3A1FC4610E005A1765 /* NoteBookTableViewCell.m in Sources */,
 				AF2308C81FB33F5600BEC151 /* UIImage+GIF.m in Sources */,
@@ -919,6 +938,7 @@
 				AF683D811FB81ADE00AB69EC /* ReadNetRequestParam.m in Sources */,
 				AF2308AB1FB33F5600BEC151 /* UIImage+ResizeMagick.m in Sources */,
 				AF2308BF1FB33F5600BEC151 /* NSData+ImageContentType.m in Sources */,
+				AF42D9B71FC536A7006DEDE8 /* BookInfoView.m in Sources */,
 				AF04C5731FB359BE00C0C67B /* ResigterVC.m in Sources */,
 				AF2308A81FB33F5600BEC151 /* NSString+Utility.m in Sources */,
 				AF2308251FB3371200BEC151 /* main.m in Sources */,
