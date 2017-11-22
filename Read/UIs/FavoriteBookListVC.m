@@ -214,6 +214,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     BookDetailVC *vc = [[BookDetailVC alloc] init];
+    if (indexPath.row < [_bookList count]) {
+        vc.isbn = [_bookList objectAtIndex:indexPath.row].isbn;
+    }
     [self.navigationController pushViewController:vc animated:YES];
 }
 

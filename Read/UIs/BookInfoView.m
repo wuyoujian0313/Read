@@ -13,7 +13,7 @@
 
 
 @interface BookInfoView ()<NetworkTaskDelegate>
-@property(nonatomic, strong)BookItem    *bookInfo;
+@property(nonatomic, strong)BookInfoResult    *bookInfo;
 @end
 
 @implementation BookInfoView
@@ -119,10 +119,9 @@
         
         UILabel *nameLabel = (UILabel *)[headerView viewWithTag:201];
         if (nameLabel == nil) {
-            nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, headerView.frame.size.width - 20, 36)];
+            nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, headerView.frame.size.width - 20 - 10, 36)];
             [nameLabel setTag:201];
             [nameLabel setBackgroundColor:[UIColor clearColor]];
-            [nameLabel setText:@"道士下山"];
             [nameLabel setFont:[UIFont boldSystemFontOfSize:15]];
             [nameLabel setTextColor:[UIColor whiteColor]];
             [headerView addSubview:nameLabel];
@@ -134,7 +133,6 @@
             typeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 38, 40, 18)];
             [typeLabel setBackgroundColor:[UIColor clearColor]];
             [typeLabel setTag:202];
-            [typeLabel setText:@"益智"];
             [typeLabel setTextAlignment:NSTextAlignmentCenter];
             [typeLabel setFont:[UIFont systemFontOfSize:11]];
             [typeLabel.layer setBorderColor:[UIColor whiteColor].CGColor];
@@ -148,7 +146,6 @@
             rangeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20 + 10 + 40, 38, 60, 18)];
             [rangeLabel setBackgroundColor:[UIColor clearColor]];
             [rangeLabel setTag:203];
-            [rangeLabel setText:@"0-2岁"];
             [rangeLabel setTextAlignment:NSTextAlignmentCenter];
             [rangeLabel setFont:[UIFont systemFontOfSize:11]];
             [rangeLabel.layer setBorderColor:[UIColor whiteColor].CGColor];
@@ -163,7 +160,6 @@
             authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 36 + 18 + 10, headerView.frame.size.width - 20 - 100, 18)];
             [authorLabel setTag:204];
             [authorLabel setBackgroundColor:[UIColor clearColor]];
-            [authorLabel setText:@"作者:陈凯歌"];
             [authorLabel setFont:[UIFont systemFontOfSize:11]];
             [authorLabel setTextColor:[UIColor whiteColor]];
             [headerView addSubview:authorLabel];
@@ -180,6 +176,19 @@
             [favoriteBtn setFrame:CGRectMake(headerView.frame.size.width - 29 - 20, 38 + 18 + 5, 29, 27)];
             [headerView addSubview:favoriteBtn];
         }
+        
+        NSString *name = _bookInfo.name;
+        nameLabel.text = name;
+        
+        NSString *type = _bookInfo.type;
+        typeLabel.text = type;
+        
+        NSString *range = _bookInfo.range;
+        rangeLabel.text =range;
+        
+        NSString *author = _bookInfo.author;
+        authorLabel.text = author;
+        
     }
 }
 
@@ -212,8 +221,7 @@
             contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, ttop, footerView.frame.size.width*2/3 - 20 - 10, 18)];
             [contentLabel setTag:301];
             [contentLabel setBackgroundColor:[UIColor clearColor]];
-            [contentLabel setText:@"一个底层人物的奋斗励志故事"];
-            [contentLabel setFont:[UIFont boldSystemFontOfSize:10]];
+            [contentLabel setFont:[UIFont boldSystemFontOfSize:11]];
             [contentLabel setTextColor:[UIColor grayColor]];
             [footerView addSubview:contentLabel];
         }
@@ -224,9 +232,8 @@
             pressLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, ttop + 18  + 5, footerView.frame.size.width*2/3 - 20 - 10, 18)];
             [pressLabel setBackgroundColor:[UIColor clearColor]];
             [pressLabel setTag:302];
-            [pressLabel setText:@"出版社:北京图书出版社"];
             [pressLabel setTextAlignment:NSTextAlignmentLeft];
-            [pressLabel setFont:[UIFont systemFontOfSize:10]];
+            [pressLabel setFont:[UIFont systemFontOfSize:11]];
             [pressLabel setTextColor:[UIColor grayColor]];
             [footerView addSubview:pressLabel];
         }
@@ -250,8 +257,13 @@
             [footerView addSubview:priceLabel];
         }
         
+        NSString *statement = _bookInfo.statement;
+        contentLabel.text = statement;
         
-        NSString *price = @"12000";//_bookInfo.price;// 单位:分
+        NSString *press = _bookInfo.press;
+        pressLabel.text = press;
+        
+        NSString *price = _bookInfo.price;// 单位:分
         if (price !=nil && [price length] > 0) {
             NSInteger priceInt = [price integerValue];
             NSInteger priceYuan = priceInt/100;
@@ -278,7 +290,7 @@
 }
 
 
-- (void)loadBookInfo:(BookItem *)item {
+- (void)loadBookInfo:(BookInfoResult *)item {
     _bookInfo = item;
     [self setNeedsLayout];
 }

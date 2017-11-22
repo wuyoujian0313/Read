@@ -12,7 +12,7 @@
 #import "NetworkTask.h"
 
 @interface BookContentView ()<NetworkTaskDelegate>
-@property(nonatomic, strong)BookItem    *bookInfo;
+@property(nonatomic, strong)BookInfoResult    *bookInfo;
 @end
 
 @implementation BookContentView
@@ -27,7 +27,7 @@
     return self;
 }
 
-- (void)loadBookInfo:(BookItem *)item {
+- (void)loadBookInfo:(BookInfoResult *)item {
     _bookInfo = item;
     [self setNeedsLayout];
 }

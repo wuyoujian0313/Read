@@ -180,10 +180,15 @@
 }
 
 - (void)selectBook:(BookButton *)sender {
-//    NSInteger index = sender.index;
-    BookDetailVC *vc = [[BookDetailVC alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+    NSInteger index = sender.index;
+    if (index < [_bookList count]) {
+        BookItem *item = [_bookList objectAtIndex:index];
+        BookDetailVC *vc = [[BookDetailVC alloc] init];
+        vc.isbn = item.isbn;
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
 }
 
 

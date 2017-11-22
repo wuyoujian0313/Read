@@ -8,11 +8,14 @@
 
 #import "BookDetailVC.h"
 #import "BookInfoView.h"
+#import "NetworkTask.h"
 #import "BookContentView.h"
+#import "BookInfoResult.h"
 
-@interface BookDetailVC ()
+@interface BookDetailVC ()<NetworkTaskDelegate>
 @property (nonatomic, strong) BookInfoView          *bookInfoView;
 @property (nonatomic, strong) BookContentView       *bookContentView;
+@property (nonatomic, strong) BookInfoResult        *bookDetail;
 @end
 
 @implementation BookDetailVC
@@ -23,6 +26,7 @@
     [self setNavTitle:@"Rlab阿来学院" titleColor:[UIColor colorWithHex:kGlobalGreenColor]];
     [self layoutBookInfoView];
     [self layoutBookContentView];
+    [self loadBookDetail];
 }
 
 - (void)layoutBookInfoView {
@@ -53,6 +57,43 @@
     self.bookContentView = contentView;
     [self.view addSubview:contentView];
 }
+
+- (void)loadBookDetail {
+    NSMutableDictionary* param =[[NSMutableDictionary alloc] initWithCapacity:0];
+    if (_isbn != nil  && [_isbn length] > 0) {
+        [param setObject:_isbn forKey:@"isbn"];
+    }
+    
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_BookInfo
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[BookInfoResult alloc] init]
+                                           customInfo:@"getBookDetail"];
+}
+
+#pragma mark - NetworkTaskDelegate
+-(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+    
+    if ([customInfo isEqualToString:@"getBookDetail"]) {
+        _bookDetail = (BookInfoResult *)result;
+        [_bookInfoView loadBookInfo:_bookDetail];
+        [_bookContentView loadBookInfo:_bookDetail];
+    }
+}
+
+
+-(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+
+    if ([customInfo isEqualToString:@"getBookDetail"]) {
+        //
+        [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
+            //
+        }];
+    }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -57,5 +57,8 @@
 // 收藏书
 #define API_FavoriteBook                @"book/storeBook"
 
+// 书的详情
+#define API_BookInfo                    @"book/info"
+
 
 #endif /* ConstantDef_h */

@@ -123,6 +123,7 @@
 		AFBAE17A1FB8590B0002DE1B /* NoteItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE1791FB8590B0002DE1B /* NoteItem.m */; };
 		AFBAE17D1FB85EC50002DE1B /* MultySearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE17C1FB85EC50002DE1B /* MultySearchResult.m */; };
 		AFBAE1801FB85EF40002DE1B /* BookItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE17F1FB85EF40002DE1B /* BookItem.m */; };
+		AFC76ED01FC5AF4E00DF7FD9 /* BookInfoResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC76ECF1FC5AF4E00DF7FD9 /* BookInfoResult.m */; };
 		AFD56B221FC070AF0062BA20 /* UpdateUserInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD56B211FC070AF0062BA20 /* UpdateUserInfoVC.m */; };
 		AFDEC9011FB4878F00926F38 /* NotesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEC9001FB4878F00926F38 /* NotesVC.m */; };
 		AFDEC9041FB487AB00926F38 /* BookroomVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEC9031FB487AB00926F38 /* BookroomVC.m */; };
@@ -342,6 +343,8 @@
 		AFBAE17C1FB85EC50002DE1B /* MultySearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultySearchResult.m; sourceTree = "<group>"; };
 		AFBAE17E1FB85EF40002DE1B /* BookItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookItem.h; sourceTree = "<group>"; };
 		AFBAE17F1FB85EF40002DE1B /* BookItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookItem.m; sourceTree = "<group>"; };
+		AFC76ECE1FC5AF4E00DF7FD9 /* BookInfoResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookInfoResult.h; sourceTree = "<group>"; };
+		AFC76ECF1FC5AF4E00DF7FD9 /* BookInfoResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookInfoResult.m; sourceTree = "<group>"; };
 		AFD56B201FC070AF0062BA20 /* UpdateUserInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateUserInfoVC.h; sourceTree = "<group>"; };
 		AFD56B211FC070AF0062BA20 /* UpdateUserInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateUserInfoVC.m; sourceTree = "<group>"; };
 		AFDEC8FF1FB4878F00926F38 /* NotesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesVC.h; sourceTree = "<group>"; };
@@ -626,6 +629,8 @@
 				AFBAE1791FB8590B0002DE1B /* NoteItem.m */,
 				AFBAE17E1FB85EF40002DE1B /* BookItem.h */,
 				AFBAE17F1FB85EF40002DE1B /* BookItem.m */,
+				AFC76ECE1FC5AF4E00DF7FD9 /* BookInfoResult.h */,
+				AFC76ECF1FC5AF4E00DF7FD9 /* BookInfoResult.m */,
 				AF036E2F1FC45CB1005A1765 /* FavoriteBookItem.h */,
 				AF036E301FC45CB1005A1765 /* FavoriteBookItem.m */,
 				AF036E3E1FC4639F005A1765 /* NoteBookItem.h */,
@@ -936,6 +941,7 @@
 				AFBAE16E1FB856890002DE1B /* UserInfoResult.m in Sources */,
 				AF2308C31FB33F5600BEC151 /* SDWebImageDownloader.m in Sources */,
 				AF683D811FB81ADE00AB69EC /* ReadNetRequestParam.m in Sources */,
+				AFC76ED01FC5AF4E00DF7FD9 /* BookInfoResult.m in Sources */,
 				AF2308AB1FB33F5600BEC151 /* UIImage+ResizeMagick.m in Sources */,
 				AF2308BF1FB33F5600BEC151 /* NSData+ImageContentType.m in Sources */,
 				AF42D9B71FC536A7006DEDE8 /* BookInfoView.m in Sources */,

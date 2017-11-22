@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BookItem.h"
+#import "BookInfoResult.h"
 
 @interface BookContentView : UIView
 - (instancetype)initWithFrame:(CGRect)frame;
 
-- (void)loadBookInfo:(BookItem *)item;
+- (void)loadBookInfo:(BookInfoResult *)item;
 @end
