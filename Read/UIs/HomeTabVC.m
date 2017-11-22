@@ -37,38 +37,52 @@
 
     [self.tabBar setBarTintColor:[UIColor colorWithHex:kGlobalGreenColor]];
     [self.tabBar setTintColor:[UIColor whiteColor]];
+    [self.tabBar setBarStyle:UIBarStyleDefault];
+    [self.tabBar setTranslucent:NO];
 
     NewbooksVC *commonVc = [[NewbooksVC alloc] init];
     _newbooksVc = commonVc;
     UITabBarItem *itemObj1 = [[UITabBarItem alloc] initWithTitle:@"新书"
-                                                           image:[UIImage imageNamed:@"tb-xinshu"]
-                                                   selectedImage:[UIImage imageNamed:@"tb-xinshu-sel"]];
+                                                           image:[[UIImage imageNamed:@"tb-xinshu"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+                                                   selectedImage:[[UIImage imageNamed:@"tb-xinshu-sel"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     itemObj1.tag = 0;
+    NSDictionary *dictNormal = [NSDictionary dictionaryWithObjectsAndKeys:
+                          [UIColor lightTextColor],NSForegroundColorAttributeName,nil];
+    NSDictionary *dictSelect = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [UIColor whiteColor],NSForegroundColorAttributeName,nil];
+    [itemObj1 setTitleTextAttributes:dictNormal forState:UIControlStateNormal];
+    [itemObj1 setTitleTextAttributes:dictSelect forState:UIControlStateSelected];
     [_newbooksVc setTabBarItem:itemObj1];
 
     BookroomVC *bookroomVc = [[BookroomVC alloc] init];
     _bookroomVc = bookroomVc;
     UITabBarItem *itemObj2 = [[UITabBarItem alloc] initWithTitle:@"书库"
-                                                           image:[UIImage imageNamed:@"tb-shuku"]
-                                                   selectedImage:[UIImage imageNamed:@"tb-shuku-sel"]];
+                                                           image:[[UIImage imageNamed:@"tb-shuku"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+                                                   selectedImage:[[UIImage imageNamed:@"tb-shuku-sel"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     itemObj2.tag = 1;
+    [itemObj2 setTitleTextAttributes:dictNormal forState:UIControlStateNormal];
+    [itemObj2 setTitleTextAttributes:dictSelect forState:UIControlStateSelected];
     [_bookroomVc setTabBarItem:itemObj2];
 
     NotesVC *notesVc = [[NotesVC alloc] init];
     _notesVc = notesVc;
     UITabBarItem *itemObj3 = [[UITabBarItem alloc] initWithTitle:@"笔记"
-                                                           image:[UIImage imageNamed:@"tb-biji"]
-                                                   selectedImage:[UIImage imageNamed:@"tb-biji-sel"]];
+                                                           image:[[UIImage imageNamed:@"tb-biji"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+                                                   selectedImage:[[UIImage imageNamed:@"tb-biji-sel"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     itemObj3.tag = 2;
+    [itemObj3 setTitleTextAttributes:dictNormal forState:UIControlStateNormal];
+    [itemObj3 setTitleTextAttributes:dictSelect forState:UIControlStateSelected];
     [_notesVc setTabBarItem:itemObj3];
     
     
     MeVC *meVc = [[MeVC alloc] init];
     _meVc = meVc;
     UITabBarItem *itemObj4 = [[UITabBarItem alloc] initWithTitle:@"我"
-                                                           image:[UIImage imageNamed:@"tb-me"]
-                                                   selectedImage:[UIImage imageNamed:@"tb-me-sel"]];
-    itemObj4.tag = 2;
+                                                           image:[[UIImage imageNamed:@"tb-me"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+                                                   selectedImage:[[UIImage imageNamed:@"tb-me-sel"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    itemObj4.tag = 3;
+    [itemObj4 setTitleTextAttributes:dictNormal forState:UIControlStateNormal];
+    [itemObj4 setTitleTextAttributes:dictSelect forState:UIControlStateSelected];
     [_meVc setTabBarItem:itemObj4];
     
     AINavigationController *nav1 = [[AINavigationController alloc] initWithRootViewController:_newbooksVc];

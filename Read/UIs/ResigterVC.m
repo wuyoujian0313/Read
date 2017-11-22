@@ -389,13 +389,13 @@ void safeVerifyRegPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) 
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 86, 45)];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 46, 45)];
             label.text = @"手机号";
             label.textColor = [UIColor colorWithHex:0x666666];
             label.font = [UIFont systemFontOfSize:14];
             [cell.contentView addSubview:label];
             
-            UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(15 + 86 + 10, 0, tableView.frame.size.width - 86 - 10 - 15, 45)];
+            UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(15 + 46 + 10, 0, tableView.frame.size.width - 46 - 10 - 15 - 15, 45)];
             self.phoneTextField = textField;
             [textField setDelegate:self];
             [textField setFont:[UIFont systemFontOfSize:14]];
@@ -403,7 +403,7 @@ void safeVerifyRegPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) 
             [textField setKeyboardType:UIKeyboardTypeDefault];
             [textField setTextAlignment:NSTextAlignmentRight];
             [textField setTextColor:[UIColor colorWithHex:0x666666]];
-            [textField setClearButtonMode:UITextFieldViewModeAlways];
+            [textField setClearButtonMode:UITextFieldViewModeWhileEditing];
             [textField setPlaceholder:@"请输入手机号码"];
             [cell.contentView addSubview:textField];
             
@@ -423,13 +423,13 @@ void safeVerifyRegPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) 
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 86, 45)];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 46, 45)];
             label.text = @"验证码";
             label.textColor = [UIColor colorWithHex:0x666666];
             label.font = [UIFont systemFontOfSize:14];
             [cell.contentView addSubview:label];
             
-            UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(15 + 86 + 10, 0, tableView.frame.size.width - 105 - 15 - 86 - 10, 45)];
+            UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(15 + 46 + 10, 0, tableView.frame.size.width - 105 - 15 - 46 - 10 -10, 45)];
             self.codeTextField = textField;
             [textField setDelegate:self];
             [textField setFont:[UIFont systemFontOfSize:14]];
@@ -437,7 +437,7 @@ void safeVerifyRegPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) 
             [textField setKeyboardType:UIKeyboardTypeNumberPad];
             [textField setTextAlignment:NSTextAlignmentRight];
             [textField setTextColor:[UIColor colorWithHex:0x666666]];
-            [textField setClearButtonMode:UITextFieldViewModeAlways];
+            [textField setClearButtonMode:UITextFieldViewModeWhileEditing];
             [textField setPlaceholder:@"请输入验证码"];
             [cell.contentView addSubview:textField];
             
@@ -471,13 +471,13 @@ void safeVerifyRegPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) 
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 86, 45)];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 46, 45)];
             label.text = @"新密码";
             label.textColor = [UIColor colorWithHex:0x666666];
             label.font = [UIFont systemFontOfSize:14];
             [cell.contentView addSubview:label];
             
-            UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(15 + 86 + 10, 0, tableView.frame.size.width - 86 - 10 - 15, 45)];
+            UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(15 + 46 + 10, 0, tableView.frame.size.width - 46 - 10 - 15 - 15, 45)];
             self.pwdTextField = textField;
             [textField setDelegate:self];
             [textField setFont:[UIFont systemFontOfSize:14]];
@@ -487,7 +487,7 @@ void safeVerifyRegPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) 
             [textField setTextAlignment:NSTextAlignmentRight];
             [textField setTextColor:[UIColor colorWithHex:0x666666]];
             [textField addTarget:self action:@selector(inputChange:) forControlEvents:UIControlEventEditingChanged];
-            [textField setClearButtonMode:UITextFieldViewModeAlways];
+            [textField setClearButtonMode:UITextFieldViewModeWhileEditing];
             [textField setPlaceholder:@"请输入新密码(6-18位)"];
             [textField setClearsOnBeginEditing:YES];
             [cell.contentView addSubview:textField];

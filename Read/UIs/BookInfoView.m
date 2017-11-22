@@ -24,7 +24,13 @@
         self.backgroundColor = [UIColor whiteColor];
         [self setClipsToBounds:YES];
         
-        UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 140)];
+        NSInteger top = 30;
+        if ([DeviceInfo screenWidth] > 320) {
+            top = 40;
+        }
+        
+        NSInteger hh  = top + 82 + 10;
+        UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, hh)];
         [bgImageView setImage:[UIImage imageNamed:@"book_detail_bg"]];
         [self addSubview:bgImageView];
         
@@ -49,11 +55,18 @@
 - (void)layoutBookImageView:(UIView *)viewParent {
     if (viewParent != nil) {
         // 110 x 153
+        NSInteger ww = 90;
+        NSInteger hh = 133;
+        NSInteger top = 30;
+        if ([DeviceInfo screenWidth] > 320) {
+            ww = 110;
+            top = 40;
+            hh = 153;
+        }
         
-        NSInteger top = (viewParent.frame.size.height - 40 - 100 - 18*2 - 10)/2.0;
         UIImageView *bookImageView = (UIImageView *)[viewParent viewWithTag:100];
         if (bookImageView == nil) {
-            bookImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, viewParent.frame.size.height - 153 - top, 110, 153)];
+            bookImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, top, ww, hh)];
             [bookImageView setTag:100];
             [bookImageView setImage:[UIImage imageNamed:@"book_cover"]];
             [bookImageView setClipsToBounds:YES];
@@ -86,9 +99,19 @@
 
 - (void)layoutBookHeaderView:(UIView *)viewParent {
     if (viewParent != nil) {
+        
+        NSInteger ww = 90;
+        NSInteger hh = 133;
+        NSInteger top = 30;
+        if ([DeviceInfo screenWidth] > 320) {
+            ww = 110;
+            top = 40;
+            hh = 153;
+        }
+        
         UIView *headerView = [viewParent viewWithTag:200];
         if (headerView == nil) {
-            headerView = [[UIView alloc] initWithFrame:CGRectMake(20 + 110, 50, viewParent.frame.size.width - 20 - 110, 100)];
+            headerView = [[UIView alloc] initWithFrame:CGRectMake(20 + ww, top, viewParent.frame.size.width - 20 - ww, 82)];
             [headerView setTag:200];
             [headerView setBackgroundColor:[UIColor clearColor]];
             [viewParent addSubview:headerView];
@@ -99,7 +122,7 @@
             nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, headerView.frame.size.width - 20, 36)];
             [nameLabel setTag:201];
             [nameLabel setBackgroundColor:[UIColor clearColor]];
-           // [nameLabel setText:@"道士下山"];
+            [nameLabel setText:@"道士下山"];
             [nameLabel setFont:[UIFont boldSystemFontOfSize:15]];
             [nameLabel setTextColor:[UIColor whiteColor]];
             [headerView addSubview:nameLabel];
@@ -111,7 +134,7 @@
             typeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 38, 40, 18)];
             [typeLabel setBackgroundColor:[UIColor clearColor]];
             [typeLabel setTag:202];
-            //[typeLabel setText:@"益智"];
+            [typeLabel setText:@"益智"];
             [typeLabel setTextAlignment:NSTextAlignmentCenter];
             [typeLabel setFont:[UIFont systemFontOfSize:11]];
             [typeLabel.layer setBorderColor:[UIColor whiteColor].CGColor];
@@ -125,7 +148,7 @@
             rangeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20 + 10 + 40, 38, 60, 18)];
             [rangeLabel setBackgroundColor:[UIColor clearColor]];
             [rangeLabel setTag:203];
-            //[rangeLabel setText:@"0-2岁"];
+            [rangeLabel setText:@"0-2岁"];
             [rangeLabel setTextAlignment:NSTextAlignmentCenter];
             [rangeLabel setFont:[UIFont systemFontOfSize:11]];
             [rangeLabel.layer setBorderColor:[UIColor whiteColor].CGColor];
@@ -137,10 +160,10 @@
         
         UILabel *authorLabel = (UILabel *)[headerView viewWithTag:204];
         if (authorLabel == nil) {
-            authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 38 + 18 + 10, headerView.frame.size.width - 20 - 100, 18)];
+            authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 36 + 18 + 10, headerView.frame.size.width - 20 - 100, 18)];
             [authorLabel setTag:204];
             [authorLabel setBackgroundColor:[UIColor clearColor]];
-            //[authorLabel setText:@"作者:陈凯歌"];
+            [authorLabel setText:@"作者:陈凯歌"];
             [authorLabel setFont:[UIFont systemFontOfSize:11]];
             [authorLabel setTextColor:[UIColor whiteColor]];
             [headerView addSubview:authorLabel];
@@ -166,21 +189,30 @@
 
 - (void)layoutBookFooterView:(UIView *)viewParent {
     if (viewParent != nil) {
+        NSInteger ww = 90;
+        NSInteger hh = 133;
+        NSInteger top = 30;
+        if ([DeviceInfo screenWidth] > 320) {
+            ww = 110;
+            top = 40;
+            hh = 153;
+        }
+        
         UIView *footerView = [viewParent viewWithTag:300];
         if (footerView == nil) {
-            footerView = [[UIView alloc] initWithFrame:CGRectMake(20 + 110, 40 + 100 , viewParent.frame.size.width - 20 - 110, viewParent.frame.size.height - 40 - 100)];
+            footerView = [[UIView alloc] initWithFrame:CGRectMake(20 + ww, top + 82 + 10, viewParent.frame.size.width - 20 - ww, viewParent.frame.size.height - top - 82- 10)];
             [footerView setTag:300];
             [footerView setBackgroundColor:[UIColor clearColor]];
             [viewParent addSubview:footerView];
         }
         
-        NSInteger top = (viewParent.frame.size.height - 40 - 100 - 18*2 - 10)/2.0;
+        NSInteger ttop = (footerView.frame.size.height - 18 - 5 - 18 )/2.0;
         UILabel *contentLabel = (UILabel *)[footerView viewWithTag:301];
         if (contentLabel == nil) {
-            contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, top, footerView.frame.size.width*2/3 - 20, 18)];
+            contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, ttop, footerView.frame.size.width*2/3 - 20 - 10, 18)];
             [contentLabel setTag:301];
             [contentLabel setBackgroundColor:[UIColor clearColor]];
-            //[contentLabel setText:@"一个底层人物的奋斗励志故事"];
+            [contentLabel setText:@"一个底层人物的奋斗励志故事"];
             [contentLabel setFont:[UIFont boldSystemFontOfSize:10]];
             [contentLabel setTextColor:[UIColor grayColor]];
             [footerView addSubview:contentLabel];
@@ -189,10 +221,10 @@
         
         UILabel *pressLabel = (UILabel *)[footerView viewWithTag:302];
         if (pressLabel == nil) {
-            pressLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, top + 18 + 10, footerView.frame.size.width*2/3 - 20, 18)];
+            pressLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, ttop + 18  + 5, footerView.frame.size.width*2/3 - 20 - 10, 18)];
             [pressLabel setBackgroundColor:[UIColor clearColor]];
             [pressLabel setTag:302];
-            //[pressLabel setText:@"出版社:北京图书出版社"];
+            [pressLabel setText:@"出版社:北京图书出版社"];
             [pressLabel setTextAlignment:NSTextAlignmentLeft];
             [pressLabel setFont:[UIFont systemFontOfSize:10]];
             [pressLabel setTextColor:[UIColor grayColor]];
@@ -201,7 +233,7 @@
         
         LineView *line = (LineView *)[footerView viewWithTag:303];
         if (line == nil) {
-            line = [[LineView alloc] initWithFrame:CGRectMake(footerView.frame.size.width*2/3, top, kLineHeight1px, footerView.frame.size.height - (2*top))];
+            line = [[LineView alloc] initWithFrame:CGRectMake(footerView.frame.size.width*2/3, ttop, kLineHeight1px, footerView.frame.size.height - 2*ttop)];
             [line setTag:303];
             [footerView addSubview:line];
         }
@@ -219,7 +251,7 @@
         }
         
         
-        NSString *price = _bookInfo.price;// 单位:分
+        NSString *price = @"12000";//_bookInfo.price;// 单位:分
         if (price !=nil && [price length] > 0) {
             NSInteger priceInt = [price integerValue];
             NSInteger priceYuan = priceInt/100;
@@ -232,7 +264,7 @@
             NSRange range1 = [priceString rangeOfString:string1];
             NSRange range2 = [priceString rangeOfString:string2];
             
-            NSDictionary *attributes1 = @{ NSFontAttributeName:[UIFont boldSystemFontOfSize:24], NSForegroundColorAttributeName:[UIColor colorWithHex:0xF74A40] };
+            NSDictionary *attributes1 = @{ NSFontAttributeName:[UIFont boldSystemFontOfSize:22], NSForegroundColorAttributeName:[UIColor colorWithHex:0xF74A40] };
             
             NSDictionary *attributes2 = @{ NSFontAttributeName:[UIFont systemFontOfSize:12], NSForegroundColorAttributeName:[UIColor colorWithHex:0xF74A40] };
             
