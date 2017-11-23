@@ -10,10 +10,11 @@
 #import "SDImageCache.h"
 #import "UIImageView+WebCache.h"
 #import "NetworkTask.h"
+#import "StoreBookResult.h"
 
 @interface FavBookTableViewCell ()<NetworkTaskDelegate>
 @property(nonatomic, strong)FavoriteBookItem    *bookInfo;
-@property(nonatomic, strong)UIButton            *favoriteButton;
+@property(nonatomic, strong)UIButton            *favoriteBtn;
 
 @end
 
@@ -141,7 +142,8 @@
     UIButton *favoriteBtn = (UIButton *)[viewParent viewWithTag:302];
     if (favoriteBtn == nil) {
         favoriteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.favoriteButton = favoriteBtn;
+        self.favoriteBtn = favoriteBtn;
+        [favoriteBtn setTag:302];
         [favoriteBtn setImage:[UIImage imageNamed:@"heart_empty"] forState:UIControlStateNormal];
         [favoriteBtn addTarget:self action:@selector(favoriteAction:) forControlEvents:UIControlEventTouchUpInside];
         [favoriteBtn setFrame:CGRectMake(bookPriceView.frame.size.width - 29, bookPriceView.frame.size.height - 27, 29, 27)];
@@ -154,6 +156,63 @@
 
 - (void)favoriteAction:(UIButton *)sender {
     //
+    //[self cancelStoreBook];
+}
+
+
+- (void)cancelStoreBook {
+    NSMutableDictionary* param = [[NSMutableDictionary alloc] initWithCapacity:0];
+    
+    NSString *author = _bookInfo.author;
+    if (author != nil && [author length] > 0) {
+        [param setObject:author forKey:@"author"];
+    }
+    NSString *name = _bookInfo.bookName;
+    if (name != nil && [name length] > 0) {
+        [param setObject:name forKey:@"bookName"];
+    }
+    
+    NSString *isbn = _bookInfo.isbn;
+    if (isbn != nil && [isbn length] > 0) {
+        [param setObject:isbn forKey:@"isbn"];
+    }
+    
+    NSString *pic = _bookInfo.pic;
+    if (pic != nil && [pic length] > 0) {
+        [param setObject:pic forKey:@"pic"];
+    }
+    
+    NSString *press = _bookInfo.press;
+    if (press != nil && [press length] > 0) {
+        [param setObject:press forKey:@"press"];
+    }
+    
+    [param setObject:@"0" forKey:@"type"];
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_StoreBook
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[StoreBookResult alloc] init]
+                                           customInfo:@"cancelStoreBook"];
+}
+
+#pragma mark - NetworkTaskDelegate
+-(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+    
+    if ([customInfo isEqualToString:@"cancelStoreBook"]) {
+        [_favoriteBtn setImage:[UIImage imageNamed:@"heart_empty"] forState:UIControlStateNormal];
+    }
+}
+
+-(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+    
+    if ([customInfo isEqualToString:@"cancelStoreBook"]) {
+        //
+        [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
+            //
+        }];
+    }
 }
 
 
@@ -167,16 +226,6 @@
     [self layoutBookImageView:self.contentView];
     [self layoutBookDetailView:self.contentView];
     [self layoutPriceView:self.contentView];
-}
-
-#pragma mark - NetworkTaskDelegate
--(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
-    [SVProgressHUD dismiss];
-}
-
-
--(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
-    [SVProgressHUD dismiss];
 }
 
 @end

@@ -10,10 +10,12 @@
 #import "SDImageCache.h"
 #import "UIImageView+WebCache.h"
 #import "NetworkTask.h"
+#import "StoreBookResult.h"
 
 
 @interface BookInfoView ()<NetworkTaskDelegate>
-@property(nonatomic, strong)BookInfoResult    *bookInfo;
+@property(nonatomic, strong)BookInfoResult      *bookInfo;
+@property(nonatomic, strong)UIButton            *favoriteBtn;
 @end
 
 @implementation BookInfoView
@@ -171,6 +173,7 @@
         if (favoriteBtn == nil) {
             favoriteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [favoriteBtn setTag:205];
+            self.favoriteBtn = favoriteBtn;
             [favoriteBtn setImage:[UIImage imageNamed:@"icon_heart_white"] forState:UIControlStateNormal];
             [favoriteBtn addTarget:self action:@selector(favoriteAction:) forControlEvents:UIControlEventTouchUpInside];
             [favoriteBtn setFrame:CGRectMake(headerView.frame.size.width - 29 - 20, 38 + 18 + 5, 29, 27)];
@@ -189,11 +192,60 @@
         NSString *author = _bookInfo.author;
         authorLabel.text = author;
         
+        NSString *fav = _bookInfo.isFavor;
+        if ([fav isEqualToString:@"yes"]) {
+            [favoriteBtn setImage:[UIImage imageNamed:@"heart_read"] forState:UIControlStateNormal];
+        } else {
+            [favoriteBtn setImage:[UIImage imageNamed:@"icon_heart_white"] forState:UIControlStateNormal];
+        }
+        
     }
 }
 
 - (void)favoriteAction:(UIButton *)sender {
     //
+    [self storeBook];
+}
+
+- (void)storeBook {
+    NSMutableDictionary* param = [[NSMutableDictionary alloc] initWithCapacity:0];
+
+    NSString *author = _bookInfo.author;
+    if (author != nil && [author length] > 0) {
+        [param setObject:author forKey:@"author"];
+    }
+    NSString *name = _bookInfo.name;
+    if (name != nil && [name length] > 0) {
+        [param setObject:name forKey:@"bookName"];
+    }
+    
+    NSString *isbn = _bookInfo.isbn;
+    if (isbn != nil && [isbn length] > 0) {
+        [param setObject:isbn forKey:@"isbn"];
+    }
+    
+    NSString *pic = _bookInfo.pic_big;
+    if (pic != nil && [pic length] > 0) {
+        [param setObject:pic forKey:@"pic"];
+    }
+    
+    NSString *press = _bookInfo.press;
+    if (press != nil && [press length] > 0) {
+        [param setObject:press forKey:@"press"];
+    }
+    
+    NSString *fav = _bookInfo.isFavor;
+    if ([fav isEqualToString:@"yes"]) {
+        [param setObject:@"0" forKey:@"type"];
+    } else {
+        [param setObject:@"1" forKey:@"type"];
+    }
+    
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_StoreBook
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[StoreBookResult alloc] init]
+                                           customInfo:@"storeBook"];
 }
 
 - (void)layoutBookFooterView:(UIView *)viewParent {
@@ -286,13 +338,39 @@
             priceLabel.attributedText = attrText;
         }
     }
-
 }
 
 
 - (void)loadBookInfo:(BookInfoResult *)item {
     _bookInfo = item;
     [self setNeedsLayout];
+}
+
+#pragma mark - NetworkTaskDelegate
+-(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+    
+    if ([customInfo isEqualToString:@"storeBook"]) {
+        NSString *fav = _bookInfo.isFavor;
+        if ([fav isEqualToString:@"yes"]) {
+            [_favoriteBtn setImage:[UIImage imageNamed:@"icon_heart_white"] forState:UIControlStateNormal];
+            _bookInfo.isFavor = @"no";
+        } else {
+            [_favoriteBtn setImage:[UIImage imageNamed:@"heart_read"] forState:UIControlStateNormal];
+            _bookInfo.isFavor = @"yes";
+        }
+    }
+}
+
+-(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+    
+    if ([customInfo isEqualToString:@"storeBook"]) {
+        //
+        [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
+            //
+        }];
+    }
 }
 
 @end

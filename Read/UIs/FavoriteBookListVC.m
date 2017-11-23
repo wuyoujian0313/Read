@@ -32,6 +32,11 @@
     [_refreshHeader free];
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [_refreshHeader beginRefreshing];
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -42,9 +47,7 @@
     [self layoutBooksTableView];
     [self addRefreshHeadder];
     [self addRefreshFootder];
-    _isRefreshList = YES;
     _booksResult = nil;
-    [_refreshHeader beginRefreshing];
 }
 
 - (void)addRefreshHeadder {

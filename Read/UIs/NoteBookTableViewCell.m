@@ -139,6 +139,7 @@
     UIButton *noteBtn = (UIButton *)[viewParent viewWithTag:302];
     if (noteBtn == nil) {
         noteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [noteBtn setTag:302];
         [noteBtn setImage:[UIImage imageNamed:@"icon_note"] forState:UIControlStateNormal];
         [noteBtn addTarget:self action:@selector(noteAction:) forControlEvents:UIControlEventTouchUpInside];
         [noteBtn setFrame:CGRectMake(bookPriceView.frame.size.width - 28, 0, 28, 29)];
