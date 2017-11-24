@@ -19,14 +19,38 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setNavTitle:@"Rlab阿来学院" titleColor:[UIColor colorWithHex:kGlobalGreenColor]];
+    [self layoutSegmentView];
+
+    UIBarButtonItem *editItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"icon_edit"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self  action:@selector(addNote:)];
+    self.navigationItem.rightBarButtonItem = editItem;
+}
+
+- (void)addNote:(UIBarButtonItem*)sender {
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 80, self.view.frame.size.width - 30, 80)];
-    label.text = @"笔记模块正在研发中......";
-    label.textColor = [UIColor blackColor];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor colorWithHex:kGlobalGreenColor];
-    label.font = [UIFont systemFontOfSize:20];
-    [self.view addSubview:label];
+}
+
+- (void)layoutSegmentView {
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+    [bgView setBackgroundColor:[UIColor whiteColor]];
+    
+    UISegmentedControl *segmentControl = [[UISegmentedControl alloc] initWithItems:@[@"文字",@"语音"]];
+    [segmentControl setFrame:CGRectMake(30, 10, bgView.frame.size.width - 80, 30)];
+    [segmentControl setTintColor:[UIColor colorWithHex:kGlobalGreenColor]];
+
+    NSDictionary *dictNormal = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [UIColor colorWithHex:kGlobalGreenColor],NSForegroundColorAttributeName,nil];
+    NSDictionary *dictSelect = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [UIColor whiteColor],NSForegroundColorAttributeName,nil];
+    [segmentControl setTitleTextAttributes:dictNormal forState:UIControlStateNormal];
+    [segmentControl setTitleTextAttributes:dictSelect forState:UIControlStateSelected];
+    [bgView addSubview:segmentControl];
+    [segmentControl setSelectedSegmentIndex:0];
+    
+    LineView *line = [[LineView alloc] initWithFrame:CGRectMake(0, bgView.frame.size.height - kLineHeight1px, bgView.frame.size.width, kLineHeight1px)];
+    [bgView addSubview:line];
+    
+    [self.view addSubview:bgView];
+    
 }
 
 - (void)didReceiveMemoryWarning {

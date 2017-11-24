@@ -113,6 +113,9 @@
 		AFAFB76C1FC2BB8F00663862 /* heart_empty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AFAFB76A1FC2BB8F00663862 /* heart_empty@2x.png */; };
 		AFAFB76D1FC2BB8F00663862 /* heart_read@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AFAFB76B1FC2BB8F00663862 /* heart_read@2x.png */; };
 		AFBABF2D1FC6CA0F0001A5E5 /* StoreBookResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBABF2C1FC6CA0F0001A5E5 /* StoreBookResult.m */; };
+		AFBABF2F1FC7E31C0001A5E5 /* icon_edit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AFBABF2E1FC7E31C0001A5E5 /* icon_edit@2x.png */; };
+		AFBABF321FC828580001A5E5 /* CustomSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBABF311FC828580001A5E5 /* CustomSegmentControl.m */; };
+		AFBABF361FC847880001A5E5 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBABF351FC847880001A5E5 /* iCarousel.m */; };
 		AFBAE1611FB83B560002DE1B /* NetResultBase.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE1601FB83B560002DE1B /* NetResultBase.m */; };
 		AFBAE1651FB83D5B0002DE1B /* SysDataSaver.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE1641FB83D5B0002DE1B /* SysDataSaver.m */; };
 		AFBAE1681FB854140002DE1B /* CaptchaResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE1671FB854140002DE1B /* CaptchaResult.m */; };
@@ -324,6 +327,11 @@
 		AFAFB76B1FC2BB8F00663862 /* heart_read@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart_read@2x.png"; sourceTree = "<group>"; };
 		AFBABF2B1FC6CA0F0001A5E5 /* StoreBookResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreBookResult.h; sourceTree = "<group>"; };
 		AFBABF2C1FC6CA0F0001A5E5 /* StoreBookResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreBookResult.m; sourceTree = "<group>"; };
+		AFBABF2E1FC7E31C0001A5E5 /* icon_edit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_edit@2x.png"; sourceTree = "<group>"; };
+		AFBABF301FC828580001A5E5 /* CustomSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSegmentControl.h; sourceTree = "<group>"; };
+		AFBABF311FC828580001A5E5 /* CustomSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSegmentControl.m; sourceTree = "<group>"; };
+		AFBABF341FC847880001A5E5 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
+		AFBABF351FC847880001A5E5 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		AFBAE15F1FB83B560002DE1B /* NetResultBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetResultBase.h; sourceTree = "<group>"; };
 		AFBAE1601FB83B560002DE1B /* NetResultBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetResultBase.m; sourceTree = "<group>"; };
 		AFBAE1631FB83D5B0002DE1B /* SysDataSaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SysDataSaver.h; sourceTree = "<group>"; };
@@ -459,6 +467,7 @@
 		AF23083A1FB33F5600BEC151 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				AFBABF331FC847880001A5E5 /* iCarousel */,
 				AF23083B1FB33F5600BEC151 /* AFNetworking */,
 				AF2308491FB33F5600BEC151 /* Category */,
 				AF2308581FB33F5600BEC151 /* MJRefresh */,
@@ -681,6 +690,7 @@
 				AF0422841FBC77CD00D15E8E /* icon_emotion@2x.png */,
 				AF0422851FBC77CD00D15E8E /* icon_heart@2x.png */,
 				AF0422861FBC77CD00D15E8E /* icon_note@2x.png */,
+				AFBABF2E1FC7E31C0001A5E5 /* icon_edit@2x.png */,
 				AF0422871FBC77CD00D15E8E /* icon_setting@2x.png */,
 				AF04228C1FBC797A00D15E8E /* icon_photo@2x.png */,
 				AF04228E1FBC88C900D15E8E /* radio_select@2x.png */,
@@ -720,6 +730,15 @@
 			name = tabbar;
 			sourceTree = "<group>";
 		};
+		AFBABF331FC847880001A5E5 /* iCarousel */ = {
+			isa = PBXGroup;
+			children = (
+				AFBABF341FC847880001A5E5 /* iCarousel.h */,
+				AFBABF351FC847880001A5E5 /* iCarousel.m */,
+			);
+			path = iCarousel;
+			sourceTree = "<group>";
+		};
 		AFBAE1621FB83D000002DE1B /* Helper */ = {
 			isa = PBXGroup;
 			children = (
@@ -740,6 +759,8 @@
 				AF42D9B61FC536A7006DEDE8 /* BookInfoView.m */,
 				AF42D9BC1FC553BF006DEDE8 /* BookContentView.h */,
 				AF42D9BD1FC553BF006DEDE8 /* BookContentView.m */,
+				AFBABF301FC828580001A5E5 /* CustomSegmentControl.h */,
+				AFBABF311FC828580001A5E5 /* CustomSegmentControl.m */,
 			);
 			name = Newbooks;
 			sourceTree = "<group>";
@@ -838,6 +859,7 @@
 				AF94FDFD1FB9DD5F0086CB22 /* tb-me-sel@2x.png in Resources */,
 				AF42D9B91FC537A6006DEDE8 /* book_detail_bg@2x.png in Resources */,
 				AF04228A1FBC77CD00D15E8E /* icon_note@2x.png in Resources */,
+				AFBABF2F1FC7E31C0001A5E5 /* icon_edit@2x.png in Resources */,
 				AF04228D1FBC797A00D15E8E /* icon_photo@2x.png in Resources */,
 				AF94FDFE1FB9DD5F0086CB22 /* tb-me@2x.png in Resources */,
 				AFAFB76D1FC2BB8F00663862 /* heart_read@2x.png in Resources */,
@@ -869,6 +891,7 @@
 				AFD56B221FC070AF0062BA20 /* UpdateUserInfoVC.m in Sources */,
 				AF2308A61FB33F5600BEC151 /* AFURLSessionManager.m in Sources */,
 				AF2308D21FB340EB00BEC151 /* MainVCManager.m in Sources */,
+				AFBABF321FC828580001A5E5 /* CustomSegmentControl.m in Sources */,
 				AF683D881FB81B5800AB69EC /* NetworkTask.m in Sources */,
 				AF2308CF1FB33F5600BEC151 /* SVProgressHUD.m in Sources */,
 				AF2308E51FB342CE00BEC151 /* LoginVC.m in Sources */,
@@ -908,6 +931,7 @@
 				AF88AB321FC1540400E885D5 /* UploadUserAvatarResult.m in Sources */,
 				AF036E401FC4639F005A1765 /* NoteBookItem.m in Sources */,
 				AF2308C51FB33F5600BEC151 /* SDWebImageManager.m in Sources */,
+				AFBABF361FC847880001A5E5 /* iCarousel.m in Sources */,
 				AFBAE17A1FB8590B0002DE1B /* NoteItem.m in Sources */,
 				AFBABF2D1FC6CA0F0001A5E5 /* StoreBookResult.m in Sources */,
 				AFBAE1771FB858C60002DE1B /* NoteListResult.m in Sources */,

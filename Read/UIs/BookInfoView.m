@@ -305,7 +305,7 @@
             [priceLabel setTag:304];
             [priceLabel setTextAlignment:NSTextAlignmentCenter];
             [priceLabel setFont:[UIFont systemFontOfSize:20]];
-            [priceLabel setTextColor:[UIColor colorWithHex:0xF74A40]];
+            [priceLabel setTextColor:[UIColor colorWithHex:kGlobalRedColor]];
             [footerView addSubview:priceLabel];
         }
         
@@ -328,9 +328,9 @@
             NSRange range1 = [priceString rangeOfString:string1];
             NSRange range2 = [priceString rangeOfString:string2];
             
-            NSDictionary *attributes1 = @{ NSFontAttributeName:[UIFont boldSystemFontOfSize:22], NSForegroundColorAttributeName:[UIColor colorWithHex:0xF74A40] };
+            NSDictionary *attributes1 = @{ NSFontAttributeName:[UIFont boldSystemFontOfSize:22], NSForegroundColorAttributeName:[UIColor colorWithHex:kGlobalRedColor] };
             
-            NSDictionary *attributes2 = @{ NSFontAttributeName:[UIFont systemFontOfSize:12], NSForegroundColorAttributeName:[UIColor colorWithHex:0xF74A40] };
+            NSDictionary *attributes2 = @{ NSFontAttributeName:[UIFont systemFontOfSize:12], NSForegroundColorAttributeName:[UIColor colorWithHex:kGlobalRedColor] };
             
             NSMutableAttributedString *attrText = [[NSMutableAttributedString alloc] initWithString:priceString];
             [attrText addAttributes:attributes1 range:range1];

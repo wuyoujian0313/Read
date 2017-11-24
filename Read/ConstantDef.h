@@ -12,6 +12,7 @@
 
 #define kGlobalGreenColor       0x6Fc05b
 #define kGlobalLineColor        0xdcdcdc
+#define kGlobalRedColor         0xF74A40
 
 
 // 服务器地址
@@ -55,7 +56,7 @@
 #define API_NoteBookList                @"book/getNoteBookList"
 
 // 收藏书
-#define API_StoreBook                @"book/storeBook"
+#define API_StoreBook                   @"book/storeBook"
 
 // 书的详情
 #define API_BookInfo                    @"book/info"

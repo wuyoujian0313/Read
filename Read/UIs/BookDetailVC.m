@@ -12,6 +12,7 @@
 #import "BookContentView.h"
 #import "BookInfoResult.h"
 
+
 @interface BookDetailVC ()<NetworkTaskDelegate>
 @property (nonatomic, strong) BookInfoView          *bookInfoView;
 @property (nonatomic, strong) BookContentView       *bookContentView;
@@ -45,15 +46,9 @@
 }
 
 - (void)layoutBookContentView {
-    NSInteger top = 30;
-    NSInteger imagehh = 133;
-    if ([DeviceInfo screenWidth] > 320) {
-        top = 40;
-        imagehh = 153;
-    }
     
-    NSInteger hh = top +  imagehh + 20;
-    BookContentView *contentView = [[BookContentView alloc] initWithFrame:CGRectMake(0, hh, self.view.frame.size.width, self.view.frame.size.height - hh -[DeviceInfo navigationBarHeight])];
+    NSInteger top = _bookInfoView.frame.size.height + 10;
+    BookContentView *contentView = [[BookContentView alloc] initWithFrame:CGRectMake(0, top, self.view.frame.size.width, self.view.frame.size.height - top -[DeviceInfo navigationBarHeight])];
     self.bookContentView = contentView;
     [self.view addSubview:contentView];
 }
