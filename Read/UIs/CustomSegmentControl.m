@@ -84,7 +84,7 @@
             [selectBottomLine setLineColor:[UIColor colorWithHex:kGlobalLineColor]];
         }
     }
-    [UIView animateWithDuration:0.2 animations:^{
+    [UIView animateWithDuration:0.3 animations:^{
         [_selectLine setFrame:CGRectMake(_itemWidth*index, 0, _itemWidth, 4*kLineHeight1px)];
     }];
     

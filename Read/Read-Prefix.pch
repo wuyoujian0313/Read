@@ -24,6 +24,7 @@
 #import "FadePromptView.h"
 #import "DeviceInfo.h"
 #import "AICommonDef.h"
+#import "UIAlertController+Orientations.h"
 #endif
 
 // 日志开关

@@ -12,6 +12,7 @@
 #import "NetworkTask.h"
 #import "CustomSegmentControl.h"
 #import "iCarousel.h"
+#import "BookIntroduceView.h"
 
 @interface BookContentView ()<NetworkTaskDelegate,CustomSegmentControlDelegate,iCarouselDataSource,iCarouselDelegate>
 @property(nonatomic,strong)BookInfoResult               *bookInfo;
@@ -36,7 +37,7 @@
 - (void)layoutCarouselView {
     self.carouselView = [[iCarousel alloc] initWithFrame:CGRectMake(0, 35, self.frame.size.width, self.frame.size.height - 35)];
     _carouselView.type = iCarouselTypeLinear;
-    _carouselView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//    _carouselView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _carouselView.delegate = self;
     _carouselView.dataSource = self;
     _carouselView.pagingEnabled = YES;
@@ -55,7 +56,8 @@
 
 - (void)loadBookInfo:(BookInfoResult *)item {
     _bookInfo = item;
-    [self setNeedsLayout];
+    [_carouselView reloadData];
+    //[self setNeedsLayout];
 }
 
 - (void)layoutSubviews {
@@ -64,7 +66,7 @@
 
 #pragma mark - CustomSegmentControlDelegate
 - (void)didSelectedIndex:(NSInteger)index {
-    [_carouselView scrollToItemAtIndex:index animated:YES];
+    [_carouselView scrollToItemAtIndex:index duration:0.3];
 }
 
 #pragma mark - iCarousel delegate methods
@@ -76,26 +78,34 @@
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view {
     
     if (view == nil) {
-        view = [[UIView alloc] initWithFrame:carousel.bounds];
-        
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 40, carousel.frame.size.width - 30, 30)];
-
-        label.tag = 1000;
-        label.textColor = [UIColor blackColor];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.textColor = [UIColor colorWithHex:kGlobalGreenColor];
-        label.font = [UIFont systemFontOfSize:14];
-        [view addSubview:label];
+        view = [[BookIntroduceView alloc] initWithFrame:carousel.bounds];
     }
     
-    UILabel *label = (UILabel *)[view viewWithTag:1000];
-    [label setText:[NSString stringWithFormat:@"select page %ld",(long)index]];
+    if (index == 0 || index == 2) {
+        BookIntroduceView *v = (BookIntroduceView*)view;
+        if (_bookInfo) {
+            [v loadImageUrl:_bookInfo.pic_jj text:_bookInfo.brief];
+        }
+    }
+    
+    
     
     return view;
 }
 
+//- (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index {
+//    [_segment setSelectedSegmentIndex:index];
+//}
+//
+//- (void)carouselDidScroll:(iCarousel *)carousel {
+//    [_segment setSelectedSegmentIndex:carousel.currentItemIndex];
+//}
+
 - (void)carouselCurrentItemIndexDidChange:(iCarousel *)carousel {
-    [_segment setSelectedSegmentIndex:carousel.currentItemIndex];
+    if (carousel.isScrolling == NO) {
+        [_segment setSelectedSegmentIndex:carousel.currentItemIndex];
+    }
+    
 }
 
 @end

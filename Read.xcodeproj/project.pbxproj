@@ -54,12 +54,10 @@
 		AF2308B31FB33F5600BEC151 /* AIActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308651FB33F5600BEC151 /* AIActionSheet.m */; };
 		AF2308B41FB33F5600BEC151 /* AINavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308681FB33F5600BEC151 /* AINavigationController.m */; };
 		AF2308B51FB33F5600BEC151 /* BaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF23086A1FB33F5600BEC151 /* BaseVC.m */; };
-		AF2308B61FB33F5600BEC151 /* CaptchaControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AF23086C1FB33F5600BEC151 /* CaptchaControl.m */; };
 		AF2308B71FB33F5600BEC151 /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AF23086E1FB33F5600BEC151 /* DeviceInfo.m */; };
 		AF2308B81FB33F5600BEC151 /* FadePromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308701FB33F5600BEC151 /* FadePromptView.m */; };
 		AF2308B91FB33F5600BEC151 /* FileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308721FB33F5600BEC151 /* FileCache.m */; };
 		AF2308BA1FB33F5600BEC151 /* LineView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308741FB33F5600BEC151 /* LineView.m */; };
-		AF2308BD1FB33F5600BEC151 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AF23087A1FB33F5600BEC151 /* Reachability.m */; };
 		AF2308BE1FB33F5600BEC151 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AF23087D1FB33F5600BEC151 /* MKAnnotationView+WebCache.m */; };
 		AF2308BF1FB33F5600BEC151 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = AF23087F1FB33F5600BEC151 /* NSData+ImageContentType.m */; };
 		AF2308C01FB33F5600BEC151 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308811FB33F5600BEC151 /* SDImageCache.m */; };
@@ -88,6 +86,7 @@
 		AF42D9BE1FC553BF006DEDE8 /* BookContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF42D9BD1FC553BF006DEDE8 /* BookContentView.m */; };
 		AF4C90CD1FBF168C003148EC /* ChildInfoResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4C90CC1FBF168C003148EC /* ChildInfoResult.m */; };
 		AF4C90D01FBF1D2A003148EC /* AddChildrenResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4C90CF1FBF1D2A003148EC /* AddChildrenResult.m */; };
+		AF4EE7F21FCAD50C00161746 /* BookIntroduceView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4EE7F11FCAD50C00161746 /* BookIntroduceView.m */; };
 		AF506F8F1FB5E26700470C01 /* icon_pwd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF506F8B1FB5E26700470C01 /* icon_pwd@2x.png */; };
 		AF506F901FB5E26700470C01 /* icon_user@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF506F8C1FB5E26700470C01 /* icon_user@2x.png */; };
 		AF506F971FB6071800470C01 /* ForgetPwdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF506F961FB6071800470C01 /* ForgetPwdVC.m */; };
@@ -224,8 +223,6 @@
 		AF2308681FB33F5600BEC151 /* AINavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AINavigationController.m; sourceTree = "<group>"; };
 		AF2308691FB33F5600BEC151 /* BaseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseVC.h; sourceTree = "<group>"; };
 		AF23086A1FB33F5600BEC151 /* BaseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseVC.m; sourceTree = "<group>"; };
-		AF23086B1FB33F5600BEC151 /* CaptchaControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptchaControl.h; sourceTree = "<group>"; };
-		AF23086C1FB33F5600BEC151 /* CaptchaControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptchaControl.m; sourceTree = "<group>"; };
 		AF23086D1FB33F5600BEC151 /* DeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceInfo.h; sourceTree = "<group>"; };
 		AF23086E1FB33F5600BEC151 /* DeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInfo.m; sourceTree = "<group>"; };
 		AF23086F1FB33F5600BEC151 /* FadePromptView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FadePromptView.h; sourceTree = "<group>"; };
@@ -234,8 +231,6 @@
 		AF2308721FB33F5600BEC151 /* FileCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileCache.m; sourceTree = "<group>"; };
 		AF2308731FB33F5600BEC151 /* LineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineView.h; sourceTree = "<group>"; };
 		AF2308741FB33F5600BEC151 /* LineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineView.m; sourceTree = "<group>"; };
-		AF2308791FB33F5600BEC151 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		AF23087A1FB33F5600BEC151 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		AF23087C1FB33F5600BEC151 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		AF23087D1FB33F5600BEC151 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		AF23087E1FB33F5600BEC151 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -290,6 +285,8 @@
 		AF4C90CC1FBF168C003148EC /* ChildInfoResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildInfoResult.m; sourceTree = "<group>"; };
 		AF4C90CE1FBF1D2A003148EC /* AddChildrenResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddChildrenResult.h; sourceTree = "<group>"; };
 		AF4C90CF1FBF1D2A003148EC /* AddChildrenResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddChildrenResult.m; sourceTree = "<group>"; };
+		AF4EE7F01FCAD50C00161746 /* BookIntroduceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookIntroduceView.h; sourceTree = "<group>"; };
+		AF4EE7F11FCAD50C00161746 /* BookIntroduceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookIntroduceView.m; sourceTree = "<group>"; };
 		AF506F8B1FB5E26700470C01 /* icon_pwd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_pwd@2x.png"; sourceTree = "<group>"; };
 		AF506F8C1FB5E26700470C01 /* icon_user@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_user@2x.png"; sourceTree = "<group>"; };
 		AF506F931FB5E6C600470C01 /* ConstantDef.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConstantDef.h; sourceTree = "<group>"; };
@@ -548,8 +545,6 @@
 				AF2308681FB33F5600BEC151 /* AINavigationController.m */,
 				AF2308691FB33F5600BEC151 /* BaseVC.h */,
 				AF23086A1FB33F5600BEC151 /* BaseVC.m */,
-				AF23086B1FB33F5600BEC151 /* CaptchaControl.h */,
-				AF23086C1FB33F5600BEC151 /* CaptchaControl.m */,
 				AF23086D1FB33F5600BEC151 /* DeviceInfo.h */,
 				AF23086E1FB33F5600BEC151 /* DeviceInfo.m */,
 				AF23086F1FB33F5600BEC151 /* FadePromptView.h */,
@@ -558,8 +553,6 @@
 				AF2308721FB33F5600BEC151 /* FileCache.m */,
 				AF2308731FB33F5600BEC151 /* LineView.h */,
 				AF2308741FB33F5600BEC151 /* LineView.m */,
-				AF2308791FB33F5600BEC151 /* Reachability.h */,
-				AF23087A1FB33F5600BEC151 /* Reachability.m */,
 			);
 			path = Owns;
 			sourceTree = "<group>";
@@ -759,6 +752,8 @@
 				AF42D9B61FC536A7006DEDE8 /* BookInfoView.m */,
 				AF42D9BC1FC553BF006DEDE8 /* BookContentView.h */,
 				AF42D9BD1FC553BF006DEDE8 /* BookContentView.m */,
+				AF4EE7F01FCAD50C00161746 /* BookIntroduceView.h */,
+				AF4EE7F11FCAD50C00161746 /* BookIntroduceView.m */,
 				AFBABF301FC828580001A5E5 /* CustomSegmentControl.h */,
 				AFBABF311FC828580001A5E5 /* CustomSegmentControl.m */,
 			);
@@ -892,6 +887,7 @@
 				AF2308A61FB33F5600BEC151 /* AFURLSessionManager.m in Sources */,
 				AF2308D21FB340EB00BEC151 /* MainVCManager.m in Sources */,
 				AFBABF321FC828580001A5E5 /* CustomSegmentControl.m in Sources */,
+				AF4EE7F21FCAD50C00161746 /* BookIntroduceView.m in Sources */,
 				AF683D881FB81B5800AB69EC /* NetworkTask.m in Sources */,
 				AF2308CF1FB33F5600BEC151 /* SVProgressHUD.m in Sources */,
 				AF2308E51FB342CE00BEC151 /* LoginVC.m in Sources */,
@@ -905,7 +901,6 @@
 				AF2308CB1FB33F5600BEC151 /* UIImageView+HighlightedWebCache.m in Sources */,
 				AF04C5761FB35A0800C0C67B /* MeVC.m in Sources */,
 				AF14EAB91FB737F60042683D /* ModifyPwdVC.m in Sources */,
-				AF2308BD1FB33F5600BEC151 /* Reachability.m in Sources */,
 				AFAFB7691FC2ACB800663862 /* BookTableViewCell.m in Sources */,
 				AF2308E31FB342CE00BEC151 /* LoginResult.m in Sources */,
 				AF2308A91FB33F5600BEC151 /* UIAlertController+Orientations.m in Sources */,
@@ -936,7 +931,6 @@
 				AFBABF2D1FC6CA0F0001A5E5 /* StoreBookResult.m in Sources */,
 				AFBAE1771FB858C60002DE1B /* NoteListResult.m in Sources */,
 				AF0422831FBC71B900D15E8E /* ChildrenInfoVC.m in Sources */,
-				AF2308B61FB33F5600BEC151 /* CaptchaControl.m in Sources */,
 				AF2308BA1FB33F5600BEC151 /* LineView.m in Sources */,
 				AF2308B41FB33F5600BEC151 /* AINavigationController.m in Sources */,
 				AF2308281FB3371200BEC151 /* AppDelegate.m in Sources */,
