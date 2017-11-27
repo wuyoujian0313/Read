@@ -126,6 +126,7 @@
 		AFBAE17A1FB8590B0002DE1B /* NoteItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE1791FB8590B0002DE1B /* NoteItem.m */; };
 		AFBAE17D1FB85EC50002DE1B /* MultySearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE17C1FB85EC50002DE1B /* MultySearchResult.m */; };
 		AFBAE1801FB85EF40002DE1B /* BookItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE17F1FB85EF40002DE1B /* BookItem.m */; };
+		AFC37B0C1FCBB02400711466 /* NoteListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC37B0B1FCBB02400711466 /* NoteListView.m */; };
 		AFC76ED01FC5AF4E00DF7FD9 /* BookInfoResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC76ECF1FC5AF4E00DF7FD9 /* BookInfoResult.m */; };
 		AFD56B221FC070AF0062BA20 /* UpdateUserInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD56B211FC070AF0062BA20 /* UpdateUserInfoVC.m */; };
 		AFDEC9011FB4878F00926F38 /* NotesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEC9001FB4878F00926F38 /* NotesVC.m */; };
@@ -351,6 +352,8 @@
 		AFBAE17C1FB85EC50002DE1B /* MultySearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultySearchResult.m; sourceTree = "<group>"; };
 		AFBAE17E1FB85EF40002DE1B /* BookItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookItem.h; sourceTree = "<group>"; };
 		AFBAE17F1FB85EF40002DE1B /* BookItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookItem.m; sourceTree = "<group>"; };
+		AFC37B0A1FCBB02400711466 /* NoteListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteListView.h; sourceTree = "<group>"; };
+		AFC37B0B1FCBB02400711466 /* NoteListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteListView.m; sourceTree = "<group>"; };
 		AFC76ECE1FC5AF4E00DF7FD9 /* BookInfoResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookInfoResult.h; sourceTree = "<group>"; };
 		AFC76ECF1FC5AF4E00DF7FD9 /* BookInfoResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookInfoResult.m; sourceTree = "<group>"; };
 		AFD56B201FC070AF0062BA20 /* UpdateUserInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateUserInfoVC.h; sourceTree = "<group>"; };
@@ -778,6 +781,8 @@
 			children = (
 				AFDEC8FF1FB4878F00926F38 /* NotesVC.h */,
 				AFDEC9001FB4878F00926F38 /* NotesVC.m */,
+				AFC37B0A1FCBB02400711466 /* NoteListView.h */,
+				AFC37B0B1FCBB02400711466 /* NoteListView.m */,
 			);
 			name = Notes;
 			sourceTree = "<group>";
@@ -903,6 +908,7 @@
 				AF14EAB91FB737F60042683D /* ModifyPwdVC.m in Sources */,
 				AFAFB7691FC2ACB800663862 /* BookTableViewCell.m in Sources */,
 				AF2308E31FB342CE00BEC151 /* LoginResult.m in Sources */,
+				AFC37B0C1FCBB02400711466 /* NoteListView.m in Sources */,
 				AF2308A91FB33F5600BEC151 /* UIAlertController+Orientations.m in Sources */,
 				AF2308A31FB33F5600BEC151 /* AFSecurityPolicy.m in Sources */,
 				AF2308CA1FB33F5600BEC151 /* UIImage+WebP.m in Sources */,

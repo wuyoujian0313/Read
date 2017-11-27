@@ -7,6 +7,7 @@
 //
 
 #import "NotesVC.h"
+#import "NoteListView.h"
 
 
 @interface NotesVC ()

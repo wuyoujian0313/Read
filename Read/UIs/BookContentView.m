@@ -13,6 +13,7 @@
 #import "CustomSegmentControl.h"
 #import "iCarousel.h"
 #import "BookIntroduceView.h"
+#import "NoteListView.h"
 
 @interface BookContentView ()<NetworkTaskDelegate,CustomSegmentControlDelegate,iCarouselDataSource,iCarouselDelegate>
 @property(nonatomic,strong)BookInfoResult               *bookInfo;
@@ -57,7 +58,6 @@
 - (void)loadBookInfo:(BookInfoResult *)item {
     _bookInfo = item;
     [_carouselView reloadData];
-    //[self setNeedsLayout];
 }
 
 - (void)layoutSubviews {
@@ -78,34 +78,46 @@
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view {
     
     if (view == nil) {
-        view = [[BookIntroduceView alloc] initWithFrame:carousel.bounds];
+        view = [[UIView alloc] initWithFrame:carousel.bounds];
+        BookIntroduceView *intrView = [[BookIntroduceView alloc] initWithFrame:view.bounds];
+        intrView.tag = 100;
+        [view addSubview:intrView];
+        
+        NoteListView *noteView = [[NoteListView alloc] initWithFrame:view.bounds];
+        noteView.tag = 101;
+        [view addSubview:noteView];
     }
+    
+    BookIntroduceView *intrView = (BookIntroduceView *)[view viewWithTag:100];
+    NoteListView *noteView = (NoteListView *)[view viewWithTag:101];
+    
+    intrView.hidden = YES;
+    noteView.hidden = YES;
     
     if (index == 0 || index == 2) {
-        BookIntroduceView *v = (BookIntroduceView*)view;
+        intrView.hidden = NO;
         if (_bookInfo) {
-            [v loadImageUrl:_bookInfo.pic_jj text:_bookInfo.brief];
+            if (index == 0) {
+                NSString *text = _bookInfo.brief != nil && [_bookInfo.brief length] > 0 ? _bookInfo.brief : @"暂无简介";
+                [intrView loadImageUrl:_bookInfo.pic_jj text:text];
+            } else if (index == 2) {
+                NSString *text = _bookInfo.introduction != nil && [_bookInfo.introduction length] > 0 ? _bookInfo.introduction : @"暂无导读";
+                [intrView loadImageUrl:_bookInfo.pic_intr text:text];
+            }
+            
         }
+    } else if (index == 1) {
+        noteView.hidden = NO;
     }
-    
     
     
     return view;
 }
 
-//- (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index {
-//    [_segment setSelectedSegmentIndex:index];
-//}
-//
-//- (void)carouselDidScroll:(iCarousel *)carousel {
-//    [_segment setSelectedSegmentIndex:carousel.currentItemIndex];
-//}
-
 - (void)carouselCurrentItemIndexDidChange:(iCarousel *)carousel {
     if (carousel.isScrolling == NO) {
         [_segment setSelectedSegmentIndex:carousel.currentItemIndex];
     }
-    
 }
 
 @end
