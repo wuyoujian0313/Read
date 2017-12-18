@@ -137,6 +137,7 @@
 		AFDEC9011FB4878F00926F38 /* NotesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEC9001FB4878F00926F38 /* NotesVC.m */; };
 		AFDEC9041FB487AB00926F38 /* BookroomVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEC9031FB487AB00926F38 /* BookroomVC.m */; };
 		AFDEC9071FB487CB00926F38 /* NewbooksVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEC9061FB487CB00926F38 /* NewbooksVC.m */; };
+		AFF5EDBD1FE783B4001FDE2B /* BookGridTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF5EDBC1FE783B4001FDE2B /* BookGridTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -377,6 +378,8 @@
 		AFDEC9031FB487AB00926F38 /* BookroomVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookroomVC.m; sourceTree = "<group>"; };
 		AFDEC9051FB487CB00926F38 /* NewbooksVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewbooksVC.h; sourceTree = "<group>"; };
 		AFDEC9061FB487CB00926F38 /* NewbooksVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewbooksVC.m; sourceTree = "<group>"; };
+		AFF5EDBB1FE783B4001FDE2B /* BookGridTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookGridTableViewCell.h; sourceTree = "<group>"; };
+		AFF5EDBC1FE783B4001FDE2B /* BookGridTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookGridTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -801,6 +804,8 @@
 				AFAFB7681FC2ACB800663862 /* BookTableViewCell.m */,
 				AFC17C5A1FE5136400734007 /* TextTagTableViewCell.h */,
 				AFC17C5B1FE5136400734007 /* TextTagTableViewCell.m */,
+				AFF5EDBB1FE783B4001FDE2B /* BookGridTableViewCell.h */,
+				AFF5EDBC1FE783B4001FDE2B /* BookGridTableViewCell.m */,
 			);
 			name = Bookroom;
 			sourceTree = "<group>";
@@ -963,6 +968,7 @@
 				AF2308C81FB33F5600BEC151 /* UIImage+GIF.m in Sources */,
 				AF88AB321FC1540400E885D5 /* UploadUserAvatarResult.m in Sources */,
 				AF036E401FC4639F005A1765 /* NoteBookItem.m in Sources */,
+				AFF5EDBD1FE783B4001FDE2B /* BookGridTableViewCell.m in Sources */,
 				AF2308C51FB33F5600BEC151 /* SDWebImageManager.m in Sources */,
 				AFBABF361FC847880001A5E5 /* iCarousel.m in Sources */,
 				AFBAE17A1FB8590B0002DE1B /* NoteItem.m in Sources */,

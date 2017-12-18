@@ -217,15 +217,22 @@
         [cell.contentView addSubview:imageView];
         
         NSInteger margin = 35;
+        NSInteger bookWidth = 53;
+        NSInteger bookHeight = 66;
+        NSInteger top = 29;
+    
         if ([DeviceInfo screenWidth] > 320) {
             margin = 40;
+            bookWidth = 63;
+            bookHeight = 80;
+            top = 15;
         }
         
-        NSInteger bookWidth = 53;
+        
         NSInteger spaceSize = (tableView.frame.size.width - margin*2 - 4*bookWidth)/3.0;
         BookButton *book1Btn = [BookButton buttonWithType:UIButtonTypeCustom];
         book1Btn.tag = 100;
-        [book1Btn setFrame:CGRectMake(margin, 25, bookWidth, 70)];
+        [book1Btn setFrame:CGRectMake(margin, top, bookWidth, bookHeight)];
         [book1Btn setImage:[UIImage imageNamed:@"book_cover"] forState:UIControlStateNormal];
         //[book1Btn.imageView setContentMode:UIViewContentModeScaleAspectFill];
         [cell.contentView addSubview:book1Btn];
@@ -233,7 +240,7 @@
         
         BookButton *book2Btn = [BookButton buttonWithType:UIButtonTypeCustom];
         book2Btn.tag = 101;
-        [book2Btn setFrame:CGRectMake(margin + spaceSize + bookWidth, 25, bookWidth, 70)];
+        [book2Btn setFrame:CGRectMake(margin + spaceSize + bookWidth, top, bookWidth, bookHeight)];
         //[book2Btn.imageView setContentMode:UIViewContentModeScaleAspectFill];
         [book2Btn setImage:[UIImage imageNamed:@"book_cover"] forState:UIControlStateNormal];
         [cell.contentView addSubview:book2Btn];
@@ -241,7 +248,7 @@
         
         BookButton *book3Btn = [BookButton buttonWithType:UIButtonTypeCustom];
         book3Btn.tag = 102;
-        [book3Btn setFrame:CGRectMake(margin + 2*(spaceSize + bookWidth), 25, bookWidth, 70)];
+        [book3Btn setFrame:CGRectMake(margin + 2*(spaceSize + bookWidth), top, bookWidth, bookHeight)];
         //[book3Btn.imageView setContentMode:UIViewContentModeScaleAspectFill];
         [book3Btn setImage:[UIImage imageNamed:@"book_cover"] forState:UIControlStateNormal];
         [cell.contentView addSubview:book3Btn];
@@ -249,7 +256,7 @@
         
         BookButton *book4Btn = [BookButton buttonWithType:UIButtonTypeCustom];
         book4Btn.tag = 103;
-        [book4Btn setFrame:CGRectMake(margin + 3*(spaceSize + bookWidth), 25, bookWidth, 70)];
+        [book4Btn setFrame:CGRectMake(margin + 3*(spaceSize + bookWidth), top, bookWidth, bookHeight)];
         //[book4Btn.imageView setContentMode:UIViewContentModeScaleAspectFill];
         [book4Btn setImage:[UIImage imageNamed:@"book_cover"] forState:UIControlStateNormal];
         [cell.contentView addSubview:book4Btn];
@@ -394,7 +401,7 @@
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 123;
+    return 119;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
