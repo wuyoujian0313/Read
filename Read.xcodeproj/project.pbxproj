@@ -105,6 +105,8 @@
 		AF94FE001FB9DD5F0086CB22 /* tb-shuku@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF94FDF81FB9DD5F0086CB22 /* tb-shuku@2x.png */; };
 		AF94FE011FB9DD5F0086CB22 /* tb-xinshu-sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF94FDF91FB9DD5F0086CB22 /* tb-xinshu-sel@2x.png */; };
 		AF94FE021FB9DD5F0086CB22 /* tb-xinshu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF94FDFA1FB9DD5F0086CB22 /* tb-xinshu@2x.png */; };
+		AF9660E51FE6464300EF4733 /* fangdajing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF9660E31FE6464200EF4733 /* fangdajing@2x.png */; };
+		AF9660E61FE6464300EF4733 /* fangdajing_green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF9660E41FE6464300EF4733 /* fangdajing_green@2x.png */; };
 		AFAFB75F1FC282F100663862 /* BookDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFAFB75E1FC282F100663862 /* BookDetailVC.m */; };
 		AFAFB7621FC298A700663862 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AFAFB7601FC298A700663862 /* InfoPlist.strings */; };
 		AFAFB7661FC2ABC100663862 /* BookListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFAFB7651FC2ABC100663862 /* BookListVC.m */; };
@@ -126,6 +128,9 @@
 		AFBAE17A1FB8590B0002DE1B /* NoteItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE1791FB8590B0002DE1B /* NoteItem.m */; };
 		AFBAE17D1FB85EC50002DE1B /* MultySearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE17C1FB85EC50002DE1B /* MultySearchResult.m */; };
 		AFBAE1801FB85EF40002DE1B /* BookItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBAE17F1FB85EF40002DE1B /* BookItem.m */; };
+		AFC17C581FE50DA800734007 /* TTGTagCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC17C551FE50DA800734007 /* TTGTagCollectionView.m */; };
+		AFC17C591FE50DA800734007 /* TTGTextTagCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC17C571FE50DA800734007 /* TTGTextTagCollectionView.m */; };
+		AFC17C5C1FE5136400734007 /* TextTagTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC17C5B1FE5136400734007 /* TextTagTableViewCell.m */; };
 		AFC37B0C1FCBB02400711466 /* NoteListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC37B0B1FCBB02400711466 /* NoteListView.m */; };
 		AFC76ED01FC5AF4E00DF7FD9 /* BookInfoResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC76ECF1FC5AF4E00DF7FD9 /* BookInfoResult.m */; };
 		AFD56B221FC070AF0062BA20 /* UpdateUserInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD56B211FC070AF0062BA20 /* UpdateUserInfoVC.m */; };
@@ -313,6 +318,8 @@
 		AF94FDF81FB9DD5F0086CB22 /* tb-shuku@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-shuku@2x.png"; sourceTree = "<group>"; };
 		AF94FDF91FB9DD5F0086CB22 /* tb-xinshu-sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-xinshu-sel@2x.png"; sourceTree = "<group>"; };
 		AF94FDFA1FB9DD5F0086CB22 /* tb-xinshu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-xinshu@2x.png"; sourceTree = "<group>"; };
+		AF9660E31FE6464200EF4733 /* fangdajing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fangdajing@2x.png"; sourceTree = "<group>"; };
+		AF9660E41FE6464300EF4733 /* fangdajing_green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fangdajing_green@2x.png"; sourceTree = "<group>"; };
 		AFAFB75D1FC282F100663862 /* BookDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookDetailVC.h; sourceTree = "<group>"; };
 		AFAFB75E1FC282F100663862 /* BookDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookDetailVC.m; sourceTree = "<group>"; };
 		AFAFB7611FC298A700663862 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -352,6 +359,12 @@
 		AFBAE17C1FB85EC50002DE1B /* MultySearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultySearchResult.m; sourceTree = "<group>"; };
 		AFBAE17E1FB85EF40002DE1B /* BookItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookItem.h; sourceTree = "<group>"; };
 		AFBAE17F1FB85EF40002DE1B /* BookItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookItem.m; sourceTree = "<group>"; };
+		AFC17C541FE50DA800734007 /* TTGTagCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTGTagCollectionView.h; sourceTree = "<group>"; };
+		AFC17C551FE50DA800734007 /* TTGTagCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTGTagCollectionView.m; sourceTree = "<group>"; };
+		AFC17C561FE50DA800734007 /* TTGTextTagCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTGTextTagCollectionView.h; sourceTree = "<group>"; };
+		AFC17C571FE50DA800734007 /* TTGTextTagCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTGTextTagCollectionView.m; sourceTree = "<group>"; };
+		AFC17C5A1FE5136400734007 /* TextTagTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextTagTableViewCell.h; sourceTree = "<group>"; };
+		AFC17C5B1FE5136400734007 /* TextTagTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextTagTableViewCell.m; sourceTree = "<group>"; };
 		AFC37B0A1FCBB02400711466 /* NoteListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteListView.h; sourceTree = "<group>"; };
 		AFC37B0B1FCBB02400711466 /* NoteListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteListView.m; sourceTree = "<group>"; };
 		AFC76ECE1FC5AF4E00DF7FD9 /* BookInfoResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookInfoResult.h; sourceTree = "<group>"; };
@@ -467,6 +480,7 @@
 		AF23083A1FB33F5600BEC151 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				AFC17C531FE50DA800734007 /* TTGTagCollectionView */,
 				AFBABF331FC847880001A5E5 /* iCarousel */,
 				AF23083B1FB33F5600BEC151 /* AFNetworking */,
 				AF2308491FB33F5600BEC151 /* Category */,
@@ -698,6 +712,8 @@
 				AFAFB76B1FC2BB8F00663862 /* heart_read@2x.png */,
 				AF42D9B81FC537A6006DEDE8 /* book_detail_bg@2x.png */,
 				AF42D9BA1FC5468A006DEDE8 /* icon_heart_white@2x.png */,
+				AF9660E41FE6464300EF4733 /* fangdajing_green@2x.png */,
+				AF9660E31FE6464200EF4733 /* fangdajing@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -744,6 +760,17 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		AFC17C531FE50DA800734007 /* TTGTagCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				AFC17C541FE50DA800734007 /* TTGTagCollectionView.h */,
+				AFC17C551FE50DA800734007 /* TTGTagCollectionView.m */,
+				AFC17C561FE50DA800734007 /* TTGTextTagCollectionView.h */,
+				AFC17C571FE50DA800734007 /* TTGTextTagCollectionView.m */,
+			);
+			path = TTGTagCollectionView;
+			sourceTree = "<group>";
+		};
 		AFDEC8FC1FB4866700926F38 /* Newbooks */ = {
 			isa = PBXGroup;
 			children = (
@@ -772,6 +799,8 @@
 				AFAFB7651FC2ABC100663862 /* BookListVC.m */,
 				AFAFB7671FC2ACB800663862 /* BookTableViewCell.h */,
 				AFAFB7681FC2ACB800663862 /* BookTableViewCell.m */,
+				AFC17C5A1FE5136400734007 /* TextTagTableViewCell.h */,
+				AFC17C5B1FE5136400734007 /* TextTagTableViewCell.m */,
 			);
 			name = Bookroom;
 			sourceTree = "<group>";
@@ -813,7 +842,7 @@
 		AF2308181FB3371200BEC151 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = weimeitc;
 				TargetAttributes = {
 					AF23081F1FB3371200BEC151 = {
@@ -848,10 +877,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF0422891FBC77CD00D15E8E /* icon_heart@2x.png in Resources */,
+				AF9660E61FE6464300EF4733 /* fangdajing_green@2x.png in Resources */,
 				AFAFB7621FC298A700663862 /* InfoPlist.strings in Resources */,
 				AF88AB341FC1723900E885D5 /* shucheng_bg@2x.png in Resources */,
 				AF506F901FB5E26700470C01 /* icon_user@2x.png in Resources */,
 				AF94FE001FB9DD5F0086CB22 /* tb-shuku@2x.png in Resources */,
+				AF9660E51FE6464300EF4733 /* fangdajing@2x.png in Resources */,
 				AF2308AE1FB33F5600BEC151 /* MJRefresh.bundle in Resources */,
 				AF0422881FBC77CD00D15E8E /* icon_emotion@2x.png in Resources */,
 				AF94FE011FB9DD5F0086CB22 /* tb-xinshu-sel@2x.png in Resources */,
@@ -915,6 +946,7 @@
 				AF2308C21FB33F5600BEC151 /* SDWebImageDecoder.m in Sources */,
 				AF2308C91FB33F5600BEC151 /* UIImage+MultiFormat.m in Sources */,
 				AF506F971FB6071800470C01 /* ForgetPwdVC.m in Sources */,
+				AFC17C5C1FE5136400734007 /* TextTagTableViewCell.m in Sources */,
 				AFBAE1801FB85EF40002DE1B /* BookItem.m in Sources */,
 				AF2308C01FB33F5600BEC151 /* SDImageCache.m in Sources */,
 				AF2308B01FB33F5600BEC151 /* MJRefreshConst.m in Sources */,
@@ -941,6 +973,7 @@
 				AF2308B41FB33F5600BEC151 /* AINavigationController.m in Sources */,
 				AF2308281FB3371200BEC151 /* AppDelegate.m in Sources */,
 				AF2308A71FB33F5600BEC151 /* NSObject+Utility.m in Sources */,
+				AFC17C581FE50DA800734007 /* TTGTagCollectionView.m in Sources */,
 				AF036E2B1FC45680005A1765 /* FavoriteBooksResult.m in Sources */,
 				AF036E341FC45DA6005A1765 /* FavBookTableViewCell.m in Sources */,
 				AF2308B81FB33F5600BEC151 /* FadePromptView.m in Sources */,
@@ -971,6 +1004,7 @@
 				AFBAE16E1FB856890002DE1B /* UserInfoResult.m in Sources */,
 				AF2308C31FB33F5600BEC151 /* SDWebImageDownloader.m in Sources */,
 				AF683D811FB81ADE00AB69EC /* ReadNetRequestParam.m in Sources */,
+				AFC17C591FE50DA800734007 /* TTGTextTagCollectionView.m in Sources */,
 				AFC76ED01FC5AF4E00DF7FD9 /* BookInfoResult.m in Sources */,
 				AF2308AB1FB33F5600BEC151 /* UIImage+ResizeMagick.m in Sources */,
 				AF2308BF1FB33F5600BEC151 /* NSData+ImageContentType.m in Sources */,
@@ -1004,13 +1038,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1018,7 +1055,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1052,13 +1093,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1066,7 +1110,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

@@ -38,7 +38,7 @@
 - (void)layoutCarouselView {
     self.carouselView = [[iCarousel alloc] initWithFrame:CGRectMake(0, 35, self.frame.size.width, self.frame.size.height - 35)];
     _carouselView.type = iCarouselTypeLinear;
-//    _carouselView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    _carouselView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _carouselView.delegate = self;
     _carouselView.dataSource = self;
     _carouselView.pagingEnabled = YES;

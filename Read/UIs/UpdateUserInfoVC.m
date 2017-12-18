@@ -19,9 +19,11 @@
 #import "UpdateUserInfoResult.h"
 #import "UploadUserAvatarResult.h"
 
+#define kHeadImageKey   @"kHeadImageKey"
 
 
-@interface UpdateUserInfoVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,NetworkTaskDelegate>
+
+@interface UpdateUserInfoVC ()<UITableViewDataSource, UITableViewDelegate,UITextFieldDelegate, UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,NetworkTaskDelegate>
 @property(nonatomic,strong)UITableView          *modifyTableView;
 @property(nonatomic,strong)UITextField          *nickTextField;
 @property(nonatomic,strong)UITextField          *moodTextField;
@@ -137,18 +139,14 @@
         }];
         
     } else if([customInfo isEqualToString:@"uploadHeadImage"]) {
-        
-        
+    
         UpdateUserInfoVC *wSelf = self;
         [FadePromptView showPromptStatus:@"上传成功！" duration:1.0  positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
-            SDImageCache *imageCache = [SDImageCache sharedImageCache];
+            SDImageCache * imageCache = [SDImageCache sharedImageCache];
+            UIImage *image = [imageCache imageFromDiskCacheForKey:kHeadImageKey];
+            _headImageView.image = image;
             
             UploadUserAvatarResult *uploadResult = (UploadUserAvatarResult *)result;
-            NSString *avatar = uploadResult.avatar;
-            NSString *imageKey = [avatar md5EncodeUpper:NO];
-            UIImage *image = [imageCache imageFromDiskCacheForKey:imageKey];
-            wSelf.headImageView.image = image;
-            
             if ([wSelf.delegate respondsToSelector:@selector(updateUserAvatar:)]) {
                 [wSelf.delegate updateUserAvatar:uploadResult.avatar];
             }
@@ -165,7 +163,9 @@
             //
         }];
     } else if([customInfo isEqualToString:@"uploadHeadImage"]) {
-        [FadePromptView showPromptStatus:errorDesc duration:2.0  positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
+        [FadePromptView showPromptStatus:errorDesc duration:1.0  positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
+            
+            
         }];
     }
 }
@@ -377,8 +377,13 @@
             
             AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
             if (authStatus == ALAuthorizationStatusRestricted || authStatus == ALAuthorizationStatusDenied ) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"无法使用相机" message:@"请在iPhone的“设置-隐私-相机”中允许访问相机" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                [alertView show];
+                
+                UIAlertController *addAlertVC = [UIAlertController alertControllerWithTitle:@"无法使用相机" message:@"请在iPhone的“设置-隐私-相机”中允许访问相机" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *confirmAction =[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+                }];
+                [addAlertVC addAction:confirmAction];
+                [self.navigationController presentViewController:addAlertVC animated:YES completion:nil];
+                
                 return;
             }
             
@@ -424,21 +429,18 @@
     
     __block UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
     __block UIImagePickerController *weakPicker = picker;
-    
+
     UpdateUserInfoVC *wSelf = self;
     dispatch_async(dispatch_get_global_queue(0, 0), ^(void) {
         UIImage *imageScale = [image resizedImageByMagick:@"200x200"];
         
         SDImageCache *imageCache = [SDImageCache sharedImageCache];
-        
-        LoginResult *userInfo = [[SysDataSaver SharedSaver] getUserInfo];\
-        NSString *imageKey = [userInfo.avatar md5EncodeUpper:NO];
-        [imageCache storeImage:imageScale forKey:imageKey];
+        [imageCache storeImage:imageScale forKey:kHeadImageKey];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             //
             [weakPicker dismissViewControllerAnimated:YES completion:^{
-                [wSelf changeHeadImage:imageKey];
+                [wSelf changeHeadImage:kHeadImageKey];
             }];
         });
     });
@@ -446,12 +448,14 @@
 
 - (void)uploadImage:(NSData *)imageData {
     
+    NSString *userId = [[SysDataSaver SharedSaver] getUserId];
+    NSString *imageFileName = [NSString stringWithFormat:@"%@.png",[userId md5EncodeUpper:NO]];
     [SVProgressHUD showWithStatus:@"正在保存..." maskType:SVProgressHUDMaskTypeBlack];
     [[NetworkTask sharedNetworkTask] startUploadTaskApi:API_UploadUserImage
                                                forParam:nil
                                                fileData:imageData
                                                 fileKey:@"file"
-                                               fileName:@"headImage.png"
+                                               fileName:imageFileName
                                                mimeType:@"image/png"
                                                delegate:self
                                               resultObj:[[UploadUserAvatarResult alloc] init]

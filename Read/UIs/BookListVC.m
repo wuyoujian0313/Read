@@ -13,11 +13,7 @@
 #import "NetworkTask.h"
 #import "BookDetailVC.h"
 #import "BookItem.h"
-
-
 #import "RecBooksResult.h"
-
-
 
 
 @interface BookListVC ()<UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate,NetworkTaskDelegate>
