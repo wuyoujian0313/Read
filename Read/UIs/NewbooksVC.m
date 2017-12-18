@@ -75,7 +75,7 @@
     } else {
         [param setObject:[NSString stringWithFormat:@"%lu",(unsigned long)[_bookList count]] forKey:@"offset"];
     }
-    [param setObject:@"16" forKey:@"length"];
+    [param setObject:@"20" forKey:@"length"];
     [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_RecList
                                              forParam:param
                                              delegate:self
@@ -217,15 +217,15 @@
         [cell.contentView addSubview:imageView];
         
         NSInteger margin = 35;
-        NSInteger bookWidth = 53;
-        NSInteger bookHeight = 66;
-        NSInteger top = 29;
+        NSInteger bookWidth = 58;
+        NSInteger bookHeight = 76;
+        NSInteger top = 18;
     
         if ([DeviceInfo screenWidth] > 320) {
             margin = 40;
-            bookWidth = 63;
-            bookHeight = 80;
-            top = 15;
+            bookWidth = 66;
+            bookHeight = 84;
+            top = 11;
         }
         
         
@@ -405,6 +405,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 10;
 }
 
 

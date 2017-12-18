@@ -9,12 +9,19 @@
 #import "BookroomVC.h"
 #import "TextTagTableViewCell.h"
 #import "BookGridTableViewCell.h"
+#import "BookListVC.h"
+#import "MultySearchResult.h"
+#import "NetworkTask.h"
 
-@interface BookroomVC()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,NSCacheDelegate,TextTagDelegate,GridMenuViewDelegate,UIGestureRecognizerDelegate>
+@interface BookroomVC()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,NSCacheDelegate,TextTagDelegate,GridMenuViewDelegate,UIGestureRecognizerDelegate,NetworkTaskDelegate>
 @property(nonatomic, strong) UITableView                        *bookroomTableView;
 @property(nonatomic, strong) UITextField                        *searchTextField;
 @property(nonatomic, strong) NSCache                            *cellCache;
-@property(nonatomic, strong) NSMutableDictionary                *tagSelIndexs;
+@property(nonatomic, strong) NSMutableDictionary                *tagInfos;
+@property(nonatomic, copy) NSString                             *ageString;
+@property(nonatomic, copy) NSString                             *typeString;
+@property(nonatomic, strong) MultySearchResult                  *multyResult;
+@property(nonatomic, strong) NSMutableArray                     *books;
 @end
 
 @implementation BookroomVC
@@ -24,11 +31,24 @@
     // Do any additional setup after loading the view.
     [self setNavTitle:@"Rlab阿来学院" titleColor:[UIColor colorWithHex:kGlobalGreenColor]];
     [self layoutBookroomTableView];
-    _tagSelIndexs = [[NSMutableDictionary alloc] initWithCapacity:0];
-    [_tagSelIndexs setObject:@-1 forKey:@1];
-    [_tagSelIndexs setObject:@"年龄" forKey:@10];
-    [_tagSelIndexs setObject:@-1 forKey:@2];
-    [_tagSelIndexs setObject:@"类别" forKey:@20];
+    [self initParams];
+    [self getMultyBooks];
+}
+
+- (void)initParams {
+    _tagInfos = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [_tagInfos setObject:@-1 forKey:@1];
+    [_tagInfos setObject:@"年龄" forKey:@10];
+    [_tagInfos setObject:@[@"0-2岁",@"2-4岁",@"4-6岁",@"6-8岁",@"8-10岁",@"8-10岁",@"10-12岁",@"12-14岁"] forKey:@100];
+    
+    [_tagInfos setObject:@-1 forKey:@2];
+    [_tagInfos setObject:@"类别" forKey:@20];
+    [_tagInfos setObject:@[@"图画书",@"科普",@"桥梁书",@"小说",@"童谣",@"诗歌",@"传记",@"漫画",@"人文",@"散文",@"童话"] forKey:@200];
+    
+    
+    _ageString = @"";
+    _typeString = @"";
+    _books = [[NSMutableArray alloc] initWithCapacity:0];
 }
 
 - (void)layoutBookroomTableView {
@@ -36,9 +56,79 @@
     [self setBookroomTableView:tableView];
     [tableView setDelegate:self];
     [tableView setDataSource:self];
-    [tableView setBackgroundColor:[UIColor whiteColor]];
+    [tableView setBackgroundColor:[UIColor clearColor]];
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.view addSubview:tableView];
+}
+
+- (void)reloadData {
+    NSArray *ages = _multyResult.arrayAge;
+    NSMutableArray *ageList = [[NSMutableArray alloc] initWithCapacity:0];
+    for (NSString *age in ages) {
+        if (age !=nil && [age length] > 0) {
+            [ageList addObject:age];
+        }
+    }
+    
+    if ([ageList count] > 0) {
+        [_tagInfos setObject:ageList forKey:@100];
+    }
+    
+    NSArray *types = _multyResult.arrayLeibie;
+    NSMutableArray *typeList = [[NSMutableArray alloc] initWithCapacity:0];
+    for (NSString *type in types) {
+        if (type != nil && [type length] > 0) {
+            [typeList addObject:type];
+        }
+    }
+    
+    if ([typeList count] > 0) {
+        [_tagInfos setObject:typeList forKey:@200];
+    }
+    
+    if (_multyResult.arrayBook && [_multyResult.arrayBook count] > 0) {
+        [_books removeAllObjects];
+        [_books addObjectsFromArray:_multyResult.arrayBook];
+    }
+    
+    [_bookroomTableView reloadData];
+}
+
+- (void)getMultyBooks {
+    NSMutableDictionary* param =[[NSMutableDictionary alloc] initWithCapacity:0];
+    [param setObject:@"0" forKey:@"offset"];
+    [param setObject:@"15" forKey:@"length"];
+    [param setObject:_ageString forKey:@"age"];
+    [param setObject:_typeString forKey:@"type"];
+    
+    [SVProgressHUD showWithStatus:@"正在获取书库信息..." maskType:SVProgressHUDMaskTypeBlack];
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_MultySearch
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[MultySearchResult alloc] init]
+                                           customInfo:@"getMultyBooks"];
+}
+
+#pragma mark - NetworkTaskDelegate
+-(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+    
+    if ([customInfo isEqualToString:@"getMultyBooks"]) {
+        //
+        _multyResult = (MultySearchResult *)result;
+        [self reloadData];
+    }
+}
+
+
+-(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+    if ([customInfo isEqualToString:@"getMultyBooks"]) {
+        //
+        [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
+            //
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,10 +138,15 @@
 
 - (void)searchBooks:(UIButton *)sender {
     [_searchTextField resignFirstResponder];
+    BookListVC *vc = [[BookListVC alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)moreBooks:(UIButton *)sender {
-    
+    BookListVC *vc = [[BookListVC alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - GridMenuViewDelegate
@@ -65,7 +160,7 @@
 - (void)didSelectTagIndex:(NSInteger)tagIndex inCell:(TextTagTableViewCell *)cell {
     NSIndexPath *indexPath = [_bookroomTableView indexPathForCell:cell];
     NSInteger index = indexPath.row;
-    [_tagSelIndexs setObject:[NSNumber numberWithInteger:tagIndex] forKey:[NSNumber numberWithInteger:index]];
+    [_tagInfos setObject:[NSNumber numberWithInteger:tagIndex] forKey:[NSNumber numberWithInteger:index]];
     
     [_searchTextField resignFirstResponder];
     [FadePromptView showPromptStatus:[NSString stringWithFormat:@"click tag index:%ld",(long)tagIndex] duration:1.0 finishBlock:^{
@@ -107,9 +202,9 @@
         
         // 设置数据
         NSNumber *indexNumber = [NSNumber numberWithInteger:indexPath.row];
-        NSInteger index = [[_tagSelIndexs objectForKey:indexNumber] integerValue];
-        NSString *nameText = [_tagSelIndexs objectForKey:[NSNumber numberWithInteger:indexPath.row*10]];
-        [cell setNameText:nameText tagNames:@[@"3-4岁",@"5-10岁",@"10-15岁",@"15-20岁",@"长沙亚信",@"湖南长沙"] selectIndex:index];
+        NSInteger index = [[_tagInfos objectForKey:indexNumber] integerValue];
+        NSString *nameText = [_tagInfos objectForKey:[NSNumber numberWithInteger:indexPath.row*10]];
+        [cell setNameText:nameText tagNames:[_tagInfos objectForKey:[NSNumber numberWithInteger:indexPath.row*100]] selectIndex:index];
         cell.delegate = self;
         
         return cell;
@@ -127,33 +222,7 @@
         }
         
         cell.delegate = self;
-        
-        // 设置数据
-        GridMenuItem *item1 = [[GridMenuItem alloc] init];
-        item1.icon = @"book_cover";
-        item1.title = @"菜单1";
-        item1.iconSize = CGSizeMake(53, 66);
-        item1.titleFont = [UIFont systemFontOfSize:13];
-        item1.titleColor = [UIColor grayColor];
-        
-        GridMenuItem *item2 = [[GridMenuItem alloc] init];
-        item2.icon = @"book_cover";
-        item2.title = @"菜单2";
-        item2.iconSize = CGSizeMake(53, 66);
-        item2.titleFont = [UIFont systemFontOfSize:13];
-        item2.titleColor = [UIColor grayColor];
-        
-        GridMenuItem *item3 = [[GridMenuItem alloc] init];
-        item3.icon = @"book_cover";
-        item3.title = @"菜单菜单菜单";
-        item3.iconSize = CGSizeMake(53, 66);
-        item3.titleFont = [UIFont systemFontOfSize:13];
-        item3.titleColor = [UIColor grayColor];
-        
-        
-        NSArray *menus = @[item1,item2,item3,item1,item2,item3,item1,item2,item3,item1,item2,item3,item1,item2,item3,item2,item3];
-        
-        [cell setMenus:menus];
+        [cell addBooks:_books];
         
         return cell;
     }
@@ -219,12 +288,11 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reusedCellID];
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            LineView *line = [[LineView alloc] initWithFrame:CGRectMake(0, 5, [DeviceInfo screenWidth], kLineHeight1px)];
+            LineView *line = [[LineView alloc] initWithFrame:CGRectMake(0, 4, [DeviceInfo screenWidth], kLineHeight1px)];
             [cell.contentView addSubview:line];
             
             UIButton *moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [moreBtn setFrame:CGRectMake(tableView.frame.size.width-15-40, (5+kLineHeight1px)*1.5, 40, 36)];
+            [moreBtn setFrame:CGRectMake(tableView.frame.size.width-15-40, (4+kLineHeight1px)*1.5, 40, 36)];
             [moreBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
             [moreBtn setTitle:@"更多" forState:UIControlStateNormal];
             [moreBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
@@ -259,7 +327,7 @@
         TextTagTableViewCell *cell = (TextTagTableViewCell *)[self tableView:_bookroomTableView preparedCellForIndexPath:indexPath];
         return cell.cellHeight;
     } else if (indexPath.row == 3) {
-        return 36 + 2*(5+kLineHeight1px);
+        return 36 + 2*(4+kLineHeight1px);
     } else if (indexPath.row == 4) {
         BookGridTableViewCell *cell = (BookGridTableViewCell *)[self tableView:_bookroomTableView preparedCellForIndexPath:indexPath];
         return cell.cellHeight;

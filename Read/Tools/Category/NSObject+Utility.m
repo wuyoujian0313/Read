@@ -89,7 +89,13 @@
                         // 基本数据类型
                         if(([varClassName isEqualToString:@"NSString"]) || ([varClassName isEqualToString:@"NSNumber"]))
                         {
-                            [arrayDest addObject:jsonValue];
+                            // 解析
+                            NSInteger jsonCount = [jsonValue count];
+                            for(NSInteger i = 0; i < jsonCount; i++)
+                            {
+                                id varObject = [jsonValue objectAtIndex:i];
+                                [arrayDest addObject:varObject];
+                            }
                         }
                         else
                         {

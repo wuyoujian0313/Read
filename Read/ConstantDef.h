@@ -61,5 +61,7 @@
 // 书的详情
 #define API_BookInfo                    @"book/info"
 
+// 书库首页数据
+#define API_MultySearch                 @"book/multySearch"
 
 #endif /* ConstantDef_h */

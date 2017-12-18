@@ -23,6 +23,6 @@
 @interface BookGridTableViewCell : UITableViewCell
 @property (nonatomic, weak) id <GridMenuViewDelegate> delegate;
 
-- (void)setMenus:(NSArray<GridMenuItem*> *)menus;
+- (void)addBooks:(NSArray *)books;
 - (CGFloat)cellHeight;
 @end

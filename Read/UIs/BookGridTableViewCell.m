@@ -8,6 +8,9 @@
 
 #import "BookGridTableViewCell.h"
 #import "UIView+SizeUtility.h"
+#import "BookItem.h"
+#import "SDImageCache.h"
+#import "UIImageView+WebCache.h"
 
 @implementation GridMenuItem
 @end
@@ -38,7 +41,7 @@ static NSString *const kGridMenuCellIdentifier = @"kGridMenuCellIdentifier";
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         [_titleLabel setBackgroundColor:[UIColor clearColor]];
         [_titleLabel setTextAlignment:NSTextAlignmentCenter];
-        [_titleLabel setLineBreakMode:NSLineBreakByWordWrapping];
+        [_titleLabel setLineBreakMode:NSLineBreakByTruncatingTail];
         [self.contentView addSubview:_titleLabel];
     }
     return self;
@@ -50,7 +53,25 @@ static NSString *const kGridMenuCellIdentifier = @"kGridMenuCellIdentifier";
     [_titleLabel setFont:menu.titleFont];
     [_titleLabel setTextColor:menu.titleColor];
     
-    [_iconImageView setImage:[UIImage imageNamed:menu.icon]];
+    // 远程icon
+    NSString *imageKey  = [menu.icon md5EncodeUpper:NO];
+    SDImageCache * imageCache = [SDImageCache sharedImageCache];
+    UIImage * cacheimage = [imageCache imageFromDiskCacheForKey:imageKey];
+    
+    if (cacheimage == nil) {
+        _iconImageView.image = [UIImage imageNamed:@"book_cover"];
+        __weak inline_GridMenuCell *wSelf = self;
+        [_iconImageView  sd_setImageWithURL:[NSURL URLWithString:menu.icon] placeholderImage:cacheimage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+            inline_GridMenuCell *sSelf = wSelf;
+            if (image) {
+                sSelf.iconImageView.image = image;
+                [[SDImageCache sharedImageCache] storeImage:image forKey:imageKey];
+            }
+        }];
+    } else {
+        _iconImageView.image = cacheimage;
+    }
     
     CGSize size = menu.iconSize;
     CGFloat textHeight = menu.titleFont.pointSize;
@@ -78,12 +99,20 @@ static NSString *const kGridMenuCellIdentifier = @"kGridMenuCellIdentifier";
 
 @implementation BookGridTableViewCell
 
-- (void)setMenus:(NSArray<GridMenuItem*> *)menus {
-
-    _menuWidth = 53;
-    _menuHeight = 66 + 5 + 14;
-    _space = ([DeviceInfo screenWidth] - 53 * 5 ) / 6;
-    NSInteger row = [menus count] % 5 == 0 ?[menus count] / 5 : [menus count] / 5 + 1;
+- (void)addBooks:(NSArray *)books {
+    
+    NSInteger bookWidth = 58;
+    NSInteger bookHeight = 72;
+    if ([DeviceInfo screenWidth] > 320) {
+        bookWidth = 66;
+        bookHeight = 86;
+    }
+    
+    _menuWidth = bookWidth;
+    _menuHeight = bookHeight + 5 + 14;
+    _space = ([DeviceInfo screenWidth] - _menuWidth * 5 ) / 6;
+    
+    NSInteger row = [books count] % 5 == 0 ?[books count] / 5 : [books count] / 5 + 1;
     _contentHeight = row * _menuHeight + (row ) * _space;
     
     
@@ -91,10 +120,25 @@ static NSString *const kGridMenuCellIdentifier = @"kGridMenuCellIdentifier";
     _mainMenuView.height = _contentHeight;
     
     [_menuDatas removeAllObjects];
-    [_menuDatas addObjectsFromArray:menus];
+    for (BookItem *item in books) {
+        NSString *title = item.name;
+        NSString *pic = item.pic_big;
+        
+        GridMenuItem *menu = [[GridMenuItem alloc] init];
+        menu.icon = pic;
+        menu.title = title;
+        menu.iconSize = CGSizeMake(bookWidth, bookHeight);
+        menu.titleColor = [UIColor grayColor];
+        
+        menu.titleFont = [UIFont systemFontOfSize:11];
+        if ([DeviceInfo screenWidth] > 320) {
+            menu.titleFont = [UIFont systemFontOfSize:13];
+        }
+        
+        [_menuDatas addObject:menu];
+    }
     [_mainMenuView reloadData];
 }
-
 
 - (CGFloat)cellHeight {
     return _contentHeight;
@@ -116,11 +160,18 @@ static NSString *const kGridMenuCellIdentifier = @"kGridMenuCellIdentifier";
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         //
-        _menuDatas = [[NSMutableArray alloc] initWithCapacity:0];
-        _menuWidth = 53;
-        _menuHeight = 66 + 5 + 14;
-        _space = ([DeviceInfo screenWidth] - 53 * 5 ) / 6;
+        NSInteger bookWidth = 58;
+        NSInteger bookHeight = 72;
+        if ([DeviceInfo screenWidth] > 320) {
+            bookWidth = 66;
+            bookHeight = 86;
+        }
         
+        _menuWidth = bookWidth;
+        _menuHeight = bookHeight + 5 + 14;
+        _space = ([DeviceInfo screenWidth] - _menuWidth * 5 ) / 6;
+        
+        _menuDatas = [[NSMutableArray alloc] initWithCapacity:0];
         //初始化
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
