@@ -20,13 +20,18 @@
         APIParam = [NSDictionary dictionary];
     }
 
-    NSString *u = [[SysDataSaver SharedSaver] getUserId];
-    if (u == nil || [u length] == 0) {
-        u = @"";
+    NSString *paramU = [APIParam objectForKey:@"u"];
+    if (paramU == nil) {
+        NSString *u = [[SysDataSaver SharedSaver] getUserId];
+        if (u == nil || [u length] == 0) {
+            paramU = @"";
+        } else {
+            paramU = u;
+        }
     }
     
     NSMutableDictionary *param = [[NSMutableDictionary alloc] initWithDictionary:APIParam];
-    [param setObject:u forKey:@"u"];
+    [param setObject:paramU forKey:@"u"];
     NSString *sha1String = [self getSH1String:param];
     [param setObject:sha1String forKey:@"sign"];
     

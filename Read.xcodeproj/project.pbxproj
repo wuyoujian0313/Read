@@ -134,6 +134,9 @@
 		AFC37B0C1FCBB02400711466 /* NoteListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC37B0B1FCBB02400711466 /* NoteListView.m */; };
 		AFC76ED01FC5AF4E00DF7FD9 /* BookInfoResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC76ECF1FC5AF4E00DF7FD9 /* BookInfoResult.m */; };
 		AFD3D2D21FE8CE40002CB821 /* BookSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD3D2D11FE8CE40002CB821 /* BookSearchResult.m */; };
+		AFD3D2D51FE8FF88002CB821 /* NoteInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD3D2D41FE8FF88002CB821 /* NoteInfoVC.m */; };
+		AFD3D2D81FE90006002CB821 /* TextNoteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD3D2D71FE90006002CB821 /* TextNoteTableViewCell.m */; };
+		AFD3D2DB1FE90080002CB821 /* VoiceNoteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD3D2DA1FE90080002CB821 /* VoiceNoteTableViewCell.m */; };
 		AFD56B221FC070AF0062BA20 /* UpdateUserInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD56B211FC070AF0062BA20 /* UpdateUserInfoVC.m */; };
 		AFDEC9011FB4878F00926F38 /* NotesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEC9001FB4878F00926F38 /* NotesVC.m */; };
 		AFDEC9041FB487AB00926F38 /* BookroomVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEC9031FB487AB00926F38 /* BookroomVC.m */; };
@@ -373,6 +376,12 @@
 		AFC76ECF1FC5AF4E00DF7FD9 /* BookInfoResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookInfoResult.m; sourceTree = "<group>"; };
 		AFD3D2D01FE8CE40002CB821 /* BookSearchResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookSearchResult.h; sourceTree = "<group>"; };
 		AFD3D2D11FE8CE40002CB821 /* BookSearchResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookSearchResult.m; sourceTree = "<group>"; };
+		AFD3D2D31FE8FF88002CB821 /* NoteInfoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoteInfoVC.h; sourceTree = "<group>"; };
+		AFD3D2D41FE8FF88002CB821 /* NoteInfoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoteInfoVC.m; sourceTree = "<group>"; };
+		AFD3D2D61FE90006002CB821 /* TextNoteTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextNoteTableViewCell.h; sourceTree = "<group>"; };
+		AFD3D2D71FE90006002CB821 /* TextNoteTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextNoteTableViewCell.m; sourceTree = "<group>"; };
+		AFD3D2D91FE90080002CB821 /* VoiceNoteTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VoiceNoteTableViewCell.h; sourceTree = "<group>"; };
+		AFD3D2DA1FE90080002CB821 /* VoiceNoteTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VoiceNoteTableViewCell.m; sourceTree = "<group>"; };
 		AFD56B201FC070AF0062BA20 /* UpdateUserInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateUserInfoVC.h; sourceTree = "<group>"; };
 		AFD56B211FC070AF0062BA20 /* UpdateUserInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateUserInfoVC.m; sourceTree = "<group>"; };
 		AFDEC8FF1FB4878F00926F38 /* NotesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesVC.h; sourceTree = "<group>"; };
@@ -788,6 +797,8 @@
 				AFAFB75E1FC282F100663862 /* BookDetailVC.m */,
 				AF42D9B51FC536A7006DEDE8 /* BookInfoView.h */,
 				AF42D9B61FC536A7006DEDE8 /* BookInfoView.m */,
+				AFC37B0A1FCBB02400711466 /* NoteListView.h */,
+				AFC37B0B1FCBB02400711466 /* NoteListView.m */,
 				AF42D9BC1FC553BF006DEDE8 /* BookContentView.h */,
 				AF42D9BD1FC553BF006DEDE8 /* BookContentView.m */,
 				AF4EE7F01FCAD50C00161746 /* BookIntroduceView.h */,
@@ -820,8 +831,12 @@
 			children = (
 				AFDEC8FF1FB4878F00926F38 /* NotesVC.h */,
 				AFDEC9001FB4878F00926F38 /* NotesVC.m */,
-				AFC37B0A1FCBB02400711466 /* NoteListView.h */,
-				AFC37B0B1FCBB02400711466 /* NoteListView.m */,
+				AFD3D2D61FE90006002CB821 /* TextNoteTableViewCell.h */,
+				AFD3D2D71FE90006002CB821 /* TextNoteTableViewCell.m */,
+				AFD3D2D91FE90080002CB821 /* VoiceNoteTableViewCell.h */,
+				AFD3D2DA1FE90080002CB821 /* VoiceNoteTableViewCell.m */,
+				AFD3D2D31FE8FF88002CB821 /* NoteInfoVC.h */,
+				AFD3D2D41FE8FF88002CB821 /* NoteInfoVC.m */,
 			);
 			name = Notes;
 			sourceTree = "<group>";
@@ -935,6 +950,7 @@
 				AFBABF321FC828580001A5E5 /* CustomSegmentControl.m in Sources */,
 				AF4EE7F21FCAD50C00161746 /* BookIntroduceView.m in Sources */,
 				AF683D881FB81B5800AB69EC /* NetworkTask.m in Sources */,
+				AFD3D2D51FE8FF88002CB821 /* NoteInfoVC.m in Sources */,
 				AF2308CF1FB33F5600BEC151 /* SVProgressHUD.m in Sources */,
 				AFD3D2D21FE8CE40002CB821 /* BookSearchResult.m in Sources */,
 				AF2308E51FB342CE00BEC151 /* LoginVC.m in Sources */,
@@ -951,6 +967,7 @@
 				AFAFB7691FC2ACB800663862 /* BookTableViewCell.m in Sources */,
 				AF2308E31FB342CE00BEC151 /* LoginResult.m in Sources */,
 				AFC37B0C1FCBB02400711466 /* NoteListView.m in Sources */,
+				AFD3D2D81FE90006002CB821 /* TextNoteTableViewCell.m in Sources */,
 				AF2308A91FB33F5600BEC151 /* UIAlertController+Orientations.m in Sources */,
 				AF2308A31FB33F5600BEC151 /* AFSecurityPolicy.m in Sources */,
 				AF2308CA1FB33F5600BEC151 /* UIImage+WebP.m in Sources */,
@@ -975,6 +992,7 @@
 				AF88AB321FC1540400E885D5 /* UploadUserAvatarResult.m in Sources */,
 				AF036E401FC4639F005A1765 /* NoteBookItem.m in Sources */,
 				AFF5EDBD1FE783B4001FDE2B /* BookGridTableViewCell.m in Sources */,
+				AFD3D2DB1FE90080002CB821 /* VoiceNoteTableViewCell.m in Sources */,
 				AF2308C51FB33F5600BEC151 /* SDWebImageManager.m in Sources */,
 				AFBABF361FC847880001A5E5 /* iCarousel.m in Sources */,
 				AFBAE17A1FB8590B0002DE1B /* NoteItem.m in Sources */,

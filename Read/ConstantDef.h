@@ -67,4 +67,7 @@
 // 书库首页数据
 #define API_BookSearch                  @"book/search"
 
+// 笔记列表
+#define API_NoteList                    @"book/noteList"
+
 #endif /* ConstantDef_h */

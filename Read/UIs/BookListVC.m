@@ -16,8 +16,6 @@
 #import "BookSearchResult.h"
 #import "MultySearchResult.h"
 
-#import "RecBooksResult.h"
-
 
 @interface BookListVC ()<UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate,NetworkTaskDelegate>
 @property(nonatomic, strong) UITableView                *booksTableView;
@@ -103,29 +101,6 @@
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.view addSubview:tableView];
 }
-
-- (void)keyboardWillShow:(NSNotification *)note{
-    [super keyboardWillShow:note];
-}
-
-- (void)keyboardWillHide:(NSNotification *)note{
-    [super keyboardWillHide:note];
-    
-    [_booksTableView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-}
-
--(void)keyboardDidShow:(NSNotification *)note{
-    
-    [super keyboardDidShow:note];
-    CGRect keyboardBounds;
-    [[note.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
-    keyboardBounds = [self.view convertRect:keyboardBounds toView:nil];
-    
-    [_booksTableView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - keyboardBounds.size.height)];
-    
-    [_booksTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-}
-
 
 #pragma mark - NetworkTaskDelegate
 -(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {

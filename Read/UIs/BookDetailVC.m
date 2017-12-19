@@ -11,12 +11,14 @@
 #import "NetworkTask.h"
 #import "BookContentView.h"
 #import "BookInfoResult.h"
+#import "NoteListResult.h"
 
 
 @interface BookDetailVC ()<NetworkTaskDelegate>
 @property (nonatomic, strong) BookInfoView          *bookInfoView;
 @property (nonatomic, strong) BookContentView       *bookContentView;
 @property (nonatomic, strong) BookInfoResult        *bookDetail;
+@property (nonatomic, strong) NoteListResult        *bookNotes;
 @end
 
 @implementation BookDetailVC
@@ -27,7 +29,37 @@
     [self setNavTitle:@"Rlab阿来学院" titleColor:[UIColor colorWithHex:kGlobalGreenColor]];
     [self layoutBookInfoView];
     [self layoutBookContentView];
-    [self loadBookDetail];
+    [self getBookDetail];
+}
+
+- (void)getNotes {
+    NSMutableDictionary* param =[[NSMutableDictionary alloc] initWithCapacity:0];
+    if (_isbn != nil  && [_isbn length] > 0) {
+        [param setObject:_isbn forKey:@"isbn"];
+    }
+    
+    [param setObject:@"" forKey:@"u"];
+    
+    [SVProgressHUD showWithStatus:@"正在获取笔记..." maskType:SVProgressHUDMaskTypeBlack];
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_NoteList
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[NoteListResult alloc] init]
+                                           customInfo:@"getNotes"];
+}
+
+- (void)getBookDetail {
+    NSMutableDictionary* param =[[NSMutableDictionary alloc] initWithCapacity:0];
+    if (_isbn != nil  && [_isbn length] > 0) {
+        [param setObject:_isbn forKey:@"isbn"];
+    }
+    
+    [SVProgressHUD showWithStatus:@"正在获取书本详情..." maskType:SVProgressHUDMaskTypeBlack];
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_BookInfo
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[BookInfoResult alloc] init]
+                                           customInfo:@"getBookDetail"];
 }
 
 - (void)layoutBookInfoView {
@@ -53,18 +85,7 @@
     [self.view addSubview:contentView];
 }
 
-- (void)loadBookDetail {
-    NSMutableDictionary* param =[[NSMutableDictionary alloc] initWithCapacity:0];
-    if (_isbn != nil  && [_isbn length] > 0) {
-        [param setObject:_isbn forKey:@"isbn"];
-    }
-    
-    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_BookInfo
-                                             forParam:param
-                                             delegate:self
-                                            resultObj:[[BookInfoResult alloc] init]
-                                           customInfo:@"getBookDetail"];
-}
+
 
 #pragma mark - NetworkTaskDelegate
 -(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
@@ -74,6 +95,11 @@
         _bookDetail = (BookInfoResult *)result;
         [_bookInfoView loadBookInfo:_bookDetail];
         [_bookContentView loadBookInfo:_bookDetail];
+        
+        [self getNotes];
+    }
+    else if ([customInfo isEqualToString:@"getNotes"]) {
+        
     }
 }
 
@@ -86,6 +112,7 @@
         [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
             //
         }];
+    } else if ([customInfo isEqualToString:@"getNotes"]) {
     }
 }
 
