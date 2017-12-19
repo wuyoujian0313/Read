@@ -92,7 +92,12 @@
 - (void)textTagCollectionView:(TTGTextTagCollectionView *)textTagCollectionView didTapTag:(NSString *)tagText atIndex:(NSUInteger)index selected:(BOOL)selected {
     
     if (_selIndex != -1) {
-        [_tagView setTagAtIndex:_selIndex selected:NO];
+        if (_selIndex == index) {
+            [_tagView setTagAtIndex:_selIndex selected:YES];
+        } else {
+            [_tagView setTagAtIndex:_selIndex selected:NO];
+        }
+        
     }
     _selIndex = index;
     

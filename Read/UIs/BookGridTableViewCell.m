@@ -36,6 +36,7 @@ static NSString *const kGridMenuCellIdentifier = @"kGridMenuCellIdentifier";
         self.iconImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         _iconImageView.userInteractionEnabled = YES;
         _iconImageView.clipsToBounds = YES;
+        [_iconImageView setImage:[UIImage imageNamed:@"book_cover"]];
         [self.contentView addSubview:_iconImageView];
         
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -59,16 +60,21 @@ static NSString *const kGridMenuCellIdentifier = @"kGridMenuCellIdentifier";
     UIImage * cacheimage = [imageCache imageFromDiskCacheForKey:imageKey];
     
     if (cacheimage == nil) {
-        _iconImageView.image = [UIImage imageNamed:@"book_cover"];
-        __weak inline_GridMenuCell *wSelf = self;
-        [_iconImageView  sd_setImageWithURL:[NSURL URLWithString:menu.icon] placeholderImage:cacheimage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (menu.icon != nil && [menu.icon length] > 0) {
             
-            inline_GridMenuCell *sSelf = wSelf;
-            if (image) {
-                sSelf.iconImageView.image = image;
-                [[SDImageCache sharedImageCache] storeImage:image forKey:imageKey];
-            }
-        }];
+            __weak inline_GridMenuCell *wSelf = self;
+            [_iconImageView  sd_setImageWithURL:[NSURL URLWithString:menu.icon] placeholderImage:[UIImage imageNamed:@"book_cover"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                
+                inline_GridMenuCell *sSelf = wSelf;
+                if (image) {
+                    sSelf.iconImageView.image = image;
+                    [[SDImageCache sharedImageCache] storeImage:image forKey:imageKey];
+                }
+            }];
+        } else {
+            _iconImageView.image = [UIImage imageNamed:@"book_cover"];
+        }
+        
     } else {
         _iconImageView.image = cacheimage;
     }

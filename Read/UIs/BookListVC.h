@@ -8,7 +8,10 @@
 
 #import "BaseVC.h"
 
-// 1）更多是：查看年龄段和类型的所有书，点击类型或者年龄段也是调用的更多同一个接口； 2）搜索是带上关键字的是另外一个接口；
 @interface BookListVC : BaseVC
 @property (nonatomic,copy)NSString *key;
+@property (nonatomic,copy)NSString *age;
+
+// type =@"keyword",是调用:API_bookSearch, type !=@"keyword":调用：API_MultySearch
+@property (nonatomic,copy)NSString *type;
 @end

@@ -133,6 +133,7 @@
 		AFC17C5C1FE5136400734007 /* TextTagTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC17C5B1FE5136400734007 /* TextTagTableViewCell.m */; };
 		AFC37B0C1FCBB02400711466 /* NoteListView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC37B0B1FCBB02400711466 /* NoteListView.m */; };
 		AFC76ED01FC5AF4E00DF7FD9 /* BookInfoResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC76ECF1FC5AF4E00DF7FD9 /* BookInfoResult.m */; };
+		AFD3D2D21FE8CE40002CB821 /* BookSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD3D2D11FE8CE40002CB821 /* BookSearchResult.m */; };
 		AFD56B221FC070AF0062BA20 /* UpdateUserInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD56B211FC070AF0062BA20 /* UpdateUserInfoVC.m */; };
 		AFDEC9011FB4878F00926F38 /* NotesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEC9001FB4878F00926F38 /* NotesVC.m */; };
 		AFDEC9041FB487AB00926F38 /* BookroomVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEC9031FB487AB00926F38 /* BookroomVC.m */; };
@@ -370,6 +371,8 @@
 		AFC37B0B1FCBB02400711466 /* NoteListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteListView.m; sourceTree = "<group>"; };
 		AFC76ECE1FC5AF4E00DF7FD9 /* BookInfoResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookInfoResult.h; sourceTree = "<group>"; };
 		AFC76ECF1FC5AF4E00DF7FD9 /* BookInfoResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookInfoResult.m; sourceTree = "<group>"; };
+		AFD3D2D01FE8CE40002CB821 /* BookSearchResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookSearchResult.h; sourceTree = "<group>"; };
+		AFD3D2D11FE8CE40002CB821 /* BookSearchResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookSearchResult.m; sourceTree = "<group>"; };
 		AFD56B201FC070AF0062BA20 /* UpdateUserInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateUserInfoVC.h; sourceTree = "<group>"; };
 		AFD56B211FC070AF0062BA20 /* UpdateUserInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateUserInfoVC.m; sourceTree = "<group>"; };
 		AFDEC8FF1FB4878F00926F38 /* NotesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesVC.h; sourceTree = "<group>"; };
@@ -676,6 +679,8 @@
 				AF4C90CF1FBF1D2A003148EC /* AddChildrenResult.m */,
 				AF88AB301FC1540400E885D5 /* UploadUserAvatarResult.h */,
 				AF88AB311FC1540400E885D5 /* UploadUserAvatarResult.m */,
+				AFD3D2D01FE8CE40002CB821 /* BookSearchResult.h */,
+				AFD3D2D11FE8CE40002CB821 /* BookSearchResult.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -931,6 +936,7 @@
 				AF4EE7F21FCAD50C00161746 /* BookIntroduceView.m in Sources */,
 				AF683D881FB81B5800AB69EC /* NetworkTask.m in Sources */,
 				AF2308CF1FB33F5600BEC151 /* SVProgressHUD.m in Sources */,
+				AFD3D2D21FE8CE40002CB821 /* BookSearchResult.m in Sources */,
 				AF2308E51FB342CE00BEC151 /* LoginVC.m in Sources */,
 				AF2308C61FB33F5600BEC151 /* SDWebImagePrefetcher.m in Sources */,
 				AF14EAB31FB6FB770042683D /* NSData+Crypto.m in Sources */,

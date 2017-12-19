@@ -12,6 +12,7 @@
 #import "BookListVC.h"
 #import "MultySearchResult.h"
 #import "NetworkTask.h"
+#import "BookDetailVC.h"
 
 @interface BookroomVC()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,NSCacheDelegate,TextTagDelegate,GridMenuViewDelegate,UIGestureRecognizerDelegate,NetworkTaskDelegate>
 @property(nonatomic, strong) UITableView                        *bookroomTableView;
@@ -86,8 +87,8 @@
         [_tagInfos setObject:typeList forKey:@200];
     }
     
+    [_books removeAllObjects];
     if (_multyResult.arrayBook && [_multyResult.arrayBook count] > 0) {
-        [_books removeAllObjects];
         [_books addObjectsFromArray:_multyResult.arrayBook];
     }
     
@@ -125,8 +126,11 @@
     [SVProgressHUD dismiss];
     if ([customInfo isEqualToString:@"getMultyBooks"]) {
         //
+        [self.books removeAllObjects];
+        [self.bookroomTableView reloadData];
         [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
             //
+            
         }];
     }
 }
@@ -138,22 +142,36 @@
 
 - (void)searchBooks:(UIButton *)sender {
     [_searchTextField resignFirstResponder];
+    if (_searchTextField.text == nil || [_searchTextField.text length] <= 0) {
+        [FadePromptView showPromptStatus:@"请输入搜索关键字~" duration:0.6  positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
+            //
+        }];
+        [_searchTextField becomeFirstResponder];
+        return;
+    }
+    
     BookListVC *vc = [[BookListVC alloc] init];
+    vc.type = @"keyword";
+    vc.key = _searchTextField.text;
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)moreBooks:(UIButton *)sender {
     BookListVC *vc = [[BookListVC alloc] init];
+    vc.age = _ageString;
+    vc.type = _typeString;
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - GridMenuViewDelegate
 - (void)didSelectGridMenuIndex:(NSInteger)index {
-    [FadePromptView showPromptStatus:[NSString stringWithFormat:@"click book index:%ld",(long)index] duration:1.0 finishBlock:^{
-        //
-    }];
+    BookDetailVC *vc = [[BookDetailVC alloc] init];
+    BookItem *item = [_books objectAtIndex:index];
+    vc.isbn = item.isbn;
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - TextTagDelegate
@@ -163,9 +181,27 @@
     [_tagInfos setObject:[NSNumber numberWithInteger:tagIndex] forKey:[NSNumber numberWithInteger:index]];
     
     [_searchTextField resignFirstResponder];
-    [FadePromptView showPromptStatus:[NSString stringWithFormat:@"click tag index:%ld",(long)tagIndex] duration:1.0 finishBlock:^{
-        //
-    }];
+    
+    if (index == 1) {
+        // 年龄
+        NSArray *ages = [_tagInfos objectForKey:[NSNumber numberWithInteger:index*100]];
+        NSString *age = [ages objectAtIndex:tagIndex];
+        NSRange range = [age rangeOfString:@"岁"];
+        if (range.length < [age length]) {
+            _ageString = [age substringToIndex:range.location];
+        }
+        
+    }
+    
+    if (index == 2) {
+        // 类型
+        NSArray *types = [_tagInfos objectForKey:[NSNumber numberWithInteger:index*100]];
+        NSString *type = [types objectAtIndex:tagIndex];
+        _typeString = type;
+    }
+    
+    [self getMultyBooks];
+    
 }
 
 #pragma mark - UITableViewDataSource

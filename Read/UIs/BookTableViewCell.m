@@ -65,7 +65,7 @@
             
             if (default_image == nil) {
                 [bookImageView setImage:[UIImage imageNamed:@"book_cover"]];
-                [bookImageView sd_setImageWithURL:[NSURL URLWithString:pic_big] placeholderImage:default_image completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                [bookImageView sd_setImageWithURL:[NSURL URLWithString:pic_big] placeholderImage:[UIImage imageNamed:@"book_cover"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                     
                     if (image) {
                         [bookImageView setImage:image];

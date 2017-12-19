@@ -64,4 +64,7 @@
 // 书库首页数据
 #define API_MultySearch                 @"book/multySearch"
 
+// 书库首页数据
+#define API_BookSearch                  @"book/search"
+
 #endif /* ConstantDef_h */

@@ -13,6 +13,9 @@
 #import "NetworkTask.h"
 #import "BookDetailVC.h"
 #import "BookItem.h"
+#import "BookSearchResult.h"
+#import "MultySearchResult.h"
+
 #import "RecBooksResult.h"
 
 
@@ -23,7 +26,8 @@
 @property(nonatomic, strong) MJRefreshFooterView        *refreshFootder;
 @property(nonatomic, assign) BOOL                       isRefreshList;
 
-@property(nonatomic, strong) RecBooksResult             *booksResult;
+@property(nonatomic, strong) BookSearchResult           *searchBookResult;
+@property(nonatomic, strong) MultySearchResult          *multyBookResult;
 @end
 
 @implementation BookListVC
@@ -44,7 +48,8 @@
     [self addRefreshHeadder];
     [self addRefreshFootder];
     _isRefreshList = YES;
-    _booksResult = nil;
+    _searchBookResult = nil;
+    _multyBookResult = nil;
     [_refreshHeader beginRefreshing];
 }
 
@@ -61,6 +66,7 @@
 }
 
 - (void)getBooks:(BOOL)isRefresh {
+    
     NSMutableDictionary* param =[[NSMutableDictionary alloc] initWithCapacity:0];
     if (isRefresh) {
         [param setObject:@"0" forKey:@"offset"];
@@ -68,11 +74,24 @@
         [param setObject:[NSString stringWithFormat:@"%lu",(unsigned long)[_bookList count]] forKey:@"offset"];
     }
     [param setObject:@"16" forKey:@"length"];
-    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_RecList
-                                             forParam:param
-                                             delegate:self
-                                            resultObj:[[RecBooksResult alloc] init]
-                                           customInfo:@"getBooks"];
+    
+    if ([_type isEqualToString:@"keyword"]) {
+        [param setObject:_type forKey:@"stype"];
+        [param setObject:_key forKey:@"keyStr"];
+        [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_BookSearch
+                                                 forParam:param
+                                                 delegate:self
+                                                resultObj:[[BookSearchResult alloc] init]
+                                               customInfo:API_BookSearch];
+    } else {
+        [param setObject:_type forKey:@"type"];
+        [param setObject:_age forKey:@"age"];
+        [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_MultySearch
+                                                 forParam:param
+                                                 delegate:self
+                                                resultObj:[[MultySearchResult alloc] init]
+                                               customInfo:API_MultySearch];
+    }
 }
 
 - (void)layoutBooksTableView {
@@ -112,7 +131,7 @@
 -(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
     [SVProgressHUD dismiss];
     
-    if ([customInfo isEqualToString:@"getBooks"]) {
+    if ([customInfo isEqualToString:API_BookSearch]) {
         //
         if (_isRefreshList) {
             [_bookList removeAllObjects];
@@ -120,9 +139,9 @@
             [_refreshFootder setHidden:NO];
         }
         
-        RecBooksResult *recBooks = (RecBooksResult *)result;
-        self.booksResult = recBooks;
-        [_bookList addObjectsFromArray:[recBooks arrayBooks]];
+        BookSearchResult *searchBooks = (BookSearchResult *)result;
+        self.searchBookResult = searchBooks;
+        [_bookList addObjectsFromArray:[searchBooks arrayBooks]];
         [_booksTableView reloadData];
         
         if ([_refreshHeader isRefreshing]) {
@@ -133,9 +152,26 @@
             [_refreshFootder endRefreshing];
         }
         
-        if (_booksResult != nil && [_booksResult.hasNext integerValue] == 0) {
+        if (_searchBookResult != nil && [_searchBookResult.hasNext integerValue] == 0) {
             [_refreshFootder setHidden:YES];
         }
+    } else if ([customInfo isEqualToString:API_MultySearch]) {
+        //
+        if (_isRefreshList) {
+            [_bookList removeAllObjects];
+            _isRefreshList = NO;
+        }
+        
+        MultySearchResult *searchBooks = (MultySearchResult *)result;
+        self.multyBookResult = searchBooks;
+        [_bookList addObjectsFromArray:[searchBooks arrayBook]];
+        [_booksTableView reloadData];
+        
+        if ([_refreshHeader isRefreshing]) {
+            [_refreshHeader endRefreshing];
+        }
+        
+        [_refreshFootder setHidden:YES];
     }
 }
 
@@ -145,7 +181,7 @@
     
     [_refreshHeader endRefreshing];
     [_refreshFootder endRefreshing];
-    if ([customInfo isEqualToString:@"getBooks"]) {
+    if ([customInfo isEqualToString:API_MultySearch] || [customInfo isEqualToString:API_BookSearch]) {
         //
         [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
             //
@@ -215,6 +251,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     BookDetailVC *vc = [[BookDetailVC alloc] init];
+    BookItem *item = [_bookList objectAtIndex:indexPath.row];
+    vc.isbn = item.isbn;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
