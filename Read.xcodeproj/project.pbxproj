@@ -80,6 +80,8 @@
 		AF2308E31FB342CE00BEC151 /* LoginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308DD1FB342CE00BEC151 /* LoginResult.m */; };
 		AF2308E41FB342CE00BEC151 /* HomeTabVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308E01FB342CE00BEC151 /* HomeTabVC.m */; };
 		AF2308E51FB342CE00BEC151 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308E21FB342CE00BEC151 /* LoginVC.m */; };
+		AF26A0491FEA3A83001F7705 /* icon_play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF26A0471FEA3A82001F7705 /* icon_play@2x.png */; };
+		AF26A04A1FEA3A83001F7705 /* icon_pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF26A0481FEA3A82001F7705 /* icon_pause@2x.png */; };
 		AF42D9B71FC536A7006DEDE8 /* BookInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF42D9B61FC536A7006DEDE8 /* BookInfoView.m */; };
 		AF42D9B91FC537A6006DEDE8 /* book_detail_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF42D9B81FC537A6006DEDE8 /* book_detail_bg@2x.png */; };
 		AF42D9BB1FC5468A006DEDE8 /* icon_heart_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF42D9BA1FC5468A006DEDE8 /* icon_heart_white@2x.png */; };
@@ -106,7 +108,6 @@
 		AF94FE011FB9DD5F0086CB22 /* tb-xinshu-sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF94FDF91FB9DD5F0086CB22 /* tb-xinshu-sel@2x.png */; };
 		AF94FE021FB9DD5F0086CB22 /* tb-xinshu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF94FDFA1FB9DD5F0086CB22 /* tb-xinshu@2x.png */; };
 		AF9660E51FE6464300EF4733 /* fangdajing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF9660E31FE6464200EF4733 /* fangdajing@2x.png */; };
-		AF9660E61FE6464300EF4733 /* fangdajing_green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF9660E41FE6464300EF4733 /* fangdajing_green@2x.png */; };
 		AFAFB75F1FC282F100663862 /* BookDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFAFB75E1FC282F100663862 /* BookDetailVC.m */; };
 		AFAFB7621FC298A700663862 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AFAFB7601FC298A700663862 /* InfoPlist.strings */; };
 		AFAFB7661FC2ABC100663862 /* BookListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFAFB7651FC2ABC100663862 /* BookListVC.m */; };
@@ -286,6 +287,8 @@
 		AF2308E01FB342CE00BEC151 /* HomeTabVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTabVC.m; sourceTree = "<group>"; };
 		AF2308E11FB342CE00BEC151 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		AF2308E21FB342CE00BEC151 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
+		AF26A0471FEA3A82001F7705 /* icon_play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_play@2x.png"; sourceTree = "<group>"; };
+		AF26A0481FEA3A82001F7705 /* icon_pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_pause@2x.png"; sourceTree = "<group>"; };
 		AF42D9B51FC536A7006DEDE8 /* BookInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookInfoView.h; sourceTree = "<group>"; };
 		AF42D9B61FC536A7006DEDE8 /* BookInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookInfoView.m; sourceTree = "<group>"; };
 		AF42D9B81FC537A6006DEDE8 /* book_detail_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "book_detail_bg@2x.png"; sourceTree = "<group>"; };
@@ -324,7 +327,6 @@
 		AF94FDF91FB9DD5F0086CB22 /* tb-xinshu-sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-xinshu-sel@2x.png"; sourceTree = "<group>"; };
 		AF94FDFA1FB9DD5F0086CB22 /* tb-xinshu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-xinshu@2x.png"; sourceTree = "<group>"; };
 		AF9660E31FE6464200EF4733 /* fangdajing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fangdajing@2x.png"; sourceTree = "<group>"; };
-		AF9660E41FE6464300EF4733 /* fangdajing_green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fangdajing_green@2x.png"; sourceTree = "<group>"; };
 		AFAFB75D1FC282F100663862 /* BookDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookDetailVC.h; sourceTree = "<group>"; };
 		AFAFB75E1FC282F100663862 /* BookDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookDetailVC.m; sourceTree = "<group>"; };
 		AFAFB7611FC298A700663862 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -729,8 +731,9 @@
 				AFAFB76B1FC2BB8F00663862 /* heart_read@2x.png */,
 				AF42D9B81FC537A6006DEDE8 /* book_detail_bg@2x.png */,
 				AF42D9BA1FC5468A006DEDE8 /* icon_heart_white@2x.png */,
-				AF9660E41FE6464300EF4733 /* fangdajing_green@2x.png */,
 				AF9660E31FE6464200EF4733 /* fangdajing@2x.png */,
+				AF26A0481FEA3A82001F7705 /* icon_pause@2x.png */,
+				AF26A0471FEA3A82001F7705 /* icon_play@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -902,7 +905,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF0422891FBC77CD00D15E8E /* icon_heart@2x.png in Resources */,
-				AF9660E61FE6464300EF4733 /* fangdajing_green@2x.png in Resources */,
 				AFAFB7621FC298A700663862 /* InfoPlist.strings in Resources */,
 				AF88AB341FC1723900E885D5 /* shucheng_bg@2x.png in Resources */,
 				AF506F901FB5E26700470C01 /* icon_user@2x.png in Resources */,
@@ -920,7 +922,9 @@
 				AF94FDFE1FB9DD5F0086CB22 /* tb-me@2x.png in Resources */,
 				AFAFB76D1FC2BB8F00663862 /* heart_read@2x.png in Resources */,
 				AF04228B1FBC77CD00D15E8E /* icon_setting@2x.png in Resources */,
+				AF26A0491FEA3A83001F7705 /* icon_play@2x.png in Resources */,
 				AF42D9BB1FC5468A006DEDE8 /* icon_heart_white@2x.png in Resources */,
+				AF26A04A1FEA3A83001F7705 /* icon_pause@2x.png in Resources */,
 				AF94FE021FB9DD5F0086CB22 /* tb-xinshu@2x.png in Resources */,
 				AF94FDFC1FB9DD5F0086CB22 /* tb-biji@2x.png in Resources */,
 				AF2308CE1FB33F5600BEC151 /* SVProgressHUD.bundle in Resources */,

@@ -13,6 +13,7 @@
 #define kGlobalGreenColor       0x6Fc05b
 #define kGlobalLineColor        0xdcdcdc
 #define kGlobalRedColor         0xF74A40
+#define kGlobalGrayColor        0xebeef0
 
 
 // 服务器地址

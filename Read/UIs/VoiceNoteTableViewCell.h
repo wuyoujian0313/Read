@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NoteItem.h"
 
 @interface VoiceNoteTableViewCell : UITableViewCell
-
+- (void)setNoteInfo:(NoteItem*)note;
 @end

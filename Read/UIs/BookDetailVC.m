@@ -39,7 +39,6 @@
     }
     
     [param setObject:@"" forKey:@"u"];
-    
     [SVProgressHUD showWithStatus:@"正在获取笔记..." maskType:SVProgressHUDMaskTypeBlack];
     [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_NoteList
                                              forParam:param
@@ -97,8 +96,8 @@
         [_bookContentView loadBookInfo:_bookDetail];
         
         [self getNotes];
-    }
-    else if ([customInfo isEqualToString:@"getNotes"]) {
+    } else if ([customInfo isEqualToString:@"getNotes"]) {
+        _bookNotes = (NoteListResult *)result;
         
     }
 }

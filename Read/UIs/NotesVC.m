@@ -200,6 +200,8 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 10;
+    
     if (_segmentControl.selectedSegmentIndex == 0) {
         [_textNotes count];
     } else if (_segmentControl.selectedSegmentIndex == 1) {
@@ -214,7 +216,15 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return nil;
+    static NSString *cellIdentifier = @"TextNoteTableViewCell";
+    VoiceNoteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[VoiceNoteTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    
+    return cell;
 }
 
 #pragma mark - UITableViewDelegate
