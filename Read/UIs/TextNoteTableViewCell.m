@@ -89,9 +89,6 @@
     }
     
     if (_note) {
-//        dateLabel.text = @"10-07";
-//        nameLabel.text = @"魔法亲亲";
-//        briefLabel.text = @"好动人的故事啊，给儿子读了好多遍。";
         dateLabel.text = _note.created;
         nameLabel.text = _note.bookname;
         briefLabel.text = _note.word;

@@ -7,11 +7,16 @@
 //
 
 #import "VoiceNoteTableViewCell.h"
+#import <CoreMedia/CoreMedia.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+#import <AVFoundation/AVFoundation.h>
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface VoiceNoteTableViewCell ()
 @property (nonatomic, strong) NoteItem              *note;
 @property (nonatomic, strong) UIProgressView        *progressView;
 @property (nonatomic, assign) BOOL                  isPlay;
+@property (nonatomic, strong) AVAudioPlayer         *audioPlayer;
 @end
 
 @implementation VoiceNoteTableViewCell
@@ -42,8 +47,10 @@
     _isPlay = !_isPlay;
     if (_isPlay) {
         [sender setImage:[UIImage imageNamed:@"icon_pause"] forState:UIControlStateNormal];
+        // 播放
     } else {
         [sender setImage:[UIImage imageNamed:@"icon_play"] forState:UIControlStateNormal];
+        // 暂停
     }
 }
 
@@ -85,7 +92,7 @@
         playButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [playButton setImage:[UIImage imageNamed:@"icon_play"] forState:UIControlStateNormal];
         [playButton setTag:103];
-        [playButton setFrame:CGRectMake([DeviceInfo screenWidth] - 60, 5, 60, 60)];
+        [playButton setFrame:CGRectMake([DeviceInfo screenWidth] - 60, 0, 60, 60)];
         [playButton setImageEdgeInsets:UIEdgeInsetsMake(2.5, 5, 2.5, 0)];
         [playButton addTarget:self action:@selector(play:) forControlEvents:UIControlEventTouchUpInside];
         [viewParent addSubview:playButton];
@@ -99,9 +106,6 @@
     }
     
     if (_note) {
-//        dateLabel.text = @"10-07";
-//        nameLabel.text = @"魔法亲亲";
-//        [progressView setProgress:0.5];
         dateLabel.text = _note.created;
         nameLabel.text = _note.bookname;
         [progressView setProgress:0.0];
@@ -112,7 +116,7 @@
     _note = note;
     _isPlay = NO;
     // 停止播放
-    
+    [_audioPlayer stop];
     [self setNeedsLayout];
 }
 

@@ -99,7 +99,7 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
--(void)setTableViewHeaderView:(NSInteger)height {
+- (void)setTableViewHeaderView:(NSInteger)height {
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _meTableView.frame.size.width, height)];
     view.backgroundColor = [UIColor colorWithHex:0xebeef0];

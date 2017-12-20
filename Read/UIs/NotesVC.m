@@ -13,6 +13,7 @@
 #import "MJRefresh.h"
 #import "VoiceNoteTableViewCell.h"
 #import "TextNoteTableViewCell.h"
+#import "NoteInfoVC.h"
 
 
 
@@ -24,6 +25,8 @@
 @property(nonatomic, strong) MJRefreshHeaderView        *refreshHeader;
 @property(nonatomic, strong) MJRefreshFooterView        *refreshFootder;
 @property(nonatomic, assign) BOOL                       isRefreshList;
+@property(nonatomic, strong) NoteListResult             *textNoteResult;
+@property(nonatomic, strong) NoteListResult             *voiceNoteResult;
 @end
 
 @implementation NotesVC
@@ -49,8 +52,7 @@
     _voiceNotes = [[NSMutableArray alloc] initWithCapacity:0];
     
     _isRefreshList = YES;
-    //[_refreshHeader beginRefreshing];
-    [self getVoiceNoteList:_isRefreshList];
+    [_refreshHeader beginRefreshing];
 }
 
 - (void)addRefreshHeadder {
@@ -76,6 +78,11 @@
     }
     
     if (!refreshView.isRefreshing) {
+        if (_segmentControl.selectedSegmentIndex == 0) {
+            [self getTextNoteList:_isRefreshList];
+        } else {
+            [self getVoiceNoteList:_isRefreshList];
+        }
     }
 }
 
@@ -127,7 +134,19 @@
 }
 
 - (void)segmentAction:(UISegmentedControl *)sender {
-    
+    if (sender.selectedSegmentIndex == 0) {
+        if ([_textNotes count] > 0) {
+            [_noteTableView reloadData];
+        } else {
+            [_refreshHeader beginRefreshing];
+        }
+    } else {
+        if ([_voiceNotes count] > 0) {
+            [_noteTableView reloadData];
+        } else {
+            [_refreshHeader beginRefreshing];
+        }
+    }
 }
 
 - (void)layoutNotesTableView {
@@ -157,7 +176,7 @@
     [segmentControl setTitleTextAttributes:dictSelect forState:UIControlStateSelected];
     [bgView addSubview:segmentControl];
     [segmentControl setSelectedSegmentIndex:0];
-    [segmentControl addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventTouchUpInside];
+    [segmentControl addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
     
     LineView *line = [[LineView alloc] initWithFrame:CGRectMake(0, bgView.frame.size.height - kLineHeight1px, bgView.frame.size.width, kLineHeight1px)];
     [bgView addSubview:line];
@@ -175,9 +194,54 @@
     [SVProgressHUD dismiss];
     
     if ([customInfo isEqualToString:@"getTextNotes"]) {
-        //
-    } else if ([customInfo isEqualToString:@"getVoiceNotes"]) {
+        // 文字
+        if (_isRefreshList) {
+            [_textNotes removeAllObjects];
+            _isRefreshList = NO;
+            [_refreshFootder setHidden:NO];
+        }
         
+        NoteListResult *notes = (NoteListResult *)result;
+        self.textNoteResult = notes;
+        [_textNotes addObjectsFromArray:[notes arrayNote]];
+        [_noteTableView reloadData];
+        
+        if ( _textNoteResult != nil && [_textNoteResult.hasNext integerValue] == 0) {
+            [_refreshFootder setHidden:YES];
+        }
+        
+        if ([_refreshHeader isRefreshing]) {
+            [_refreshHeader endRefreshing];
+        }
+        
+        if ([_refreshFootder isRefreshing]) {
+            [_refreshFootder endRefreshing];
+        }
+        
+    } else if ([customInfo isEqualToString:@"getVoiceNotes"]) {
+        // 语音
+        if (_isRefreshList) {
+            [_voiceNotes removeAllObjects];
+            _isRefreshList = NO;
+            [_refreshFootder setHidden:NO];
+        }
+        
+        NoteListResult *notes = (NoteListResult *)result;
+        self.voiceNoteResult = notes;
+        [_voiceNotes addObjectsFromArray:[notes arrayNote]];
+        [_noteTableView reloadData];
+        
+        if (_voiceNoteResult != nil && [_voiceNoteResult.hasNext integerValue] == 0) {
+            [_refreshFootder setHidden:YES];
+        }
+        
+        if ([_refreshHeader isRefreshing]) {
+            [_refreshHeader endRefreshing];
+        }
+        
+        if ([_refreshFootder isRefreshing]) {
+            [_refreshFootder endRefreshing];
+        }
     }
 }
 
@@ -187,12 +251,10 @@
     if ([customInfo isEqualToString:@"getTextNotes"]) {
         [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
             //
-            
         }];
     }  else if ([customInfo isEqualToString:@"getVoiceNotes"]) {
         [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
             //
-            
         }];
     }
 }
@@ -200,13 +262,12 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
-    
     if (_segmentControl.selectedSegmentIndex == 0) {
-        [_textNotes count];
+        return [_textNotes count];
     } else if (_segmentControl.selectedSegmentIndex == 1) {
-        [_voiceNotes count];
+        return [_voiceNotes count];
     }
+
     return 0;
 }
 
@@ -215,16 +276,42 @@
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *cellIdentifier = @"TextNoteTableViewCell";
-    VoiceNoteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        cell = [[VoiceNoteTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (_segmentControl.selectedSegmentIndex == 0) {
+        // 语言
+        static NSString *cellIdentifier = @"TextNoteTableViewCell";
+        TextNoteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (cell == nil) {
+            cell = [[TextNoteTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        }
         
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        NSInteger row = indexPath.row;
+        if (row < [_textNotes count]) {
+            [cell setNoteInfo:[_textNotes objectAtIndex:row]];
+        }
+        
+        return cell;
+    } else if (_segmentControl.selectedSegmentIndex == 1) {
+        // 语言
+        static NSString *cellIdentifier = @"VoiceNoteTableViewCell";
+        VoiceNoteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (cell == nil) {
+            cell = [[VoiceNoteTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        
+        NSInteger row = indexPath.row;
+        if (row < [_voiceNotes count]) {
+            [cell setNoteInfo:[_voiceNotes objectAtIndex:row]];
+        }
+        
+        return cell;
     }
-    
-    return cell;
+
+    return nil;
 }
 
 #pragma mark - UITableViewDelegate
@@ -234,6 +321,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (_segmentControl.selectedSegmentIndex == 0) {
+        // 文字
+        NoteInfoVC *vc = [[NoteInfoVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 
