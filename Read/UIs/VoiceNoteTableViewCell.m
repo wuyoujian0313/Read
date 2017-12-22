@@ -7,16 +7,15 @@
 //
 
 #import "VoiceNoteTableViewCell.h"
-#import <CoreMedia/CoreMedia.h>
-#import <MobileCoreServices/MobileCoreServices.h>
-#import <AVFoundation/AVFoundation.h>
-#import <MediaPlayer/MediaPlayer.h>
+
 
 @interface VoiceNoteTableViewCell ()
-@property (nonatomic, strong) NoteItem              *note;
-@property (nonatomic, strong) UIProgressView        *progressView;
-@property (nonatomic, assign) BOOL                  isPlay;
-@property (nonatomic, strong) AVAudioPlayer         *audioPlayer;
+@property (nonatomic, strong) NoteItem                    *note;
+@property (nonatomic, strong) UIProgressView              *progressView;
+@property (nonatomic, assign) BOOL                        isPlay;
+@property (nonatomic, assign) NSInteger                   index;
+@property (nonatomic, strong) UIButton                    *playButton;
+
 @end
 
 @implementation VoiceNoteTableViewCell
@@ -36,22 +35,32 @@
     
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        [self layoutContentView:self.contentView];
         _isPlay = NO;
+        [self layoutContentView:self.contentView];
     }
     
     return self;
 }
 
+- (void)setPlayButtonStatus:(BOOL)isPlay {
+    _isPlay = isPlay;
+    [self resetPlayButtonStatus];
+}
+
+- (void)resetPlayButtonStatus {
+    if (!_isPlay) {
+        [_playButton setImage:[UIImage imageNamed:@"icon_play"] forState:UIControlStateNormal];
+    } else {
+        [_playButton setImage:[UIImage imageNamed:@"icon_pause"] forState:UIControlStateNormal];
+    }
+}
+
 - (void)play:(UIButton *)sender {
     _isPlay = !_isPlay;
-    if (_isPlay) {
-        [sender setImage:[UIImage imageNamed:@"icon_pause"] forState:UIControlStateNormal];
-        // 播放
-    } else {
-        [sender setImage:[UIImage imageNamed:@"icon_play"] forState:UIControlStateNormal];
-        // 暂停
+    if (_delegate && [_delegate respondsToSelector:@selector(playVoice:isPlay:index:)]) {
+        [_delegate playVoice:_note.sound isPlay:_isPlay index:_index];
     }
+    [self resetPlayButtonStatus];
 }
 
 - (void)layoutContentView:(UIView *)viewParent {
@@ -92,6 +101,7 @@
         playButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [playButton setImage:[UIImage imageNamed:@"icon_play"] forState:UIControlStateNormal];
         [playButton setTag:103];
+        self.playButton = playButton;
         [playButton setFrame:CGRectMake([DeviceInfo screenWidth] - 60, 0, 60, 60)];
         [playButton setImageEdgeInsets:UIEdgeInsetsMake(2.5, 5, 2.5, 0)];
         [playButton addTarget:self action:@selector(play:) forControlEvents:UIControlEventTouchUpInside];
@@ -109,14 +119,15 @@
         dateLabel.text = _note.created;
         nameLabel.text = _note.bookname;
         [progressView setProgress:0.0];
+        [self setPlayButtonStatus:_isPlay];
     }
 }
 
-- (void)setNoteInfo:(NoteItem*)note {
+- (void)setNoteInfo:(NoteItem*)note index:(NSInteger)index {
     _note = note;
     _isPlay = NO;
-    // 停止播放
-    [_audioPlayer stop];
+    _index = index;
+    [self resetPlayButtonStatus];
     [self setNeedsLayout];
 }
 

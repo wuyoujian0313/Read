@@ -10,6 +10,7 @@
 #import "LoginVC.h"
 #import "HomeTabVC.h"
 #import "AINavigationController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface MainVCManager ()
 @property (nonatomic, strong) UIViewController              *rootVC;

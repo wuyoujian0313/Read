@@ -14,10 +14,15 @@
 #import "VoiceNoteTableViewCell.h"
 #import "TextNoteTableViewCell.h"
 #import "NoteInfoVC.h"
+#import <CoreMedia/CoreMedia.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+#import <AVFoundation/AVFoundation.h>
+#import <MediaPlayer/MediaPlayer.h>
+#import "FileCache.h"
 
 
 
-@interface NotesVC ()<NetworkTaskDelegate,UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate>
+@interface NotesVC ()<NetworkTaskDelegate,UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate,VoiceNoteDelegate,AVAudioPlayerDelegate>
 @property(nonatomic, strong) UITableView                *noteTableView;
 @property(nonatomic, strong) UISegmentedControl         *segmentControl;
 @property(nonatomic, strong) NSMutableArray             *textNotes;
@@ -27,6 +32,9 @@
 @property(nonatomic, assign) BOOL                       isRefreshList;
 @property(nonatomic, strong) NoteListResult             *textNoteResult;
 @property(nonatomic, strong) NoteListResult             *voiceNoteResult;
+@property(nonatomic, assign) NSInteger                  playIndex;
+
+@property(nonatomic, strong) AVAudioPlayer              *audioPlayer;
 @end
 
 @implementation NotesVC
@@ -34,6 +42,7 @@
 - (void)dealloc {
     [_refreshFootder free];
     [_refreshHeader free];
+    [self stopPlay];
 }
 
 - (void)viewDidLoad {
@@ -52,7 +61,113 @@
     _voiceNotes = [[NSMutableArray alloc] initWithCapacity:0];
     
     _isRefreshList = YES;
+    _playIndex = -1;
     [_refreshHeader beginRefreshing];
+}
+
+- (void)pausePlay {
+    if ([_audioPlayer isPlaying]) {
+        [_audioPlayer pause];
+    }
+}
+
+- (void)continuePlay {
+    [_audioPlayer play];
+}
+
+- (void)playVoiceFile:(NSString *)voiceURL {
+    
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    NSError *sessionError;
+    [session setCategory:AVAudioSessionCategoryPlayAndRecord error:&sessionError];
+    [session setActive:YES error:nil];
+    
+    [_audioPlayer stop];
+#if TARGET_IPHONE_SIMULATOR
+#elif TARGET_OS_IPHONE
+    __weak NotesVC *weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // 播放
+        // 注意安卓录音是aac格式的，ios才能播放
+#if 0 // 测试mp3
+        NSString *file = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"mp3"];
+        NSURL *URL = [NSURL fileURLWithPath:file];
+        NSString *fileKey = [file md5EncodeUpper:NO];
+#else
+        NSURL *URL = [NSURL URLWithString:voiceURL];
+        NSString *fileKey = [voiceURL md5EncodeUpper:NO];
+#endif
+        
+        NotesVC *sself = weakSelf;
+        FileCache *sharedCache = [FileCache sharedFileCache];
+        
+        NSError *playerError;
+        NSData *data = [sharedCache dataFromCacheForKey:fileKey];
+        if (data == nil) {
+            NSData *dd = [NSData dataWithContentsOfURL:URL];
+            [sharedCache writeData:dd forKey:fileKey];
+        }
+        
+        sself.audioPlayer = [[AVAudioPlayer alloc] initWithData:data error:&playerError];//AVFileTypeWAVE 为音频格式;
+        if (sself.audioPlayer) {
+            sself.audioPlayer.delegate = sself;
+            sself.audioPlayer.volume = 1.0;
+            [sself.audioPlayer prepareToPlay];
+            [sself.audioPlayer play];
+            
+        } else {
+            NSLog(@"ERror creating player: %@", [playerError description]);
+        }
+    });
+#endif
+}
+
+#pragma mark - VoiceNoteDelegate
+- (void)playVoice:(NSString *)voiceURL isPlay:(BOOL)isPlay index:(NSInteger)index {
+    //
+    if (_segmentControl.selectedSegmentIndex == 1) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_playIndex inSection:0];
+        VoiceNoteTableViewCell *cell = [_noteTableView cellForRowAtIndexPath:indexPath];
+        if (index != _playIndex) {
+            [cell setPlayButtonStatus:NO];
+            [self stopPlay];
+        }
+    }
+    _playIndex = index;
+    if (isPlay) {
+        [self playVoiceFile:voiceURL];
+    } else {
+        [self stopPlay];
+    }
+}
+
+#pragma mark - AVAudioPlayerDelegate
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+    [self stopPlay];
+}
+
+- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
+    [self stopPlay];
+}
+
+- (void)stopPlay {
+    [_audioPlayer stop];
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    NSError *sessionError;
+    [session setCategory:AVAudioSessionCategoryPlayAndRecord error:&sessionError];
+    
+    if(session) {
+        [session setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
+    }
+    
+    if (_segmentControl.selectedSegmentIndex == 1) {
+        if (_playIndex != -1) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_playIndex inSection:0];
+            VoiceNoteTableViewCell *cell = [_noteTableView cellForRowAtIndexPath:indexPath];
+            [cell setPlayButtonStatus:NO];
+        }
+        
+    }
 }
 
 - (void)addRefreshHeadder {
@@ -259,8 +374,6 @@
     }
 }
 
-
-#pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (_segmentControl.selectedSegmentIndex == 0) {
         return [_textNotes count];
@@ -303,9 +416,11 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         
+        cell.delegate = self;
         NSInteger row = indexPath.row;
         if (row < [_voiceNotes count]) {
-            [cell setNoteInfo:[_voiceNotes objectAtIndex:row]];
+            [self stopPlay];
+            [cell setNoteInfo:[_voiceNotes objectAtIndex:row] index:row];
         }
         
         return cell;

@@ -9,6 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "NoteItem.h"
 
+@protocol VoiceNoteDelegate <NSObject>
+- (void)playVoice:(NSString *)voiceURL isPlay:(BOOL)isPlay index:(NSInteger)index;
+@end
+
 @interface VoiceNoteTableViewCell : UITableViewCell
-- (void)setNoteInfo:(NoteItem*)note;
+@property (nonatomic, weak) id <VoiceNoteDelegate> delegate;
+
+- (void)setNoteInfo:(NoteItem*)note index:(NSInteger)index;
+- (void)setPlayButtonStatus:(BOOL)isPlay;
+
 @end
