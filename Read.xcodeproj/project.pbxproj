@@ -30,6 +30,9 @@
 		AF14EAB31FB6FB770042683D /* NSData+Crypto.m in Sources */ = {isa = PBXBuildFile; fileRef = AF14EAB21FB6FB770042683D /* NSData+Crypto.m */; };
 		AF14EAB61FB7191D0042683D /* SetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF14EAB51FB7191D0042683D /* SetVC.m */; };
 		AF14EAB91FB737F60042683D /* ModifyPwdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF14EAB81FB737F60042683D /* ModifyPwdVC.m */; };
+		AF1BEFCA1FED165000B90C0B /* WriteTextNoteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1BEFC91FED165000B90C0B /* WriteTextNoteVC.m */; };
+		AF1BEFCD1FED17FB00B90C0B /* SearchBookVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1BEFCC1FED17FB00B90C0B /* SearchBookVC.m */; };
+		AF1BEFD01FED199200B90C0B /* VoiceTextNoteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1BEFCF1FED199200B90C0B /* VoiceTextNoteVC.m */; };
 		AF2308251FB3371200BEC151 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308241FB3371200BEC151 /* main.m */; };
 		AF2308281FB3371200BEC151 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308271FB3371200BEC151 /* AppDelegate.m */; };
 		AF2308301FB3371200BEC151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF23082F1FB3371200BEC151 /* Assets.xcassets */; };
@@ -185,6 +188,12 @@
 		AF14EAB51FB7191D0042683D /* SetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetVC.m; sourceTree = "<group>"; };
 		AF14EAB71FB737F60042683D /* ModifyPwdVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyPwdVC.h; sourceTree = "<group>"; };
 		AF14EAB81FB737F60042683D /* ModifyPwdVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyPwdVC.m; sourceTree = "<group>"; };
+		AF1BEFC81FED165000B90C0B /* WriteTextNoteVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WriteTextNoteVC.h; sourceTree = "<group>"; };
+		AF1BEFC91FED165000B90C0B /* WriteTextNoteVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WriteTextNoteVC.m; sourceTree = "<group>"; };
+		AF1BEFCB1FED17FB00B90C0B /* SearchBookVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchBookVC.h; sourceTree = "<group>"; };
+		AF1BEFCC1FED17FB00B90C0B /* SearchBookVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchBookVC.m; sourceTree = "<group>"; };
+		AF1BEFCE1FED199200B90C0B /* VoiceTextNoteVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VoiceTextNoteVC.h; sourceTree = "<group>"; };
+		AF1BEFCF1FED199200B90C0B /* VoiceTextNoteVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VoiceTextNoteVC.m; sourceTree = "<group>"; };
 		AF2308201FB3371200BEC151 /* Read.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Read.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF2308241FB3371200BEC151 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AF2308261FB3371200BEC151 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -840,6 +849,12 @@
 				AFD3D2DA1FE90080002CB821 /* VoiceNoteTableViewCell.m */,
 				AFD3D2D31FE8FF88002CB821 /* NoteInfoVC.h */,
 				AFD3D2D41FE8FF88002CB821 /* NoteInfoVC.m */,
+				AF1BEFC81FED165000B90C0B /* WriteTextNoteVC.h */,
+				AF1BEFC91FED165000B90C0B /* WriteTextNoteVC.m */,
+				AF1BEFCE1FED199200B90C0B /* VoiceTextNoteVC.h */,
+				AF1BEFCF1FED199200B90C0B /* VoiceTextNoteVC.m */,
+				AF1BEFCB1FED17FB00B90C0B /* SearchBookVC.h */,
+				AF1BEFCC1FED17FB00B90C0B /* SearchBookVC.m */,
 			);
 			name = Notes;
 			sourceTree = "<group>";
@@ -958,6 +973,7 @@
 				AF2308CF1FB33F5600BEC151 /* SVProgressHUD.m in Sources */,
 				AFD3D2D21FE8CE40002CB821 /* BookSearchResult.m in Sources */,
 				AF2308E51FB342CE00BEC151 /* LoginVC.m in Sources */,
+				AF1BEFCA1FED165000B90C0B /* WriteTextNoteVC.m in Sources */,
 				AF2308C61FB33F5600BEC151 /* SDWebImagePrefetcher.m in Sources */,
 				AF14EAB31FB6FB770042683D /* NSData+Crypto.m in Sources */,
 				AF2308B71FB33F5600BEC151 /* DeviceInfo.m in Sources */,
@@ -993,6 +1009,7 @@
 				AFBAE1741FB856F50002DE1B /* ResetPwdResult.m in Sources */,
 				AF036E3A1FC4610E005A1765 /* NoteBookTableViewCell.m in Sources */,
 				AF2308C81FB33F5600BEC151 /* UIImage+GIF.m in Sources */,
+				AF1BEFD01FED199200B90C0B /* VoiceTextNoteVC.m in Sources */,
 				AF88AB321FC1540400E885D5 /* UploadUserAvatarResult.m in Sources */,
 				AF036E401FC4639F005A1765 /* NoteBookItem.m in Sources */,
 				AFF5EDBD1FE783B4001FDE2B /* BookGridTableViewCell.m in Sources */,
@@ -1028,6 +1045,7 @@
 				AF2308BE1FB33F5600BEC151 /* MKAnnotationView+WebCache.m in Sources */,
 				AF2308CC1FB33F5600BEC151 /* UIImageView+WebCache.m in Sources */,
 				AFBAE16B1FB8558A0002DE1B /* RegisterResult.m in Sources */,
+				AF1BEFCD1FED17FB00B90C0B /* SearchBookVC.m in Sources */,
 				AF88AB391FC1AA9A00E885D5 /* RecBooksResult.m in Sources */,
 				AF2308A21FB33F5600BEC151 /* AFNetworkReachabilityManager.m in Sources */,
 				AF2308B31FB33F5600BEC151 /* AIActionSheet.m in Sources */,

@@ -71,4 +71,7 @@
 // 笔记列表
 #define API_NoteList                    @"book/noteList"
 
+// 写笔记
+#define API_WriteNote                   @"book/writeNotes"
+
 #endif /* ConstantDef_h */
