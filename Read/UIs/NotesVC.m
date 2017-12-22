@@ -439,6 +439,8 @@
     if (_segmentControl.selectedSegmentIndex == 0) {
         // 文字
         NoteInfoVC *vc = [[NoteInfoVC alloc] init];
+        NoteItem *note = [_textNotes objectAtIndex:indexPath.row];
+        vc.note = note;
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }

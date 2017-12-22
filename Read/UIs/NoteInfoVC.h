@@ -7,7 +7,8 @@
 //
 
 #import "BaseVC.h"
+#import "NoteItem.h"
 
 @interface NoteInfoVC : BaseVC
-
+@property (nonatomic, strong) NoteItem *note;
 @end
