@@ -1,22 +1,23 @@
 //
-//  VoiceTextNoteVC.m
+//  VoiceNoteVC.m
 //  Read
 //
 //  Created by wuyoujian on 2017/12/22.
 //  Copyright © 2017年 weimeitc. All rights reserved.
 //
 
-#import "VoiceTextNoteVC.h"
+#import "VoiceNoteVC.h"
 
-@interface VoiceTextNoteVC ()
+@interface VoiceNoteVC ()
 
 @end
 
-@implementation VoiceTextNoteVC
+@implementation VoiceNoteVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self setNavTitle:@"Rlab阿来学院" titleColor:[UIColor colorWithHex:kGlobalGreenColor]];
 }
 
 - (void)didReceiveMemoryWarning {

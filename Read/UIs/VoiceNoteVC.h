@@ -1,5 +1,5 @@
 //
-//  VoiceTextNoteVC.h
+//  VoiceNoteVC.h
 //  Read
 //
 //  Created by wuyoujian on 2017/12/22.
@@ -8,6 +8,6 @@
 
 #import "BaseVC.h"
 
-@interface VoiceTextNoteVC : BaseVC
+@interface VoiceNoteVC : BaseVC
 
 @end

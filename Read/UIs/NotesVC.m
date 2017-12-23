@@ -19,7 +19,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import "FileCache.h"
-#import "SearchBookVC.h"
+#import "WriteTextNoteVC.h"
+#import "VoiceNoteVC.h"
 
 
 
@@ -246,9 +247,15 @@
 
 
 - (void)addNote:(UIBarButtonItem*)sender {
-    SearchBookVC *vc = [[SearchBookVC alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+    if (_segmentControl.selectedSegmentIndex == 1) {
+        WriteTextNoteVC *vc = [[WriteTextNoteVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        VoiceNoteVC *vc = [[VoiceNoteVC alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)segmentAction:(UISegmentedControl *)sender {

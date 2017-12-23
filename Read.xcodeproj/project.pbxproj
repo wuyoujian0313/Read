@@ -32,7 +32,7 @@
 		AF14EAB91FB737F60042683D /* ModifyPwdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF14EAB81FB737F60042683D /* ModifyPwdVC.m */; };
 		AF1BEFCA1FED165000B90C0B /* WriteTextNoteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1BEFC91FED165000B90C0B /* WriteTextNoteVC.m */; };
 		AF1BEFCD1FED17FB00B90C0B /* SearchBookVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1BEFCC1FED17FB00B90C0B /* SearchBookVC.m */; };
-		AF1BEFD01FED199200B90C0B /* VoiceTextNoteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1BEFCF1FED199200B90C0B /* VoiceTextNoteVC.m */; };
+		AF1BEFD01FED199200B90C0B /* VoiceNoteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1BEFCF1FED199200B90C0B /* VoiceNoteVC.m */; };
 		AF2308251FB3371200BEC151 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308241FB3371200BEC151 /* main.m */; };
 		AF2308281FB3371200BEC151 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308271FB3371200BEC151 /* AppDelegate.m */; };
 		AF2308301FB3371200BEC151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF23082F1FB3371200BEC151 /* Assets.xcassets */; };
@@ -192,8 +192,8 @@
 		AF1BEFC91FED165000B90C0B /* WriteTextNoteVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WriteTextNoteVC.m; sourceTree = "<group>"; };
 		AF1BEFCB1FED17FB00B90C0B /* SearchBookVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchBookVC.h; sourceTree = "<group>"; };
 		AF1BEFCC1FED17FB00B90C0B /* SearchBookVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchBookVC.m; sourceTree = "<group>"; };
-		AF1BEFCE1FED199200B90C0B /* VoiceTextNoteVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VoiceTextNoteVC.h; sourceTree = "<group>"; };
-		AF1BEFCF1FED199200B90C0B /* VoiceTextNoteVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VoiceTextNoteVC.m; sourceTree = "<group>"; };
+		AF1BEFCE1FED199200B90C0B /* VoiceNoteVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VoiceNoteVC.h; sourceTree = "<group>"; };
+		AF1BEFCF1FED199200B90C0B /* VoiceNoteVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VoiceNoteVC.m; sourceTree = "<group>"; };
 		AF2308201FB3371200BEC151 /* Read.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Read.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF2308241FB3371200BEC151 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AF2308261FB3371200BEC151 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -851,8 +851,8 @@
 				AFD3D2D41FE8FF88002CB821 /* NoteInfoVC.m */,
 				AF1BEFC81FED165000B90C0B /* WriteTextNoteVC.h */,
 				AF1BEFC91FED165000B90C0B /* WriteTextNoteVC.m */,
-				AF1BEFCE1FED199200B90C0B /* VoiceTextNoteVC.h */,
-				AF1BEFCF1FED199200B90C0B /* VoiceTextNoteVC.m */,
+				AF1BEFCE1FED199200B90C0B /* VoiceNoteVC.h */,
+				AF1BEFCF1FED199200B90C0B /* VoiceNoteVC.m */,
 				AF1BEFCB1FED17FB00B90C0B /* SearchBookVC.h */,
 				AF1BEFCC1FED17FB00B90C0B /* SearchBookVC.m */,
 			);
@@ -1009,7 +1009,7 @@
 				AFBAE1741FB856F50002DE1B /* ResetPwdResult.m in Sources */,
 				AF036E3A1FC4610E005A1765 /* NoteBookTableViewCell.m in Sources */,
 				AF2308C81FB33F5600BEC151 /* UIImage+GIF.m in Sources */,
-				AF1BEFD01FED199200B90C0B /* VoiceTextNoteVC.m in Sources */,
+				AF1BEFD01FED199200B90C0B /* VoiceNoteVC.m in Sources */,
 				AF88AB321FC1540400E885D5 /* UploadUserAvatarResult.m in Sources */,
 				AF036E401FC4639F005A1765 /* NoteBookItem.m in Sources */,
 				AFF5EDBD1FE783B4001FDE2B /* BookGridTableViewCell.m in Sources */,
