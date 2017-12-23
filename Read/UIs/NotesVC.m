@@ -19,6 +19,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import "FileCache.h"
+#import "SearchBookVC.h"
 
 
 
@@ -245,7 +246,9 @@
 
 
 - (void)addNote:(UIBarButtonItem*)sender {
-    
+    SearchBookVC *vc = [[SearchBookVC alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)segmentAction:(UISegmentedControl *)sender {

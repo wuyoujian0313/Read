@@ -10,6 +10,7 @@
 #import "SDImageCache.h"
 #import "UIImageView+WebCache.h"
 #import "NetworkTask.h"
+#import "StoreBookResult.h"
 
 @interface BookTableViewCell ()<NetworkTaskDelegate>
 @property(nonatomic, strong)BookItem    *bookInfo;
@@ -192,6 +193,48 @@
 
 - (void)favoriteAction:(UIButton *)sender {
     //
+    [self storeBook];
+}
+
+- (void)storeBook {
+    NSMutableDictionary* param = [[NSMutableDictionary alloc] initWithCapacity:0];
+    
+    NSString *author = _bookInfo.author;
+    if (author != nil && [author length] > 0) {
+        [param setObject:author forKey:@"author"];
+    }
+    NSString *name = _bookInfo.name;
+    if (name != nil && [name length] > 0) {
+        [param setObject:name forKey:@"bookName"];
+    }
+    
+    NSString *isbn = _bookInfo.isbn;
+    if (isbn != nil && [isbn length] > 0) {
+        [param setObject:isbn forKey:@"isbn"];
+    }
+    
+    NSString *pic = _bookInfo.pic_big;
+    if (pic != nil && [pic length] > 0) {
+        [param setObject:pic forKey:@"pic"];
+    }
+    
+    NSString *press = _bookInfo.press;
+    if (press != nil && [press length] > 0) {
+        [param setObject:press forKey:@"press"];
+    }
+    
+    NSString *fav = _bookInfo.isFavor;
+    if ([fav isEqualToString:@"yes"]) {
+        [param setObject:@"0" forKey:@"type"];
+    } else {
+        [param setObject:@"1" forKey:@"type"];
+    }
+    
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_StoreBook
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[StoreBookResult alloc] init]
+                                           customInfo:@"favorite"];
 }
 
 
@@ -216,11 +259,12 @@
         if ([fav isEqualToString:@"yes"]) {
             _bookInfo.isFavor = @"no";
             [_favoriteButton setImage:[UIImage imageNamed:@"heart_empty"] forState:UIControlStateNormal];
+            
         } else {
             _bookInfo.isFavor = @"yes";
             [_favoriteButton setImage:[UIImage imageNamed:@"heart_read"] forState:UIControlStateNormal];
         }
-        
+        [self setNeedsLayout];
         if (_delegate && [_delegate respondsToSelector:@selector(favoriteBookAction:)]) {
             [_delegate favoriteBookAction:self];
         }

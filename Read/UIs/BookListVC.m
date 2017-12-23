@@ -17,7 +17,7 @@
 #import "MultySearchResult.h"
 
 
-@interface BookListVC ()<UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate,NetworkTaskDelegate>
+@interface BookListVC ()<UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate,NetworkTaskDelegate,BookTableViewCellDelegate>
 @property(nonatomic, strong) UITableView                *booksTableView;
 @property(nonatomic, strong) NSMutableArray<BookItem *> *bookList;
 @property(nonatomic, strong) MJRefreshHeaderView        *refreshHeader;
@@ -100,6 +100,11 @@
     [tableView setBackgroundColor:[UIColor clearColor]];
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.view addSubview:tableView];
+}
+
+#pragma mark - BookTableViewCellDelegate
+- (void)favoriteBookAction:(BookTableViewCell *)cell {
+    //NSIndexPath *indexPath = [_booksTableView indexPathForCell:cell];
 }
 
 #pragma mark - NetworkTaskDelegate
@@ -211,6 +216,7 @@
     NSInteger row = indexPath.row;
     if (row < [_bookList count]) {
         BookItem *item = [_bookList objectAtIndex:row];
+        cell.delegate = self;
         [cell loadBookInfo:item];
     }
     
