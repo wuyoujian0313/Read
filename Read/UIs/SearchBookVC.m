@@ -11,12 +11,18 @@
 #import "BookItem.h"
 #import "BookTableViewCell.h"
 #import "NetworkTask.h"
+#import "UIView+SizeUtility.h"
 
 @interface SearchBookVC ()<UITableViewDataSource,UITableViewDelegate,NetworkTaskDelegate,UITextFieldDelegate,BookTableViewCellDelegate>
 @property(nonatomic, strong) UITableView                *booksTableView;
 @property(nonatomic, strong) NSMutableArray<BookItem *> *bookList;
 @property(nonatomic, strong) UITextField                *searchTextField;
 @property(nonatomic, strong) BookSearchResult           *searchBookResult;
+@property(nonatomic, assign) BOOL                       isAddBook;
+@property(nonatomic, copy) NSString                     *keyword;
+@property(nonatomic, strong)UITextField *bookNameField;
+@property(nonatomic, strong)UITextField *authorField;
+@property(nonatomic, strong)UITextField *pressField;
 @end
 
 @implementation SearchBookVC
@@ -29,10 +35,24 @@
     // Do any additional setup after loading the view.
     [self setNavTitle:@"Rlab阿来学院" titleColor:[UIColor colorWithHex:kGlobalGreenColor]];
     _bookList = [[NSMutableArray alloc] initWithCapacity:0];
+    _isAddBook = NO;
+    _keyword = @"";
     [self layoutBooksTableView];
     _searchBookResult = nil;
+    
+    UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithTitle:@"新添" style:UIBarButtonItemStylePlain target:self action:@selector(setAddBook:)];
+    self.navigationItem.rightBarButtonItem = addItem;
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                          [UIColor colorWithHex:kGlobalGreenColor],NSForegroundColorAttributeName,
+                          [UIFont systemFontOfSize:15],NSFontAttributeName,nil];
+    [addItem setTitleTextAttributes:dict forState:UIControlStateNormal];
 }
 
+- (void)setAddBook:(UIBarButtonItem *)sender {
+    _isAddBook = !_isAddBook;
+    [_searchTextField resignFirstResponder];
+    [self resetTableViewHeaderView];
+}
 
 - (void)searchBooks:(UIButton *)sender {
     [_searchTextField resignFirstResponder];
@@ -72,15 +92,17 @@
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.view addSubview:tableView];
     
-    [self layoutTableViewHeaderView:66];
+    [self resetTableViewHeaderView];
 }
 
-- (void)layoutTableViewHeaderView:(CGFloat)height {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _booksTableView.frame.size.width, height)];
+- (void)resetTableViewHeaderView {
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _booksTableView.frame.size.width, 0)];
     view.backgroundColor = [UIColor whiteColor];
     
     UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(15, 15, _booksTableView.frame.size.width - 15*2 - 15 - 60, 36)];
     self.searchTextField = textField;
+    textField.text = _keyword;
     [textField setDelegate:self];
     [textField setBorderStyle:UITextBorderStyleRoundedRect];
     [textField setFont:[UIFont systemFontOfSize:14]];
@@ -101,9 +123,82 @@
     [searchBtn addTarget:self action:@selector(searchBooks:) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:searchBtn];
     
-    LineView *line = [[LineView alloc] initWithFrame:CGRectMake(0, height-kLineHeight1px, _booksTableView.frame.size.width, kLineHeight1px)];
+    LineView *line = [[LineView alloc] initWithFrame:CGRectMake(0, 66-kLineHeight1px, _booksTableView.frame.size.width, kLineHeight1px)];
     [view addSubview:line];
+
+    NSInteger height = 66;
+    if (_isAddBook) {
+        height += [self layoutAddBookInfoView:view];
+    }
+    
+    view.height = height;
     [_booksTableView setTableHeaderView:view];
+}
+
+- (CGFloat)layoutAddBookInfoView:(UIView *)parentView {
+    UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 66 + 10, parentView.frame.size.width - 40, 15)];
+    [textLabel setBackgroundColor:[UIColor clearColor]];
+    [textLabel setFont:[UIFont systemFontOfSize:14]];
+    [textLabel setText:@"请填写您要写笔记的书目信息"];
+    [parentView addSubview:textLabel];
+    
+    UITextField *bookNameField = [[UITextField alloc] initWithFrame:CGRectMake(20, textLabel.bottom + 8, parentView.frame.size.width - 40, 30)];
+    [bookNameField setDelegate:self];
+    self.bookNameField = bookNameField;
+    [bookNameField setBorderStyle:UITextBorderStyleRoundedRect];
+    [bookNameField setFont:[UIFont systemFontOfSize:14]];
+    [bookNameField setReturnKeyType:UIReturnKeyNext];
+    [bookNameField setKeyboardType:UIKeyboardTypeDefault];
+    [bookNameField setTextAlignment:NSTextAlignmentLeft];
+    [bookNameField setTextColor:[UIColor colorWithHex:0x666666]];
+    [bookNameField setClearButtonMode:UITextFieldViewModeWhileEditing];
+    [bookNameField setPlaceholder:@"书目名称"];
+    [parentView addSubview:bookNameField];
+    
+    UITextField *authorField = [[UITextField alloc] initWithFrame:CGRectMake(20, bookNameField.bottom + 8, parentView.frame.size.width - 40, 30)];
+    [authorField setDelegate:self];
+    self.authorField = authorField;
+    [authorField setBorderStyle:UITextBorderStyleRoundedRect];
+    [authorField setFont:[UIFont systemFontOfSize:14]];
+    [authorField setReturnKeyType:UIReturnKeyNext];
+    [authorField setKeyboardType:UIKeyboardTypeDefault];
+    [authorField setTextAlignment:NSTextAlignmentLeft];
+    [authorField setTextColor:[UIColor colorWithHex:0x666666]];
+    [authorField setClearButtonMode:UITextFieldViewModeWhileEditing];
+    [authorField setPlaceholder:@"作者"];
+    [parentView addSubview:authorField];
+    
+    UITextField *pressField = [[UITextField alloc] initWithFrame:CGRectMake(20, authorField.bottom + 8, parentView.frame.size.width - 40, 30)];
+    [pressField setDelegate:self];
+    self.pressField = pressField;
+    [pressField setBorderStyle:UITextBorderStyleRoundedRect];
+    [pressField setFont:[UIFont systemFontOfSize:14]];
+    [pressField setReturnKeyType:UIReturnKeyDone];
+    [pressField setKeyboardType:UIKeyboardTypeDefault];
+    [pressField setTextAlignment:NSTextAlignmentLeft];
+    [pressField setTextColor:[UIColor colorWithHex:0x666666]];
+    [pressField setClearButtonMode:UITextFieldViewModeWhileEditing];
+    [pressField setPlaceholder:@"出版社"];
+    [parentView addSubview:pressField];
+    
+    UIButton *addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addBtn setBackgroundImage:[UIImage imageFromColor:[UIColor colorWithHex:kGlobalGreenColor]] forState:UIControlStateNormal];
+    [addBtn.layer setCornerRadius:5.0];
+    [addBtn setClipsToBounds:YES];
+    [addBtn setTitle:@"新建书目" forState:UIControlStateNormal];
+    [addBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [addBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    [addBtn setFrame:CGRectMake(20, pressField.bottom + 8, parentView.frame.size.width - 40, 30)];
+    [addBtn addTarget:self action:@selector(addBookAction:) forControlEvents:UIControlEventTouchUpInside];
+    [parentView addSubview:addBtn];
+    
+    LineView *line = [[LineView alloc] initWithFrame:CGRectMake(0, addBtn.bottom + 10 -kLineHeight1px, _booksTableView.frame.size.width, kLineHeight1px)];
+    [parentView addSubview:line];
+    
+    return line.bottom - textLabel.top + 10 + kLineHeight1px;
+}
+
+- (void)addBookAction:(UIButton *)sender {
 }
 
 #pragma mark - BookTableViewCellDelegate
@@ -117,8 +212,21 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
+    if (textField == _searchTextField) {
+        _keyword = textField.text;
+        [textField resignFirstResponder];
+    } else if (textField == _bookNameField) {
+        [_authorField becomeFirstResponder];
+    } else if (textField == _authorField) {
+        [_pressField becomeFirstResponder];
+    } else if(textField == _pressField) {
+        [textField resignFirstResponder];
+    }
     return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    _keyword = textField.text;
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {

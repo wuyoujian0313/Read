@@ -22,7 +22,7 @@
 #import "WriteTextNoteVC.h"
 #import "VoiceNoteVC.h"
 
-
+#import "SearchBookVC.h"
 
 @interface NotesVC ()<NetworkTaskDelegate,UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate,VoiceNoteDelegate,AVAudioPlayerDelegate>
 @property(nonatomic, strong) UITableView                *noteTableView;
@@ -247,6 +247,11 @@
 
 
 - (void)addNote:(UIBarButtonItem*)sender {
+    SearchBookVC *vc = [[SearchBookVC alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+    return;
+    
     if (_segmentControl.selectedSegmentIndex == 1) {
         WriteTextNoteVC *vc = [[WriteTextNoteVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
