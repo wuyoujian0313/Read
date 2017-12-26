@@ -7,7 +7,15 @@
 //
 
 #import "BaseVC.h"
+#import "BookItem.h"
+
+@protocol SearchBookDelegate <NSObject>
+
+- (void)didSelectBook:(BookItem *)book;
+- (void)disNewBook:(BookItem *)newBook;
+
+@end
 
 @interface SearchBookVC : BaseVC
-
+@property (nonatomic, weak) id <SearchBookDelegate> delegate;
 @end

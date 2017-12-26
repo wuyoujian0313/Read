@@ -13,8 +13,9 @@
 #import "SZTextView.h"
 #import "AddNoteResult.h"
 #import "NetworkTask.h"
+#import "SearchBookVC.h"
 
-@interface WriteTextNoteVC ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,NetworkTaskDelegate>
+@interface WriteTextNoteVC ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,NetworkTaskDelegate,SearchBookDelegate>
 @property (nonatomic, strong) UITableView                *noteTableView;
 @property (nonatomic, strong) SZTextView                 *noteTextView;
 @end
@@ -76,7 +77,7 @@
 
 - (void)setPageStatus:(VCPageStatus)pageStatus {
     _pageStatus = pageStatus;
-    if (_pageStatus == VCPageStatusNoNote || _pageStatus == VCPageStatusNone) {
+    if (_pageStatus == VCPageStatusNoBook || _pageStatus == VCPageStatusNone) {
         _note = nil;
     }
     [self setAddTextNoteButton];
@@ -100,8 +101,15 @@
     [self.view addSubview:tableView];
 }
 
-- (void)photoBookImageAction:(UIButton *)sender {
-    
+//
+- (void)selectBookAction:(UIButton *)sender {
+    if ([sender.currentTitle isEqualToString:@"选择书目"]) {
+        SearchBookVC *vc = [[SearchBookVC alloc] init];
+        vc.delegate = self;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if ([sender.currentTitle isEqualToString:@"封面拍照"]) {
+        // 拍封面
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -161,13 +169,7 @@
     [addBtn setClipsToBounds:YES];
     [addBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [addBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
-    if (_pageStatus == VCPageStatusNoNote) {
-        [addBtn setFrame:CGRectMake(0, 10 ,bgView.frame.size.width, 30)];
-    } else if (_pageStatus == VCPageStatusAddBook) {
-        [addBtn setFrame:CGRectMake(0, 10*2 + hh,bgView.frame.size.width, 30)];
-    }
-    
-    [addBtn addTarget:self action:@selector(photoBookImageAction:) forControlEvents:UIControlEventTouchUpInside];
+    [addBtn addTarget:self action:@selector(selectBookAction:) forControlEvents:UIControlEventTouchUpInside];
     [bgView addSubview:addBtn];
 }
 
@@ -224,6 +226,7 @@
             
             if (_pageStatus == VCPageStatusAddBook) {
                 addBtn.hidden = NO;
+                [addBtn setFrame:CGRectMake(0, 10*2 + hh,bgView.frame.size.width, 30)];
                 [bgView setFrame:CGRectMake(0, 0,tableView.frame.size.width,hh + 50)];
                 [addBtn setTitle:@"封面拍照" forState:UIControlStateNormal];
             } else {
@@ -255,8 +258,9 @@
                 [bookImageView setImage:[UIImage imageNamed:@"book_cover"]];
             }
             
-        } else if (_pageStatus == VCPageStatusNoNote) {
+        } else if (_pageStatus == VCPageStatusNoBook) {
             addBtn.hidden = NO;
+            [addBtn setFrame:CGRectMake(0, 10 ,bgView.frame.size.width, 30)];
             [bgView setFrame:CGRectMake(0, 0,tableView.frame.size.width,50)];
             [addBtn setTitle:@"选择书目" forState:UIControlStateNormal];
         }
@@ -285,7 +289,7 @@
         
         if (_pageStatus == VCPageStatusAddBook) {
             hh += 50;
-        } else if (_pageStatus == VCPageStatusNoNote) {
+        } else if (_pageStatus == VCPageStatusNoBook) {
             hh = 50;
         }
         [_noteTextView setFrame:CGRectMake(0, 10, tableView.width, tableView.height - hh - 10)];
@@ -307,7 +311,7 @@
             return hh;
         } else if (_pageStatus == VCPageStatusAddBook) {
             return hh + 50;
-        } else if (_pageStatus == VCPageStatusNoNote) {
+        } else if (_pageStatus == VCPageStatusNoBook) {
             return 50;
         }
         return 0;
@@ -319,7 +323,7 @@
         
         if (_pageStatus == VCPageStatusAddBook) {
             hh += 50;
-        } else if (_pageStatus == VCPageStatusNoNote) {
+        } else if (_pageStatus == VCPageStatusNoBook) {
             hh = 50;
         }
         
@@ -356,6 +360,29 @@
             //
         }];
     }
+}
+
+#pragma mark - SearchBookDelegate
+- (void)didSelectBook:(BookItem *)book {
+    NoteItem *note = [[NoteItem alloc] init];
+    note.bookname = book.name;
+    note.author = book.author;
+    note.press = book.press;
+    note.isbn = book.isbn;
+    note.pic = book.pic_big;
+    
+    _note = note;
+    [self setPageStatus:VCPageStatusSelectBook];
+}
+
+- (void)disNewBook:(BookItem *)newBook {
+    NoteItem *note = [[NoteItem alloc] init];
+    note.bookname = newBook.name;
+    note.author = newBook.author;
+    note.press = newBook.press;
+    
+    _note = note;
+    [self setPageStatus:VCPageStatusAddBook];
 }
 
 @end

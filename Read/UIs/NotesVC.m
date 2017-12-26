@@ -250,7 +250,7 @@
 - (void)addNote:(UIBarButtonItem*)sender {
     if (_segmentControl.selectedSegmentIndex == 0) {
         WriteTextNoteVC *vc = [[WriteTextNoteVC alloc] init];
-        vc.pageStatus = VCPageStatusSelectBook;
+        vc.pageStatus = VCPageStatusNoBook;
         vc.note = [_textNotes objectAtIndex:0];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];

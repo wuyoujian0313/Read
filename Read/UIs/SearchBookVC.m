@@ -8,7 +8,6 @@
 
 #import "SearchBookVC.h"
 #import "BookSearchResult.h"
-#import "BookItem.h"
 #import "BookTableViewCell.h"
 #import "NetworkTask.h"
 #import "UIView+SizeUtility.h"
@@ -199,6 +198,42 @@
 }
 
 - (void)addBookAction:(UIButton *)sender {
+    if (_bookNameField.text == nil || [_bookNameField.text length] <= 0) {
+        [FadePromptView showPromptStatus:@"请输入书目名称" duration:0.6 positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
+            //
+        }];
+        [_bookNameField becomeFirstResponder];
+        return;
+    }
+    
+    if (_authorField.text == nil || [_authorField.text length] <= 0) {
+        [FadePromptView showPromptStatus:@"请输入作者" duration:0.6 positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
+            //
+        }];
+        [_authorField becomeFirstResponder];
+        return;
+    }
+    
+    if (_pressField.text == nil || [_pressField.text length] <= 0) {
+        [FadePromptView showPromptStatus:@"请输入出版社" duration:0.6 positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
+            //
+        }];
+        [_pressField becomeFirstResponder];
+        return;
+    }
+    
+    
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(didSelectBook:)]) {
+        
+        BookItem *book = [[BookItem alloc] init];
+        book.name = _bookNameField.text;
+        book.author = _authorField.text;
+        book.press = _pressField.text;
+        
+        [_delegate disNewBook:book];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - BookTableViewCellDelegate
@@ -300,6 +335,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(didSelectBook:)]) {
+        [_delegate didSelectBook:[_bookList objectAtIndex:indexPath.row]];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 

@@ -77,7 +77,7 @@
 
 typedef NS_ENUM(NSInteger,VCPageStatus){
     VCPageStatusNone,
-    VCPageStatusNoNote,
+    VCPageStatusNoBook,
     VCPageStatusAddBook,
     VCPageStatusSelectBook,
 };

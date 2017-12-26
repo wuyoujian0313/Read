@@ -40,7 +40,7 @@
 
 - (void)setPageStatus:(VCPageStatus)pageStatus {
     _pageStatus = pageStatus;
-    if (_pageStatus == VCPageStatusNoNote || _pageStatus == VCPageStatusNone) {
+    if (_pageStatus == VCPageStatusNoBook || _pageStatus == VCPageStatusNone) {
         _note = nil;
     }
     [self setAddTextNoteButton];
@@ -126,7 +126,7 @@
     [addBtn setClipsToBounds:YES];
     [addBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [addBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
-    if (_pageStatus == VCPageStatusNoNote) {
+    if (_pageStatus == VCPageStatusNoBook) {
         [addBtn setFrame:CGRectMake(0, 10 ,bgView.frame.size.width, 30)];
     } else if (_pageStatus == VCPageStatusAddBook) {
         [addBtn setFrame:CGRectMake(0, 10*2 + hh,bgView.frame.size.width, 30)];
@@ -220,7 +220,7 @@
                 [bookImageView setImage:[UIImage imageNamed:@"book_cover"]];
             }
             
-        } else if (_pageStatus == VCPageStatusNoNote) {
+        } else if (_pageStatus == VCPageStatusNoBook) {
             addBtn.hidden = NO;
             [bgView setFrame:CGRectMake(0, 0,tableView.frame.size.width,50)];
             [addBtn setTitle:@"选择书目" forState:UIControlStateNormal];
@@ -242,7 +242,7 @@
         
         if (_pageStatus == VCPageStatusAddBook) {
             hh += 50;
-        } else if (_pageStatus == VCPageStatusNoNote) {
+        } else if (_pageStatus == VCPageStatusNoBook) {
             hh = 50;
         }
         //
@@ -265,7 +265,7 @@
             return hh;
         } else if (_pageStatus == VCPageStatusAddBook) {
             return hh + 50;
-        } else if (_pageStatus == VCPageStatusNoNote) {
+        } else if (_pageStatus == VCPageStatusNoBook) {
             return 50;
         }
         return 0;
@@ -277,7 +277,7 @@
         
         if (_pageStatus == VCPageStatusAddBook) {
             hh += 50;
-        } else if (_pageStatus == VCPageStatusNoNote) {
+        } else if (_pageStatus == VCPageStatusNoBook) {
             hh = 50;
         }
         
