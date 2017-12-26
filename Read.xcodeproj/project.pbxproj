@@ -33,6 +33,8 @@
 		AF1BEFCA1FED165000B90C0B /* WriteTextNoteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1BEFC91FED165000B90C0B /* WriteTextNoteVC.m */; };
 		AF1BEFCD1FED17FB00B90C0B /* SearchBookVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1BEFCC1FED17FB00B90C0B /* SearchBookVC.m */; };
 		AF1BEFD01FED199200B90C0B /* VoiceNoteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1BEFCF1FED199200B90C0B /* VoiceNoteVC.m */; };
+		AF201A5B1FF1F2050084CAD6 /* SZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF201A5A1FF1F2050084CAD6 /* SZTextView.m */; };
+		AF201A5E1FF22AB10084CAD6 /* AddNoteResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AF201A5D1FF22AB10084CAD6 /* AddNoteResult.m */; };
 		AF2308251FB3371200BEC151 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308241FB3371200BEC151 /* main.m */; };
 		AF2308281FB3371200BEC151 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2308271FB3371200BEC151 /* AppDelegate.m */; };
 		AF2308301FB3371200BEC151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF23082F1FB3371200BEC151 /* Assets.xcassets */; };
@@ -194,6 +196,10 @@
 		AF1BEFCC1FED17FB00B90C0B /* SearchBookVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchBookVC.m; sourceTree = "<group>"; };
 		AF1BEFCE1FED199200B90C0B /* VoiceNoteVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VoiceNoteVC.h; sourceTree = "<group>"; };
 		AF1BEFCF1FED199200B90C0B /* VoiceNoteVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VoiceNoteVC.m; sourceTree = "<group>"; };
+		AF201A591FF1F2050084CAD6 /* SZTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZTextView.h; sourceTree = "<group>"; };
+		AF201A5A1FF1F2050084CAD6 /* SZTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZTextView.m; sourceTree = "<group>"; };
+		AF201A5C1FF22AB10084CAD6 /* AddNoteResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddNoteResult.h; sourceTree = "<group>"; };
+		AF201A5D1FF22AB10084CAD6 /* AddNoteResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddNoteResult.m; sourceTree = "<group>"; };
 		AF2308201FB3371200BEC151 /* Read.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Read.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF2308241FB3371200BEC151 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AF2308261FB3371200BEC151 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -456,6 +462,15 @@
 			name = Me;
 			sourceTree = "<group>";
 		};
+		AF201A581FF1F2050084CAD6 /* SZTextView */ = {
+			isa = PBXGroup;
+			children = (
+				AF201A591FF1F2050084CAD6 /* SZTextView.h */,
+				AF201A5A1FF1F2050084CAD6 /* SZTextView.m */,
+			);
+			path = SZTextView;
+			sourceTree = "<group>";
+		};
 		AF2308171FB3371200BEC151 = {
 			isa = PBXGroup;
 			children = (
@@ -506,6 +521,7 @@
 		AF23083A1FB33F5600BEC151 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				AF201A581FF1F2050084CAD6 /* SZTextView */,
 				AFC17C531FE50DA800734007 /* TTGTagCollectionView */,
 				AFBABF331FC847880001A5E5 /* iCarousel */,
 				AF23083B1FB33F5600BEC151 /* AFNetworking */,
@@ -701,6 +717,8 @@
 				AF88AB311FC1540400E885D5 /* UploadUserAvatarResult.m */,
 				AFD3D2D01FE8CE40002CB821 /* BookSearchResult.h */,
 				AFD3D2D11FE8CE40002CB821 /* BookSearchResult.m */,
+				AF201A5C1FF22AB10084CAD6 /* AddNoteResult.h */,
+				AF201A5D1FF22AB10084CAD6 /* AddNoteResult.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -993,6 +1011,7 @@
 				AF2308CA1FB33F5600BEC151 /* UIImage+WebP.m in Sources */,
 				AF2308C21FB33F5600BEC151 /* SDWebImageDecoder.m in Sources */,
 				AF2308C91FB33F5600BEC151 /* UIImage+MultiFormat.m in Sources */,
+				AF201A5B1FF1F2050084CAD6 /* SZTextView.m in Sources */,
 				AF506F971FB6071800470C01 /* ForgetPwdVC.m in Sources */,
 				AFC17C5C1FE5136400734007 /* TextTagTableViewCell.m in Sources */,
 				AFBAE1801FB85EF40002DE1B /* BookItem.m in Sources */,
@@ -1015,6 +1034,7 @@
 				AFF5EDBD1FE783B4001FDE2B /* BookGridTableViewCell.m in Sources */,
 				AFD3D2DB1FE90080002CB821 /* VoiceNoteTableViewCell.m in Sources */,
 				AF2308C51FB33F5600BEC151 /* SDWebImageManager.m in Sources */,
+				AF201A5E1FF22AB10084CAD6 /* AddNoteResult.m in Sources */,
 				AFBABF361FC847880001A5E5 /* iCarousel.m in Sources */,
 				AFBAE17A1FB8590B0002DE1B /* NoteItem.m in Sources */,
 				AFBABF2D1FC6CA0F0001A5E5 /* StoreBookResult.m in Sources */,

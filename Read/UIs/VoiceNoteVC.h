@@ -7,7 +7,9 @@
 //
 
 #import "BaseVC.h"
+#import "NoteItem.h"
 
 @interface VoiceNoteVC : BaseVC
-
+@property (nonatomic, assign) VCPageStatus pageStatus;
+@property (nonatomic, strong) NoteItem *note;
 @end

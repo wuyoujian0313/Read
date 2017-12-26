@@ -22,8 +22,6 @@
 #import "WriteTextNoteVC.h"
 #import "VoiceNoteVC.h"
 
-#import "SearchBookVC.h"
-
 @interface NotesVC ()<NetworkTaskDelegate,UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate,VoiceNoteDelegate,AVAudioPlayerDelegate>
 @property(nonatomic, strong) UITableView                *noteTableView;
 @property(nonatomic, strong) UISegmentedControl         *segmentControl;
@@ -47,6 +45,10 @@
     [self stopPlay];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [_refreshHeader beginRefreshing];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -64,7 +66,6 @@
     
     _isRefreshList = YES;
     _playIndex = -1;
-    [_refreshHeader beginRefreshing];
 }
 
 - (void)pausePlay {
@@ -247,13 +248,10 @@
 
 
 - (void)addNote:(UIBarButtonItem*)sender {
-    SearchBookVC *vc = [[SearchBookVC alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
-    return;
-    
-    if (_segmentControl.selectedSegmentIndex == 1) {
+    if (_segmentControl.selectedSegmentIndex == 0) {
         WriteTextNoteVC *vc = [[WriteTextNoteVC alloc] init];
+        vc.pageStatus = VCPageStatusSelectBook;
+        vc.note = [_textNotes objectAtIndex:0];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     } else {
@@ -389,6 +387,7 @@
     }
 }
 
+#pragma mark - UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (_segmentControl.selectedSegmentIndex == 0) {
         return [_textNotes count];
@@ -444,7 +443,7 @@
     return nil;
 }
 
-#pragma mark - UITableViewDelegate
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 60;
 }

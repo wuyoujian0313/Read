@@ -7,7 +7,10 @@
 //
 
 #import "BaseVC.h"
+#import "NoteItem.h"
 
 @interface WriteTextNoteVC : BaseVC
+@property (nonatomic, assign) VCPageStatus pageStatus;
+@property (nonatomic, strong) NoteItem *note;
 
 @end

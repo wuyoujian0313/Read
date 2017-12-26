@@ -74,4 +74,12 @@
 // 写笔记
 #define API_WriteNote                   @"book/writeNotes"
 
+
+typedef NS_ENUM(NSInteger,VCPageStatus){
+    VCPageStatusNone,
+    VCPageStatusNoNote,
+    VCPageStatusAddBook,
+    VCPageStatusSelectBook,
+};
+
 #endif /* ConstantDef_h */
