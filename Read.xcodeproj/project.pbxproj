@@ -39,6 +39,8 @@
 		AF08A7C71FF36ABD0059A9B6 /* talk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF08A7BB1FF36ABD0059A9B6 /* talk@2x.png */; };
 		AF08A7C81FF36ABD0059A9B6 /* chatto_voice_playing_f0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF08A7BC1FF36ABD0059A9B6 /* chatto_voice_playing_f0@2x.png */; };
 		AF08A7C91FF36ABD0059A9B6 /* talk5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF08A7BD1FF36ABD0059A9B6 /* talk5@2x.png */; };
+		AF08A7CC1FF375D90059A9B6 /* start_record_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF08A7CA1FF375D80059A9B6 /* start_record_pressed@2x.png */; };
+		AF08A7CD1FF375D90059A9B6 /* start_record_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF08A7CB1FF375D90059A9B6 /* start_record_normal@2x.png */; };
 		AF14EAB31FB6FB770042683D /* NSData+Crypto.m in Sources */ = {isa = PBXBuildFile; fileRef = AF14EAB21FB6FB770042683D /* NSData+Crypto.m */; };
 		AF14EAB61FB7191D0042683D /* SetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF14EAB51FB7191D0042683D /* SetVC.m */; };
 		AF14EAB91FB737F60042683D /* ModifyPwdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF14EAB81FB737F60042683D /* ModifyPwdVC.m */; };
@@ -208,6 +210,8 @@
 		AF08A7BB1FF36ABD0059A9B6 /* talk@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "talk@2x.png"; sourceTree = "<group>"; };
 		AF08A7BC1FF36ABD0059A9B6 /* chatto_voice_playing_f0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chatto_voice_playing_f0@2x.png"; sourceTree = "<group>"; };
 		AF08A7BD1FF36ABD0059A9B6 /* talk5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "talk5@2x.png"; sourceTree = "<group>"; };
+		AF08A7CA1FF375D80059A9B6 /* start_record_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "start_record_pressed@2x.png"; sourceTree = "<group>"; };
+		AF08A7CB1FF375D90059A9B6 /* start_record_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "start_record_normal@2x.png"; sourceTree = "<group>"; };
 		AF14EAB11FB6FB770042683D /* NSData+Crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Crypto.h"; sourceTree = "<group>"; };
 		AF14EAB21FB6FB770042683D /* NSData+Crypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Crypto.m"; sourceTree = "<group>"; };
 		AF14EAB41FB7191D0042683D /* SetVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetVC.h; sourceTree = "<group>"; };
@@ -797,6 +801,8 @@
 				AF08A7BD1FF36ABD0059A9B6 /* talk5@2x.png */,
 				AF08A7B21FF36ABB0059A9B6 /* talk6@2x.png */,
 				AF08A7B31FF36ABB0059A9B6 /* voice_bg@2x.png */,
+				AF08A7CB1FF375D90059A9B6 /* start_record_normal@2x.png */,
+				AF08A7CA1FF375D80059A9B6 /* start_record_pressed@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -1004,6 +1010,7 @@
 				AF08A7BF1FF36ABD0059A9B6 /* voice_bg@2x.png in Resources */,
 				AF26A04A1FEA3A83001F7705 /* icon_pause@2x.png in Resources */,
 				AF94FE021FB9DD5F0086CB22 /* tb-xinshu@2x.png in Resources */,
+				AF08A7CC1FF375D90059A9B6 /* start_record_pressed@2x.png in Resources */,
 				AF08A7BE1FF36ABD0059A9B6 /* talk6@2x.png in Resources */,
 				AF94FDFC1FB9DD5F0086CB22 /* tb-biji@2x.png in Resources */,
 				AF2308CE1FB33F5600BEC151 /* SVProgressHUD.bundle in Resources */,
@@ -1015,6 +1022,7 @@
 				AF94FDFF1FB9DD5F0086CB22 /* tb-shuku-sel@2x.png in Resources */,
 				AFAFB76C1FC2BB8F00663862 /* heart_empty@2x.png in Resources */,
 				AF0422901FBC88C900D15E8E /* radio_select@2x.png in Resources */,
+				AF08A7CD1FF375D90059A9B6 /* start_record_normal@2x.png in Resources */,
 				AF94FDFB1FB9DD5F0086CB22 /* tb-biji-sel@2x.png in Resources */,
 				AF506F8F1FB5E26700470C01 /* icon_pwd@2x.png in Resources */,
 			);

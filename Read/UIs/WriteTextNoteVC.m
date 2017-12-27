@@ -146,7 +146,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)layoutHeadInfoView:(UIView *)parentView {
+- (void)layoutHeadInfoViewInCell:(UIView *)parentView {
     
     UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _noteTableView.width, 0)];
     [bgView setTag:99];
@@ -228,7 +228,7 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reusedCellID];
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [self layoutHeadInfoView:cell.contentView];
+            [self layoutHeadInfoViewInCell:cell.contentView];
         }
         
         UIView *bgView = (UIView *)[cell.contentView viewWithTag:99];

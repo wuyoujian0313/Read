@@ -20,6 +20,7 @@
 
 @interface VoiceNoteVC ()<UITableViewDataSource,UITableViewDelegate,NetworkTaskDelegate,SearchBookDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic, strong) UITableView                *noteTableView;
+@property (nonatomic, strong) UIImageView                *voiceImageView;
 @end
 
 @implementation VoiceNoteVC
@@ -137,7 +138,97 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)layoutHeadInfoView:(UIView *)parentView {
+- (void)layoutVoiceViewInCell:(UIView *)parentView {
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _noteTableView.width, 0)];
+    [bgView setTag:299];
+    [bgView setBackgroundColor:[UIColor whiteColor]];
+    [bgView setClipsToBounds:YES];
+    [parentView addSubview:bgView];
+    
+    NSInteger height = _noteTableView.width;
+    if ([DeviceInfo screenHeight] <= 480) {
+        height = _noteTableView.width *3/4;
+    }
+    UIView *voiceBGView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _noteTableView.width, height)];
+    [voiceBGView setTag:200];
+    [voiceBGView setBackgroundColor:[UIColor colorWithHex:0xcccccc]];
+    [voiceBGView setClipsToBounds:YES];
+    [bgView addSubview:voiceBGView];
+    
+    // 35 * 75
+    // 20
+    // 20
+    NSInteger top = (height - 75 - 20 - 20 )/2;
+    UIImageView *talkImageView = [[UIImageView alloc] initWithFrame:CGRectMake((_noteTableView.width - 35)/2.0, top, 35, 75)];
+    [talkImageView setImage:[UIImage imageNamed:@"talk"]];
+    [talkImageView setTag:100];
+    [bgView addSubview:talkImageView];
+    
+    UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, talkImageView.bottom + 20, _noteTableView.width, 20)];
+    [textLabel setTag:101];
+    [textLabel setBackgroundColor:[UIColor clearColor]];
+    [textLabel setFont:[UIFont systemFontOfSize:15]];
+    [textLabel setTextAlignment:NSTextAlignmentCenter];
+    [textLabel setText:@"手指上滑，取消录音"];
+    [textLabel setTextColor:[UIColor whiteColor]];
+    [bgView addSubview:textLabel];
+    
+    // 19 * 60
+    UIImageView *voiceImageView = [[UIImageView alloc] initWithFrame:CGRectMake(talkImageView.right + 2,talkImageView.bottom - 60 - 25, 19, 60)];
+    self.voiceImageView = voiceImageView;
+    [voiceImageView setImage:[UIImage imageNamed:@"talk1"]];
+    [voiceImageView setTag:102];
+    [bgView addSubview:voiceImageView];
+    
+    UIView *pressView = [[UIView alloc] initWithFrame:CGRectMake(0, voiceBGView.bottom + 10,_noteTableView.width,96)];
+    [pressView setTag:103];
+    [bgView addSubview:pressView];
+    
+    // 96*96
+    UIButton *recordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [recordBtn setFrame:CGRectMake((_noteTableView.width - 96)/2, 0, 96, 96)];
+    [recordBtn setImage:[UIImage imageNamed:@"start_record_normal"] forState:UIControlStateNormal];
+    [recordBtn setClipsToBounds:YES];
+    [recordBtn addTarget:self action:@selector(pressDownAction:) forControlEvents:UIControlEventTouchDown];
+    [recordBtn addTarget:self action:@selector(pressUpAction:) forControlEvents:UIControlEventTouchUpInside];
+
+    // to get the drag event
+    [recordBtn addTarget:self action:@selector(btnDragged:withEvent:) forControlEvents:UIControlEventTouchDragInside];
+    [recordBtn addTarget:self action:@selector(btnDragged:withEvent:) forControlEvents:UIControlEventTouchDragOutside];
+    [recordBtn setTag:104];
+    [pressView addSubview:recordBtn];
+}
+
+- (void)btnDragged:(UIButton *)sender withEvent:(UIEvent *)event {
+    UITouch *touch = [[event allTouches] anyObject];
+    CGFloat boundsExtension = 10.0f;
+    CGRect outerBounds = CGRectInset(sender.bounds, -1 * boundsExtension, -1 * boundsExtension);
+    BOOL touchOutside = !CGRectContainsPoint(outerBounds, [touch locationInView:sender]);
+    CGPoint point = [touch locationInView:sender];
+
+    if (touchOutside) {
+        BOOL previewTouchInside = CGRectContainsPoint(outerBounds, [touch previousLocationInView:sender]);
+        if (previewTouchInside) {
+            // UIControlEventTouchDragExit 并且是朝上的
+            if (point.y < -boundsExtension) {
+                NSString *str = @"UIControlEventTouchDragExit";
+                NSLog(@"%@",str);
+            }
+        }
+    }
+}
+
+- (void)pressDownAction:(UIButton *)sender {
+    NSString *str = @"pressDownAction";
+    NSLog(@"%@",str);
+}
+
+- (void)pressUpAction:(UIButton *)sender {
+    NSString *str = @"pressUpAction";
+    NSLog(@"%@",str);
+}
+
+- (void)layoutHeadInfoViewInCell:(UIView *)parentView {
     
     UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _noteTableView.width, 0)];
     [bgView setTag:99];
@@ -219,7 +310,7 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reusedCellID];
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [self layoutHeadInfoView:cell.contentView];
+            [self layoutHeadInfoViewInCell:cell.contentView];
         }
         
         UIView *bgView = (UIView *)[cell.contentView viewWithTag:99];
@@ -292,8 +383,10 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reusedCellID];
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.contentView.backgroundColor = [UIColor grayColor];
+            [self layoutVoiceViewInCell:cell.contentView];
         }
+        
+        UIView *bgView = (UIView *)[cell.contentView viewWithTag:299];
         
         NSInteger hh = 90;
         if ([DeviceInfo screenWidth] > 320) {
@@ -305,7 +398,7 @@
         } else if (_pageStatus == VCPageStatusNoBook) {
             hh = 50;
         }
-        //[_noteTextView setFrame:CGRectMake(0, 10, tableView.width, tableView.height - hh)];
+        [bgView setFrame:CGRectMake(0, 10, tableView.width, tableView.height - hh)];
         return cell;
         
     }
