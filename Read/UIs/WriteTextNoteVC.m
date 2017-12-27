@@ -14,8 +14,11 @@
 #import "AddNoteResult.h"
 #import "NetworkTask.h"
 #import "SearchBookVC.h"
+#import <MobileCoreServices/MobileCoreServices.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <AVFoundation/AVFoundation.h>
 
-@interface WriteTextNoteVC ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,NetworkTaskDelegate,SearchBookDelegate>
+@interface WriteTextNoteVC ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,NetworkTaskDelegate,SearchBookDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic, strong) UITableView                *noteTableView;
 @property (nonatomic, strong) SZTextView                 *noteTextView;
 @end
@@ -39,7 +42,7 @@
     [finishItem setTitleTextAttributes:dict forState:UIControlStateNormal];
 }
 
-- (void)addNoteAction:(UIBarButtonItem *)sender {
+- (void)commitNote {
     if (_pageStatus == VCPageStatusSelectBook || _pageStatus == VCPageStatusAddBook) {
         if (_noteTextView.text == nil || [_noteTextView.text length] <= 0) {
             [FadePromptView showPromptStatus:@"请输入您的笔记~" duration:0.6 positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
@@ -71,8 +74,33 @@
             
         } else {
             // uploadTextNote
+            [param setObject:@"2" forKey:@"source"];
+            [param setObject:@"1" forKey:@"type"];
+            [param setObject:_note.bookname forKey:@"bookName"];
+            [param setObject:_note.author forKey:@"author"];
+            [param setObject:_note.press forKey:@"press"];
+            [param setObject:_noteTextView.text forKey:@"content"];
+            
+            SDImageCache *imageCache = [SDImageCache sharedImageCache];
+            NSString *imageKey = [_note.pic md5EncodeUpper:NO];
+            UIImage  *image = [imageCache imageFromDiskCacheForKey:imageKey];
+            NSData   *imageData = UIImagePNGRepresentation(image);
+            [SVProgressHUD showWithStatus:@"正在提交笔记..." maskType:SVProgressHUDMaskTypeBlack];
+            [[NetworkTask sharedNetworkTask] startUploadTaskApi:API_WriteNote
+                                                       forParam:param
+                                                       fileData:imageData
+                                                        fileKey:@"pic"
+                                                       fileName:[NSString stringWithFormat:@"%@.png",imageKey]
+                                                       mimeType:@"image/png"
+                                                       delegate:self
+                                                      resultObj:[[AddNoteResult alloc] init]
+                                                     customInfo:@"uploadTextNote"];
         }
     }
+}
+
+- (void)addNoteAction:(UIBarButtonItem *)sender {
+    [self commitNote];
 }
 
 - (void)setPageStatus:(VCPageStatus)pageStatus {
@@ -109,6 +137,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     } else if ([sender.currentTitle isEqualToString:@"封面拍照"]) {
         // 拍封面
+        [self takePicture];
     }
 }
 
@@ -139,7 +168,7 @@
     [bookImageView setClipsToBounds:YES];
     [bgView addSubview:bookImageView];
 
-    top += 5;
+    top += 3;
     NSInteger space = (hh - top - 20 - 15 - 15)/2.0;
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10 + ww, top, bgView.frame.size.width - 10 - ww, 20)];
     [nameLabel setBackgroundColor:[UIColor whiteColor]];
@@ -155,7 +184,7 @@
     [authorLabel setTextColor:[UIColor grayColor]];
     [bgView addSubview:authorLabel];
     
-    UILabel *pressLabel = [[UILabel alloc] initWithFrame:CGRectMake(10 + ww, space + authorLabel.bottom, bgView.frame.size.width - 10 - ww, 20)];
+    UILabel *pressLabel = [[UILabel alloc] initWithFrame:CGRectMake(10 + ww, space + authorLabel.bottom, bgView.frame.size.width - 10 - ww, 15)];
     [pressLabel setBackgroundColor:[UIColor whiteColor]];
     [pressLabel setFont:[UIFont systemFontOfSize:13]];
     [pressLabel setTag:103];
@@ -292,7 +321,7 @@
         } else if (_pageStatus == VCPageStatusNoBook) {
             hh = 50;
         }
-        [_noteTextView setFrame:CGRectMake(0, 10, tableView.width, tableView.height - hh - 10)];
+        [_noteTextView setFrame:CGRectMake(0, 10, tableView.width, tableView.height - hh)];
         return cell;
         
     }
@@ -327,7 +356,7 @@
             hh = 50;
         }
         
-        return tableView.height - hh - 10;
+        return tableView.height - hh;
     }
     return 0;
 }
@@ -341,10 +370,14 @@
     [SVProgressHUD dismiss];
     
     if ([customInfo isEqualToString:@"addTextNote"]) {
-        
+        [FadePromptView showPromptStatus:result.message duration:1.0 finishBlock:^{
+            //
+        }];
         
     } else if ([customInfo isEqualToString:@"uploadTextNote"]) {
-        
+        [FadePromptView showPromptStatus:result.message duration:1.0 finishBlock:^{
+            //
+        }];
     }
 }
 
@@ -380,9 +413,97 @@
     note.bookname = newBook.name;
     note.author = newBook.author;
     note.press = newBook.press;
+    note.pic = [NSString UUID];
     
     _note = note;
     [self setPageStatus:VCPageStatusAddBook];
+}
+
+- (void)takePicture {
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从相册选择", nil];
+    [sheet showInView:self.view];
+}
+
+#pragma mark - UIActionSheetDelegate
+-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    
+    switch (buttonIndex) {
+        case 0: {
+            
+            AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+            if (authStatus == ALAuthorizationStatusRestricted || authStatus == ALAuthorizationStatusDenied ) {
+                
+                UIAlertController *addAlertVC = [UIAlertController alertControllerWithTitle:@"无法使用相机" message:@"请在iPhone的“设置-隐私-相机”中允许访问相机" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *confirmAction =[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+                }];
+                [addAlertVC addAction:confirmAction];
+                [self.navigationController presentViewController:addAlertVC animated:YES completion:nil];
+                
+                return;
+            }
+            
+            //打开照相机拍照
+            if ([UIImagePickerController isSourceTypeAvailable:
+                 UIImagePickerControllerSourceTypeCamera]) {
+                
+                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                picker.delegate = self;
+                picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                picker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
+                picker.allowsEditing = YES;
+                [self presentViewController:picker animated:YES completion:^{
+                }];
+            }
+            
+            break;
+            
+        }
+            
+            
+        case 1: {
+            
+            //打开本地相册
+            if ([UIImagePickerController isSourceTypeAvailable:
+                 UIImagePickerControllerSourceTypePhotoLibrary]) {
+                
+                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                picker.delegate = self;
+                picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                picker.allowsEditing = YES;
+                [self presentViewController:picker animated:YES completion:^{
+                }];
+            }
+            
+            break;
+        }
+    }
+}
+
+#pragma mark - imagepicker delegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    __block UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    __block UIImagePickerController *weakPicker = picker;
+    
+    WriteTextNoteVC *wSelf = self;
+    dispatch_async(dispatch_get_global_queue(0, 0), ^(void) {
+        
+        NSInteger ww = 400;
+        NSInteger hh = 500;
+
+        UIImage *imageScale = [image resizedImageByMagick:[NSString stringWithFormat:@"%ldx%ld",ww,hh]];
+        
+        SDImageCache *imageCache = [SDImageCache sharedImageCache];
+        NSString *key = [_note.pic md5EncodeUpper:NO];
+        [imageCache storeImage:imageScale forKey:key];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //
+            [weakPicker dismissViewControllerAnimated:YES completion:^{
+                [wSelf.noteTableView reloadData];
+            }];
+        });
+    });
 }
 
 @end

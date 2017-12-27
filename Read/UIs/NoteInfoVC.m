@@ -70,21 +70,21 @@
     top += 5;
     NSInteger space = (hh - top - 20 - 15 - 15)/2.0;
     
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10 + ww, top, bgView.frame.size.width - 10 - ww - 10, 20)];
+    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10 + bookImageView.right, top, bgView.right - bookImageView.right - 10*3, 20)];
     [nameLabel setBackgroundColor:[UIColor clearColor]];
     [nameLabel setFont:[UIFont systemFontOfSize:16]];
     [nameLabel setTextColor:[UIColor blackColor]];
     [bgView addSubview:nameLabel];
     nameLabel.text = _note.bookname;
     
-    UILabel *authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(10 + ww, space + top+20, bgView.frame.size.width - 10 - ww - 10, 15)];
+    UILabel *authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(10 + bookImageView.right, space + top+20, bgView.right - bookImageView.right - 10*3, 15)];
     [authorLabel setBackgroundColor:[UIColor clearColor]];
     [authorLabel setFont:[UIFont systemFontOfSize:13]];
     [authorLabel setTextColor:[UIColor grayColor]];
     [bgView addSubview:authorLabel];
     authorLabel.text = _note.author;
     
-    UILabel *pressLabel = [[UILabel alloc] initWithFrame:CGRectMake(10 + ww, 2*space + top+20 + 15, bgView.frame.size.width - 10 - ww - 10, 20)];
+    UILabel *pressLabel = [[UILabel alloc] initWithFrame:CGRectMake(10 + bookImageView.right, 2*space + top+20 + 15, bgView.right - bookImageView.right - 10*3, 20)];
     [pressLabel setBackgroundColor:[UIColor clearColor]];
     [pressLabel setFont:[UIFont systemFontOfSize:13]];
     [pressLabel setTextColor:[UIColor grayColor]];

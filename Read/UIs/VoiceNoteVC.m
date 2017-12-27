@@ -11,8 +11,14 @@
 #import "UIImageView+WebCache.h"
 #import "UIView+SizeUtility.h"
 #import "SZTextView.h"
+#import "AddNoteResult.h"
+#import "NetworkTask.h"
+#import "SearchBookVC.h"
+#import <MobileCoreServices/MobileCoreServices.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <AVFoundation/AVFoundation.h>
 
-@interface VoiceNoteVC ()<UITableViewDataSource,UITableViewDelegate>
+@interface VoiceNoteVC ()<UITableViewDataSource,UITableViewDelegate,NetworkTaskDelegate,SearchBookDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic, strong) UITableView                *noteTableView;
 @end
 
@@ -35,7 +41,57 @@
     [finishItem setTitleTextAttributes:dict forState:UIControlStateNormal];
 }
 
+- (void)commitNote {
+    if (_pageStatus == VCPageStatusSelectBook || _pageStatus == VCPageStatusAddBook) {
+        //
+        NSMutableDictionary* param =[[NSMutableDictionary alloc] initWithCapacity:0];
+        if (_pageStatus == VCPageStatusSelectBook) {
+            //
+            [param setObject:@"1" forKey:@"source"];
+            [param setObject:@"1" forKey:@"type"];
+            [param setObject:_note.bookname forKey:@"bookName"];
+            [param setObject:_note.author forKey:@"author"];
+            [param setObject:_note.press forKey:@"press"];
+            [param setObject:_note.pic forKey:@"pic"];
+            [param setObject:_note.isbn forKey:@"isbn"];
+            //[param setObject:_noteTextView.text forKey:@"content"];
+            
+            [SVProgressHUD showWithStatus:@"正在提交笔记..." maskType:SVProgressHUDMaskTypeBlack];
+            [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_WriteNote
+                                                     forParam:param
+                                                     delegate:self
+                                                    resultObj:[[AddNoteResult alloc] init]
+                                                   customInfo:@"addTextNote"];
+            
+        } else {
+            // uploadTextNote
+            [param setObject:@"2" forKey:@"source"];
+            [param setObject:@"1" forKey:@"type"];
+            [param setObject:_note.bookname forKey:@"bookName"];
+            [param setObject:_note.author forKey:@"author"];
+            [param setObject:_note.press forKey:@"press"];
+            //[param setObject:_noteTextView.text forKey:@"content"];
+            
+            SDImageCache *imageCache = [SDImageCache sharedImageCache];
+            NSString *imageKey = [_note.pic md5EncodeUpper:NO];
+            UIImage  *image = [imageCache imageFromDiskCacheForKey:imageKey];
+            NSData   *imageData = UIImagePNGRepresentation(image);
+            [SVProgressHUD showWithStatus:@"正在提交笔记..." maskType:SVProgressHUDMaskTypeBlack];
+            [[NetworkTask sharedNetworkTask] startUploadTaskApi:API_WriteNote
+                                                       forParam:param
+                                                       fileData:imageData
+                                                        fileKey:@"pic"
+                                                       fileName:[NSString stringWithFormat:@"%@.png",imageKey]
+                                                       mimeType:@"image/png"
+                                                       delegate:self
+                                                      resultObj:[[AddNoteResult alloc] init]
+                                                     customInfo:@"uploadTextNote"];
+        }
+    }
+}
+
 - (void)addNoteAction:(UIBarButtonItem *)sender {
+    [self commitNote];
 }
 
 - (void)setPageStatus:(VCPageStatus)pageStatus {
@@ -64,9 +120,16 @@
     [self.view addSubview:tableView];
 }
 
-
-- (void)photoBookImageAction:(UIButton *)sender {
-    
+//
+- (void)selectBookAction:(UIButton *)sender {
+    if ([sender.currentTitle isEqualToString:@"选择书目"]) {
+        SearchBookVC *vc = [[SearchBookVC alloc] init];
+        vc.delegate = self;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if ([sender.currentTitle isEqualToString:@"封面拍照"]) {
+        // 拍封面
+        [self takePicture];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -96,7 +159,7 @@
     [bookImageView setClipsToBounds:YES];
     [bgView addSubview:bookImageView];
     
-    top += 5;
+    top += 3;
     NSInteger space = (hh - top - 20 - 15 - 15)/2.0;
     UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10 + ww, top, bgView.frame.size.width - 10 - ww, 20)];
     [nameLabel setBackgroundColor:[UIColor whiteColor]];
@@ -112,7 +175,7 @@
     [authorLabel setTextColor:[UIColor grayColor]];
     [bgView addSubview:authorLabel];
     
-    UILabel *pressLabel = [[UILabel alloc] initWithFrame:CGRectMake(10 + ww, space + authorLabel.bottom, bgView.frame.size.width - 10 - ww, 20)];
+    UILabel *pressLabel = [[UILabel alloc] initWithFrame:CGRectMake(10 + ww, space + authorLabel.bottom, bgView.frame.size.width - 10 - ww, 15)];
     [pressLabel setBackgroundColor:[UIColor whiteColor]];
     [pressLabel setFont:[UIFont systemFontOfSize:13]];
     [pressLabel setTag:103];
@@ -126,13 +189,7 @@
     [addBtn setClipsToBounds:YES];
     [addBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [addBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
-    if (_pageStatus == VCPageStatusNoBook) {
-        [addBtn setFrame:CGRectMake(0, 10 ,bgView.frame.size.width, 30)];
-    } else if (_pageStatus == VCPageStatusAddBook) {
-        [addBtn setFrame:CGRectMake(0, 10*2 + hh,bgView.frame.size.width, 30)];
-    }
-    
-    [addBtn addTarget:self action:@selector(photoBookImageAction:) forControlEvents:UIControlEventTouchUpInside];
+    [addBtn addTarget:self action:@selector(selectBookAction:) forControlEvents:UIControlEventTouchUpInside];
     [bgView addSubview:addBtn];
 }
 
@@ -156,7 +213,7 @@
     
     // 不使用重用机制
     if (indexPath.row == 0) {
-        static NSString *reusedCellID = @"writeTextNoteCell1";
+        static NSString *reusedCellID = @"VoiceNoteCell1";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reusedCellID];
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reusedCellID];
@@ -189,6 +246,7 @@
             
             if (_pageStatus == VCPageStatusAddBook) {
                 addBtn.hidden = NO;
+                [addBtn setFrame:CGRectMake(0, 10*2 + hh,bgView.frame.size.width, 30)];
                 [bgView setFrame:CGRectMake(0, 0,tableView.frame.size.width,hh + 50)];
                 [addBtn setTitle:@"封面拍照" forState:UIControlStateNormal];
             } else {
@@ -222,17 +280,19 @@
             
         } else if (_pageStatus == VCPageStatusNoBook) {
             addBtn.hidden = NO;
+            [addBtn setFrame:CGRectMake(0, 10 ,bgView.frame.size.width, 30)];
             [bgView setFrame:CGRectMake(0, 0,tableView.frame.size.width,50)];
             [addBtn setTitle:@"选择书目" forState:UIControlStateNormal];
         }
         return cell;
     } else {
-        static NSString *reusedCellID = @"writeTextNoteCell2";
+        static NSString *reusedCellID = @"VoiceNoteCell2";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reusedCellID];
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reusedCellID];
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.contentView.backgroundColor = [UIColor grayColor];
         }
         
         NSInteger hh = 90;
@@ -245,8 +305,7 @@
         } else if (_pageStatus == VCPageStatusNoBook) {
             hh = 50;
         }
-        //
-        //CGRectMake(0, 10, tableView.width, tableView.height - hh - 10)
+        //[_noteTextView setFrame:CGRectMake(0, 10, tableView.width, tableView.height - hh)];
         return cell;
         
     }
@@ -281,13 +340,156 @@
             hh = 50;
         }
         
-        return tableView.height - hh - 10;
+        return tableView.height - hh;
     }
     return 0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - NetworkTaskDelegate
+-(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+    
+    if ([customInfo isEqualToString:@"addTextNote"]) {
+        [FadePromptView showPromptStatus:result.message duration:1.0 finishBlock:^{
+            //
+        }];
+        
+    } else if ([customInfo isEqualToString:@"uploadTextNote"]) {
+        [FadePromptView showPromptStatus:result.message duration:1.0 finishBlock:^{
+            //
+        }];
+    }
+}
+
+
+-(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+    if ([customInfo isEqualToString:@"addTextNote"]) {
+        [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
+            //
+        }];
+    }  else if ([customInfo isEqualToString:@"uploadTextNote"]) {
+        [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
+            //
+        }];
+    }
+}
+
+#pragma mark - SearchBookDelegate
+- (void)didSelectBook:(BookItem *)book {
+    NoteItem *note = [[NoteItem alloc] init];
+    note.bookname = book.name;
+    note.author = book.author;
+    note.press = book.press;
+    note.isbn = book.isbn;
+    note.pic = book.pic_big;
+    
+    _note = note;
+    [self setPageStatus:VCPageStatusSelectBook];
+}
+
+- (void)disNewBook:(BookItem *)newBook {
+    NoteItem *note = [[NoteItem alloc] init];
+    note.bookname = newBook.name;
+    note.author = newBook.author;
+    note.press = newBook.press;
+    note.pic = [NSString UUID];
+    
+    _note = note;
+    [self setPageStatus:VCPageStatusAddBook];
+}
+
+
+
+- (void)takePicture {
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从相册选择", nil];
+    [sheet showInView:self.view];
+}
+
+#pragma mark - UIActionSheetDelegate
+-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    
+    switch (buttonIndex) {
+        case 0: {
+            
+            AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+            if (authStatus == ALAuthorizationStatusRestricted || authStatus == ALAuthorizationStatusDenied ) {
+                
+                UIAlertController *addAlertVC = [UIAlertController alertControllerWithTitle:@"无法使用相机" message:@"请在iPhone的“设置-隐私-相机”中允许访问相机" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *confirmAction =[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+                }];
+                [addAlertVC addAction:confirmAction];
+                [self.navigationController presentViewController:addAlertVC animated:YES completion:nil];
+                
+                return;
+            }
+            
+            //打开照相机拍照
+            if ([UIImagePickerController isSourceTypeAvailable:
+                 UIImagePickerControllerSourceTypeCamera]) {
+                
+                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                picker.delegate = self;
+                picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                picker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
+                picker.allowsEditing = YES;
+                [self presentViewController:picker animated:YES completion:^{
+                }];
+            }
+            
+            break;
+            
+        }
+            
+            
+        case 1: {
+            
+            //打开本地相册
+            if ([UIImagePickerController isSourceTypeAvailable:
+                 UIImagePickerControllerSourceTypePhotoLibrary]) {
+                
+                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                picker.delegate = self;
+                picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                picker.allowsEditing = YES;
+                [self presentViewController:picker animated:YES completion:^{
+                }];
+            }
+            
+            break;
+        }
+    }
+}
+
+#pragma mark - imagepicker delegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    __block UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    __block UIImagePickerController *weakPicker = picker;
+    
+    VoiceNoteVC *wSelf = self;
+    dispatch_async(dispatch_get_global_queue(0, 0), ^(void) {
+        
+        NSInteger ww = 400;
+        NSInteger hh = 500;
+        
+        UIImage *imageScale = [image resizedImageByMagick:[NSString stringWithFormat:@"%ldx%ld",ww,hh]];
+        
+        SDImageCache *imageCache = [SDImageCache sharedImageCache];
+        NSString *key = [_note.pic md5EncodeUpper:NO];
+        [imageCache storeImage:imageScale forKey:key];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //
+            [weakPicker dismissViewControllerAnimated:YES completion:^{
+                [wSelf.noteTableView reloadData];
+            }];
+        });
+    });
 }
 
 @end
