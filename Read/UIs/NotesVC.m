@@ -35,6 +35,7 @@
 @property(nonatomic, assign) NSInteger                  playIndex;
 
 @property(nonatomic, strong) AVAudioPlayer              *audioPlayer;
+@property(nonatomic, strong) NSTimer                    *timer;
 @end
 
 @implementation NotesVC
@@ -118,11 +119,23 @@
             [sself.audioPlayer prepareToPlay];
             [sself.audioPlayer play];
             
+            //设置定时检测
+            _timer = [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(detectionPlay) userInfo:nil repeats:YES];
+            
         } else {
             NSLog(@"ERror creating player: %@", [playerError description]);
         }
     });
 #endif
+}
+
+- (void)detectionPlay {
+    CGFloat progress = _audioPlayer.currentTime/_audioPlayer.duration;
+    if (_segmentControl.selectedSegmentIndex == 1) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_playIndex inSection:0];
+        VoiceNoteTableViewCell *cell = [_noteTableView cellForRowAtIndexPath:indexPath];
+        [cell setPlayProgress:progress];
+    }
 }
 
 #pragma mark - VoiceNoteDelegate
@@ -168,9 +181,11 @@
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_playIndex inSection:0];
             VoiceNoteTableViewCell *cell = [_noteTableView cellForRowAtIndexPath:indexPath];
             [cell setPlayButtonStatus:NO];
+            [cell setPlayProgress:0.0];
         }
-        
     }
+    
+    [_timer invalidate];
 }
 
 - (void)addRefreshHeadder {

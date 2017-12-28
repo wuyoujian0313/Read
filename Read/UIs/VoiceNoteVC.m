@@ -53,6 +53,15 @@
     if ([_audioRecoder isRecording]) {
         [_audioRecoder stop];
     }
+    
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    NSError *sessionError;
+    [session setCategory:AVAudioSessionCategoryPlayAndRecord error:&sessionError];
+    
+    if(session) {
+        [session setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
+    }
+    
     [_timer invalidate];
 }
 
@@ -345,7 +354,6 @@
         NSLog(@"%@", error.description);
     }
 #endif
-    
 }
 
 - (void)detectionVoice {

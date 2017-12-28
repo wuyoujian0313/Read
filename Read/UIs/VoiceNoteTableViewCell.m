@@ -123,17 +123,20 @@
     }
 }
 
+- (void)setPlayProgress:(CGFloat)progress {
+    [_progressView setProgress:progress];
+}
+
 - (void)setNoteInfo:(NoteItem*)note index:(NSInteger)index {
     _note = note;
     _isPlay = NO;
     _index = index;
     [self resetPlayButtonStatus];
-    [self setNeedsLayout];
+     [self layoutContentView:self.contentView];
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    [self layoutContentView:self.contentView];
 }
 
 @end

@@ -18,5 +18,5 @@
 
 - (void)setNoteInfo:(NoteItem*)note index:(NSInteger)index;
 - (void)setPlayButtonStatus:(BOOL)isPlay;
-
+- (void)setPlayProgress:(CGFloat)progress;
 @end
