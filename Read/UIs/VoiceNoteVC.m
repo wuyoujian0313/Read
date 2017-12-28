@@ -17,13 +17,44 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <AVFoundation/AVFoundation.h>
+#import "AudioPlayControl.h"
+#import <CoreMedia/CoreMedia.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+#import <AVFoundation/AVFoundation.h>
+#import <MediaPlayer/MediaPlayer.h>
 
-@interface VoiceNoteVC ()<UITableViewDataSource,UITableViewDelegate,NetworkTaskDelegate,SearchBookDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+#define UPLOAD_RECORDFILEKEY                    @"UPLOAD_RECORDFILEKEY"
+
+@interface VoiceNoteVC ()<UITableViewDataSource,UITableViewDelegate,NetworkTaskDelegate,SearchBookDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,AVAudioPlayerDelegate,AVAudioRecorderDelegate>
 @property (nonatomic, strong) UITableView                *noteTableView;
 @property (nonatomic, strong) UIImageView                *voiceImageView;
+@property (nonatomic, strong) AudioPlayControl           *audioControl;
+@property (nonatomic, assign) BOOL                       isPlay;
+@property (nonatomic, strong) AVAudioPlayer              *audioPlayer;
+@property (nonatomic, strong) AVAudioRecorder            *audioRecoder;
+@property (nonatomic, copy) NSString                     *recordFileKey;
+@property (nonatomic, strong) NSURL                      *recordedFile;
+@property (nonatomic, strong) NSTimer                    *timer;
+@property (nonatomic, assign) BOOL                       isCanPlay;
+@property (nonatomic, strong) UIButton                   *recordBtn;
 @end
 
 @implementation VoiceNoteVC
+
+- (void)dealloc {
+    [self stopPlayAndRecoder];
+}
+
+- (void)stopPlayAndRecoder {
+    if ([_audioPlayer isPlaying]) {
+        [_audioPlayer stop];
+    }
+    
+    if ([_audioRecoder isRecording]) {
+        [_audioRecoder stop];
+    }
+    [_timer invalidate];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,7 +62,26 @@
     [self setNavTitle:@"Rlab阿来学院" titleColor:[UIColor colorWithHex:kGlobalGreenColor]];
     [self layoutBGView];
     [self layoutNoteTableView];
+    [self setInitData];
 }
+
+-(void)setInitData {
+    _isPlay = NO;
+    _isCanPlay = NO;
+    NSString *recordFileKey = [NSString stringWithFormat:@"%@",[NSString UUID]];
+    self.recordFileKey = recordFileKey;
+    self.recordedFile = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingFormat:@"%@.m4a",recordFileKey]];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *oldRecordFileKey = [[NSUserDefaults standardUserDefaults] objectForKey:UPLOAD_RECORDFILEKEY];
+    [fileManager removeItemAtURL:[NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingFormat:@"%@.m4a",oldRecordFileKey]] error:nil];
+    
+    // 播放音频
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    NSError *sessionError;
+    [session setCategory:AVAudioSessionCategoryPlayAndRecord error:&sessionError];
+}
+
 
 - (void)setAddTextNoteButton {
     UIBarButtonItem *finishItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(addNoteAction:)];
@@ -138,6 +188,34 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)audioPlayAction:(AudioPlayControl *)sender {
+    _isPlay = !_isPlay;
+    if (_isPlay) {
+        [sender startPlayAnimation];
+    } else {
+        [sender stopPlayAnimation];
+    }
+    
+    // 播放
+    
+#if TARGET_IPHONE_SIMULATOR
+#elif TARGET_OS_IPHONE
+    
+    NSError *playerError;
+    [self.audioPlayer stop];
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:_recordedFile error:&playerError];
+    if (_audioPlayer) {
+        _audioPlayer.delegate = self;
+        [_audioPlayer prepareToPlay];
+        [_audioPlayer play];
+        
+    } else {
+        NSLog(@"ERror creating player: %@", [playerError description]);
+    }
+#endif
+    
+}
+
 - (void)layoutVoiceViewInCell:(UIView *)parentView {
     UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _noteTableView.width, 0)];
     [bgView setTag:299];
@@ -145,6 +223,16 @@
     [bgView setClipsToBounds:YES];
     [parentView addSubview:bgView];
     
+    // 播放录音,begin
+    AudioPlayControl *control = [[AudioPlayControl alloc] initWithFrame:CGRectMake(0, 0, bgView.width, 20)];
+    self.audioControl = control;
+    _audioControl.tag = 300;
+    _audioControl.hidden = YES;
+    [_audioControl addTarget:self action:@selector(audioPlayAction:) forControlEvents:UIControlEventTouchUpInside];
+    [bgView addSubview:control];
+    // 播放录音,end
+    
+    // 录音状态页面,begin
     NSInteger height = _noteTableView.width;
     if ([DeviceInfo screenHeight] <= 480) {
         height = _noteTableView.width *3/4;
@@ -155,37 +243,36 @@
     [voiceBGView setClipsToBounds:YES];
     [bgView addSubview:voiceBGView];
     
-    // 35 * 75
-    // 20
-    // 20
+    // 35 * 75 20 20
     NSInteger top = (height - 75 - 20 - 20 )/2;
-    UIImageView *talkImageView = [[UIImageView alloc] initWithFrame:CGRectMake((_noteTableView.width - 35)/2.0, top, 35, 75)];
+    UIImageView *talkImageView = [[UIImageView alloc] initWithFrame:CGRectMake((voiceBGView.width - 35)/2.0, top, 35, 75)];
     [talkImageView setImage:[UIImage imageNamed:@"talk"]];
     [talkImageView setTag:100];
-    [bgView addSubview:talkImageView];
+    [voiceBGView addSubview:talkImageView];
     
-    UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, talkImageView.bottom + 20, _noteTableView.width, 20)];
+    UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, talkImageView.bottom + 20, voiceBGView.width, 20)];
     [textLabel setTag:101];
     [textLabel setBackgroundColor:[UIColor clearColor]];
     [textLabel setFont:[UIFont systemFontOfSize:15]];
     [textLabel setTextAlignment:NSTextAlignmentCenter];
     [textLabel setText:@"手指上滑，取消录音"];
     [textLabel setTextColor:[UIColor whiteColor]];
-    [bgView addSubview:textLabel];
+    [voiceBGView addSubview:textLabel];
     
     // 19 * 60
     UIImageView *voiceImageView = [[UIImageView alloc] initWithFrame:CGRectMake(talkImageView.right + 2,talkImageView.bottom - 60 - 25, 19, 60)];
     self.voiceImageView = voiceImageView;
     [voiceImageView setImage:[UIImage imageNamed:@"talk1"]];
     [voiceImageView setTag:102];
-    [bgView addSubview:voiceImageView];
+    [voiceBGView addSubview:voiceImageView];
     
     UIView *pressView = [[UIView alloc] initWithFrame:CGRectMake(0, voiceBGView.bottom + 10,_noteTableView.width,96)];
-    [pressView setTag:103];
+    [pressView setTag:400];
     [bgView addSubview:pressView];
     
     // 96*96
     UIButton *recordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.recordBtn = recordBtn;
     [recordBtn setFrame:CGRectMake((_noteTableView.width - 96)/2, 0, 96, 96)];
     [recordBtn setImage:[UIImage imageNamed:@"start_record_normal"] forState:UIControlStateNormal];
     [recordBtn setClipsToBounds:YES];
@@ -197,6 +284,7 @@
     [recordBtn addTarget:self action:@selector(btnDragged:withEvent:) forControlEvents:UIControlEventTouchDragOutside];
     [recordBtn setTag:104];
     [pressView addSubview:recordBtn];
+    // 录音状态页面,end
 }
 
 - (void)btnDragged:(UIButton *)sender withEvent:(UIEvent *)event {
@@ -211,21 +299,135 @@
         if (previewTouchInside) {
             // UIControlEventTouchDragExit 并且是朝上的
             if (point.y < -boundsExtension) {
-                NSString *str = @"UIControlEventTouchDragExit";
-                NSLog(@"%@",str);
+                [_recordBtn setImage:[UIImage imageNamed:@"start_record_normal"] forState:UIControlStateNormal];
+                [_audioRecoder stop];
+                [_timer invalidate];
+                [_noteTableView reloadData];
             }
         }
     }
 }
 
 - (void)pressDownAction:(UIButton *)sender {
-    NSString *str = @"pressDownAction";
-    NSLog(@"%@",str);
+    [sender setImage:[UIImage imageNamed:@"start_record_pressed"] forState:UIControlStateNormal];
+    [sender setNeedsDisplay];
+    
+    // 录音
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setActive:YES error:nil];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager removeItemAtURL:_recordedFile error:nil];
+    
+#if TARGET_IPHONE_SIMULATOR
+#elif TARGET_OS_IPHONE
+    
+    NSMutableDictionary* recordSetting = [[NSMutableDictionary alloc] init];
+    [recordSetting setValue :[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
+    [recordSetting setValue:[NSNumber numberWithFloat:44100.0] forKey:AVSampleRateKey];
+    [recordSetting setValue:[NSNumber numberWithInt:1] forKey:AVNumberOfChannelsKey];
+    
+    NSError *error;
+    [self.audioRecoder stop];
+    [self.audioControl stopPlayAnimation];
+    self.audioRecoder = [[AVAudioRecorder alloc] initWithURL:_recordedFile settings:recordSetting error:&error];
+    if (_audioRecoder) {
+        [_audioRecoder prepareToRecord];
+        [_audioRecoder record];
+        //开启音量检测
+        _audioRecoder.meteringEnabled = YES;
+        _audioRecoder.delegate = self;
+        
+        //设置定时检测
+        _timer = [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(detectionVoice) userInfo:nil repeats:YES];
+    } else {
+        [session setActive:NO error:nil];
+        NSLog(@"%@", error.description);
+    }
+#endif
+    
+}
+
+- (void)detectionVoice {
+    [_audioRecoder updateMeters];//刷新音量数据
+    
+    double cTime = _audioRecoder.currentTime;
+    if (cTime >= 60) {
+        [_audioRecoder stop];
+        [_timer invalidate];
+        [_noteTableView reloadData];
+        [_recordBtn setImage:[UIImage imageNamed:@"start_record_normal"] forState:UIControlStateNormal];
+        return;
+    }
+    
+    //获取音量的平均值  [recorder averagePowerForChannel:0];
+    //音量的最大值  [recorder peakPowerForChannel:0];
+    
+    double lowPassResults = pow(10, (0.05 * [_audioRecoder peakPowerForChannel:0]));
+    NSLog(@"%lf",lowPassResults);
+    //最大50  0
+    //图片 小-》大
+    if (0<lowPassResults<=0.06) {
+        
+        [_voiceImageView setImage:[UIImage imageNamed:@"talk1"]];
+    } else if (0.06<lowPassResults<=0.13) {
+        
+        [_voiceImageView setImage:[UIImage imageNamed:@"talk1"]];
+    } else if (0.13<lowPassResults<=0.20) {
+        
+        [_voiceImageView setImage:[UIImage imageNamed:@"talk2"]];
+    } else if (0.20<lowPassResults<=0.27) {
+        
+        [_voiceImageView setImage:[UIImage imageNamed:@"talk3"]];
+    } else if (0.27<lowPassResults<=0.34) {
+        
+        [_voiceImageView setImage:[UIImage imageNamed:@"talk3"]];
+    } else if (0.34<lowPassResults<=0.41) {
+        
+        [_voiceImageView setImage:[UIImage imageNamed:@"talk4"]];
+        
+    } else if (0.55<lowPassResults<=0.62) {
+        
+        [_voiceImageView setImage:[UIImage imageNamed:@"talk4"]];
+    }else if (0.48<lowPassResults<=0.55) {
+        
+        [_voiceImageView setImage:[UIImage imageNamed:@"talk5"]];
+        
+    } else if (0.69<lowPassResults<=0.76) {
+        
+        [_voiceImageView setImage:[UIImage imageNamed:@"talk5"]];
+    }else if (0.76<lowPassResults<=0.83) {
+        
+        [_voiceImageView setImage:[UIImage imageNamed:@"talk6"]];
+        
+    } else if (0.83<lowPassResults<=0.9)  {
+        
+        [_voiceImageView setImage:[UIImage imageNamed:@"talk6"]];
+    } else {
+        
+    }
 }
 
 - (void)pressUpAction:(UIButton *)sender {
-    NSString *str = @"pressUpAction";
-    NSLog(@"%@",str);
+    [sender setImage:[UIImage imageNamed:@"start_record_normal"] forState:UIControlStateNormal];
+    if (![_audioRecoder isRecording] || ![_timer isValid]) {
+        return;
+    }
+    
+    double cTime = _audioRecoder.currentTime;
+    if (cTime >= 1) {
+        _isCanPlay = YES;
+        [_noteTableView reloadData];
+    } else {
+        //删除记录的文件
+        [_audioRecoder deleteRecording];
+        [FadePromptView showPromptStatus:@"录音太短" duration:1.0 finishBlock:^{
+            //
+        }];
+    }
+    
+    [_audioRecoder stop];
+    [_timer invalidate];
 }
 
 - (void)layoutHeadInfoViewInCell:(UIView *)parentView {
@@ -387,6 +589,20 @@
         }
         
         UIView *bgView = (UIView *)[cell.contentView viewWithTag:299];
+        UIView *voiceBGView = (UIView *)[bgView viewWithTag:200];
+        UIImageView *voiceImageView = (UIImageView *)[voiceBGView viewWithTag:102];
+        UIView *pressView = (UIView *)[bgView viewWithTag:400];
+        AudioPlayControl *audioControl = (AudioPlayControl*)[bgView viewWithTag:300];
+        voiceBGView.hidden = YES;
+        pressView.hidden = YES;
+        audioControl.hidden = YES;
+        if (_isCanPlay) {
+            audioControl.hidden = NO;
+        } else {
+            voiceBGView.hidden = NO;
+            pressView.hidden = NO;
+            [voiceImageView setImage:[UIImage imageNamed:@"talk1"]];
+        }
         
         NSInteger hh = 90;
         if ([DeviceInfo screenWidth] > 320) {
@@ -399,8 +615,8 @@
             hh = 50;
         }
         [bgView setFrame:CGRectMake(0, 10, tableView.width, tableView.height - hh)];
+
         return cell;
-        
     }
     return nil;
 }
@@ -583,6 +799,26 @@
             }];
         });
     });
+}
+
+#pragma mark - AVAudioPlayerDelegate
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+    [_audioControl stopPlayAnimation];
+    [_audioPlayer stop];
+}
+
+- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
+    [_audioControl stopPlayAnimation];
+    [_audioPlayer stop];
+}
+
+#pragma mark - AVAudioRecorderDelegate
+- (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag {
+    [recorder stop];
+}
+
+- (void)audioRecorderEncodeErrorDidOccur:(AVAudioRecorder *)recorder error:(NSError *)error {
+    [recorder stop];
 }
 
 @end

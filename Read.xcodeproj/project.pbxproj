@@ -127,6 +127,7 @@
 		AF94FE011FB9DD5F0086CB22 /* tb-xinshu-sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF94FDF91FB9DD5F0086CB22 /* tb-xinshu-sel@2x.png */; };
 		AF94FE021FB9DD5F0086CB22 /* tb-xinshu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF94FDFA1FB9DD5F0086CB22 /* tb-xinshu@2x.png */; };
 		AF9660E51FE6464300EF4733 /* fangdajing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF9660E31FE6464200EF4733 /* fangdajing@2x.png */; };
+		AFA28FDA1FF49A49003D4820 /* AudioPlayControl.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA28FD91FF49A49003D4820 /* AudioPlayControl.m */; };
 		AFAFB75F1FC282F100663862 /* BookDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFAFB75E1FC282F100663862 /* BookDetailVC.m */; };
 		AFAFB7621FC298A700663862 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AFAFB7601FC298A700663862 /* InfoPlist.strings */; };
 		AFAFB7661FC2ABC100663862 /* BookListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFAFB7651FC2ABC100663862 /* BookListVC.m */; };
@@ -370,6 +371,8 @@
 		AF94FDF91FB9DD5F0086CB22 /* tb-xinshu-sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-xinshu-sel@2x.png"; sourceTree = "<group>"; };
 		AF94FDFA1FB9DD5F0086CB22 /* tb-xinshu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb-xinshu@2x.png"; sourceTree = "<group>"; };
 		AF9660E31FE6464200EF4733 /* fangdajing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fangdajing@2x.png"; sourceTree = "<group>"; };
+		AFA28FD81FF49A49003D4820 /* AudioPlayControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayControl.h; sourceTree = "<group>"; };
+		AFA28FD91FF49A49003D4820 /* AudioPlayControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioPlayControl.m; sourceTree = "<group>"; };
 		AFAFB75D1FC282F100663862 /* BookDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookDetailVC.h; sourceTree = "<group>"; };
 		AFAFB75E1FC282F100663862 /* BookDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookDetailVC.m; sourceTree = "<group>"; };
 		AFAFB7611FC298A700663862 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -915,6 +918,8 @@
 				AF1BEFCF1FED199200B90C0B /* VoiceNoteVC.m */,
 				AF1BEFCB1FED17FB00B90C0B /* SearchBookVC.h */,
 				AF1BEFCC1FED17FB00B90C0B /* SearchBookVC.m */,
+				AFA28FD81FF49A49003D4820 /* AudioPlayControl.h */,
+				AFA28FD91FF49A49003D4820 /* AudioPlayControl.m */,
 			);
 			name = Notes;
 			sourceTree = "<group>";
@@ -1089,6 +1094,7 @@
 				AF036E401FC4639F005A1765 /* NoteBookItem.m in Sources */,
 				AFF5EDBD1FE783B4001FDE2B /* BookGridTableViewCell.m in Sources */,
 				AFD3D2DB1FE90080002CB821 /* VoiceNoteTableViewCell.m in Sources */,
+				AFA28FDA1FF49A49003D4820 /* AudioPlayControl.m in Sources */,
 				AF2308C51FB33F5600BEC151 /* SDWebImageManager.m in Sources */,
 				AF201A5E1FF22AB10084CAD6 /* AddNoteResult.m in Sources */,
 				AFBABF361FC847880001A5E5 /* iCarousel.m in Sources */,
