@@ -132,6 +132,7 @@
     _isPlay = NO;
     _index = index;
     [self resetPlayButtonStatus];
+    [_progressView setProgress:0.0];
      [self layoutContentView:self.contentView];
 }
 

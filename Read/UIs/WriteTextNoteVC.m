@@ -55,7 +55,7 @@
         //
         NSMutableDictionary* param =[[NSMutableDictionary alloc] initWithCapacity:0];
         if (_pageStatus == VCPageStatusSelectBook) {
-            //
+            // 增加笔记
             [param setObject:@"1" forKey:@"source"];
             [param setObject:@"1" forKey:@"type"];
             [param setObject:_note.bookname forKey:@"bookName"];
@@ -73,6 +73,7 @@
                                                    customInfo:@"addTextNote"];
             
         } else {
+            // 增加笔记，并且增加书目
             // uploadTextNote
             [param setObject:@"2" forKey:@"source"];
             [param setObject:@"1" forKey:@"type"];
@@ -85,6 +86,14 @@
             NSString *imageKey = [_note.pic md5EncodeUpper:NO];
             UIImage  *image = [imageCache imageFromDiskCacheForKey:imageKey];
             NSData   *imageData = UIImagePNGRepresentation(image);
+            if (imageData == nil) {
+                [FadePromptView showPromptStatus:@"请拍书的封面" duration:1.0 finishBlock:^{
+                    //
+                }];
+                
+                return;
+            }
+            
             [SVProgressHUD showWithStatus:@"正在提交笔记..." maskType:SVProgressHUDMaskTypeBlack];
             [[NetworkTask sharedNetworkTask] startUploadTaskApi:API_WriteNote
                                                        forParam:param

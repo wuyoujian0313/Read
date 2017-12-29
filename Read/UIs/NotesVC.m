@@ -46,6 +46,10 @@
     [self stopPlay];
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [self stopPlay];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [_refreshHeader beginRefreshing];
 }
@@ -87,6 +91,7 @@
     [session setActive:YES error:nil];
     
     [_audioPlayer stop];
+    [_timer invalidate];
 #if TARGET_IPHONE_SIMULATOR
 #elif TARGET_OS_IPHONE
     __weak NotesVC *weakSelf = self;
@@ -108,8 +113,8 @@
         NSError *playerError;
         NSData *data = [sharedCache dataFromCacheForKey:fileKey];
         if (data == nil) {
-            NSData *dd = [NSData dataWithContentsOfURL:URL];
-            [sharedCache writeData:dd forKey:fileKey];
+            data = [NSData dataWithContentsOfURL:URL];
+            [sharedCache writeData:data forKey:fileKey];
         }
         
         sself.audioPlayer = [[AVAudioPlayer alloc] initWithData:data error:&playerError];//AVFileTypeWAVE 为音频格式;

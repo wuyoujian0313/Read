@@ -19,8 +19,6 @@
 #import <AVFoundation/AVFoundation.h>
 #import "AudioPlayControl.h"
 #import <CoreMedia/CoreMedia.h>
-#import <MobileCoreServices/MobileCoreServices.h>
-#import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 
 #define UPLOAD_RECORDFILEKEY                    @"UPLOAD_RECORDFILEKEY"
@@ -40,6 +38,10 @@
 @end
 
 @implementation VoiceNoteVC
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [self stopPlayAndRecoder];
+}
 
 - (void)dealloc {
     [self stopPlayAndRecoder];
@@ -106,43 +108,80 @@
         //
         NSMutableDictionary* param =[[NSMutableDictionary alloc] initWithCapacity:0];
         if (_pageStatus == VCPageStatusSelectBook) {
-            //
+            // 增加笔记
             [param setObject:@"1" forKey:@"source"];
-            [param setObject:@"1" forKey:@"type"];
+            [param setObject:@"2" forKey:@"type"];
             [param setObject:_note.bookname forKey:@"bookName"];
             [param setObject:_note.author forKey:@"author"];
             [param setObject:_note.press forKey:@"press"];
             [param setObject:_note.pic forKey:@"pic"];
             [param setObject:_note.isbn forKey:@"isbn"];
-            //[param setObject:_noteTextView.text forKey:@"content"];
-            
+
+            NSData *voiceData = [NSData dataWithContentsOfURL:_recordedFile];
+            if (voiceData == nil) {
+                [FadePromptView showPromptStatus:@"请录语音笔记" duration:1.0 finishBlock:^{
+                    //
+                }];
+                
+                return;
+            }
             [SVProgressHUD showWithStatus:@"正在提交笔记..." maskType:SVProgressHUDMaskTypeBlack];
-            [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_WriteNote
-                                                     forParam:param
-                                                     delegate:self
-                                                    resultObj:[[AddNoteResult alloc] init]
-                                                   customInfo:@"addTextNote"];
-            
+            [[NetworkTask sharedNetworkTask] startUploadTaskApi:API_WriteNote
+                                                       forParam:param
+                                                       fileData:voiceData
+                                                        fileKey:@"file"
+                                                       fileName:[NSString stringWithFormat:@"%@.mp3",_recordFileKey]
+                                                       mimeType:@"audio/mpeg"
+                                                       delegate:self
+                                                      resultObj:[[AddNoteResult alloc] init]
+                                                     customInfo:@"addVoiceNote"];
         } else {
-            // uploadTextNote
+            // 增加笔记，并且增加书目 uploadTextNote
             [param setObject:@"2" forKey:@"source"];
-            [param setObject:@"1" forKey:@"type"];
+            [param setObject:@"2" forKey:@"type"];
             [param setObject:_note.bookname forKey:@"bookName"];
             [param setObject:_note.author forKey:@"author"];
             [param setObject:_note.press forKey:@"press"];
-            //[param setObject:_noteTextView.text forKey:@"content"];
             
             SDImageCache *imageCache = [SDImageCache sharedImageCache];
             NSString *imageKey = [_note.pic md5EncodeUpper:NO];
             UIImage  *image = [imageCache imageFromDiskCacheForKey:imageKey];
             NSData   *imageData = UIImagePNGRepresentation(image);
+            
+            if (imageData == nil) {
+                [FadePromptView showPromptStatus:@"请拍书的封面" duration:1.0 finishBlock:^{
+                    //
+                }];
+                
+                return;
+            }
+            
+            UploadFileInfo *imageFile = [[UploadFileInfo alloc] init];
+            imageFile.fileData = imageData;
+            imageFile.fileKey = @"pic";
+            imageFile.fileName = [NSString stringWithFormat:@"%@.png",imageKey];
+            imageFile.mimeType = @"image/png";
+            
+            NSData *voiceData = [NSData dataWithContentsOfURL:_recordedFile];
+            if (voiceData == nil) {
+                [FadePromptView showPromptStatus:@"请录语音笔记" duration:1.0 finishBlock:^{
+                    //
+                }];
+                
+                return;
+            }
+            
+            UploadFileInfo *voiceFile = [[UploadFileInfo alloc] init];
+            voiceFile.fileData = voiceData;
+            voiceFile.fileKey = @"file";
+            voiceFile.fileName = [NSString stringWithFormat:@"%@.mp3",_recordFileKey];
+            voiceFile.mimeType = @"audio/mpeg";
+            
+            NSArray *arr = @[imageFile,voiceData];
             [SVProgressHUD showWithStatus:@"正在提交笔记..." maskType:SVProgressHUDMaskTypeBlack];
             [[NetworkTask sharedNetworkTask] startUploadTaskApi:API_WriteNote
                                                        forParam:param
-                                                       fileData:imageData
-                                                        fileKey:@"pic"
-                                                       fileName:[NSString stringWithFormat:@"%@.png",imageKey]
-                                                       mimeType:@"image/png"
+                                                          files:arr
                                                        delegate:self
                                                       resultObj:[[AddNoteResult alloc] init]
                                                      customInfo:@"uploadTextNote"];
@@ -171,7 +210,7 @@
 }
 
 - (void)layoutNoteTableView {
-    UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectMake(20, 20, self.view.frame.size.width - 40, self.view.frame.size.height- [DeviceInfo navigationBarHeight] - 40) style:UITableViewStylePlain];
+    UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectMake(20, 10, self.view.frame.size.width - 40, self.view.frame.size.height- [DeviceInfo navigationBarHeight] - 20) style:UITableViewStylePlain];
     [self setNoteTableView:tableView];
     [tableView setDelegate:self];
     [tableView setDataSource:self];
@@ -243,9 +282,27 @@
     
     // 录音状态页面,begin
     NSInteger height = _noteTableView.width;
-    if ([DeviceInfo screenHeight] <= 480) {
-        height = _noteTableView.width *3/4;
+    if (_pageStatus == VCPageStatusNoBook) {
+        if ([DeviceInfo screenHeight] <= 480) {
+            height = _noteTableView.width *3/4;
+        }
+    } else if (_pageStatus == VCPageStatusAddBook
+               || _pageStatus == VCPageStatusSelectBook) {
+        if ([DeviceInfo screenHeight] <= 480) {
+            if (_pageStatus == VCPageStatusSelectBook) {
+                height = _noteTableView.width *1/2;
+            } else {
+                height = _noteTableView.width *2.7/4;
+            }
+        } else {
+            height = _noteTableView.width *4/5;
+        }
+        
+        if (_pageStatus == VCPageStatusAddBook) {
+            height -= 50;
+        }
     }
+    
     UIView *voiceBGView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _noteTableView.width, height)];
     [voiceBGView setTag:200];
     [voiceBGView setBackgroundColor:[UIColor colorWithHex:0xcccccc]];
@@ -331,6 +388,7 @@
 #if TARGET_IPHONE_SIMULATOR
 #elif TARGET_OS_IPHONE
     
+    // audio/mpeg
     NSMutableDictionary* recordSetting = [[NSMutableDictionary alloc] init];
     [recordSetting setValue :[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
     [recordSetting setValue:[NSNumber numberWithFloat:44100.0] forKey:AVSampleRateKey];
@@ -376,40 +434,26 @@
     //最大50  0
     //图片 小-》大
     if (0<lowPassResults<=0.06) {
-        
         [_voiceImageView setImage:[UIImage imageNamed:@"talk1"]];
     } else if (0.06<lowPassResults<=0.13) {
-        
         [_voiceImageView setImage:[UIImage imageNamed:@"talk1"]];
     } else if (0.13<lowPassResults<=0.20) {
-        
         [_voiceImageView setImage:[UIImage imageNamed:@"talk2"]];
     } else if (0.20<lowPassResults<=0.27) {
-        
         [_voiceImageView setImage:[UIImage imageNamed:@"talk3"]];
     } else if (0.27<lowPassResults<=0.34) {
-        
         [_voiceImageView setImage:[UIImage imageNamed:@"talk3"]];
     } else if (0.34<lowPassResults<=0.41) {
-        
         [_voiceImageView setImage:[UIImage imageNamed:@"talk4"]];
-        
+    } else if (0.48<lowPassResults<=0.55) {
+        [_voiceImageView setImage:[UIImage imageNamed:@"talk4"]];
     } else if (0.55<lowPassResults<=0.62) {
-        
-        [_voiceImageView setImage:[UIImage imageNamed:@"talk4"]];
-    }else if (0.48<lowPassResults<=0.55) {
-        
         [_voiceImageView setImage:[UIImage imageNamed:@"talk5"]];
-        
     } else if (0.69<lowPassResults<=0.76) {
-        
         [_voiceImageView setImage:[UIImage imageNamed:@"talk5"]];
-    }else if (0.76<lowPassResults<=0.83) {
-        
+    } else if (0.76<lowPassResults<=0.83) {
         [_voiceImageView setImage:[UIImage imageNamed:@"talk6"]];
-        
-    } else if (0.83<lowPassResults<=0.9)  {
-        
+    } else if (0.83<lowPassResults<=1.00)  {
         [_voiceImageView setImage:[UIImage imageNamed:@"talk6"]];
     } else {
         
@@ -528,6 +572,7 @@
         UILabel *nameLabel = (UILabel *)[bgView viewWithTag:101];
         UILabel *authorLabel = (UILabel *)[bgView viewWithTag:102];
         UILabel *pressLabel = (UILabel *)[bgView viewWithTag:103];
+        
         UIButton *addBtn = (UIButton *)[bgView viewWithTag:104];
         bookImageView.hidden = YES;
         nameLabel.hidden = YES;
@@ -599,6 +644,8 @@
         UIView *bgView = (UIView *)[cell.contentView viewWithTag:299];
         UIView *voiceBGView = (UIView *)[bgView viewWithTag:200];
         UIImageView *voiceImageView = (UIImageView *)[voiceBGView viewWithTag:102];
+        UILabel *textLabel = (UILabel *)[voiceBGView viewWithTag:101];
+        UIImageView *talkImageView = (UIImageView *)[voiceBGView viewWithTag:100];
         UIView *pressView = (UIView *)[bgView viewWithTag:400];
         AudioPlayControl *audioControl = (AudioPlayControl*)[bgView viewWithTag:300];
         voiceBGView.hidden = YES;
@@ -612,6 +659,37 @@
             [voiceImageView setImage:[UIImage imageNamed:@"talk1"]];
         }
         
+        NSInteger height = _noteTableView.width;
+        if (_pageStatus == VCPageStatusNoBook) {
+            if ([DeviceInfo screenHeight] <= 480) {
+                height = _noteTableView.width *3/4;
+            }
+        } else if (_pageStatus == VCPageStatusAddBook
+                   || _pageStatus == VCPageStatusSelectBook) {
+            if ([DeviceInfo screenHeight] <= 480) {
+                if (_pageStatus == VCPageStatusSelectBook) {
+                    height = _noteTableView.width *1/2;
+                } else {
+                    height = _noteTableView.width *2.7/4;
+                }
+                
+            } else {
+                height = _noteTableView.width *4/5;
+            }
+            
+            if (_pageStatus == VCPageStatusAddBook) {
+                height -= 50;
+            }
+        }
+        
+        NSInteger top = (height - 75 - 20 - 20 )/2;
+        
+        voiceBGView.height = height;
+        pressView.top = voiceBGView.bottom + 10;
+        talkImageView.top = top;
+        textLabel.top = talkImageView.bottom + 20;
+        voiceImageView.top = talkImageView.bottom - 60 - 25;
+        
         NSInteger hh = 90;
         if ([DeviceInfo screenWidth] > 320) {
             hh = 100;
@@ -622,6 +700,7 @@
         } else if (_pageStatus == VCPageStatusNoBook) {
             hh = 50;
         }
+
         [bgView setFrame:CGRectMake(0, 10, tableView.width, tableView.height - hh)];
 
         return cell;
