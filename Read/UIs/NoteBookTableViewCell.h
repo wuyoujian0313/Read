@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "NoteBookItem.h"
 
+@protocol NoteBookTableViewCellDelegate <NSObject>
+- (void)addNoteToBook:(NoteBookItem *)book;
+@end
+
 @interface NoteBookTableViewCell : UITableViewCell
+
+@property (nonatomic, weak) id<NoteBookTableViewCellDelegate> delegate;
 - (void)loadBookInfo:(NoteBookItem *)book;
 @end

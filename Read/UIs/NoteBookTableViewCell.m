@@ -149,6 +149,9 @@
 
 - (void)noteAction:(UIButton *)sender {
     //
+    if (_delegate && [_delegate respondsToSelector:@selector(addNoteToBook:)]) {
+        [_delegate addNoteToBook:_bookInfo];
+    }
 }
 
 

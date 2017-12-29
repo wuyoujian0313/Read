@@ -249,6 +249,9 @@
 #if TARGET_IPHONE_SIMULATOR
 #elif TARGET_OS_IPHONE
     
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setActive:YES error:nil];
+    
     NSError *playerError;
     [self.audioPlayer stop];
     self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:_recordedFile error:&playerError];

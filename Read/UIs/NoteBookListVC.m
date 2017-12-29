@@ -14,18 +14,18 @@
 #import "BookDetailVC.h"
 #import "BookItem.h"
 #import "NoteBooksResult.h"
+#import "WriteTextNoteVC.h"
 
 
 
 
-@interface NoteBookListVC ()<UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate,NetworkTaskDelegate>
-@property(nonatomic, strong) UITableView                *booksTableView;
+@interface NoteBookListVC ()<UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate,NetworkTaskDelegate,NoteBookTableViewCellDelegate>
+@property(nonatomic, strong) UITableView                    *booksTableView;
 @property(nonatomic, strong) NSMutableArray<NoteBookItem *> *bookList;
-@property(nonatomic, strong) MJRefreshHeaderView        *refreshHeader;
-@property(nonatomic, strong) MJRefreshFooterView        *refreshFootder;
-@property(nonatomic, assign) BOOL                       isRefreshList;
-
-@property(nonatomic, strong) NoteBooksResult        *booksResult;
+@property(nonatomic, strong) MJRefreshHeaderView            *refreshHeader;
+@property(nonatomic, strong) MJRefreshFooterView            *refreshFootder;
+@property(nonatomic, assign) BOOL                           isRefreshList;
+@property(nonatomic, strong) NoteBooksResult                *booksResult;
 @end
 
 @implementation NoteBookListVC
@@ -199,6 +199,7 @@
         [cell.contentView addSubview:line1];
     }
     
+    cell.delegate = self;
     NSInteger row = indexPath.row;
     if (row < [_bookList count]) {
         NoteBookItem *item = [_bookList objectAtIndex:row];
@@ -217,6 +218,21 @@
     //[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+
+#pragma mark - NoteBookTableViewCellDelegate
+- (void)addNoteToBook:(NoteBookItem *)book {
+//    WriteTextNoteVC *vc = [[WriteTextNoteVC alloc] init];
+//    vc.pageStatus = VCPageStatusSelectBook;
+//    NoteItem *note = [[NoteItem alloc] init];
+//    note.bookname = book.bookname;
+//    note.author = book.author;
+//    note.press = book.press;
+//    note.pic = book.pic;
+//
+//    vc.note = note;
+//    vc.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:vc animated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
