@@ -17,6 +17,7 @@
 
 @interface BookContentView ()<NetworkTaskDelegate,CustomSegmentControlDelegate,iCarouselDataSource,iCarouselDelegate>
 @property(nonatomic,strong)BookInfoResult               *bookInfo;
+@property(nonatomic,strong)NoteListResult               *note;
 @property(nonatomic,strong)iCarousel                    *carouselView;
 @property(nonatomic,strong)CustomSegmentControl         *segment;
 @end
@@ -57,6 +58,11 @@
 
 - (void)loadBookInfo:(BookInfoResult *)item {
     _bookInfo = item;
+    [_carouselView reloadData];
+}
+
+- (void)loadBookNotes:(NoteListResult *)note {
+    _note = note;
     [_carouselView reloadData];
 }
 
@@ -108,8 +114,10 @@
         }
     } else if (index == 1) {
         noteView.hidden = NO;
+        if (_note) {
+            [noteView loadBookNoteList:_note];
+        }
     }
-    
     
     return view;
 }

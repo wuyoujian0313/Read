@@ -237,7 +237,7 @@
     }
     
     [param setObject:@"15" forKey:@"length"];
-    [param setObject:@"1" forKey:@"type"];
+    [param setObject:@"1" forKey:@"type"];// 文字
     
     [SVProgressHUD showWithStatus:@"正在获取文字笔记..." maskType:SVProgressHUDMaskTypeBlack];
     [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_NoteList
@@ -256,7 +256,7 @@
     }
     
     [param setObject:@"15" forKey:@"length"];
-    [param setObject:@"2" forKey:@"type"];
+    [param setObject:@"2" forKey:@"type"];// 语音
     
     [SVProgressHUD showWithStatus:@"正在获取语音笔记..." maskType:SVProgressHUDMaskTypeBlack];
     [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_NoteList

@@ -98,7 +98,7 @@
         [self getNotes];
     } else if ([customInfo isEqualToString:@"getNotes"]) {
         _bookNotes = (NoteListResult *)result;
-        
+        [_bookContentView loadBookNotes:_bookNotes];
     }
 }
 

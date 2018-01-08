@@ -1309,7 +1309,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.weimeitc.bqdj;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "021b0eed-3146-46b4-bff7-f213a15f2f87";
+				PROVISIONING_PROFILE = "a74f757b-30a6-4bfc-8f04-5609d0e6c7b6";
 				PROVISIONING_PROFILE_SPECIFIER = bqdjAppDis_profile;
 			};
 			name = Release;

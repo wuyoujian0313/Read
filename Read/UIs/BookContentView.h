@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "BookInfoResult.h"
+#import "NoteListResult.h"
 
 @interface BookContentView : UIView
 - (instancetype)initWithFrame:(CGRect)frame;
-
 - (void)loadBookInfo:(BookInfoResult *)item;
+- (void)loadBookNotes:(NoteListResult *)note;
 @end

@@ -40,7 +40,7 @@
     UILabel *dateLabel = (UILabel *)[viewParent viewWithTag:100];
     if (dateLabel == nil) {
         dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 10, 40, 26)];
-        [dateLabel setFont:[UIFont systemFontOfSize:14]];
+        [dateLabel setFont:[UIFont systemFontOfSize:13]];
         [dateLabel setTextColor:[UIColor grayColor]];
         [dateLabel setTag:100];
         [viewParent addSubview:dateLabel];
@@ -59,6 +59,7 @@
         line2 = [[UIView alloc] initWithFrame:CGRectMake(60,20,3,3)];
         [line2 setTag:102];
         [line2 setBackgroundColor:[UIColor colorWithHex:kGlobalGreenColor]];
+        [line2 setTintColor:[UIColor colorWithHex:kGlobalGreenColor]];
         [viewParent addSubview:line2];
     }
     
