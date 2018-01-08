@@ -11,6 +11,8 @@
 #import "NoteListResult.h"
 
 @interface BookContentView : UIView
+@property (nonatomic,weak) id<NoteListViewDelegate> delegate;
+
 - (instancetype)initWithFrame:(CGRect)frame;
 - (void)loadBookInfo:(BookInfoResult *)item;
 - (void)loadBookNotes:(NoteListResult *)note;

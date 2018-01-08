@@ -15,7 +15,7 @@
 #import "BookIntroduceView.h"
 #import "NoteListView.h"
 
-@interface BookContentView ()<NetworkTaskDelegate,CustomSegmentControlDelegate,iCarouselDataSource,iCarouselDelegate>
+@interface BookContentView ()<NetworkTaskDelegate,CustomSegmentControlDelegate,iCarouselDataSource,iCarouselDelegate,NoteListViewDelegate>
 @property(nonatomic,strong)BookInfoResult               *bookInfo;
 @property(nonatomic,strong)NoteListResult               *note;
 @property(nonatomic,strong)iCarousel                    *carouselView;
@@ -114,6 +114,7 @@
         }
     } else if (index == 1) {
         noteView.hidden = NO;
+        noteView.delegate = self;
         if (_note) {
             [noteView loadBookNoteList:_note];
         }
@@ -125,6 +126,13 @@
 - (void)carouselCurrentItemIndexDidChange:(iCarousel *)carousel {
     if (carousel.isScrolling == NO) {
         [_segment setSelectedSegmentIndex:carousel.currentItemIndex];
+    }
+}
+
+#pragma mark - NoteListViewDelegate
+- (void)didSelectTextNote:(NoteItem *)note {
+    if (_delegate && [_delegate respondsToSelector:@selector(didSelectTextNote:)]) {
+        [_delegate didSelectTextNote:note];
     }
 }
 

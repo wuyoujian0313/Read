@@ -9,10 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "NoteListResult.h"
 
-@protocol NoteListViewDelegate <NSObject>
-- (void)didSelectTextNote:(NoteItem *)note;
-@end
-
 @interface NoteListView : UIView
 @property (nonatomic,weak) id<NoteListViewDelegate> delegate;
 

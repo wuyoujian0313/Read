@@ -82,4 +82,9 @@ typedef NS_ENUM(NSInteger,VCPageStatus){
     VCPageStatusSelectBook,
 };
 
+@class NoteItem;
+@protocol NoteListViewDelegate <NSObject>
+- (void)didSelectTextNote:(NoteItem *)note;
+@end
+
 #endif /* ConstantDef_h */

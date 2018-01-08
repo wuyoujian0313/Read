@@ -12,9 +12,10 @@
 #import "BookContentView.h"
 #import "BookInfoResult.h"
 #import "NoteListResult.h"
+#import "NoteInfoVC.h"
 
 
-@interface BookDetailVC ()<NetworkTaskDelegate>
+@interface BookDetailVC ()<NetworkTaskDelegate,NoteListViewDelegate>
 @property (nonatomic, strong) BookInfoView          *bookInfoView;
 @property (nonatomic, strong) BookContentView       *bookContentView;
 @property (nonatomic, strong) BookInfoResult        *bookDetail;
@@ -80,6 +81,7 @@
     
     NSInteger top = _bookInfoView.frame.size.height + 10;
     BookContentView *contentView = [[BookContentView alloc] initWithFrame:CGRectMake(0, top, self.view.frame.size.width, self.view.frame.size.height - top -[DeviceInfo navigationBarHeight])];
+    contentView.delegate = self;
     self.bookContentView = contentView;
     [self.view addSubview:contentView];
 }
@@ -113,6 +115,13 @@
         }];
     } else if ([customInfo isEqualToString:@"getNotes"]) {
     }
+}
+
+#pragma mark - NoteListViewDelegate
+- (void)didSelectTextNote:(NoteItem *)note {
+    NoteInfoVC *vc = [[NoteInfoVC alloc] init];
+    vc.note = note;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

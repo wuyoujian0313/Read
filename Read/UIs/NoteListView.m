@@ -112,6 +112,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    NoteItem *item = [_notes objectAtIndex:indexPath.row];
+//    if ([item.type isEqualToString:@"1"]) {
+//        if (_delegate && [_delegate respondsToSelector:@selector(didSelectTextNote:)]) {
+//            [_delegate didSelectTextNote:item];
+//        }
+//    }
 }
 
 #pragma mark - NetworkTaskDelegate
