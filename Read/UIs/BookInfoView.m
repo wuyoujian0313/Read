@@ -70,6 +70,8 @@
         if (bookImageView == nil) {
             bookImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, top, ww, hh)];
             [bookImageView setTag:100];
+            bookImageView.clipsToBounds = YES;
+            [bookImageView setContentMode:UIViewContentModeScaleAspectFill];
             [bookImageView setImage:[UIImage imageNamed:@"book_cover"]];
             [bookImageView setClipsToBounds:YES];
             [viewParent addSubview:bookImageView];
@@ -131,10 +133,19 @@
             [headerView addSubview:nameLabel];
         }
         
+        UILabel *contentLabel = (UILabel *)[headerView viewWithTag:204];
+        if (contentLabel == nil) {
+            contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 36, headerView.frame.size.width - 20 - 10, 18)];
+            [contentLabel setTag:204];
+            [contentLabel setBackgroundColor:[UIColor clearColor]];
+            [contentLabel setFont:[UIFont systemFontOfSize:11]];
+            [contentLabel setTextColor:[UIColor whiteColor]];
+            [headerView addSubview:contentLabel];
+        }
         
         UILabel *typeLabel = (UILabel *)[headerView viewWithTag:202];
         if (typeLabel == nil) {
-            typeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 38, 40, 18)];
+            typeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 36  + 18 + 10, 40, 18)];
             [typeLabel setBackgroundColor:[UIColor clearColor]];
             [typeLabel setTag:202];
             [typeLabel setTextAlignment:NSTextAlignmentCenter];
@@ -147,7 +158,7 @@
         
         UILabel *rangeLabel = (UILabel *)[headerView viewWithTag:203];
         if (rangeLabel == nil) {
-            rangeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20 + 10 + 40, 38, 60, 18)];
+            rangeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20 + 10 + 40, 36 + 18 + 10, 60, 18)];
             [rangeLabel setBackgroundColor:[UIColor clearColor]];
             [rangeLabel setTag:203];
             [rangeLabel setTextAlignment:NSTextAlignmentCenter];
@@ -157,18 +168,6 @@
             [rangeLabel setTextColor:[UIColor whiteColor]];
             [headerView addSubview:rangeLabel];
         }
-        
-        
-        UILabel *authorLabel = (UILabel *)[headerView viewWithTag:204];
-        if (authorLabel == nil) {
-            authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 36 + 18 + 10, headerView.frame.size.width - 20 - 100, 18)];
-            [authorLabel setTag:204];
-            [authorLabel setBackgroundColor:[UIColor clearColor]];
-            [authorLabel setFont:[UIFont systemFontOfSize:11]];
-            [authorLabel setTextColor:[UIColor whiteColor]];
-            [headerView addSubview:authorLabel];
-        }
-        
         
         // 14 x 12
         UIButton *favoriteBtn = (UIButton *)[viewParent viewWithTag:205];
@@ -188,11 +187,15 @@
         NSString *type = _bookInfo.type;
         typeLabel.text = type;
         
-        NSString *range = _bookInfo.range;
-        rangeLabel.text =range;
+        NSString *f_age = _bookInfo.f_age;
+        rangeLabel.hidden = YES;
+        if (f_age && [f_age length] > 0) {
+            rangeLabel.hidden = NO;
+            rangeLabel.text = [NSString stringWithFormat:@"%@岁",f_age];
+        }
         
-        NSString *author = _bookInfo.author;
-        authorLabel.text = author;
+        NSString *statement = _bookInfo.statement;
+        contentLabel.text = statement;
         
         NSString *fav = _bookInfo.isFavor;
         if ([fav isEqualToString:@"yes"]) {
@@ -270,14 +273,14 @@
         }
         
         NSInteger ttop = (footerView.frame.size.height - 18 - 5 - 18 )/2.0;
-        UILabel *contentLabel = (UILabel *)[footerView viewWithTag:301];
-        if (contentLabel == nil) {
-            contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, ttop, footerView.frame.size.width*2/3 - 20 - 10, 18)];
-            [contentLabel setTag:301];
-            [contentLabel setBackgroundColor:[UIColor clearColor]];
-            [contentLabel setFont:[UIFont boldSystemFontOfSize:11]];
-            [contentLabel setTextColor:[UIColor grayColor]];
-            [footerView addSubview:contentLabel];
+        UILabel *authorLabel = (UILabel *)[footerView viewWithTag:301];
+        if (authorLabel == nil) {
+            authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, ttop, footerView.frame.size.width*2/3 - 20 - 10, 18)];
+            [authorLabel setTag:301];
+            [authorLabel setBackgroundColor:[UIColor clearColor]];
+            [authorLabel setFont:[UIFont systemFontOfSize:11]];
+            [authorLabel setTextColor:[UIColor grayColor]];
+            [footerView addSubview:authorLabel];
         }
         
         
@@ -311,11 +314,11 @@
             [footerView addSubview:priceLabel];
         }
         
-        NSString *statement = _bookInfo.statement;
-        contentLabel.text = statement;
+        NSString *author = _bookInfo.author;
+        authorLabel.text = [NSString stringWithFormat:@"作者:%@",author];
         
         NSString *press = _bookInfo.press;
-        pressLabel.text = press;
+        pressLabel.text = [NSString stringWithFormat:@"出版社:%@",press];;
         
         NSString *price = _bookInfo.price;// 单位:分
         if (price !=nil && [price length] > 0) {

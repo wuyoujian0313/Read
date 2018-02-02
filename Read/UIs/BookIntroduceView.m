@@ -33,9 +33,11 @@
         _contentScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
         [_contentScrollView setShowsHorizontalScrollIndicator:NO];
         [_contentScrollView setShowsVerticalScrollIndicator:YES];
+        _contentScrollView.clipsToBounds = YES;
         [self addSubview:_contentScrollView];
         
         _bookImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+        [_bookImageView setContentMode:UIViewContentModeScaleAspectFill];
         [_contentScrollView addSubview:_bookImageView];
         
         _bookTextLabel = [[UILabel alloc] initWithFrame:CGRectZero];

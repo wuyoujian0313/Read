@@ -51,6 +51,8 @@
         if (bookImageView == nil) {
             bookImageView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 15, 38, 54)];
             [bookImageView setTag:100];
+            bookImageView.clipsToBounds = YES;
+            [bookImageView setContentMode:UIViewContentModeScaleAspectFill];
             [bookImageView setImage:[UIImage imageNamed:@"book_cover"]];
             [bookImageView setClipsToBounds:YES];
             [viewParent addSubview:bookImageView];

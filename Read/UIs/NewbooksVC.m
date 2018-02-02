@@ -234,14 +234,16 @@
         book1Btn.tag = 100;
         [book1Btn setFrame:CGRectMake(margin, top, bookWidth, bookHeight)];
         [book1Btn setImage:[UIImage imageNamed:@"book_cover"] forState:UIControlStateNormal];
-        //[book1Btn.imageView setContentMode:UIViewContentModeScaleAspectFill];
+        [book1Btn.imageView setContentMode:UIViewContentModeScaleAspectFill];
+        [book1Btn.imageView setClipsToBounds:YES];
         [cell.contentView addSubview:book1Btn];
         [book1Btn addTarget:self action:@selector(selectBook:) forControlEvents:UIControlEventTouchUpInside];
         
         BookButton *book2Btn = [BookButton buttonWithType:UIButtonTypeCustom];
         book2Btn.tag = 101;
         [book2Btn setFrame:CGRectMake(margin + spaceSize + bookWidth, top, bookWidth, bookHeight)];
-        //[book2Btn.imageView setContentMode:UIViewContentModeScaleAspectFill];
+        [book2Btn.imageView setContentMode:UIViewContentModeScaleAspectFill];
+        [book2Btn.imageView setClipsToBounds:YES];
         [book2Btn setImage:[UIImage imageNamed:@"book_cover"] forState:UIControlStateNormal];
         [cell.contentView addSubview:book2Btn];
         [book2Btn addTarget:self action:@selector(selectBook:) forControlEvents:UIControlEventTouchUpInside];
@@ -249,7 +251,8 @@
         BookButton *book3Btn = [BookButton buttonWithType:UIButtonTypeCustom];
         book3Btn.tag = 102;
         [book3Btn setFrame:CGRectMake(margin + 2*(spaceSize + bookWidth), top, bookWidth, bookHeight)];
-        //[book3Btn.imageView setContentMode:UIViewContentModeScaleAspectFill];
+        [book3Btn.imageView setContentMode:UIViewContentModeScaleAspectFill];
+        [book3Btn.imageView setClipsToBounds:YES];
         [book3Btn setImage:[UIImage imageNamed:@"book_cover"] forState:UIControlStateNormal];
         [cell.contentView addSubview:book3Btn];
         [book3Btn addTarget:self action:@selector(selectBook:) forControlEvents:UIControlEventTouchUpInside];
@@ -257,7 +260,8 @@
         BookButton *book4Btn = [BookButton buttonWithType:UIButtonTypeCustom];
         book4Btn.tag = 103;
         [book4Btn setFrame:CGRectMake(margin + 3*(spaceSize + bookWidth), top, bookWidth, bookHeight)];
-        //[book4Btn.imageView setContentMode:UIViewContentModeScaleAspectFill];
+        [book4Btn.imageView setContentMode:UIViewContentModeScaleAspectFill];
+        [book4Btn.imageView setClipsToBounds:YES];
         [book4Btn setImage:[UIImage imageNamed:@"book_cover"] forState:UIControlStateNormal];
         [cell.contentView addSubview:book4Btn];
         [book4Btn addTarget:self action:@selector(selectBook:) forControlEvents:UIControlEventTouchUpInside];

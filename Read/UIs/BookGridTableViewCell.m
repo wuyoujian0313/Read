@@ -36,6 +36,7 @@ static NSString *const kGridMenuCellIdentifier = @"kGridMenuCellIdentifier";
         self.iconImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         _iconImageView.userInteractionEnabled = YES;
         _iconImageView.clipsToBounds = YES;
+        [_iconImageView setContentMode:UIViewContentModeScaleAspectFill];
         [_iconImageView setImage:[UIImage imageNamed:@"book_cover"]];
         [self.contentView addSubview:_iconImageView];
         
